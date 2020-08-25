@@ -1,0 +1,37 @@
+.post{
+    display: inline-block;
+    /* min-width: 250px; */
+    max-width: 400px;
+    background: #f4f4f4;
+    box-shadow: 0px 12px 13px -5px rgba(175, 175, 175, 0.75);
+    margin: 1rem;
+    
+}
+
+.post_img{
+    width: 100%;
+}
+
+.post_info{
+    margin: 5px 10px;
+}
+
+.post_desc{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.post_title{
+    flex-basis: 55%;
+    font-weight: bold;
+    font-size: 20px;
+}
+.post_price{
+    flex-basis: 35%;
+    text-align: right;
+}
+
+.post_price_type, .post_creator_name{
+    color: #707070;
+    font-style: italic;
+}
