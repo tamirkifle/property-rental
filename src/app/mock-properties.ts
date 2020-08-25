@@ -1,6 +1,6 @@
 import { Property } from './property';
 
-export const properties: Property[] = [
+export const MOCKPROPERTIES: Property[] = [
     {
     id: 1,
     propertyTitle: '',
@@ -9,7 +9,11 @@ export const properties: Property[] = [
     listPrice: 2000,
     priceType: 'Fixed',
     postCreator: 'Ethio Delala',
-    propertyImages: ['../../assets/1.jpg'],
+    propertyImages: ['1.jpg'],
+    amenities: ['Fixed Kitchen Cabinet', 'Balcony'],
+    bathrooms: 2,
+    levels: 'Ground',
+    areaInM2: 400,
   },
   {
     id: 2,
@@ -19,7 +23,8 @@ export const properties: Property[] = [
     listPrice: 50000,
     priceType: 'Negotiable',
     postCreator: 'Ethio Delala',
-    propertyImages: ['../../assets/1.jpg'],
+    propertyImages: ['1.jpg'],
+    amenities: [],
   },
   {
     id: 3,
@@ -29,5 +34,6 @@ export const properties: Property[] = [
     listPrice: 9000,
     priceType: 'Negotiable',
     postCreator: 'Ethio Delala',
-    propertyImages: ['../../assets/1.jpg'],
+    propertyImages: ['1.jpg'],
+    amenities: ['Backyard', 'Nice View'],
   }];

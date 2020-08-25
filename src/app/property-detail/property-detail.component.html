@@ -1,3 +1,35 @@
-<div *ngIf="property">
-<h2>Property Detail</h2>
+<div class="post" *ngIf="property">
+    <header>
+        <button (click)="goBack()" class="back_btn">←</button>
+        <h2 class="title">Selected Property Detail</h2>
+    </header>
+    <div class="post_img_container">
+        <img src="../../assets/{{ property.propertyImages[0] }}" class="post_img" alt="Property Photo">
+    </div>
+    <div class="post_info">
+        <div class="post_desc">
+            <div class="post_title">
+              {{ property.bedrooms }} Bedroom House In {{property.location}}
+            </div>
+            <div class="post_price">
+                <div class="post_price_amt">{{addCommas(property.listPrice)}} Birr</div>
+                <div class="post_price_type">{{property.priceType}} Price</div>
+            </div>
+        </div>
+        <div class="post_detail">
+            <h4 class="detail_title">Details</h4>
+            <div class="detail_item" ><img src="../../assets/detail_icons/bedrooms.png"class="detail_img"/><span class="detail_text">{{property.bedrooms}} Bedroom</span></div>
+            <div class="detail_item" *ngIf="property.bathrooms"><img src="../../assets/detail_icons/bathrooms.png" class="detail_img"/><span class="detail_text">{{property.bathrooms}} Bathroom</span></div>
+            <div class="detail_item" *ngIf="property.areaInM2"><img src="../../assets/detail_icons/areaInM2.png" class="detail_img"/><span class="detail_text">{{property.areaInM2}} M<sup>2</sup></span></div>
+            <div class="detail_item" *ngIf="property.levels"><img src="../../assets/detail_icons/levels.png" class="detail_img"/><span class="detail_text">{{property.levels}}</span></div>
+        </div>
+        <div class="post_amenities" *ngIf="property.amenities !== undefined && property.amenities.length !== 0">
+            <h4 class="amenity_title">Amenities</h4>
+            <span class="amenity_item" *ngFor="let amenity of property.amenities">{{amenity}}</span>
+        </div>
+        <!-- <div class="post_map"></div> -->
+        <div class="post_creator">
+            By: <span class="post_creator_name">{{property.postCreator}}</span>
+        </div>
+    </div>
 </div>

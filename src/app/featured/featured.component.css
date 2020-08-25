@@ -1,0 +1,13 @@
+.featured_items{
+    text-align: center;
+}
+.featured_item{
+    display: inline-block;
+    cursor: pointer;
+}
+.featured_title{
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+

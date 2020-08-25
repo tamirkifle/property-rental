@@ -7,4 +7,8 @@ export interface Property {
     priceType: 'Fixed' | 'Negotiable';
     postCreator: string;
     propertyImages: string[];
+    bathrooms?: number;
+    areaInM2?: number;
+    levels?: string;
+    amenities?: string[];
   }

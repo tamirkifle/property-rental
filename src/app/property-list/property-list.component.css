@@ -5,3 +5,7 @@
 .post-list > * {
     flex-basis: 33%;
 }
+
+app-property-item{
+    cursor: pointer;
+}

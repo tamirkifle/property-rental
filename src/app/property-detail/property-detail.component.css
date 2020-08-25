@@ -1,0 +1,91 @@
+.post{
+    display: block;
+    /* min-width: 250px; */
+    max-width: 800px;
+    /* background: #f4f4f4; */
+    box-shadow: 0px 12px 13px -5px rgba(175, 175, 175, 0.75);
+    margin: 1rem auto;
+    padding: 1rem;
+    
+}
+.title{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.post_img{
+    width: 100%;
+}
+
+.post_info{
+    margin: 5px 10px;
+}
+
+.post_desc{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+.post_title{
+    flex-basis: 55%;
+    font-weight: bold;
+    font-size: 20px;
+}
+.post_price{
+    flex-basis: 35%;
+    text-align: right;
+}
+
+.post_price_type, .post_creator_name{
+    color: #707070;
+    /* font-style: italic; */
+}
+.post_desc, .post_detail, .post_amenities, .post_creator{
+    padding: 1rem 0;
+    border-bottom: 1px solid #707070;
+}
+
+.detail_title, .amenity_title{
+    margin-bottom: 1rem;
+}
+.detail_item{
+    display: inline-block;
+    margin-right: 1.2rem;
+}
+
+.detail_img{
+    margin-right: 8px;
+    vertical-align: bottom;
+}
+
+.detail_text{
+    color: #5a5a5a;
+}
+
+.amenity_item{
+    color: #5a5a5a;
+    font-weight: 500;
+}
+
+.amenity_item::after{
+    content: "·";
+    font-weight: 700;
+    padding: 0 6px;
+    display: inline-block;
+}
+
+.amenity_item:last-child::after{
+    content:"";
+}
+
+.back_btn{
+    float: left;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.back_btn::after{
+    clear: both;
+}

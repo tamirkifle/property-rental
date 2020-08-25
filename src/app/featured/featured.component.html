@@ -1,0 +1,7 @@
+<div class="featured">
+    <h3 class="featured_title">Today's Featured Properties</h3>
+    <div class="featured_items">
+        <app-property-item *ngFor="let property of properties" [property]="property" class="featured_item"
+            routerLink="/detail/{{property.id}}"></app-property-item>
+    </div>
+</div>

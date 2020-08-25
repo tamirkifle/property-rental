@@ -13,7 +13,7 @@ export class PropertyItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public addCommas(num): string {
+  addCommas(num): string {
     const str = String(num);
     const length = str.length;
     return str
