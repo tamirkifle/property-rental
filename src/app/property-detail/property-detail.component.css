@@ -12,13 +12,17 @@
     font-size: 2rem;
     text-align: center;
     margin-bottom: 1rem;
+    display: none;
+}
+.post_img_container{
+    position: relative;
 }
 .post_img{
-    width: 100%;
+    width: calc(100% - 80px);/*minus the size of button*/
 }
 
 .post_info{
-    margin: 5px 10px;
+    margin: 5px 40px;
 }
 
 .post_desc{
@@ -79,13 +83,29 @@
 }
 
 .back_btn{
-    float: left;
     background: none;
     border: none;
     outline: none;
     font-size: 2rem;
     cursor: pointer;
+    vertical-align: top;
 }
-.back_btn::after{
-    clear: both;
+
+.slider_btn{
+    position: absolute;
+    top:50%;
+    border:none;
+    background: none;
+    outline:none;
+    cursor: pointer;
+}
+.left_slider_btn{
+    left:0px;
+}
+.right_slider_btn{
+    right:0;
+}
+
+@media(min-width: 900px){
+
 }
