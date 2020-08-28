@@ -10,6 +10,7 @@ import { PropertyListComponent } from './property-list/property-list.component';
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FeaturedComponent } from './featured/featured.component';
+import { ImageSliderComponent } from './image-slider/image-slider.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FeaturedComponent } from './featured/featured.component';
     PropertyListComponent,
     PropertyDetailComponent,
     FeaturedComponent,
+    ImageSliderComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@
     box-shadow: 0px 12px 13px -5px rgba(175, 175, 175, 0.75);
     margin: 1rem auto;
     padding: 1rem;
+    position: relative;
     
 }
 .title{
@@ -13,12 +14,6 @@
     text-align: center;
     margin-bottom: 1rem;
     display: none;
-}
-.post_img_container{
-    position: relative;
-}
-.post_img{
-    width: calc(100% - 80px);/*minus the size of button*/
 }
 
 .post_info{
@@ -89,22 +84,11 @@
     font-size: 2rem;
     cursor: pointer;
     vertical-align: top;
+    position: relative;
+    z-index: 112;
 }
 
-.slider_btn{
-    position: absolute;
-    top:50%;
-    border:none;
-    background: none;
-    outline:none;
-    cursor: pointer;
-}
-.left_slider_btn{
-    left:0px;
-}
-.right_slider_btn{
-    right:0;
-}
+
 
 @media(min-width: 900px){
 

@@ -16,7 +16,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 2000,
         priceType: 'Fixed',
         postCreator: 'Ethio Delala',
-        propertyImages: [`${Math.floor(Math.random()*4)+1}.jpg`],
+        propertyImages: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
         amenities: ['Fixed Kitchen Cabinet', 'Balcony'],
         bathrooms: 2,
         levels: 'Ground',
@@ -30,7 +30,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 10000,
         priceType: 'Negotiable',
         postCreator: 'Mihret Alemu',
-        propertyImages: [`${Math.floor(Math.random()*4)+1}.jpg`],
+        propertyImages: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
         amenities: [],
       },
       {
@@ -41,7 +41,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 19000,
         priceType: 'Negotiable',
         postCreator: 'Yared Ketema',
-        propertyImages: [`${Math.floor(Math.random()*4)+1}.jpg`],
+        propertyImages: [`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`],
         amenities: ['Backyard', 'Nice View'],
       },
       {
@@ -52,7 +52,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 49000,
         priceType: 'Negotiable',
         postCreator: 'Ethio Delala',
-        propertyImages: [`${Math.floor(Math.random()*4)+1}.jpg`],
+        propertyImages: [`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`],
         amenities: ['Backyard', 'Nice View'],
       },
       {

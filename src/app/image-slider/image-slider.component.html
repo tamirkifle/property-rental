@@ -1,0 +1,13 @@
+<div class="slider">
+    <div class="cover left_cover"></div>
+    <div class="cover right_cover"></div>
+    <button class="slider_btn left_slider_btn" (click)="slideImage('left')"><img
+            src="../../assets/other_icons/backward_arrow_small.svg" alt="Image Slide Left Button"></button>
+    <img src="../../assets/{{ imgFileName }}" *ngFor="let imgFileName of property.propertyImages" class="post_img"
+        [class.left]="imgFileName === property.propertyImages[property.propertyImages.length-1]"
+        [class.right]="imgFileName === property.propertyImages[1]"
+        [class.showing]="imgFileName === property.propertyImages[0]"
+        alt="Property Photo">
+    <button class="slider_btn right_slider_btn" (click)="slideImage('right')"><img
+            src="../../assets/other_icons/forward_arrow_small.svg" alt="Image Slide Right Button"></button>
+</div>
