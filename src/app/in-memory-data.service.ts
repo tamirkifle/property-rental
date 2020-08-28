@@ -30,7 +30,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 10000,
         priceType: 'Negotiable',
         postCreator: 'Mihret Alemu',
-        propertyImages: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
+        propertyImages: ['2.jpg', '3.jpg', '4.jpg', '1.jpg'],
         amenities: [],
       },
       {
@@ -41,7 +41,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 19000,
         priceType: 'Negotiable',
         postCreator: 'Yared Ketema',
-        propertyImages: [`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`],
+        propertyImages: ['3.jpg', '4.jpg', '1.jpg', '2.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
       {
@@ -52,7 +52,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 49000,
         priceType: 'Negotiable',
         postCreator: 'Ethio Delala',
-        propertyImages: [`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`,`${Math.floor(Math.random()*4)+1}.jpg`],
+        propertyImages: ['4.jpg', '1.jpg', '2.jpg', '3.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
       {
@@ -63,7 +63,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 12000,
         priceType: 'Fixed',
         postCreator: 'Ethio Delala',
-        propertyImages: [`${Math.floor(Math.random()*4)+1}.jpg`],
+        propertyImages: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
       {
@@ -74,7 +74,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 25000,
         priceType: 'Negotiable',
         postCreator: 'Ethio Delala',
-        propertyImages: [`${Math.floor(Math.random()*4)+1}.jpg`],
+        propertyImages: ['2.jpg', '3.jpg', '4.jpg', '1.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
       {
@@ -85,7 +85,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 29000,
         priceType: 'Fixed',
         postCreator: 'Henok T.',
-        propertyImages: [`${Math.floor(Math.random()*4)+1}.jpg`],
+        propertyImages: ['3.jpg', '4.jpg', '1.jpg', '2.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
     ];

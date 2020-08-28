@@ -69,3 +69,13 @@
 .right_cover{
     right: -100%;
 }
+
+.color{
+    width:56px;
+    height:100%;
+    display:block;
+    background-color: #f4f4f4;
+}
+.right_color{
+    margin-left: auto;
+}

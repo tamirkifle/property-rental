@@ -1,6 +1,6 @@
 <div class="slider">
-    <div class="cover left_cover"></div>
-    <div class="cover right_cover"></div>
+    <div class="cover left_cover"><div class="color right_color"></div></div>
+    <div class="cover right_cover"><div class="color left_color"></div></div>
     <button class="slider_btn left_slider_btn" (click)="slideImage('left')"><img
             src="../../assets/other_icons/backward_arrow_small.svg" alt="Image Slide Left Button"></button>
     <img src="../../assets/{{ imgFileName }}" *ngFor="let imgFileName of property.propertyImages" class="post_img"

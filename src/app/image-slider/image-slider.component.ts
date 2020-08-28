@@ -12,17 +12,9 @@ export class ImageSliderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    // this.allImages = Array.from(
-    //   document.querySelectorAll('.post_img')
-    // );
-    // console.log(this.allImages);
-    // console.log(this.property);
-    // this.allImages[0].classList.add('showing');
-    // this.allImages[1].classList.add("right");
-    // this.allImages[this.allImages.length-1].classList.add("left");
   }
 
-  slideImage(dir): void {
+  slideImage(dir: 'left' | 'right'): void {
     const allImages = Array.from(
          document.querySelectorAll('.post_img'));
     let currentIndex = -1;
@@ -57,7 +49,6 @@ export class ImageSliderComponent implements OnInit {
       );
     } else if (dir === 'right') {
       allImages[currentIndex].classList.add('right');
-      // allImages[currentIndex].classList.remove('showing');
       allImages[indexStep(allImages, currentIndex, -1)].classList.add(
         'showing'
       );
