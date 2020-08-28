@@ -7,7 +7,7 @@ import { Property } from './property';
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const properties = [
+    const properties: Property[] = [
       {
         id: 11,
         propertyTitle: '',
