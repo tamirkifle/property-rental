@@ -54,9 +54,9 @@
     transform: translateX(0);
 }
 .post_img.left{
-    transform: translateX(-688px);
+    transform: translateX(-100%);
 }
 
 .post_img.right{
-    transform: translateX(688px);
+    transform: translateX(100%);
 }
