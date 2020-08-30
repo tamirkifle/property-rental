@@ -39,7 +39,7 @@ export class ImageSliderComponent implements OnInit {
         i.classList.remove('right');
         i.classList.remove('showing');
     });
-    if (dir === 'left') {
+    if (dir === 'right') {
       allImages[currentIndex].classList.add('left');
       allImages[indexStep(allImages, currentIndex, 1)].classList.add(
         'showing'
@@ -47,7 +47,7 @@ export class ImageSliderComponent implements OnInit {
       allImages[indexStep(allImages, currentIndex, 2)].classList.add(
         'right'
       );
-    } else if (dir === 'right') {
+    } else if (dir === 'left') {
       allImages[currentIndex].classList.add('right');
       allImages[indexStep(allImages, currentIndex, -1)].classList.add(
         'showing'
