@@ -104,7 +104,7 @@ export class InMemoryDataService implements InMemoryDbService {
         username: 'mahletg',
         firstname: 'Mahlet',
         lastname: 'Getachew',
-        avatar: '../../assets/guy-avatars/lady-3.jpg',
+        avatar: '../../assets/lady-avatars/lady-3.jpg',
         rating: 5,
       },
       {
@@ -112,7 +112,7 @@ export class InMemoryDataService implements InMemoryDbService {
         username: 'mesimesi',
         firstname: 'Meseret',
         lastname: 'Leykun',
-        avatar: '../../assets/guy-avatars/lady-2.jpg',
+        avatar: '../../assets/lady-avatars/lady-2.jpg',
         rating: 5,
       },
       {
