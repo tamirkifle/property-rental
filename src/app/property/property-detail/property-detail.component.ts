@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 
 import { PropertyService } from '../property.service';
 import { Property } from '../property';
+import { User } from '../../user/user';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-property-detail',
@@ -12,10 +14,12 @@ import { Property } from '../property';
 })
 export class PropertyDetailComponent implements OnInit {
   property: Property;
+  postCreatorUser: User;
   constructor(
     private route: ActivatedRoute,
     private propertyService: PropertyService,
-    private location: Location) { }
+    private location: Location,
+    private userService: UserService) { }
 
   ngOnInit(): void {
     this.getProperty();
@@ -36,10 +40,19 @@ export class PropertyDetailComponent implements OnInit {
   getProperty(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.propertyService.getProperty(id)
-      .subscribe(property => this.property = property);
+      .subscribe(property => {
+        this.property = property;
+        this.getUser(this.property.postCreator);
+
+      });
   }
 
   goBack(): void{
     this.location.back();
+  }
+
+  getUser(username: string){
+    this.userService.getUsers()
+    .subscribe(users => this.postCreatorUser = users.find(user => user.username === username));
   }
 }

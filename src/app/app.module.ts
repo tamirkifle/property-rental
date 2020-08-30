@@ -11,6 +11,7 @@ import { PropertyDetailComponent } from './property/property-detail/property-det
 import { AppRoutingModule } from './app-routing.module';
 import { FeaturedComponent } from './property/featured/featured.component';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
+import { UserLineComponent } from './user/user-line/user-line.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ImageSliderComponent } from './image-slider/image-slider.component';
     PropertyDetailComponent,
     FeaturedComponent,
     ImageSliderComponent,
+    UserLineComponent,
   ],
   imports: [
     BrowserModule,

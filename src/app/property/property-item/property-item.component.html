@@ -13,11 +13,7 @@
             </div>
         </div>
         <div class="post_creator">
-            <div class="post_creator_avatar"><img src="../../assets/guy-avatars/guy-4.jpg" alt="User Avatar"></div>
-            <div class="post_creator_details">
-                <div class="post_creator_name">{{property.postCreator}}</div>
-                <div class="post_creator_sub">Subhead</div>
-            </div>
+            <app-user-line [user]="postCreatorUser"></app-user-line>
         </div>
     </div>
 </div>

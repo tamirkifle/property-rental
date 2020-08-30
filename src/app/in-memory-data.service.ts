@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Property } from './property/property';
+import { User } from './user/user';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class InMemoryDataService implements InMemoryDbService {
         location: 'Bole, Addis Ababa',
         listPrice: 2000,
         priceType: 'Fixed',
-        postCreator: 'Ethio Delala',
+        postCreator: 'edelala',
         propertyImages: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
         amenities: ['Fixed Kitchen Cabinet', 'Balcony'],
         bathrooms: 2,
@@ -29,7 +30,7 @@ export class InMemoryDataService implements InMemoryDbService {
         location: 'Hayahulet, Addis Ababa',
         listPrice: 10000,
         priceType: 'Negotiable',
-        postCreator: 'Mihret Alemu',
+        postCreator: 'mahletg',
         propertyImages: ['2.jpg', '3.jpg', '4.jpg', '1.jpg'],
         amenities: [],
       },
@@ -40,7 +41,7 @@ export class InMemoryDataService implements InMemoryDbService {
         location: 'Yerer, Addis Ababa',
         listPrice: 19000,
         priceType: 'Negotiable',
-        postCreator: 'Yared Ketema',
+        postCreator: 'mesimesi',
         propertyImages: ['3.jpg', '4.jpg', '1.jpg', '2.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
@@ -51,7 +52,7 @@ export class InMemoryDataService implements InMemoryDbService {
         location: 'Addis Ketema, Addis Ababa',
         listPrice: 49000,
         priceType: 'Negotiable',
-        postCreator: 'Ethio Delala',
+        postCreator: 'edelala',
         propertyImages: ['4.jpg', '1.jpg', '2.jpg', '3.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
@@ -62,7 +63,7 @@ export class InMemoryDataService implements InMemoryDbService {
         location: 'Merkato, Addis Ababa',
         listPrice: 12000,
         priceType: 'Fixed',
-        postCreator: 'Ethio Delala',
+        postCreator: 'edelala',
         propertyImages: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
@@ -73,7 +74,7 @@ export class InMemoryDataService implements InMemoryDbService {
         location: 'Meskel Flower, Addis Ababa',
         listPrice: 25000,
         priceType: 'Negotiable',
-        postCreator: 'Ethio Delala',
+        postCreator: 'edelala',
         propertyImages: ['2.jpg', '3.jpg', '4.jpg', '1.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
@@ -84,13 +85,52 @@ export class InMemoryDataService implements InMemoryDbService {
         location: 'Gotera, Addis Ababa',
         listPrice: 29000,
         priceType: 'Fixed',
-        postCreator: 'Henok T.',
+        postCreator: 'allhouseset',
         propertyImages: ['3.jpg', '4.jpg', '1.jpg', '2.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
     ];
-    return {properties};
+    const users: User[] = [
+      {
+        id: 11,
+        username: 'edelala',
+        firstname: 'Ethio',
+        lastname: 'Delala',
+        avatar: '../../assets/guy-avatars/guy-1.jpg',
+        rating: 5,
+      },
+      {
+        id: 12,
+        username: 'mahletg',
+        firstname: 'Mahlet',
+        lastname: 'Getachew',
+        avatar: '../../assets/guy-avatars/lady-3.jpg',
+        rating: 5,
+      },
+      {
+        id: 13,
+        username: 'mesimesi',
+        firstname: 'Meseret',
+        lastname: 'Leykun',
+        avatar: '../../assets/guy-avatars/lady-2.jpg',
+        rating: 5,
+      },
+      {
+        id: 14,
+        username: 'allhouseset',
+        firstname: 'AllHouse',
+        lastname: 'Ethiopia',
+        avatar: '../../assets/guy-avatars/guy-2.jpg',
+        rating: 5,
+      },
+    ];
+
+    function getUser(username){
+      return users.find(user => user.username === username);
+    }
+    return { users, properties };
   }
+
 
   // Overrides the genId method to ensure that a hero always has an id.
   // If the heroes array is empty,
@@ -98,6 +138,8 @@ export class InMemoryDataService implements InMemoryDbService {
   // if the heroes array is not empty, the method below returns the highest
   // hero id + 1.
   genId(properties: Property[]): number {
-    return properties.length > 0 ? Math.max(...properties.map(property => property.id)) + 1 : 11;
+    return properties.length > 0
+      ? Math.max(...properties.map((property) => property.id)) + 1
+      : 11;
   }
 }
