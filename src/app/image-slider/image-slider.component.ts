@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Property } from '../property';
+import { Property } from '../property/property';
 
 @Component({
   selector: 'app-image-slider',

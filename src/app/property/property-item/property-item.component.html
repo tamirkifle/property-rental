@@ -5,7 +5,7 @@
     <div class="post_info">
         <div class="post_desc">
             <div class="post_title">
-              {{ property.bedrooms }} Bedroom House In {{property.location}}
+                {{ property.bedrooms }} Bedroom House In {{property.location}}
             </div>
             <div class="post_price">
                 <div class="post_price_amt">{{addCommas(property.listPrice)}} Birr</div>
@@ -13,7 +13,11 @@
             </div>
         </div>
         <div class="post_creator">
-            By: <span class="post_creator_name">{{property.postCreator}}</span>
+            <div class="post_creator_avatar"><img src="../../assets/guy-avatars/guy-4.jpg" alt="User Avatar"></div>
+            <div class="post_creator_details">
+                <div class="post_creator_name">{{property.postCreator}}</div>
+                <div class="post_creator_sub">Subhead</div>
+            </div>
         </div>
     </div>
 </div>

@@ -5,11 +5,11 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
-import { PropertyItemComponent } from './property-item/property-item.component';
-import { PropertyListComponent } from './property-list/property-list.component';
-import { PropertyDetailComponent } from './property-detail/property-detail.component';
+import { PropertyItemComponent } from './property/property-item/property-item.component';
+import { PropertyListComponent } from './property/property-list/property-list.component';
+import { PropertyDetailComponent } from './property/property-detail/property-detail.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FeaturedComponent } from './featured/featured.component';
+import { FeaturedComponent } from './property/featured/featured.component';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
 
 @NgModule({
