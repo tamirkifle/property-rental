@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FeaturedComponent } from './property/featured/featured.component';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { UserLineComponent } from './user/user-line/user-line.component';
+import { UserDetailComponent } from './user/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { UserLineComponent } from './user/user-line/user-line.component';
     FeaturedComponent,
     ImageSliderComponent,
     UserLineComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+<div class="user_detail_card" *ngIf="user">
+    <div class="user_avatar"><img src="{{user.avatar}}" alt="User Avatar"></div>
+    <div class="user_details">
+        <div class="user_name">{{user.firstname}} {{user.lastname}}</div>
+        <div class="user_address">Addis Ababa, Ethiopia</div>
+        <div class="user_posts">{{user.posts}} Post{{user.posts != 1?'s':''}}</div>
+        <div class="user_rating"><img src="../../../assets/other_icons/filled_stars.png" alt="placeholder"></div>
+    </div>
+    <div class="rate_user">
+        <div class="star_input"><img src="../../../assets/other_icons/empty_stars.png" alt="placeholder"></div>
+        <label>Rate Broker</label>
+        <button class="report_user_btn">Report Broker</button>
+    </div>
+</div>

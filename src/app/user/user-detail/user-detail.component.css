@@ -1,0 +1,46 @@
+.user_detail_card{
+    width:528px;
+    margin: 10vh auto;
+    text-align: center;
+    background-color: white;
+    height:80vh;
+    min-height: 700px;
+    padding: 84px 3rem;
+}
+.user_avatar{
+    padding: 0 0 30px;
+}
+.user_avatar img{
+    border-radius: 50%;
+}
+.user_details > *{
+    margin-bottom: 5px;
+}
+.user_rating{
+    margin-top: 10px;
+}
+.user_address, .user_posts, .rate_user label{
+    color: #979797;
+}
+.user_details{
+    margin-bottom: 100px;
+}
+
+.star_input{
+    margin-bottom: 10px;
+}
+.rate_user label{
+    display: block;
+    margin-bottom: 3rem;
+}
+.report_user_btn{
+    width:100%;
+    padding: 16px;
+    border: none;
+    background-color: #AC0909;
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
