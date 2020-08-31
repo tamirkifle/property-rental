@@ -96,7 +96,7 @@ export class InMemoryDataService implements InMemoryDbService {
         username: 'edelala',
         firstname: 'Ethio',
         lastname: 'Delala',
-        avatar: '../../assets/guy-avatars/guy-1.jpg',
+        avatar: '../../assets/guy-avatars/guy-4.jpg',
         posts: properties.reduce((a: number, p) => a + (p.postCreator === 'edelala' ? 1 : 0), 0),
         rating: 5,
       },
@@ -114,7 +114,7 @@ export class InMemoryDataService implements InMemoryDbService {
         username: 'mesimesi',
         firstname: 'Meseret',
         lastname: 'Leykun',
-        avatar: '../../assets/lady-avatars/lady-2.jpg',
+        avatar: '../../assets/lady-avatars/lady-4.jpg',
         posts: properties.reduce((a: number, p) => a + (p.postCreator === 'mesimesi' ? 1 : 0), 0),
         rating: 5,
       },
@@ -128,10 +128,6 @@ export class InMemoryDataService implements InMemoryDbService {
         rating: 5,
       },
     ];
-
-    function getUser(username){
-      return users.find(user => user.username === username);
-    }
     return { users, properties };
   }
 
