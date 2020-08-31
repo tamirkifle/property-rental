@@ -1,3 +1,6 @@
+.user_line_container{
+  cursor: pointer;
+}
 .post_creator_avatar,
 .post_creator_details {
   display: inline-block;

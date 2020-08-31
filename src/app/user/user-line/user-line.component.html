@@ -2,6 +2,6 @@
     <div class="post_creator_avatar"><img src="{{user.avatar}}" alt="User Avatar"></div>
     <div class="post_creator_details">
         <div class="post_creator_name">{{user.firstname}} {{user.lastname}}</div>
-        <div class="post_creator_sub">Subhead</div>
+        <div class="post_creator_sub">{{user.posts}} Post{{user.posts != 1?'s':''}}</div>
     </div>
 </div>

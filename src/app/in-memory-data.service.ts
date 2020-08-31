@@ -97,6 +97,7 @@ export class InMemoryDataService implements InMemoryDbService {
         firstname: 'Ethio',
         lastname: 'Delala',
         avatar: '../../assets/guy-avatars/guy-1.jpg',
+        posts: properties.reduce((a: number, p) => a + (p.postCreator === 'edelala' ? 1 : 0), 0),
         rating: 5,
       },
       {
@@ -105,6 +106,7 @@ export class InMemoryDataService implements InMemoryDbService {
         firstname: 'Mahlet',
         lastname: 'Getachew',
         avatar: '../../assets/lady-avatars/lady-3.jpg',
+        posts: properties.reduce((a: number, p) => a + (p.postCreator === 'mahletg' ? 1 : 0), 0),
         rating: 5,
       },
       {
@@ -113,6 +115,7 @@ export class InMemoryDataService implements InMemoryDbService {
         firstname: 'Meseret',
         lastname: 'Leykun',
         avatar: '../../assets/lady-avatars/lady-2.jpg',
+        posts: properties.reduce((a: number, p) => a + (p.postCreator === 'mesimesi' ? 1 : 0), 0),
         rating: 5,
       },
       {
@@ -121,6 +124,7 @@ export class InMemoryDataService implements InMemoryDbService {
         firstname: 'AllHouse',
         lastname: 'Ethiopia',
         avatar: '../../assets/guy-avatars/guy-2.jpg',
+        posts: properties.reduce((a: number, p) => a + (p.postCreator === 'allhouseset' ? 1 : 0), 0),
         rating: 5,
       },
     ];
