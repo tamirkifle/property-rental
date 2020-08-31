@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../user';
 
 @Component({
@@ -7,18 +7,15 @@ import { User } from '../user';
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
-  user: User = {
-    id: 14,
-    username: 'allhouseset',
-    firstname: 'AllHouse',
-    lastname: 'Ethiopia',
-    avatar: '../../assets/guy-avatars/guy-2.jpg',
-    posts: 5,
-    rating: 5,
-  };
+  @Input() user: User;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+
+  closeDetail(): void{
+    // Shouldn't use app-user-detail outside a component that uses it ???????
+    document.querySelector('app-user-detail').classList.add('hidden');
+  }
 }

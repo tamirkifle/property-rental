@@ -1,3 +1,4 @@
+<div class="container">
 <div class="user_detail_card" *ngIf="user">
     <div class="user_avatar"><img src="{{user.avatar}}" alt="User Avatar"></div>
     <div class="user_details">
@@ -11,4 +12,6 @@
         <label>Rate Broker</label>
         <button class="report_user_btn">Report Broker</button>
     </div>
+</div>
+<div class="overlay" (click)='closeDetail()'></div>
 </div>

@@ -6,6 +6,11 @@
     height:80vh;
     min-height: 700px;
     padding: 84px 3rem;
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index: 1000;
 }
 .user_avatar{
     padding: 0 0 30px;
@@ -43,4 +48,14 @@
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.overlay{
+    background-color: rgba(117, 143, 155, 0.8);
+    position: fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    z-index:999;
 }

@@ -1,3 +1,6 @@
+app-user-detail.hidden{
+  display: none;
+}
 .user_line_container{
   cursor: pointer;
 }
