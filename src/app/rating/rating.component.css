@@ -1,2 +1,9 @@
-.rating-container{
+.star{
+    font-size: 1.3rem;
+    color: #28b6f6;
+    margin-right: 9px;
+}
+.star:last-of-type{
+    margin-right: 0;
+
 }

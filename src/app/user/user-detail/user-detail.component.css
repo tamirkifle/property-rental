@@ -21,8 +21,8 @@
 .user_details > *{
     margin-bottom: 5px;
 }
-.user_rating{
-    margin-top: 10px;
+.user_details .user_posts{
+    margin-bottom: 10px;
 }
 .user_address, .user_posts, .rate_user label{
     color: #979797;

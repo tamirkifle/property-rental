@@ -5,7 +5,7 @@
         <div class="user_name">{{user.firstname}} {{user.lastname}}</div>
         <div class="user_address">Addis Ababa, Ethiopia</div>
         <div class="user_posts">{{user.posts}} Post{{user.posts != 1?'s':''}}</div>
-        <div class="user_rating"><img src="../../../assets/other_icons/filled_stars.png" alt="placeholder"></div>
+        <app-rating [rating]="user.rating"></app-rating>
     </div>
     <div class="rate_user">
         <div class="star_input"><img src="../../../assets/other_icons/empty_stars.png" alt="placeholder"></div>
