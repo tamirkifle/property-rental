@@ -13,6 +13,7 @@ import { FeaturedComponent } from './property/featured/featured.component';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { UserLineComponent } from './user/user-line/user-line.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { RatingComponent } from './rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component';
     ImageSliderComponent,
     UserLineComponent,
     UserDetailComponent,
+    RatingComponent,
   ],
   imports: [
     BrowserModule,
