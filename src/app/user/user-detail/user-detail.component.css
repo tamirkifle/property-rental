@@ -1,10 +1,10 @@
 .user_detail_card{
     width:528px;
-    margin: 10vh auto;
+    margin: 3rem auto;
     text-align: center;
     background-color: white;
     height:80vh;
-    min-height: 700px;
+    min-height: 670px;
     padding: 84px 3rem;
     position: fixed;
     top:0;
