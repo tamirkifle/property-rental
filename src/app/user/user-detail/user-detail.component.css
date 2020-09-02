@@ -1,61 +1,72 @@
-.user_detail_card{
-    width:528px;
-    margin: 3rem auto;
-    text-align: center;
-    background-color: white;
-    height:80vh;
-    min-height: 670px;
-    padding: 84px 3rem;
-    position: fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index: 1000;
+.user_detail_card {
+  width: 528px;
+  margin: 3rem auto;
+  text-align: center;
+  background-color: white;
+  height: 80vh;
+  min-height: 670px;
+  padding: 84px 3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
-.user_avatar{
-    padding: 0 0 30px;
+.user_avatar {
+  padding: 0 0 30px;
 }
-.user_avatar img{
-    border-radius: 50%;
+.user_avatar img {
+  border-radius: 50%;
 }
-.user_details > *{
-    margin-bottom: 5px;
+.user_details > * {
+  margin-bottom: 5px;
 }
-.user_details .user_posts{
-    margin-bottom: 10px;
+.user_details .user_posts {
+  margin-bottom: 10px;
 }
-.user_address, .user_posts, .rate_user label{
-    color: #979797;
+.user_address,
+.user_posts,
+.rate_user label {
+  color: #979797;
 }
-.user_details{
-    margin-bottom: 100px;
-}
-
-.star_input{
-    margin-bottom: 10px;
-}
-.rate_user label{
-    display: block;
-    margin-bottom: 3rem;
-}
-.report_user_btn{
-    width:100%;
-    padding: 16px;
-    border: none;
-    background-color: #AC0909;
-    color: white;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+.user_details {
+  margin-bottom: 100px;
 }
 
-.overlay{
-    background-color: rgba(117, 143, 155, 0.8);
-    position: fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
-    z-index:999;
+.star_input {
+  margin-bottom: 10px;
+}
+.rate_user label {
+  display: block;
+  margin-top:10px;
+  margin-bottom: 3rem;
+  cursor: pointer;
+}
+.report_user_btn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  background-color: #ac0909;
+  color: white;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.overlay {
+  background-color: rgba(117, 143, 155, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+}
+
+.user_details app-rating {
+  color: #28b6f6;
+}
+.rate_user app-rating {
+  color: rgb(112, 112, 112);
 }

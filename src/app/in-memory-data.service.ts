@@ -132,11 +132,11 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
 
-  // Overrides the genId method to ensure that a hero always has an id.
-  // If the heroes array is empty,
+  // Overrides the genId method to ensure that a property always has an id.
+  // If the properties array is empty,
   // the method below returns the initial number (11).
-  // if the heroes array is not empty, the method below returns the highest
-  // hero id + 1.
+  // if the properties array is not empty, the method below returns the highest
+  // property id + 1.
   genId(properties: Property[]): number {
     return properties.length > 0
       ? Math.max(...properties.map((property) => property.id)) + 1

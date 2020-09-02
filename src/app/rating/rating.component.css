@@ -1,9 +1,15 @@
 .star{
     font-size: 1.3rem;
-    color: #28b6f6;
     margin-right: 9px;
 }
 .star:last-of-type{
     margin-right: 0;
 
+}
+
+.rating_container.input .star{
+    color: #707070;
+}
+.rating_container.input .star:hover{
+    color: #28b6f6;
 }
