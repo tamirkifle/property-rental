@@ -11,6 +11,7 @@ export class RatingComponent implements OnInit {
   @Input() type: 'input' | 'display' = 'display';
   @ViewChild('ratingContainer') ratingContainer;
   private stars: HTMLElement[];
+  inputRating: number = null;
 
   constructor() {}
 
@@ -25,7 +26,7 @@ export class RatingComponent implements OnInit {
   }
   generateRating() {
     this.fillStarsUntil(this.rating - 1, '#28b6f6');
-    if (this.rating - Math.floor(this.rating) > 0){
+    if (this.rating - Math.floor(this.rating) > 0) {
       this.stars[Math.floor(this.rating)].classList.add('fa-star-half-o');
       this.stars[Math.floor(this.rating)].style.color = '#28b6f6';
     }
@@ -43,7 +44,7 @@ export class RatingComponent implements OnInit {
         return true;
       }
       star.classList.remove('fa-star-o');
-      if(color){
+      if (color) {
         star.style.color = color;
       }
     });
@@ -72,14 +73,16 @@ export class RatingComponent implements OnInit {
     };
 
     let fillStars = (e): void => {
-      let { clickedIndex, filledAfterClickedStar } = getStarsInfo(
+      const { clickedIndex, filledAfterClickedStar } = getStarsInfo(
         e.currentTarget
       );
+      this.inputRating = clickedIndex + 1;
       if (filledAfterClickedStar) {
         this.fillStarsUntil(clickedIndex, '#28b667');
       } else {
         if (isFilled(e.currentTarget)) {
           this.removeFillAllStars();
+          this.inputRating = null;
         } else {
           this.fillStarsUntil(clickedIndex, '#28b667');
         }
