@@ -16,10 +16,7 @@ export class RatingComponent implements OnInit {
 
   ngOnInit(): void {}
   ngAfterViewInit() {
-    this.stars = Array.from(
-      this.ratingContainer.nativeElement.children
-    );
-    console.log(this.stars);
+    this.stars = Array.from(this.ratingContainer.nativeElement.children);
     if (this.type === 'input') {
       this.generateInputRating();
     } else {
@@ -71,47 +68,89 @@ export class RatingComponent implements OnInit {
     }
   }
 
-  generateInputRating(){
-    let filled = false;
+  generateInputRating() {
+    function isFilled(star) {
+      return !star.classList.contains('fa-star-o');
+    }
+    let removeFillAllStars = () => {
+      this.stars.forEach((star: HTMLElement) => {
+        star.classList.add('fa-star-o');
+        star.style.color = '#707070';
 
-    let colorGrey = () => {
-      if(filled){
-        this.stars.forEach((s: HTMLElement) => (s.style.color = '#28b6f6'));
-        return;
-      }
-      this.stars.forEach((s: HTMLElement) => (s.style.color = '#707070'));
-    };
-
-    let colorStars = (e): void => {
-      this.stars.some((star) => {
-        star.style.color = '#28b6f6';
-        if (star === e.currentTarget) {
-          star.style.color = '#28b6f6';
-          return true;
-        }
       });
     };
-    let fillStars = (e): void => {
-      this.stars.forEach(star => star.classList.add('fa-star-o'));
-      this.stars.some((star) => {
+    let fillStarsUntil = (index = this.stars.length) => {
+      removeFillAllStars();
+      this.stars.some((star, i) => {
+        if(i > index){
+          return true;
+        }
         star.classList.remove('fa-star-o');
-        if (star === e.currentTarget) {
-          star.classList.remove('fa-star-o');
-          filled = true;
-          return true;
+        star.style.color = '#28b667';
+
+      });
+    };
+    let getStarsInfo = (clickedStar) => {
+      let clickedIndex = -1;
+      let filledAfterClickedStar = false;
+      this.stars.some((star, i) => {
+        if (clickedIndex !== -1) {
+          if (isFilled(star)) {      // Are there stars filled after the clicked star?
+            filledAfterClickedStar = true;
+            return true;
+          }
+        }
+        if (clickedStar === star) {
+          clickedIndex = i;
         }
       });
-      return;
+      return {clickedIndex, filledAfterClickedStar};
     };
 
-    this.stars.forEach((star: HTMLElement) =>
-      star.addEventListener('mouseenter', colorStars)
-    );
-    this.stars.forEach((star: HTMLElement) =>
-      star.addEventListener('mouseleave', colorGrey)
-    );
+    let fillStars = (e): void => {
+      let {clickedIndex, filledAfterClickedStar} = getStarsInfo(e.currentTarget);
+      if (filledAfterClickedStar){
+          fillStarsUntil(clickedIndex);
+      }
+      else{
+        if(isFilled(e.currentTarget)){
+          removeFillAllStars();
+        }
+        else{
+          fillStarsUntil(clickedIndex);
+        }
+      }
+    };
     this.stars.forEach((star: HTMLElement) =>
       star.addEventListener('click', fillStars)
     );
   }
+
+  // generateInputRating(){
+  //   let filled = false;
+
+  //   let colorGrey = () => {
+  //     if(filled){
+  //       this.stars.forEach((s: HTMLElement) => (s.style.color = '#28b6f6'));
+  //       return;
+  //     }
+  //     this.stars.forEach((s: HTMLElement) => (s.style.color = '#707070'));
+  //   };
+
+  //   let colorStars = (e): void => {
+  //     this.stars.some((star) => {
+  //       star.style.color = '#28b6f6';
+  //       if (star === e.currentTarget) {
+  //         star.style.color = '#28b6f6';
+  //         return true;
+  //       }
+  //     });
+  //   };
+  //   this.stars.forEach((star: HTMLElement) =>
+  //     star.addEventListener('mouseenter', colorStars)
+  //   );
+  //   this.stars.forEach((star: HTMLElement) =>
+  //     star.addEventListener('mouseleave', colorGrey)
+  //   );
+  // }
 }
