@@ -1,0 +1,29 @@
+:host{
+    height:100vh;
+    display:flex;
+    flex-flow: row wrap;
+}
+.landing_container{
+    background-color: rgba(0,133,195,0.41);
+    flex-basis: 40%;
+    height:calc(100vh - 50px);
+    overflow: hidden;
+}
+.landing_container img{
+    width:133%;
+    height:100%;
+    object-fit: cover;
+    object-position: -130px 4%;
+}
+.login_container{
+    background-color: white;
+    flex-basis: 60%;
+}
+.login_footer{
+    background-color: #6E6E6E;
+    flex-basis: 100%;
+    padding: 1rem 0;
+    font-size: 13px;
+    color: white;
+    text-align: center;
+}

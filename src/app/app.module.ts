@@ -14,6 +14,7 @@ import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { UserLineComponent } from './user/user-line/user-line.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { RatingComponent } from './rating/rating.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RatingComponent } from './rating/rating.component';
     UserLineComponent,
     UserDetailComponent,
     RatingComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
