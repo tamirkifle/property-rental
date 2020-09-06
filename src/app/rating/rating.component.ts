@@ -17,7 +17,9 @@ export class RatingComponent implements OnInit {
 
   ngOnInit(): void {}
   ngAfterViewInit() {
-    this.stars = Array.from(this.ratingContainer.nativeElement.children);
+    this.stars = Array.from(
+      this.ratingContainer.nativeElement.querySelectorAll('.star')
+    );
     if (this.type === 'input') {
       this.generateInputRating();
     } else {
@@ -25,12 +27,33 @@ export class RatingComponent implements OnInit {
     }
   }
   generateRating() {
-    this.fillStarsUntil(this.rating - 1, '#28b6f6');
-    if (this.rating - Math.floor(this.rating) > 0) {
-      this.stars[Math.floor(this.rating)].classList.add('fa-star-half-o');
-      this.stars[Math.floor(this.rating)].style.color = '#28b6f6';
-    }
+    this.ratingContainer.nativeElement.title = this.rating;
+    const fullStarsToShow = Math.floor(this.rating);
+    const partStarsToShow = this.rating - fullStarsToShow;
+    this.stars.some((star, i) => {
+      if (i === Math.ceil(this.rating) - 1) {
+        if (Math.ceil(this.rating) === this.rating) {
+          star.style.opacity = '0%';
+        }
+        return true;
+      }
+      star.style.opacity = '0%';
+    });
+    this.ratingContainer.nativeElement.querySelector('.color').style.width = `${
+      28 * fullStarsToShow + partStarsToShow * 20
+    }px`;
+    console.log(
+      this.ratingContainer.nativeElement.querySelector('.color').style.width
+    );
   }
+
+  // generateRating() {
+  //   this.fillStarsUntil(this.rating - 1, '#28b6f6');
+  //   if (this.rating - Math.floor(this.rating) > 0) {
+  //     this.stars[Math.floor(this.rating)].classList.add('fa-star-half-o');
+  //     this.stars[Math.floor(this.rating)].style.color = '#28b6f6';
+  //   }
+  // }
   private removeFillAllStars() {
     this.stars.forEach((star: HTMLElement) => {
       star.classList.add('fa-star-o');
@@ -88,9 +111,10 @@ export class RatingComponent implements OnInit {
         }
       }
     };
-    this.stars.forEach((star: HTMLElement) =>
-      star.addEventListener('click', fillStars)
-    );
+    this.stars.forEach((star: HTMLElement) => {
+      star.addEventListener('click', fillStars);
+    });
+    this.ratingContainer.nativeElement.classList.add('input');
   }
 
   // generateInputRating(){

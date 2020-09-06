@@ -107,7 +107,7 @@ export class InMemoryDataService implements InMemoryDbService {
         lastname: 'Getachew',
         avatar: '../../assets/lady-avatars/lady-3.jpg',
         posts: properties.reduce((a: number, p) => a + (p.postCreator === 'mahletg' ? 1 : 0), 0),
-        rating: 3.2,
+        rating: 2.7,
       },
       {
         id: 13,

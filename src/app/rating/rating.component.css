@@ -1,15 +1,42 @@
-.star{
-    font-size: 1.3rem;
-    margin-right: 9px;
+.star {
+  font-size: 21px;
+  width: 20px;
+  margin-right: 8px;
+  /* color: #28b6f6; */
 }
 .star:last-of-type{
-    margin-right: 0;
-
+  margin-right: 0;
 }
 
-.rating_container.input .star{
-    color: #707070;
+.rating_container.input .star {
+  color: #707070;
 }
-.rating_container.input .star:hover{
-    color: #28b6f6;
+.rating_container.input .star:hover {
+  color: #28b667;
+}
+.rating_container.input .color{
+    display: none;
+}
+.rating_container {
+  position: relative;
+  display: inline-block;
+}
+.color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right:0;
+  margin-right:auto;
+  margin-left: 0;
+  height:100%;
+  background-color: white;
+  z-index:-1;
+}
+
+.color img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position: left;
+    height:19px;
 }
