@@ -11,9 +11,7 @@
 .rating_container.input .star {
   color: #707070;
 }
-.rating_container.input .star:hover {
-  color: #28b667;
-}
+
 .rating_container.input .color{
     display: none;
 }
