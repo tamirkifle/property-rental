@@ -18,6 +18,9 @@
 .login_container{
     background-color: white;
     flex-basis: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .login_footer{
     background-color: #6E6E6E;
@@ -26,4 +29,47 @@
     font-size: 13px;
     color: white;
     text-align: center;
+}
+
+.signin_form{
+    border: 1px solid green;
+    padding: 5rem 3rem 3rem;
+    width:60%;
+    text-align: center;
+}
+.signin_title{
+    font-size: 24px;
+    margin-bottom: 33px;
+}
+
+input, a, button{
+    display: block;
+}
+
+.account_type{
+    padding: 5px 10px;
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+}
+button, input{
+    width: 100%;
+}
+
+input{
+    padding: 1rem;
+    border: none;
+}
+.username_input{
+    margin-bottom: 0.5rem;
+}
+.password_input{
+    margin-top: 0.5rem;
+}
+hr{
+    border: none;
+    border-bottom: 1px solid #0085C3;
+}
+input::placeholder{
+    font-size: 1rem;
+    color: #8b8b8b;
 }

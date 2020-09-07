@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+    --primary-blue: #28b6f6;
+    --primary-grey: #707070;
+}
 *{
     box-sizing: border-box;
 }
