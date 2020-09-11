@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Property } from '../property/property';
+import { Property } from '../../property/property';
 
 @Component({
   selector: 'app-image-slider',
@@ -12,6 +12,7 @@ export class ImageSliderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    console.log(this.property);
   }
 
   slideImage(dir: 'left' | 'right'): void {
