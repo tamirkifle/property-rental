@@ -1,75 +1,169 @@
-:host{
-    height:100vh;
-    display:flex;
-    flex-flow: row wrap;
+.landing_main {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 0;
 }
-.landing_container{
-    background-color: rgba(0,133,195,0.41);
-    flex-basis: 40%;
-    height:calc(100vh - 50px);
-    overflow: hidden;
+.landing_container {
+  background-color: rgba(0, 133, 195, 0.41);
+  flex-basis: 40%;
+  min-height: calc(100vh - 50px);
 }
-.landing_container img{
-    width:133%;
-    height:100%;
-    object-fit: cover;
-    object-position: -130px 4%;
+.landing_container img {
+  width: 133%;
+  min-height:100%;
+  height: calc(100vh - 50px);
+  object-fit: cover;
+  object-position: -130px 4%;
 }
-.login_container{
-    background-color: white;
-    flex-basis: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.login_container {
+  background-color: white;
+  flex-basis: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-.login_footer{
-    background-color: #6E6E6E;
-    flex-basis: 100%;
-    padding: 1rem 0;
-    font-size: 13px;
-    color: white;
-    text-align: center;
-}
-
-.signin_form{
-    border: 1px solid green;
-    padding: 5rem 3rem 3rem;
-    width:60%;
-    text-align: center;
-}
-.signin_title{
-    font-size: 24px;
-    margin-bottom: 33px;
+.login_footer {
+  background-color: #6e6e6e;
+  flex-basis: 100%;
+  padding: 1rem 0;
+  font-size: 13px;
+  color: white;
+  text-align: center;
 }
 
-input, a, button{
-    display: block;
+/* FORM */
+.signin_form {
+  padding: calc(2.5 * 1.48vh) calc(4 * 1.48vh) calc(1.5 * 1.48vh);
+  width: 528px;
+  text-align: center;
 }
 
-.account_type{
-    padding: 5px 10px;
-    color: var(--primary-blue);
-    margin-bottom: 1rem;
+input,
+button {
+  display: block;
+  width: 100%;
 }
-button, input{
-    width: 100%;
+input {
+  padding: calc(1 * 1.48vh) calc(1 * 1.48vh) calc(13 / 16 * 1.48vh);
+  border: none;
+  line-height: calc(21 / 16 * 1.48vh);
+  outline: none;
+  min-height: 50px;
 }
-
-input{
-    padding: 1rem;
-    border: none;
+input:focus{
+    border-bottom: 1px solid rgba(0,133,195);
 }
-.username_input{
-    margin-bottom: 0.5rem;
+input::placeholder {
+  font-size: 1rem;
+  color: #8b8b8b;
 }
-.password_input{
-    margin-top: 0.5rem;
+button {
+  padding: 14px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin-bottom: 1rem;
+  cursor: pointer;
 }
-hr{
-    border: none;
-    border-bottom: 1px solid #0085C3;
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
 }
-input::placeholder{
+a, p {
     font-size: 1rem;
-    color: #8b8b8b;
+}
+
+/* Title */
+.signin_title {
+  font-size: 24px;
+  margin-bottom: calc(3 * 1.48vh);
+  text-align: left;
+}
+
+.account_type {
+  padding: calc(12 / 16 * 1.48vh) calc(24 / 16 * 1.48vh);
+  color: var(--primary-blue);
+  margin-bottom: calc(2 * 1.48vh);
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  font-size: 20px;
+
+}
+
+.account_type_label, .at_input_container{
+    display: inline-block;
+    width:50%;
+    min-width: 140px;
+}
+.account_type_label{
+    text-align: left;
+}
+.at_input_container{
+    text-align: right;
+}
+#account_type_input{
+    width: 86px;
+    border: none;
+    color: var(--primary-blue);
+    font-size: 20px;
+    outline: none;
+    padding: 1px;
+}
+
+.username_input {
+  margin-bottom: calc(1* 1.48vh);
+  border-bottom: 1px solid rgba(0,133,195,0.3);
+}
+.password_input {
+  margin: calc(0.5 * 1.48vh) 0 calc(1 * 1.48vh);
+  border-bottom: 1px solid rgba(0,133,195,0.3);
+}
+
+.forgot_password {
+  margin-bottom: calc(3.5 * 1.48vh);
+}
+
+.login_btn {
+  background-color: #0085c3;
+}
+
+.create_account {
+  text-decoration: underline;
+  margin-bottom: calc(0.875 * 1.48vh);
+}
+.options_label {
+  margin-bottom: calc(4 * 1.48vh);
+}
+
+.login_fb_btn {
+  background-color: #157dc3;
+}
+.login_go_btn {
+  background-color: #e75a4d;
+}
+.login_tw_btn {
+  background-color: #56c0ee;
+}
+
+@media(max-width: 880px){
+    .landing_main{
+        display: block;
+    }
+
+    .landing_container{
+        display: block;
+        min-height: auto;
+        height: 150px;
+        overflow: hidden;
+    }
+    .landing_container img{
+        /* height: 100px; */
+        width: 110%;
+        object-fit: contain;
+        object-position: 80px -160px;
+
+    }
+    .account_type_label, .at_input_container{
+        text-align: center;
+    }
 }
