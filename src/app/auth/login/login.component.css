@@ -144,7 +144,21 @@ a, p {
 .login_tw_btn {
   background-color: #56c0ee;
 }
-
+.signin_title{
+  display: inline-block;
+  width: 50%;
+}
+.skip_link{
+  /* float: right; */
+  color: green;
+  /* margin-top: 5px; */
+  text-transform: uppercase;
+  text-decoration: underline;
+  display: inline-block;
+  text-align: right;
+  width: 50%;
+  font-size: 18px;
+}
 @media(max-width: 880px){
     .landing_main{
         display: block;
