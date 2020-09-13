@@ -1,12 +1,17 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { generate } from 'rxjs';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 
 @Component({
   selector: 'app-rating',
   templateUrl: './rating.component.html',
   styleUrls: ['./rating.component.css'],
 })
-export class RatingComponent implements OnInit {
+export class RatingComponent implements OnInit, AfterViewInit {
   @Input() rating = 0;
   @Input() type: 'input' | 'display' = 'display';
   @ViewChild('ratingContainer') ratingContainer;
@@ -16,28 +21,44 @@ export class RatingComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  ngAfterViewInit() {
-    this.stars = Array.from(this.ratingContainer.nativeElement.children);
+  ngAfterViewInit(): void {
+    this.stars = Array.from(
+      this.ratingContainer.nativeElement.querySelectorAll('.star')
+    );
     if (this.type === 'input') {
       this.generateInputRating();
     } else {
       this.generateRating();
     }
   }
-  generateRating() {
-    this.fillStarsUntil(this.rating - 1, '#28b6f6');
-    if (this.rating - Math.floor(this.rating) > 0) {
-      this.stars[Math.floor(this.rating)].classList.add('fa-star-half-o');
-      this.stars[Math.floor(this.rating)].style.color = '#28b6f6';
-    }
+  generateRating(): void {
+    this.ratingContainer.nativeElement.title = this.rating;
+    const fullStarsToShow = Math.floor(this.rating);
+    const partStarsToShow = this.rating - fullStarsToShow;
+    this.stars.some((star, i) => {
+      if (i === Math.ceil(this.rating) - 1) {
+        if (Math.ceil(this.rating) === this.rating) {
+          star.style.opacity = '0%';
+        }
+        return true;
+      }
+      star.style.opacity = '0%';
+    });
+    this.ratingContainer.nativeElement.querySelector('.color').style.width = `${
+      28 * fullStarsToShow + partStarsToShow * 20
+    }px`; // 20 is width of the star and 8 is the right margin between stars
   }
-  private removeFillAllStars() {
+
+  private removeFillAllStars(): void {
     this.stars.forEach((star: HTMLElement) => {
       star.classList.add('fa-star-o');
       star.style.color = '#707070';
     });
   }
-  private fillStarsUntil(index = this.stars.length, color?) {
+  private fillStarsUntil(
+    index: number = this.stars.length,
+    color: string
+  ): void {
     this.removeFillAllStars();
     this.stars.some((star, i) => {
       if (i > index) {
@@ -49,12 +70,12 @@ export class RatingComponent implements OnInit {
       }
     });
   }
-  generateInputRating() {
-    function isFilled(star) {
+  generateInputRating(): void {
+    function isFilled(star: HTMLElement): boolean {
       return !star.classList.contains('fa-star-o');
     }
 
-    let getStarsInfo = (clickedStar) => {
+    const getStarsInfo = (clickedStar: HTMLElement) => {
       let clickedIndex = -1;
       let filledAfterClickedStar = false;
       this.stars.some((star, i) => {
@@ -72,15 +93,15 @@ export class RatingComponent implements OnInit {
       return { clickedIndex, filledAfterClickedStar };
     };
 
-    let fillStars = (e): void => {
+    const fillStars = (e: Event): void => {
       const { clickedIndex, filledAfterClickedStar } = getStarsInfo(
-        e.currentTarget
+        e.currentTarget as HTMLElement
       );
       this.inputRating = clickedIndex + 1;
       if (filledAfterClickedStar) {
         this.fillStarsUntil(clickedIndex, '#28b667');
       } else {
-        if (isFilled(e.currentTarget)) {
+        if (isFilled(e.currentTarget as HTMLElement)) {
           this.removeFillAllStars();
           this.inputRating = null;
         } else {
@@ -88,36 +109,9 @@ export class RatingComponent implements OnInit {
         }
       }
     };
-    this.stars.forEach((star: HTMLElement) =>
-      star.addEventListener('click', fillStars)
-    );
+    this.stars.forEach((star: HTMLElement) => {
+      star.addEventListener('click', fillStars);
+    });
+    this.ratingContainer.nativeElement.classList.add('input');
   }
-
-  // generateInputRating(){
-  //   let filled = false;
-
-  //   let colorGrey = () => {
-  //     if(filled){
-  //       this.stars.forEach((s: HTMLElement) => (s.style.color = '#28b6f6'));
-  //       return;
-  //     }
-  //     this.stars.forEach((s: HTMLElement) => (s.style.color = '#707070'));
-  //   };
-
-  //   let colorStars = (e): void => {
-  //     this.stars.some((star) => {
-  //       star.style.color = '#28b6f6';
-  //       if (star === e.currentTarget) {
-  //         star.style.color = '#28b6f6';
-  //         return true;
-  //       }
-  //     });
-  //   };
-  //   this.stars.forEach((star: HTMLElement) =>
-  //     star.addEventListener('mouseenter', colorStars)
-  //   );
-  //   this.stars.forEach((star: HTMLElement) =>
-  //     star.addEventListener('mouseleave', colorGrey)
-  //   );
-  // }
 }
