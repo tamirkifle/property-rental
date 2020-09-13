@@ -1,3 +1,6 @@
+:host{
+    margin: auto;
+}
 .post{
     display: block;
     /* min-width: 250px; */
@@ -6,7 +9,7 @@
     box-shadow: 0px 12px 13px -5px rgba(175, 175, 175, 0.75);
     margin: 1rem auto;
     padding: 1rem;
-    
+    min-width: calc(688px + 80px + 2rem);
 }
 .title{
     font-size: 2rem;
