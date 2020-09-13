@@ -39,7 +39,8 @@ nav a {
   align-items: center;
   color: white;
   padding: 15px 40px 20px;
-  margin-bottom: 2rem;
+  width: 100%;
+  /* margin-bottom: 2rem; */
 }
 
 .page_title {
@@ -73,4 +74,26 @@ nav a {
   border-left: solid 1px #eeeeee;
   width: 48px;
   outline: none;
+}
+
+
+.main{
+  display: flex;
+  min-height: calc(100vh - 150px);
+}
+
+.main_nav{
+  min-width: 18%;
+  font-family: Roboto;
+  display: flex;
+  min-height: 100%;
+  flex-flow: column nowrap;
+  background-color: #f7f7f7;
+  padding: 1rem;
+  color: #707070;
+
+}
+
+.main_nav i{
+  margin-right: 16px;
 }
