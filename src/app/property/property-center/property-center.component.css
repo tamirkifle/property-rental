@@ -1,73 +1,76 @@
-nav a:visited, a:link {
-    color: #334953;
-  }
-  nav a:hover {
-    color: #039be5;
-    background-color: #cfd8dc;
-  }
-  nav a.active {
-    color: #039be5;
-  }
+nav a:visited,
+a:link {
+  color: #334953;
+}
+nav a:hover {
+  color: #039be5;
+  background-color: #cfd8dc;
+}
+nav a.active {
+  color: #039be5;
+}
 
-  nav a {
-    text-decoration: none;
-    padding: 1rem;
-  }
-
-  /* .page_title, nav{
-      margin-bottom: 2rem;
-  } */
+nav a {
+  text-decoration: none;
+  padding: 1rem;
+}
 
 
-  .login_footer {
-    background-color: #6e6e6e;
-    padding: 1rem 0;
-    font-size: 13px;
-    color: white;
-    text-align: center;
-    position: relative;
-  }
+:host {
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+}
 
-  .property_header{
-    background-color: #0085c3;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    padding: 15px 40px 20px;
-    margin-bottom: 4rem;
+.login_footer {
+  background-color: #6e6e6e;
+  padding: 1rem 0;
+  font-size: 13px;
+  color: white;
+  text-align: center;
+  position: relative;
+  margin-top: auto;
+}
 
-  }
+.property_header {
+  background-color: #0085c3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 15px 40px 20px;
+  margin-bottom: 2rem;
+}
 
-  .page_title{
-    font-size: 20px;
-    color: white;
-    font-weight: normal;
-    /* margin: 44px 0; */
-  }
-  .search_container{
-    flex-basis: 46.75%;
-    position: relative;
-    margin-top: 8px;
-  }
-  .search_input{
-    width:100%;
-    font-size: 16px;
-    padding: 10px 17px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-  }
+.page_title {
+  font-size: 20px;
+  color: white;
+  font-weight: normal;
+  /* margin: 44px 0; */
+}
+.search_container {
+  flex-basis: 46.75%;
+  position: relative;
+  margin-top: 8px;
+}
+.search_input {
+  width: 100%;
+  font-size: 16px;
+  padding: 10px 17px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
 
-  .search_btn{
-    position: absolute;
-    right: 0;
-    height: 100%;
-    background-color: white;
-    border: none;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-left: solid 1px #eeeeee;
-    width: 48px;
-    outline: none;
-  }
+.search_btn {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  background-color: white;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-left: solid 1px #eeeeee;
+  width: 48px;
+  outline: none;
+}
