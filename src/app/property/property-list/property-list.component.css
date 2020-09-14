@@ -1,9 +1,10 @@
 .post-list{
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 .post-list > * {
-    flex-basis: 33%;
+    /* flex-basis: 33%; */
 }
 
 app-property-item{
