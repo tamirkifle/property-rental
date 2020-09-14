@@ -9,6 +9,7 @@ import { FeaturedComponent } from './featured/featured.component';
 import { UserModule } from '../user/user.module';
 import { SharedModule } from '../shared/shared.module';
 import { PropertyCenterComponent } from './property-center/property-center.component';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PropertyCenterComponent } from './property-center/property-center.compo
     PropertyDetailComponent,
     FeaturedComponent,
     PropertyCenterComponent,
+    FilterComponent,
   ],
   imports: [
     CommonModule,

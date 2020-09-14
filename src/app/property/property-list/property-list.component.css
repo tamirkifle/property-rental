@@ -10,3 +10,7 @@
 app-property-item{
     cursor: pointer;
 }
+
+app-filter{
+    flex-basis: 100%;
+}
