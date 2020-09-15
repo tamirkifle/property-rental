@@ -1,0 +1,19 @@
+<div class="post">
+    <div class="post_img_container">
+        <img src="../../assets/{{ property.propertyImages[0] }}" class="post_img" alt="Property Photo">
+    </div>
+    <div class="post_info">
+        <div class="post_desc">
+            <div class="post_title">
+                {{ property.bedrooms }} Bedroom House In {{property.location}}
+            </div>
+            <div class="post_price">
+                <div class="post_price_amt">{{addCommas(property.listPrice)}} Birr</div>
+                <div class="post_price_type">{{property.priceType}} Price</div>
+            </div>
+        </div>
+        <div class="post_creator">
+            <app-user-line [user]="postCreatorUser"></app-user-line>
+        </div>
+    </div>
+</div>

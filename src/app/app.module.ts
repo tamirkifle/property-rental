@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PropertyModule } from './property/property.module';
 import { AuthModule } from './auth/auth.module';
+import { AdminModule } from './admin/admin.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +23,7 @@ import { AuthModule } from './auth/auth.module';
       InMemoryDataService, { dataEncapsulation: false }
     ),
     PropertyModule,
+    AdminModule,
     AuthModule,
     AppRoutingModule,
   ],

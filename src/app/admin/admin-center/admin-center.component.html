@@ -1,0 +1,22 @@
+<header class="property_header">
+    <h1 class="page_title">Property Rental</h1>
+    <div class="search_container"><input type="text" class="search_input" placeholder="Search"><button
+        class="search_btn"><img src="assets/other_icons/search.png" alt=""></button></div>
+    <div class="main_btns">
+      <app-top-menu-button [name]="'Notifications'" [iconSrc]="'assets/other_icons/notification.png'">
+      </app-top-menu-button>
+      <app-top-menu-button [name]="'Admin'" [iconSrc]="'assets/other_icons/profile.png'"></app-top-menu-button>
+    </div>
+  </header>
+  
+  <div class="main">
+    <nav class="main_nav">
+      <a routerLink="home"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+      <a routerLink="properties"><i class="fa fa-list" aria-hidden="true"></i>Manage Properties</a>
+      <a routerLink="users"><i class="fa fa-user" aria-hidden="true"></i>Manage Users</a>
+      <a (click)="logout()"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+  
+  <footer class="login_footer"><span>© Property Rental 2020</span></footer>

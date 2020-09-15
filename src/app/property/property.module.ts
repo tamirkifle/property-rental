@@ -9,8 +9,7 @@ import { FeaturedComponent } from './featured/featured.component';
 import { UserModule } from '../user/user.module';
 import { SharedModule } from '../shared/shared.module';
 import { PropertyCenterComponent } from './property-center/property-center.component';
-import { FilterComponent } from './filter/filter.component';
-import { FilterFieldComponent } from './filter-field/filter-field.component';
+
 
 @NgModule({
   declarations: [
@@ -19,14 +18,17 @@ import { FilterFieldComponent } from './filter-field/filter-field.component';
     PropertyDetailComponent,
     FeaturedComponent,
     PropertyCenterComponent,
-    FilterComponent,
-    FilterFieldComponent,
   ],
   imports: [
     CommonModule,
     UserModule,
     SharedModule,
     PropertyRoutingModule,
+  ],
+  exports: [
+    PropertyItemComponent,
+    PropertyListComponent,
+    PropertyDetailComponent,
   ]
 })
 export class PropertyModule { }
