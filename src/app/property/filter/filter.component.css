@@ -5,14 +5,8 @@
     padding: 0 10px;
     border-left: 1px solid #0085c3;
 }
-.filter_item:last-child{
+app-filter-field:last-child{
     border-right: 1px solid #0085c3;
-}
-.filter_text{
-    margin-right: 2rem;
-}
-.down_traingle{
-    opacity: 0.54;
 }
 .filter_container{
     text-align: center;

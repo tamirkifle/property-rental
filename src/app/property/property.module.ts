@@ -10,6 +10,7 @@ import { UserModule } from '../user/user.module';
 import { SharedModule } from '../shared/shared.module';
 import { PropertyCenterComponent } from './property-center/property-center.component';
 import { FilterComponent } from './filter/filter.component';
+import { FilterFieldComponent } from './filter-field/filter-field.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FilterComponent } from './filter/filter.component';
     FeaturedComponent,
     PropertyCenterComponent,
     FilterComponent,
+    FilterFieldComponent,
   ],
   imports: [
     CommonModule,
