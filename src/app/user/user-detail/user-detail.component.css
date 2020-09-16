@@ -70,3 +70,13 @@
 .rate_user app-rating {
   color: rgb(112, 112, 112);
 }
+
+
+.close_btn{
+  position: absolute;
+  top: 0;
+  right: 5px;
+  font-size: 2rem;
+  color: #707070;
+  cursor: pointer;
+}

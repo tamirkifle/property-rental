@@ -1,17 +1,18 @@
-<div class="container">
-<div class="user_detail_card" *ngIf="user">
-    <div class="user_avatar"><img src="{{user.avatar}}" alt="User Avatar"></div>
-    <div class="user_details">
-        <div class="user_name">{{user.firstname}} {{user.lastname}}</div>
-        <div class="user_address">Addis Ababa, Ethiopia</div>
-        <div class="user_posts">{{user.posts}} Post{{user.posts != 1?'s':''}}</div>
-        <app-rating [rating]="user.rating"></app-rating>
+<div class="container" *ngIf="user">
+    <div class="user_detail_card">
+        <a class="close_btn" aria-hidden="true" (click)="closeDetail()">╳</a>
+        <div class="user_avatar"><img src="{{user.avatar}}" alt="User Avatar"></div>
+        <div class="user_details">
+            <div class="user_name">{{user.firstname}} {{user.lastname}}</div>
+            <div class="user_address">Addis Ababa, Ethiopia</div>
+            <div class="user_posts">{{user.posts}} Post{{user.posts != 1?'s':''}}</div>
+            <app-rating [rating]="user.rating"></app-rating>
+        </div>
+        <div class="rate_user">
+            <app-rating [type]="'input'"></app-rating>
+            <label>Rate Broker</label>
+            <button class="report_user_btn">Report Broker</button>
+        </div>
     </div>
-    <div class="rate_user">
-        <app-rating [type]="'input'"></app-rating>
-        <label>Rate Broker</label>
-        <button class="report_user_btn">Report Broker</button>
-    </div>
-</div>
-<div class="overlay" (click)='closeDetail()'></div>
+    <div class="overlay" (click)="closeDetail()"></div>
 </div>
