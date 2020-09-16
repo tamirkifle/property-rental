@@ -1,1 +1,4 @@
-<h1>List Of Users</h1>
+<h1 class="user_title">List Of Users</h1>
+<div *ngFor="let user of users" class="user_line">
+    <app-user-line [user]="user"></app-user-line><button>Edit</button><button>Ban</button><button>Remove</button>
+</div>

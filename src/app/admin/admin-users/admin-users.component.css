@@ -1,0 +1,16 @@
+:host{
+    width: 100%;
+}
+.user_title{
+    margin-bottom: 2rem;
+}
+.user_line{
+    display: block;
+    margin: 0 0 1rem 1rem;
+    display: flex;
+    min-width: 400px;
+}
+
+app-user-line{
+    flex-basis: 80%;
+}

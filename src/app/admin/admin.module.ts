@@ -8,6 +8,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminPropertiesComponent } from './admin-properties/admin-properties.component';
 import { SharedModule } from '../shared/shared.module';
 import { PropertyModule } from '../property/property.module';
+import { UserModule } from '../user/user.module';
 
 @NgModule({
   declarations: [AdminCenterComponent, AdminPropertiesComponent, AdminUsersComponent, AdminHomeComponent],
@@ -15,7 +16,8 @@ import { PropertyModule } from '../property/property.module';
     CommonModule,
     AdminRoutingModule,
     SharedModule,
-    PropertyModule
+    PropertyModule,
+    UserModule
   ]
 })
 export class AdminModule { }
