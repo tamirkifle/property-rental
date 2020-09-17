@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { PropertyService } from '../property.service';
 import { Property } from '../property';
@@ -10,7 +9,7 @@ import { UserService } from '../../user/user.service';
 @Component({
   selector: 'app-property-detail',
   templateUrl: './property-detail.component.html',
-  styleUrls: ['./property-detail.component.css']
+  styleUrls: ['./property-detail.component.css'],
 })
 export class PropertyDetailComponent implements OnInit {
   property: Property;
@@ -18,12 +17,13 @@ export class PropertyDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private propertyService: PropertyService,
-    private location: Location,
-    private userService: UserService) { }
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getProperty();
-
+    console.log(this.property);
   }
 
   addCommas(num): string {
@@ -39,20 +39,29 @@ export class PropertyDetailComponent implements OnInit {
 
   getProperty(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.propertyService.getProperty(id)
-      .subscribe(property => {
-        this.property = property;
-        this.getUser(this.property.postCreator);
-
-      });
+    this.propertyService.getProperty(id).subscribe((property) => {
+      this.property = property;
+      this.getUser(this.property.postCreator);
+    });
   }
 
-  goBack(): void{
-    this.location.back();
+  goBack(): void {
+    // this.location.back();
+    let parent = this.route.snapshot.pathFromRoot[1].url[0].path;
+    if (parent === 'admin') {
+      parent += '/properties';
+    }
+    this.router.navigate([parent]);
   }
 
-  getUser(username: string){
-    this.userService.getUsers()
-    .subscribe(users => this.postCreatorUser = users.find(user => user.username === username));
+  getUser(username: string) {
+    this.userService
+      .getUsers()
+      .subscribe(
+        (users) =>
+          (this.postCreatorUser = users.find(
+            (user) => user.username === username
+          ))
+      );
   }
 }
