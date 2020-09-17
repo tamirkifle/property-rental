@@ -5,6 +5,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminPropertiesComponent } from './admin-properties/admin-properties.component';
 import { AdminGuard } from '../auth/admin.guard';
+import { PropertyDetailComponent } from '../property/property-detail/property-detail.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,11 @@ const routes: Routes = [
     // canActivate: [AdminGuard],
     children: [
       { path: 'users', component: AdminUsersComponent },
-      { path: 'properties', component: AdminPropertiesComponent },
+      {
+        path: 'properties',
+        component: AdminPropertiesComponent,
+      },
+      { path: 'properties/detail/:id', component: PropertyDetailComponent },
       { path: 'home', component: AdminHomeComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
