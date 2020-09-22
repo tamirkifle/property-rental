@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { User } from '../user';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 
@@ -9,11 +9,15 @@ import { UserDetailComponent } from '../user-detail/user-detail.component';
 })
 export class UserLineComponent implements OnInit {
   @Input() user: User;
+  active = false;
   constructor() {}
 
   ngOnInit(): void {}
 
   showUserDetail() {
-    document.querySelector('app-user-detail').classList.remove('hidden');
+    this.active = true;
+  }
+  closeUserDetail(){
+    this.active = false;
   }
 }

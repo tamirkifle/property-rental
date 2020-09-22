@@ -5,4 +5,4 @@
         <div class="post_creator_sub">{{user.posts}} Post{{user.posts != 1?'s':''}}</div>
     </div>
 </div>
-<app-user-detail class="hidden" [user]=user></app-user-detail>
+<app-user-detail [user]=user [class.hidden]="!active" (closeMe)="closeUserDetail()"></app-user-detail>
