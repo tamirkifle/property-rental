@@ -1,0 +1,36 @@
+<div class="landing_main">
+    <div class="landing_container">
+        <img src="../../assets/images/landing.png" alt="Property Rental Logo">
+    </div>
+    <div class="signup_container">
+        <form class="signup_form" #form="ngForm" (ngSubmit)="onFormSubmit(createdUser)">
+            <div class="signup_top">
+                <h1 class="signup_title">Sign Up</h1><a routerLink="/properties" class="skip_link">Skip to
+                    Properties</a>
+            </div>
+            <!-- <div class="account_type">
+                <label for="account_type_input" class="account_type_label">Account Type</label>
+                <div class="at_input_container">
+                    <select name="account_type" id="account_type_input">
+                        <option value="normal">Tenant (Default)</option>
+                        <option value="normal">Broker</option>
+                    </select>
+                </div>
+            </div> -->
+            <input type="text" placeholder="Phone Number / Email" id="phoneEmail" name="phoneEmail" class="inputfield"
+                [(ngModel)]="createdUser.contact">
+            <input type="password" placeholder="Password" name="password" class="inputfield">
+            <input type="password" placeholder="Confirm Password" name="confirmPassword" class="inputfield"
+                [(ngModel)]="createdUser.password">
+            <input type="text" placeholder="First Name" name="firstName" class="inputfield"
+                [(ngModel)]="createdUser.firstname">
+            <input type="text" placeholder="Last Name" name="lastName" class="inputfield"
+                [(ngModel)]="createdUser.lastname">
+            <input type="text" placeholder="User Name" name="userName" class="inputfield"
+                [(ngModel)]="createdUser.username">
+            <button type="submit" class="signup_btn btn">Sign Up</button>
+        </form>
+
+    </div>
+</div>
+<footer class="signup_footer"><span>© Property Rental 2020</span></footer>
