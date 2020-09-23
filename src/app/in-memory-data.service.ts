@@ -17,7 +17,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 2000,
         priceType: 'Fixed',
         postCreator: 'edelala',
-        propertyImages: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
+        propertyImages: ['assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg', 'assets/4.jpg'],
         amenities: ['Fixed Kitchen Cabinet', 'Balcony'],
         bathrooms: 2,
         levels: 'Ground',
@@ -31,7 +31,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 10000,
         priceType: 'Negotiable',
         postCreator: 'mahletg',
-        propertyImages: ['2.jpg', '3.jpg', '4.jpg', '1.jpg'],
+        propertyImages: ['assets/2.jpg', 'assets/3.jpg', 'assets/4.jpg', 'assets/1.jpg'],
         amenities: [],
       },
       {
@@ -42,7 +42,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 19000,
         priceType: 'Negotiable',
         postCreator: 'mesimesi',
-        propertyImages: ['3.jpg', '4.jpg', '1.jpg', '2.jpg'],
+        propertyImages: ['assets/3.jpg', 'assets/4.jpg', 'assets/1.jpg', 'assets/2.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
       {
@@ -53,7 +53,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 49000,
         priceType: 'Negotiable',
         postCreator: 'edelala',
-        propertyImages: ['4.jpg', '1.jpg', '2.jpg', '3.jpg'],
+        propertyImages: ['assets/4.jpg', 'assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
       {
@@ -64,7 +64,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 12000,
         priceType: 'Fixed',
         postCreator: 'edelala',
-        propertyImages: ['1.jpg', '2.jpg', '3.jpg', '4.jpg'],
+        propertyImages: ['assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg', 'assets/4.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
       {
@@ -75,7 +75,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 25000,
         priceType: 'Negotiable',
         postCreator: 'edelala',
-        propertyImages: ['2.jpg', '3.jpg', '4.jpg', '1.jpg'],
+        propertyImages: ['assets/2.jpg', 'assets/3.jpg', 'assets/4.jpg', 'assets/1.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
       {
@@ -86,7 +86,7 @@ export class InMemoryDataService implements InMemoryDbService {
         listPrice: 29000,
         priceType: 'Fixed',
         postCreator: 'allhouseset',
-        propertyImages: ['3.jpg', '4.jpg', '1.jpg', '2.jpg'],
+        propertyImages: ['assets/3.jpg', 'assets/4.jpg', 'assets/1.jpg', 'assets/2.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
     ];
