@@ -26,7 +26,6 @@ export class CreateUserComponent implements OnInit {
   ngOnInit(): void {}
 
   onFormSubmit(user: User) {
-    console.log(user);
     this.http
       .post(this.url, user)
       .subscribe((result) => console.log('Successfully Added'));

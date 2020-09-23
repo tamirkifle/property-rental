@@ -8,7 +8,7 @@ import { User } from '../user';
 })
 export class UserDetailComponent implements OnInit {
   @Input() user: User;
-  @Output() closeMe:EventEmitter<any> = new EventEmitter();
+  @Output() closeMe: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
   ngOnInit(): void {

@@ -9,6 +9,8 @@ import { FeaturedComponent } from './featured/featured.component';
 import { UserModule } from '../user/user.module';
 import { SharedModule } from '../shared/shared.module';
 import { PropertyCenterComponent } from './property-center/property-center.component';
+import { CreatePropertyComponent } from './create-property/create-property.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,12 +20,14 @@ import { PropertyCenterComponent } from './property-center/property-center.compo
     PropertyDetailComponent,
     FeaturedComponent,
     PropertyCenterComponent,
+    CreatePropertyComponent,
   ],
   imports: [
     CommonModule,
     UserModule,
     SharedModule,
     PropertyRoutingModule,
+    FormsModule
   ],
   exports: [
     PropertyItemComponent,
