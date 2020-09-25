@@ -18,6 +18,7 @@
   .rating_container {
     position: relative;
     display: inline-block;
+    font-size: 0;
   }
   .color {
     position: absolute;
