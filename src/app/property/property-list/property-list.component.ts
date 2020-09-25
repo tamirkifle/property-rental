@@ -13,7 +13,7 @@ export class PropertyListComponent implements OnInit {
   // selectedProperty: Property;
 
   constructor(private propertyService: PropertyService) { }
-
+  searchText = '';
   ngOnInit(): void {
     this.getProperties();
   }
