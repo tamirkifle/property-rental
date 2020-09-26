@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Property } from '../property';
 import { PropertyService } from '../property.service';
@@ -12,9 +13,12 @@ export class PropertyListComponent implements OnInit {
   properties: Property[];
   // selectedProperty: Property;
 
-  constructor(private propertyService: PropertyService) { }
+  constructor(private propertyService: PropertyService, private route: ActivatedRoute) { }
   searchText = '';
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.searchText = params.get('search');
+    });
     this.getProperties();
   }
   // onSelect(property: Property): void{

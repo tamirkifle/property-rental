@@ -1,13 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Property } from './property/property';
+import { Property } from './property';
 
 @Pipe({
   name: 'propertyFilter',
 })
 export class PropertyFilterPipe implements PipeTransform {
-  transform(properties: Property[], arg: String): Property[] {
+  transform(properties: Property[], arg: string): Property[] {
     const searchFields = ['propertyTitle', 'location'];
     if (!arg || !properties) {
+      return properties;
+    }
+    else if('bedroom'.includes(arg) || 'bathroom'.includes(arg)){
       return properties;
     }
     else{

@@ -11,7 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PropertyCenterComponent } from './property-center/property-center.component';
 import { CreatePropertyComponent } from './create-property/create-property.component';
 import { FormsModule } from '@angular/forms';
-import { PropertyFilterPipe } from '../property-filter.pipe';
+import { PropertyFilterPipe } from './property-filter.pipe';
 
 
 
