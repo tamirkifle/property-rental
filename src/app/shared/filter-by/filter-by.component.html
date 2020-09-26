@@ -1,0 +1,8 @@
+<div class="filter_item_container" [class.active]="showOptions">
+    <div class="filter_title_container" (click)="toggleOptions()"><span
+            class="filter_text">{{ filterDetails.name }}</span><span class="down_traingle">▾</span></div>
+    <div class="filter_options_container">
+            <label *ngFor="let option of filterDetails.options" for="{{ option }}" class="filter_option"><input
+                    type="checkbox" name="{{option}}" id="{{option}}"><label for="{{option}}">{{option}}</label></label>
+    </div>
+</div>

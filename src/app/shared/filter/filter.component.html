@@ -1,3 +1,3 @@
 <div class="filter_container" #filterContainer>
-    <app-filter-field *ngFor="let item of filterItems" [filterField]="item" (fieldClicked)="activateOnly($event)"></app-filter-field>
+    <app-filter-by *ngFor="let filterItem of filterItems" class="filter_cpt" (optionActive)="resetActiveOption($event)" [filterDetails]="filterItem"></app-filter-by>
 </div>

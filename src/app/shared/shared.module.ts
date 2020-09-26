@@ -6,7 +6,7 @@ import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { RatingComponent } from './rating/rating.component';
 import { TopMenuButtonComponent } from './top-menu-button/top-menu-button.component';
 import { FilterComponent } from './filter/filter.component';
-import { FilterFieldComponent } from './filter-field/filter-field.component';
+import { FilterByComponent } from './filter-by/filter-by.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { FilterFieldComponent } from './filter-field/filter-field.component';
     ImageSliderComponent,
     TopMenuButtonComponent,
     FilterComponent,
-    FilterFieldComponent
+    FilterByComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +25,6 @@ import { FilterFieldComponent } from './filter-field/filter-field.component';
     ImageSliderComponent,
     TopMenuButtonComponent,
     FilterComponent,
-    FilterFieldComponent
   ]
 })
 export class SharedModule { }

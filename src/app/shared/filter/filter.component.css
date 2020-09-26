@@ -1,11 +1,8 @@
-.filter_item, span{
-    display: inline-block;
-}
-.filter_item{
-    padding: 0 10px;
+
+.filter_cpt{
     border-left: 1px solid #0085c3;
 }
-app-filter-field:last-child{
+.filter_cpt:last-child{
     border-right: 1px solid #0085c3;
 }
 .filter_container{
