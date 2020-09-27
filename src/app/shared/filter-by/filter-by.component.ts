@@ -11,7 +11,7 @@ export class FilterByComponent implements OnInit {
   @Output() fieldActive = new EventEmitter();
   filterOptions = ['Addis Ababa', 'Mekele', 'Bahir Dar', 'Adama'];
   showOptions = false;
-  @Output() optionSelected: EventEmitter<string> = new EventEmitter<string>();
+  @Output() optionSelected: EventEmitter<{option: string, checked: boolean}> = new EventEmitter<{option: string, checked: boolean}>();
   constructor() { }
 
   ngOnInit(): void {
@@ -23,7 +23,8 @@ export class FilterByComponent implements OnInit {
     this.showOptions = !this.showOptions;
   }
 
-  onOptionSelected(option){
-    this.optionSelected.emit(option);
+  onOptionSelected(inputElement){
+    this.optionSelected.emit({option: inputElement.id, checked: inputElement.checked});
+    
   }
 }

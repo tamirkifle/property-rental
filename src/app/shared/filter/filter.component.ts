@@ -11,7 +11,7 @@ export class FilterComponent implements OnInit {
   filterItems = [
     {
       name: 'City',
-      options: ['Addis Ababa', 'Mekele', 'Bahir Dar', 'Adama']
+      options: ['Addis Ababa', 'Mekele', 'Bahir Dar', 'Adama'],
     },
     {
       name: 'Sub-City',
@@ -19,7 +19,7 @@ export class FilterComponent implements OnInit {
     },
     {
       name: 'Type',
-      options: ['Apartment', 'Full Compound', 'Room(s)']
+      options: ['Apartment', 'Full Compound', 'Room(s)'],
     },
     {
       name: 'Number Of Bedrooms',
@@ -59,10 +59,16 @@ export class FilterComponent implements OnInit {
     }
     this.activeComp = filterByComponent;
   }
-  addToActiveOptions(option){
-    this.activeOptions.push(option);
+  addToActiveOptions(optionObj) {
+    if (optionObj.checked) {
+      this.activeOptions.push(optionObj.option);
+    } else {
+      this.activeOptions = this.activeOptions.filter(
+        (option) => !(option === optionObj.option)
+      );
+    }
   }
-  filterBySelected(){
-    this.router.navigate(['/properties', {options: this.activeOptions}]);
+  filterBySelected() {
+    this.router.navigate(['/properties', { options: this.activeOptions }]);
   }
 }
