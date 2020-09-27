@@ -1,5 +1,5 @@
 <div class="post-list">
     <app-filter></app-filter>
-    <app-property-item *ngFor="let property of properties | propertyFilter:searchText" [property]="property"
+    <app-property-item *ngFor="let property of properties | propertyFilter:searchText | filterBy:filterOptions" [property]="property"
         routerLink="/properties/detail/{{property.id}}"></app-property-item>
 </div>

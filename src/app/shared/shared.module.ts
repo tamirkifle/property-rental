@@ -14,7 +14,7 @@ import { FilterByComponent } from './filter-by/filter-by.component';
     ImageSliderComponent,
     TopMenuButtonComponent,
     FilterComponent,
-    FilterByComponent
+    FilterByComponent,
   ],
   imports: [
     CommonModule,

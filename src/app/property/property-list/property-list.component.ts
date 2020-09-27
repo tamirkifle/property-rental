@@ -3,23 +3,27 @@ import { Component, OnInit } from '@angular/core';
 import { Property } from '../property';
 import { PropertyService } from '../property.service';
 
-
 @Component({
   selector: 'app-property-list',
   templateUrl: './property-list.component.html',
-  styleUrls: ['./property-list.component.css']
+  styleUrls: ['./property-list.component.css'],
 })
 export class PropertyListComponent implements OnInit {
   properties: Property[];
-  filterOptions: string[];
+  filterOptions: string[] = [];
   // selectedProperty: Property;
 
-  constructor(private propertyService: PropertyService, private route: ActivatedRoute) { }
+  constructor(
+    private propertyService: PropertyService,
+    private route: ActivatedRoute
+  ) {}
   searchText = '';
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.searchText = params.get('search');
-      this.filterOptions = params.get('options').split(',');
+      if (params.get('options')) {
+        this.filterOptions = params.get('options').split(',');
+      }
     });
     this.getProperties();
   }
@@ -39,7 +43,8 @@ export class PropertyListComponent implements OnInit {
   }
 
   getProperties(): void {
-    this.propertyService.getProperties()
-    .subscribe(properties => this.properties = properties);
+    this.propertyService
+      .getProperties()
+      .subscribe((properties) => (this.properties = properties));
   }
 }

@@ -12,6 +12,7 @@ import { PropertyCenterComponent } from './property-center/property-center.compo
 import { CreatePropertyComponent } from './create-property/create-property.component';
 import { FormsModule } from '@angular/forms';
 import { PropertyFilterPipe } from './property-filter.pipe';
+import { FilterByPipe } from './filter-by.pipe';
 
 
 
@@ -23,7 +24,8 @@ import { PropertyFilterPipe } from './property-filter.pipe';
     FeaturedComponent,
     PropertyCenterComponent,
     CreatePropertyComponent,
-    PropertyFilterPipe
+    PropertyFilterPipe,
+    FilterByPipe
   ],
   imports: [
     CommonModule,
