@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FilterByComponent } from '../filter-by/filter-by.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-filter',
@@ -29,8 +30,9 @@ export class FilterComponent implements OnInit {
       options: ['<2000', '2000-3000', '3000-5000', '>5000'],
     },
   ];
+  activeOptions: string[] = [];
   activeComp: FilterByComponent = null;
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
   // activateOnly(event: any): void {
@@ -56,5 +58,11 @@ export class FilterComponent implements OnInit {
       this.activeComp.showOptions = false;
     }
     this.activeComp = filterByComponent;
+  }
+  addToActiveOptions(option){
+    this.activeOptions.push(option);
+  }
+  filterBySelected(){
+    this.router.navigate(['/properties', {options: this.activeOptions}]);
   }
 }

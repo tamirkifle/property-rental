@@ -11,6 +11,7 @@ import { PropertyService } from '../property.service';
 })
 export class PropertyListComponent implements OnInit {
   properties: Property[];
+  filterOptions: string[];
   // selectedProperty: Property;
 
   constructor(private propertyService: PropertyService, private route: ActivatedRoute) { }
@@ -18,6 +19,7 @@ export class PropertyListComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.searchText = params.get('search');
+      this.filterOptions = params.get('options').split(',');
     });
     this.getProperties();
   }

@@ -8,9 +8,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class FilterByComponent implements OnInit {
   @Input() filterDetails: {name: string, options: string[]};
   @Input() otherOptionsActive: boolean;
-  @Output() optionActive = new EventEmitter();
+  @Output() fieldActive = new EventEmitter();
   filterOptions = ['Addis Ababa', 'Mekele', 'Bahir Dar', 'Adama'];
   showOptions = false;
+  @Output() optionSelected: EventEmitter<string> = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {
@@ -18,8 +19,11 @@ export class FilterByComponent implements OnInit {
   }
 
   toggleOptions(){
-
-    this.optionActive.emit(this);
+    this.fieldActive.emit(this);
     this.showOptions = !this.showOptions;
+  }
+
+  onOptionSelected(option){
+    this.optionSelected.emit(option);
   }
 }
