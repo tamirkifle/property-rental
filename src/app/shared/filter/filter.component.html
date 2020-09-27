@@ -1,3 +1,4 @@
 <div class="filter_container" #filterContainer>
     <app-filter-by *ngFor="let filterItem of filterItems" class="filter_cpt" (optionActive)="resetActiveOption($event)" [filterDetails]="filterItem"></app-filter-by>
+    <button class="apply_btn">Apply</button>
 </div>
