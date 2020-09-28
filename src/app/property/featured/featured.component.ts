@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Property } from '../property';
 import { PropertyService } from '../property.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-featured',
@@ -9,9 +10,18 @@ import { PropertyService } from '../property.service';
 })
 export class FeaturedComponent implements OnInit {
   properties: Property[];
-  constructor(private propertyService: PropertyService) { }
+  searchText = '';
+  filterOptions: string[] = [];
+
+  constructor(private propertyService: PropertyService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      this.searchText = params.get('search');
+      if (params.get('options')) {
+        this.filterOptions = params.get('options').split(',');
+      }
+    });
     this.getProperties();
   }
   getProperties(): void {
