@@ -2,7 +2,6 @@
     display: inline-block;
 }
 .filter_item_container {
-  padding: 0 20px;
   position: relative;
 }
 
@@ -14,9 +13,14 @@
 }
 .filter_options_container{
     display: none;
+
 }
 .filter_title_container{
+    padding: 0 20px;
     cursor: pointer;
+    position: relative;
+    z-index: 1000;
+
 }
 /* Options Active */
 
@@ -36,8 +40,9 @@
     width: max-content;
     min-width:100%;
     padding-top: 1rem;
-    z-index: 2;
+    z-index: 1001;
     text-align: left;
+
 }
 .filter_option{
     margin-bottom: 10px;
@@ -46,6 +51,7 @@
     display: list-item;
     cursor: pointer;
     list-style-type: none;
+    
 
 
 }

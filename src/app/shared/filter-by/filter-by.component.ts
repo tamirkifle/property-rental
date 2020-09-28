@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class FilterByComponent implements OnInit {
   @Input() filterDetails: {name: string, options: string[]};
   @Input() otherOptionsActive: boolean;
-  @Output() fieldActive = new EventEmitter();
+  @Output() fieldToggle = new EventEmitter();
   filterOptions = ['Addis Ababa', 'Mekele', 'Bahir Dar', 'Adama'];
   showOptions = false;
   @Output() optionSelected: EventEmitter<{option: string, checked: boolean}> = new EventEmitter<{option: string, checked: boolean}>();
@@ -19,7 +19,7 @@ export class FilterByComponent implements OnInit {
   }
 
   toggleOptions(){
-    this.fieldActive.emit(this);
+    this.fieldToggle.emit(this);
     this.showOptions = !this.showOptions;
   }
 

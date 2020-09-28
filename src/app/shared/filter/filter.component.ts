@@ -71,4 +71,8 @@ export class FilterComponent implements OnInit {
   filterBySelected() {
     this.router.navigate(['/properties', { options: this.activeOptions }]);
   }
+
+  closeFilterOptions(){
+    this.activeComp.showOptions = false;
+  }
 }

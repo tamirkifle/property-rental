@@ -1,4 +1,6 @@
 <div class="filter_container" #filterContainer>
-    <app-filter-by *ngFor="let filterItem of filterItems" class="filter_cpt" (fieldActive)="resetActiveOption($event)" (optionSelected)="addToActiveOptions($event)" [filterDetails]="filterItem"></app-filter-by>
+    <app-filter-by *ngFor="let filterItem of filterItems" class="filter_cpt" (fieldToggle)="resetActiveOption($event)" (optionSelected)="addToActiveOptions($event)" [filterDetails]="filterItem"></app-filter-by>
     <button class="apply_btn" (click)=filterBySelected()>Apply</button>
 </div>
+<div class="overlay" [class.active]="activeComp && activeComp.showOptions" (click)="closeFilterOptions()"></div>
+
