@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Property } from './property';
+import { Property } from '../property/property';
 
 @Pipe({
   name: 'propertyFilter',
