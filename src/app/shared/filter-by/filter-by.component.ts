@@ -9,13 +9,22 @@ export class FilterByComponent implements OnInit {
   @Input() filterDetails: {name: string, options: string[]};
   @Input() otherOptionsActive: boolean;
   @Output() fieldToggle = new EventEmitter();
-  filterOptions = ['Addis Ababa', 'Mekele', 'Bahir Dar', 'Adama'];
   showOptions = false;
+  optionsObjs: {option: string, checked: boolean}[] = [];
+  @Input() activeOptions: string[];
   @Output() optionSelected: EventEmitter<{option: string, checked: boolean}> = new EventEmitter<{option: string, checked: boolean}>();
   constructor() { }
 
   ngOnInit(): void {
-
+    this.filterDetails.options.forEach(option => this.optionsObjs.push({option, checked: false}));
+    this.activeOptions.forEach(option => {
+      this.optionsObjs.some(optionObj => {
+        if (optionObj.option === option){
+          optionObj.checked = true;
+          return true;
+        }
+      });
+    });
   }
 
   toggleOptions(){
@@ -25,6 +34,5 @@ export class FilterByComponent implements OnInit {
 
   onOptionSelected(inputElement){
     this.optionSelected.emit({option: inputElement.id, checked: inputElement.checked});
-    
   }
 }

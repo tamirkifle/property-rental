@@ -16,7 +16,7 @@ export class FeaturedComponent implements OnInit {
   constructor(private propertyService: PropertyService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
+    this.route.queryParamMap.subscribe((params) => {
       this.searchText = params.get('search');
       if (params.get('options')) {
         this.filterOptions = params.get('options').split(',');

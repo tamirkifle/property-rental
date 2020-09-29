@@ -2,7 +2,7 @@
     <div class="filter_title_container" (click)="toggleOptions()"><span
             class="filter_text">{{ filterDetails.name }}</span><span class="down_traingle">▾</span></div>
     <div class="filter_options_container">
-            <label *ngFor="let option of filterDetails.options" for="{{ option }}" class="filter_option"><input
-                    (change)="onOptionSelected($event.target)" type="checkbox" name="{{option}}" id="{{option}}" ><label for="{{option}}">{{option}}</label></label>
+            <label *ngFor="let optionObj of optionsObjs" for="{{ optionObj.option }}" class="filter_option"><input
+                    (change)="onOptionSelected($event.target)" [checked]="optionObj.checked" type="checkbox" name="{{optionObj.option}}" id="{{optionObj.option}}" ><label for="{{optionObj.option}}">{{optionObj.option}}</label></label>
     </div>
 </div>

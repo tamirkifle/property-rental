@@ -11,16 +11,24 @@ export class PropertyCenterComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.queryParamMap.subscribe((params) => {
       this.searchTerm = params.get('search') || '';
     });
   }
   onSearch(searchTerm) {
     if (!searchTerm) {
-      this.router.navigate(['/properties']);
+      this.router.navigate([], {
+        relativeTo: this.route,
+        // queryParamsHandling: 'merge',
+        // skipLocationChange: true
+      });
       return;
     }
     this.searchTerm = searchTerm;
-    this.router.navigate(['/properties', { search: searchTerm }]);
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { search: searchTerm },
+      queryParamsHandling: 'merge',
+    });
   }
 }

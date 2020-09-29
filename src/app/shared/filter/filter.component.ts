@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FilterByComponent } from '../filter-by/filter-by.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-filter',
@@ -32,9 +32,15 @@ export class FilterComponent implements OnInit {
   ];
   activeOptions: string[] = [];
   activeComp: FilterByComponent = null;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) => {
+      if (params.get('options')) {
+        this.activeOptions = params.getAll('options');
+      }
+    });
+  }
   // activateOnly(event: any): void {
   //   const clickedField: HTMLElement = event.currentTarget;
   //   const activeFields = clickedField.parentElement.parentElement.querySelectorAll(
@@ -53,6 +59,7 @@ export class FilterComponent implements OnInit {
   //     }
   //   }
   // }
+
   resetActiveOption(filterByComponent) {
     if (this.activeComp && this.activeComp !== filterByComponent) {
       this.activeComp.showOptions = false;
@@ -70,10 +77,12 @@ export class FilterComponent implements OnInit {
   }
   filterBySelected() {
     this.activeComp.showOptions = false;
-    this.router.navigate([this.router.url, { options: this.activeOptions }]);
+    console.log(this.activeOptions);
+    this.router.navigate([], {relativeTo: this.route,
+      queryParams: { options: this.activeOptions }    });
   }
 
-  closeFilterOptions(){
+  closeFilterOptions() {
     this.activeComp.showOptions = false;
   }
 }
