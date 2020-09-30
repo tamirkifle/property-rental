@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -11,20 +12,14 @@ export class FilterByComponent implements OnInit {
   @Output() fieldToggle = new EventEmitter();
   showOptions = false;
   optionsObjs: {option: string, checked: boolean}[] = [];
-  @Input() activeOptions: string[];
+  activeOptions: string[];
   @Output() optionSelected: EventEmitter<{option: string, checked: boolean}> = new EventEmitter<{option: string, checked: boolean}>();
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.filterDetails.options.forEach(option => this.optionsObjs.push({option, checked: false}));
-    this.activeOptions.forEach(option => {
-      this.optionsObjs.some(optionObj => {
-        if (optionObj.option === option){
-          optionObj.checked = true;
-          return true;
-        }
-      });
-    });
+    this.route.queryParamMap.subscribe((params) => {
+      this.activeOptions = params.getAll('options');
+  });
   }
 
   toggleOptions(){
