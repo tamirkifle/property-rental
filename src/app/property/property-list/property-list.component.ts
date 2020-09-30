@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Property } from '../property';
 import { PropertyService } from '../property.service';
@@ -15,7 +15,8 @@ export class PropertyListComponent implements OnInit {
 
   constructor(
     private propertyService: PropertyService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
   searchText = '';
   ngOnInit(): void {
@@ -26,7 +27,12 @@ export class PropertyListComponent implements OnInit {
       }
       // console.log(this.searchText, this.filterOptions);
       this.getProperties();
+
     });
+
+  }
+  ngOnChanges(){
+    console.log(this.route.snapshot.queryParams.options);
   }
   // onSelect(property: Property): void{
   //   this.selectedProperty = property;
@@ -48,5 +54,9 @@ export class PropertyListComponent implements OnInit {
       .getProperties()
       .subscribe((properties) => {(this.properties = properties);;
       });
+  }
+
+  showPropertyDetail(id){
+    this.router.navigate([`/properties/detail/${id}`], {queryParamsHandling: 'preserve'});
   }
 }

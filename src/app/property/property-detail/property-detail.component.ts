@@ -51,7 +51,7 @@ export class PropertyDetailComponent implements OnInit {
     if (parent === 'admin') {
       parent += '/properties';
     }
-    this.router.navigate([parent]);
+    this.router.navigate([parent], {queryParamsHandling: 'preserve'});
   }
 
   getUser(username: string) {
