@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./filter.component.css'],
 })
 export class FilterComponent implements OnInit {
+  pageQueries: string[];
   filterItems = [
     {
       name: 'City',
@@ -35,10 +36,9 @@ export class FilterComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.route.snapshot.queryParamMap.getAll('options').forEach(option => this.activeOptions.push(option));
     this.route.queryParamMap.subscribe((params) => {
-      if (params.get('options')) {
-        this.activeOptions = params.getAll('options');
-      }
+        this.pageQueries = params.getAll('options');
     });
   }
   // activateOnly(event: any): void {
@@ -77,9 +77,11 @@ export class FilterComponent implements OnInit {
   }
   filterBySelected() {
     this.activeComp.showOptions = false;
-    console.log(this.activeOptions);
-    this.router.navigate([], {relativeTo: this.route,
-      queryParams: { options: this.activeOptions }    });
+    this.router.navigate([], {
+      queryParams: { options: this.activeOptions },
+      relativeTo: this.route,
+      queryParamsHandling: 'merge'
+    });
   }
 
   closeFilterOptions() {
