@@ -14,7 +14,6 @@ export class PropertyListComponent implements OnInit {
   // selectedProperty: Property;
 
   constructor(
-    private propertyService: PropertyService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -26,7 +25,7 @@ export class PropertyListComponent implements OnInit {
         this.filterOptions = params.getAll('by');
       }
       // console.log(this.searchText, this.filterOptions);
-      this.getProperties();
+      this.properties = this.route.snapshot.data.properties;
 
     });
 
@@ -47,13 +46,6 @@ export class PropertyListComponent implements OnInit {
         (length - 1 - i) % 3 === 0 && i !== length - 1 ? item + ',' : item
       )
       .join('');
-  }
-
-  getProperties(): void {
-    this.propertyService
-      .getProperties()
-      .subscribe((properties) => {(this.properties = properties);;
-      });
   }
 
   showPropertyDetail(id){

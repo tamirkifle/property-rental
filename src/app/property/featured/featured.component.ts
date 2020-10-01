@@ -13,7 +13,7 @@ export class FeaturedComponent implements OnInit {
   searchText = '';
   filterOptions: string[] = [];
 
-  constructor(private propertyService: PropertyService, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
@@ -22,10 +22,6 @@ export class FeaturedComponent implements OnInit {
         this.filterOptions = params.get('by').split(',');
       }
     });
-    this.getProperties();
-  }
-  getProperties(): void {
-    this.propertyService.getProperties()
-      .subscribe(properties => this.properties = properties.slice(0, 2));
+    this.properties = this.route.snapshot.data.properties.slice(0, 2);
   }
 }

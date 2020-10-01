@@ -16,13 +16,13 @@ export class PropertyDetailComponent implements OnInit {
   postCreatorUser: User;
   constructor(
     private route: ActivatedRoute,
-    private propertyService: PropertyService,
     private userService: UserService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getProperty();
+    this.property = this.route.snapshot.data.property;
+    this.getUser(this.property.postCreator);
     console.log(this.property);
   }
 
@@ -35,14 +35,6 @@ export class PropertyDetailComponent implements OnInit {
         (length - 1 - i) % 3 === 0 && i !== length - 1 ? item + ',' : item
       )
       .join('');
-  }
-
-  getProperty(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.propertyService.getProperty(id).subscribe((property) => {
-      this.property = property;
-      this.getUser(this.property.postCreator);
-    });
   }
 
   goBack(): void {

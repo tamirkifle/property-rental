@@ -5,15 +5,17 @@ import { PropertyDetailComponent } from './property-detail/property-detail.compo
 import { FeaturedComponent } from './featured/featured.component';
 import { PropertyCenterComponent } from './property-center/property-center.component';
 import { CreatePropertyComponent } from './create-property/create-property.component';
+import { PropertyResolver, PropertiesResolver } from './property-resolver.service';
+import { Property } from './property';
 
 const propertyRoutes: Routes = [
   {
     path: 'properties',
     component: PropertyCenterComponent,
     children: [
-      { path: '', component: PropertyListComponent},
-      { path: 'detail/:id', component: PropertyDetailComponent },
-      { path: 'home', component: FeaturedComponent },
+      { path: '', component: PropertyListComponent, resolve: {properties: PropertiesResolver} },
+      { path: 'detail/:id', component: PropertyDetailComponent, resolve: {property: PropertyResolver} },
+      { path: 'home', component: FeaturedComponent, resolve: {properties: PropertiesResolver} },
       { path: 'create', component: CreatePropertyComponent}
     ],
   },
