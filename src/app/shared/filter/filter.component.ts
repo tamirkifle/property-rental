@@ -36,9 +36,9 @@ export class FilterComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.snapshot.queryParamMap.getAll('options').forEach(option => this.activeOptions.push(option));
+    this.route.snapshot.queryParamMap.getAll('by').forEach(option => this.activeOptions.push(option));
     this.route.queryParamMap.subscribe((params) => {
-        this.pageQueries = params.getAll('options');
+        this.pageQueries = params.getAll('by');
     });
   }
   // activateOnly(event: any): void {
@@ -78,7 +78,7 @@ export class FilterComponent implements OnInit {
   filterBySelected() {
     this.activeComp.showOptions = false;
     this.router.navigate([], {
-      queryParams: { options: this.activeOptions },
+      queryParams: { by: this.activeOptions },
       relativeTo: this.route,
       queryParamsHandling: 'merge'
     });

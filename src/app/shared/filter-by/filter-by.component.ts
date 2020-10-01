@@ -18,7 +18,7 @@ export class FilterByComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
-      this.activeOptions = params.getAll('options');
+      this.activeOptions = params.getAll('by');
   });
   }
 
