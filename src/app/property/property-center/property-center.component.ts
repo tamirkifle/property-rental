@@ -12,7 +12,7 @@ export class PropertyCenterComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
-      this.searchTerm = params.get('search') || '';
+      this.searchTerm = params.get('s') || '';
     });
   }
   onSearch(searchTerm) {
@@ -27,8 +27,8 @@ export class PropertyCenterComponent implements OnInit {
     this.searchTerm = searchTerm;
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { search: searchTerm },
-      queryParamsHandling: 'merge',
+      queryParams: { s: searchTerm },
+      // queryParamsHandling: 'merge',
     });
   }
 }

@@ -20,7 +20,7 @@ export class PropertyListComponent implements OnInit {
   searchText = '';
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
-      this.searchText = params.get('search');
+      this.searchText = params.get('s');
       if (params.get('by')) {
         this.filterOptions = params.getAll('by');
       }
