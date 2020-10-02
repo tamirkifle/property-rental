@@ -7,6 +7,7 @@ import { PropertyCenterComponent } from './property-center/property-center.compo
 import { CreatePropertyComponent } from './create-property/create-property.component';
 import { PropertyResolver, PropertiesResolver } from './property-resolver.service';
 import { Property } from './property';
+import { IsLoggedInGuard } from '../auth/is-logged-in.guard';
 
 const propertyRoutes: Routes = [
   {
@@ -16,7 +17,7 @@ const propertyRoutes: Routes = [
       { path: '', component: PropertyListComponent, resolve: {properties: PropertiesResolver} },
       { path: 'detail/:id', component: PropertyDetailComponent, resolve: {property: PropertyResolver} },
       { path: 'home', component: FeaturedComponent, resolve: {properties: PropertiesResolver} },
-      { path: 'create', component: CreatePropertyComponent}
+      { path: 'create', component: CreatePropertyComponent, canActivate: [IsLoggedInGuard]}
     ],
   },
 ];

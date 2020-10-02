@@ -3,6 +3,7 @@ import { Property } from '../property';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../../user/user';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-create-property',
@@ -25,14 +26,13 @@ export class CreatePropertyComponent implements OnInit {
     levels: null,
   };
   url = 'api/properties';
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {}
 
   onFormSubmit(){
-    // post creator should be set to logged in user through a service
-    this.createdProperty.postCreator = 'allhouseset';
-    if(this.createdProperty.propertyTitle == null){
+    this.createdProperty.postCreator = this.authService.currentUser.username;
+    if (this.createdProperty.propertyTitle == null){
       this.createdProperty.propertyTitle = `${this.createdProperty.bedrooms} House in ${this.createdProperty.location}`; 
     }
     this.http
