@@ -11,6 +11,8 @@ import { SharedModule } from '../shared/shared.module';
 import { PropertyCenterComponent } from './property-center/property-center.component';
 import { CreatePropertyComponent } from './create-property/create-property.component';
 import { FormsModule } from '@angular/forms';
+import { FilterByPipe } from '../shared/filter-by.pipe';
+import { PropertyFilterPipe } from '../shared/property-filter.pipe';
 
 
 
@@ -34,6 +36,7 @@ import { FormsModule } from '@angular/forms';
     PropertyItemComponent,
     PropertyListComponent,
     PropertyDetailComponent,
-  ]
+  ],
+  providers: [FilterByPipe, PropertyFilterPipe]
 })
 export class PropertyModule { }

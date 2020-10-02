@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Property } from './property';
+import { Property, PropertyOptions } from './property';
 // import { MOCKPROPERTIES } from './mock-properties';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FilterByPipe } from '../shared/filter-by.pipe';
+import { PropertyFilterPipe } from '../shared/property-filter.pipe';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PropertyService {
 
   private propertiesURL = 'api/properties';  // URL to web api
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private filterBy: FilterByPipe, private search: PropertyFilterPipe) { }
 
-  getProperties(): Observable<Property[]> {
+  getProperties(options?: PropertyOptions): Observable<Property[]> {
     return this.http.get<Property[]>(this.propertiesURL)
     .pipe(
+      map(properties => options ? this.filterBy.transform(properties, options.filterBy) : properties),
+      map(properties => options ? this.search.transform(properties, options.search) : properties),
       catchError(this.handleError<Property[]>('getProperties', []))
     );
   }
