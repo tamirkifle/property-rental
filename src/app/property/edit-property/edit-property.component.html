@@ -1,0 +1,65 @@
+<div class="signup_container">
+    <form class="signup_form" #form="ngForm" (ngSubmit)="onFormSubmit()">
+        <div class="signup_top">
+            <h1>Edit Property</h1>
+        </div>
+        <div class="one_line">
+            <label for="bedrooms">Bedrooms:</label>
+            <input type="text" placeholder="No. of Bedrooms" id="bedrooms" name="bedrooms" class="inputfield"
+            value="{{editedProperty.bedrooms}}">
+        </div>
+        <div class="one_line">
+            <label for="bathrooms">Bathrooms:</label>
+            <input type="text" placeholder="No. of Bathrooms" id="bathrooms" name="bathrooms" class="inputfield"
+            value="{{editedProperty.bathrooms}}">
+        </div>
+        <div class="price_input one_line">
+            <label for="listPrice">List Price:</label>
+            <input type="text" placeholder="List Price" id="listPrice" name="listPrice" class="inputfield"
+            value="{{editedProperty.listPrice}}">
+            <select name="priceType" id="priceType">
+                <option value="Negotiable" [selected]="property.priceType === 'Negotiable'">Negotiable</option>
+                <option value="Fixed" [selected]="property.priceType === 'Fixed'">Fixed</option>
+            </select>
+        </div>
+        <div class="one_line">
+            <label for="propertyTitle">Property Title:</label>
+            <input type="text" placeholder="Post title (optional)" id="propertyTitle" name="propertyTitle"
+            class="inputfield" value="{{editedProperty.propertyTitle}}">
+        </div>
+        <div class="one_line">
+            <label for="location">Location:</label>
+            <input type="text" placeholder="Location" id="location" name="location" class="inputfield"
+            value="{{editedProperty.location}}">
+        </div>
+        <div class="one_line">
+            <label for="areaInM2">Area in m²:</label>
+            <input type="text" placeholder="Area in m²" id="areaInM2" name="areaInM2" class="inputfield"
+                value="{{editedProperty.areaInM2}}">
+        </div>
+        <!-- <div class="amenities_input">
+            <label for="balcony">Balcony</label>
+            <input type="checkbox" name="balcony" id="balcony">
+            <label for="backyard">Backyard</label>
+            <input type="checkbox" name="backyard" id="backyard">
+            <label for="jacuzzi">Jacuzzi</label>
+            <input type="checkbox" name="jacuzzi" id="jacuzzi">
+        </div> -->
+        <div class="one_line">
+            <label for="amenities">Amenities:</label>
+
+            <input type="text" placeholder="Other Amenities e.g. Backyard, Jacuzzi, Balcony" id="amenities" name="amenities"
+                class="inputfield" value="{{editedProperty.amenities.join(', ')}}">
+        </div>   
+        <!-- <input type="text" placeholder="Details" id="details" name="details" class="inputfield"
+            value="{{editedProperty.details"> -->
+        <div class="images_input" style="margin-top: 2rem">
+            <label for="images">Images</label>
+            <!-- Put Image Showcase here -->
+        </div>
+
+        <button class="signup_btn btn">Preview</button>
+        <button type="submit" class="signup_btn btn">Save Property</button>
+    </form>
+
+</div>

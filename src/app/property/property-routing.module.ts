@@ -7,6 +7,7 @@ import { PropertyCenterComponent } from './property-center/property-center.compo
 import { CreatePropertyComponent } from './create-property/create-property.component';
 import { PropertyResolver, PropertiesResolver } from './property-resolver.service';
 import { Property } from './property';
+import { EditPropertyComponent } from './edit-property/edit-property.component';
 
 const propertyRoutes: Routes = [
   {
@@ -15,6 +16,7 @@ const propertyRoutes: Routes = [
     children: [
       { path: '', component: PropertyListComponent, resolve: {properties: PropertiesResolver} },
       { path: 'detail/:id', component: PropertyDetailComponent, resolve: {property: PropertyResolver} },
+      { path: 'detail/:id/edit', component: EditPropertyComponent, resolve: {property: PropertyResolver} },
       { path: 'home', component: FeaturedComponent, resolve: {properties: PropertiesResolver} },
       { path: 'create', component: CreatePropertyComponent}
     ],
