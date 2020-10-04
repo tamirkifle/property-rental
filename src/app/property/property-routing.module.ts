@@ -5,20 +5,45 @@ import { PropertyDetailComponent } from './property-detail/property-detail.compo
 import { FeaturedComponent } from './featured/featured.component';
 import { PropertyCenterComponent } from './property-center/property-center.component';
 import { CreatePropertyComponent } from './create-property/create-property.component';
-import { PropertyResolver, PropertiesResolver } from './property-resolver.service';
+import {
+  PropertyResolver,
+  PropertiesResolver,
+} from './property-resolver.service';
 import { Property } from './property';
 import { EditPropertyComponent } from './edit-property/edit-property.component';
+import { CanDeactivateGuard } from '../can-deactivate.guard';
 
 const propertyRoutes: Routes = [
   {
     path: 'properties',
     component: PropertyCenterComponent,
     children: [
-      { path: '', component: PropertyListComponent, resolve: {properties: PropertiesResolver} },
-      { path: 'detail/:id', component: PropertyDetailComponent, resolve: {property: PropertyResolver} },
-      { path: 'detail/:id/edit', component: EditPropertyComponent, resolve: {property: PropertyResolver} },
-      { path: 'home', component: FeaturedComponent, resolve: {properties: PropertiesResolver} },
-      { path: 'create', component: CreatePropertyComponent}
+      {
+        path: '',
+        component: PropertyListComponent,
+        resolve: { properties: PropertiesResolver },
+      },
+      {
+        path: 'detail/:id',
+        component: PropertyDetailComponent,
+        resolve: { property: PropertyResolver },
+      },
+      {
+        path: 'detail/:id/edit',
+        component: EditPropertyComponent,
+        resolve: { property: PropertyResolver },
+        canDeactivate: [CanDeactivateGuard],
+      },
+      {
+        path: 'home',
+        component: FeaturedComponent,
+        resolve: { properties: PropertiesResolver },
+      },
+      {
+        path: 'create',
+        component: CreatePropertyComponent,
+        canDeactivate: [CanDeactivateGuard],
+      },
     ],
   },
 ];

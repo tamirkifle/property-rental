@@ -10,7 +10,7 @@
         <div class="price_input">
             <input type="text" placeholder="List Price" id="listPrice" name="listPrice" class="inputfield"
                 [(ngModel)]="createdProperty.listPrice">
-            <select name="priceType" id="priceType">
+            <select name="priceType" id="priceType" [(ngModel)]="createdProperty.priceType">
                 <option value="Negotiable">Negotiable</option>
                 <option value="Fixed">Fixed</option>
             </select>
@@ -29,7 +29,7 @@
             <label for="jacuzzi">Jacuzzi</label>
             <input type="checkbox" name="jacuzzi" id="jacuzzi">
         </div> -->
-            
+
         <input type="text" placeholder="Other Amenities e.g. Backyard, Jacuzzi, Balcony" id="amenities" name="amenities"
             class="inputfield" [(ngModel)]="createdProperty.amenities">
         <!-- <input type="text" placeholder="Details" id="details" name="details" class="inputfield"
@@ -38,8 +38,10 @@
             <label for="images">Upload Images</label>
             <input type="file" name="images" id="images">
         </div>
-
-        <button type="submit" class="signup_btn btn">Create Property</button>
+        <div class="one_line">
+            <button type="submit" class="signup_btn btn">Create Property</button>
+            <button type="button" class="signup_btn btn" (click)="cancelCreation()">Cancel</button>
+        </div>
     </form>
 
 </div>

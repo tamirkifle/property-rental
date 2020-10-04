@@ -5,13 +5,17 @@ import { UserService } from 'src/app/user/user.service';
 import { Property } from '../property';
 import { PropertyService } from '../property.service';
 import { HttpClient } from '@angular/common/http';
+import { CanComponentDeactivate } from 'src/app/can-deactivate.guard';
+import { Observable, of } from 'rxjs';
+import { DialogService } from '../../dialog.service';
+import { clone, isEqual } from 'lodash';
 
 @Component({
   selector: 'app-edit-property',
   templateUrl: './edit-property.component.html',
   styleUrls: ['./edit-property.component.css'],
 })
-export class EditPropertyComponent implements OnInit {
+export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
   property: Property;
   postCreatorUser: User;
   editedProperty: Property;
@@ -23,11 +27,13 @@ export class EditPropertyComponent implements OnInit {
     private propertyService: PropertyService,
     private router: Router,
     private http: HttpClient,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
-    this.editedProperty = this.property = this.route.snapshot.data.property;
-    if (this.editedProperty.amenities){
+    this.property = this.route.snapshot.data.property;
+    this.editedProperty = clone(this.property);
+    if (this.editedProperty.amenities) {
       this.amenitiesString = this.editedProperty.amenities.join(', ');
     }
     this.getUser(this.property.postCreator);
@@ -73,13 +79,23 @@ export class EditPropertyComponent implements OnInit {
   }
 
   save() {
-    if (this.amenitiesString){
-      this.editedProperty.amenities = this.amenitiesString.split(',').map(a => a.trim());
+    if (this.amenitiesString) {
+      this.editedProperty.amenities = this.amenitiesString
+        .split(',')
+        .map((a) => a.trim());
     }
     this.propertyService.updateProperty(this.editedProperty);
-    this.router.navigate(['..'],
-    {
-      relativeTo: this.route
+    this.router.navigate(['..'], {
+      relativeTo: this.route,
     });
+  }
+
+  canDeactivate(): Observable<boolean> {
+    if (isEqual(this.property, this.editedProperty)) {
+      return of(true);
+    }
+    return this.dialogService.confirm(
+      'All unsaved changes will be lost, do you want to continue?'
+    );
   }
 }
