@@ -3,24 +3,33 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
 import { Property } from '../property';
+import { PropertyService } from '../property.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-property',
   templateUrl: './edit-property.component.html',
-  styleUrls: ['./edit-property.component.css']
+  styleUrls: ['./edit-property.component.css'],
 })
 export class EditPropertyComponent implements OnInit {
   property: Property;
   postCreatorUser: User;
   editedProperty: Property;
+  amenitiesString: string;
+
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private router: Router
+    private propertyService: PropertyService,
+    private router: Router,
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
     this.editedProperty = this.property = this.route.snapshot.data.property;
+    if (this.editedProperty.amenities){
+      this.amenitiesString = this.editedProperty.amenities.join(', ');
+    }
     this.getUser(this.property.postCreator);
     console.log(this.property);
   }
@@ -42,7 +51,7 @@ export class EditPropertyComponent implements OnInit {
     if (parent === 'admin') {
       parent += '/properties';
     }
-    this.router.navigate([parent], {queryParamsHandling: 'preserve'});
+    this.router.navigate([parent], { queryParamsHandling: 'preserve' });
   }
 
   getUser(username: string) {
@@ -55,7 +64,22 @@ export class EditPropertyComponent implements OnInit {
           ))
       );
   }
-  onFormSubmit(){
-    
+  onFormSubmit() {}
+
+  goToDetail() {
+    this.router.navigate(['..'], {
+      relativeTo: this.route,
+    });
+  }
+
+  save() {
+    if (this.amenitiesString){
+      this.editedProperty.amenities = this.amenitiesString.split(',').map(a => a.trim());
+    }
+    this.propertyService.updateProperty(this.editedProperty);
+    this.router.navigate(['..'],
+    {
+      relativeTo: this.route
+    });
   }
 }

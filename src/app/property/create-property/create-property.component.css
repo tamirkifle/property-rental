@@ -17,9 +17,7 @@
   }
   .signup_container {
     background-color: white;
-    flex-basis: 60%;
     display: flex;
-    justify-content: space-around;
     align-items: center;
   }
   .signup_footer {
@@ -34,7 +32,7 @@
   /* FORM */
   .signup_form {
     padding: calc(2.5 * 1.48vh) calc(4 * 1.48vh) calc(1.5 * 1.48vh);
-    width: 528px;
+    min-width: 528px;
     text-align: center;
   }
   

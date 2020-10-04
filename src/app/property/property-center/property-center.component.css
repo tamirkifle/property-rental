@@ -98,7 +98,9 @@ nav a {
   margin-right: 16px;
 }
 
-
+.content_container{
+  flex-basis: 100%;
+}
 .admin_center{
   color: #b4529c;
 }

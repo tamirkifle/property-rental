@@ -52,4 +52,11 @@ export class PropertyService {
       catchError(this.handleError<Property>(`getProperty id=${id}`))
     );
   }
+
+  updateProperty(editedProperty){
+    console.log('in update property:', editedProperty);
+    this.http
+      .put(this.propertiesURL, editedProperty)
+      .subscribe((result) => console.log('Successfully Added'));
+  }
 }

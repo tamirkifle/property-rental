@@ -17,7 +17,9 @@
     <a routerLink="/admin" class="admin_center"><i class="fa fa-unlock-alt" aria-hidden="true"></i>Admin Center</a>
     <a [routerLink]="['/properties','create']"><i class="fa fa-plus" aria-hidden="true"></i>Create New Property</a>
   </nav>
-  <router-outlet></router-outlet>
+  <div class="content_container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 
 <footer class="login_footer"><span>© Property Rental 2020</span></footer>
