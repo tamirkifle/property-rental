@@ -89,7 +89,18 @@
     position: relative;
     z-index: 112;
 }
-
+.edit_btn{
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+    vertical-align: top;
+    position: relative;
+    z-index: 112;
+    float:right;
+    border: 1px solid black;
+}
 @media(min-width: 900px){
 
 }

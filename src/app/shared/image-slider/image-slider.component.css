@@ -9,6 +9,7 @@
     position: relative;
     width: 688px;
     height: 550px;
+    left: 40px;
 }
 .images_container{
     display: inline-block;
