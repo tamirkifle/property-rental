@@ -49,6 +49,7 @@ input {
   line-height: calc(21 / 16 * 1.48vh);
   outline: none;
   min-height: 50px;
+  font-size: 16px;
 }
 input:focus{
     border-bottom: 1px solid rgba(0,133,195);
