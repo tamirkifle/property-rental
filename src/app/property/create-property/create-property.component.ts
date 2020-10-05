@@ -6,7 +6,7 @@ import { User } from '../../user/user';
 import { CanComponentDeactivate } from '../../can-deactivate.guard';
 import { Observable, of } from 'rxjs';
 import { DialogService } from '../../dialog.service';
-import { isEqual, isEqualWith } from 'lodash';
+import { isEqualWith } from 'lodash-es';
 import { UserService } from '../../user/user.service';
 
 @Component({

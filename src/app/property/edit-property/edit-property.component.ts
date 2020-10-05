@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { CanComponentDeactivate } from 'src/app/can-deactivate.guard';
 import { Observable, of } from 'rxjs';
 import { DialogService } from '../../dialog.service';
-import { clone, isEqual } from 'lodash';
+import { clone, isEqual } from 'lodash-es';
 
 @Component({
   selector: 'app-edit-property',
