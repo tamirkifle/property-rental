@@ -11,21 +11,18 @@ export class PropertyCenterComponent implements OnInit {
   searchTerm = '';
   avatar = '';
   userFirstName = '';
-  constructor(private router: Router, private route: ActivatedRoute, public authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       this.searchTerm = params.get('s') || '';
     });
-    this.avatar = this.authService.currentUser ? this.authService.currentUser.avatar: 'assets/other_icons/profile.png';
-    this.userFirstName = this.authService.currentUser ? this.authService.currentUser.firstname: 'Profile';
-
-    if(this.authService.currentUser){
-      this.avatar = this.authService.currentUser.avatar;
-      this.userFirstName = this.authService.currentUser.firstname;
-    }
-
-    console.log('check: ', this.avatar, this.userFirstName)
+    this.avatar = this.authService.currentUser ? this.authService.currentUser.avatar : 'assets/other_icons/profile.png';
+    this.userFirstName = this.authService.currentUser ? this.authService.currentUser.firstname : 'Profile';
   }
   onSearch(searchTerm) {
     if (!searchTerm) {
@@ -44,7 +41,7 @@ export class PropertyCenterComponent implements OnInit {
     });
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.avatar = 'assets/other_icons/profile.png';
     this.userFirstName = 'Profile';
