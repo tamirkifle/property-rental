@@ -16,8 +16,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(credentials){
-    this.authService.login(credentials);
-    this.authService.redirectUrl ? this.router.navigate([this.authService.redirectUrl]) : this.router.navigate(['/properties']);
+    this.authService.login(credentials).subscribe(
+      resp => {
+      if (resp === true) {
+        this.authService.redirectUrl ? this.router.navigate([this.authService.redirectUrl]) : this.router.navigate(['/properties']);
+      }
+    });
 
   }
 }

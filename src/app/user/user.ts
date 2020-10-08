@@ -7,6 +7,7 @@ export interface User {
   lastname: string;
   avatar: string;
   posts: number;
+  isAdmin?: boolean;
   rating?:
     0
     | 0.01

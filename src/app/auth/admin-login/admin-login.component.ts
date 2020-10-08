@@ -15,13 +15,12 @@ export class AdminLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(user, password){
-    this.authService.login({user, password});
-    if (this.authService.redirectUrl) {
-      this.router.navigateByUrl(this.authService.redirectUrl);
-    }
-    else{
-      this.router.navigate(['/admin']);
-    }
+  login(credentials){
+    this.authService.adminLogin(credentials).subscribe(
+      resp => {
+      if (resp === true) {
+        this.authService.redirectUrl ? this.router.navigate([this.authService.redirectUrl]) : this.router.navigate(['/admin']);
+      }
+    });
   }
 }

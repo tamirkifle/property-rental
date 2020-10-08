@@ -34,4 +34,10 @@ export class UserService {
     );
   }
 
+  getUser(username): Observable<User>{
+    return this.getUsers().pipe(
+      map(users => users.find(user => user.username === username))
+    );
+  }
+
 }
