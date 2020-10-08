@@ -6,7 +6,7 @@
         <input type="text" placeholder="User Name/ Email" class="username_input" #username>
         <input type="password" placeholder="Password" class="password_input" #password>
         <a href="#" class="forgot_password">Forgot Password?</a>
-        <button class="login_btn btn" (click)="$event.preventDefault();login(username.value, password.value);username.value='';password.value=''">Log In</button>
+        <button class="login_btn btn" (click)="$event.preventDefault();login({user:username.value, password:password.value});username.value='';password.value=''">Log In</button>
     </form>
 </div>
 <footer class="login_footer"><span>© Property Rental 2020</span></footer>

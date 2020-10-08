@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-property-center',
@@ -8,12 +9,23 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PropertyCenterComponent implements OnInit {
   searchTerm = '';
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  avatar = '';
+  userFirstName = '';
+  constructor(private router: Router, private route: ActivatedRoute, public authService: AuthService) {}
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       this.searchTerm = params.get('s') || '';
     });
+    this.avatar = this.authService.currentUser ? this.authService.currentUser.avatar: 'assets/other_icons/profile.png';
+    this.userFirstName = this.authService.currentUser ? this.authService.currentUser.firstname: 'Profile';
+
+    if(this.authService.currentUser){
+      this.avatar = this.authService.currentUser.avatar;
+      this.userFirstName = this.authService.currentUser.firstname;
+    }
+
+    console.log('check: ', this.avatar, this.userFirstName)
   }
   onSearch(searchTerm) {
     if (!searchTerm) {
@@ -30,5 +42,11 @@ export class PropertyCenterComponent implements OnInit {
       queryParams: { s: searchTerm },
       // queryParamsHandling: 'merge',
     });
+  }
+
+  logout(){
+    this.authService.logout();
+    this.avatar = 'assets/other_icons/profile.png';
+    this.userFirstName = 'Profile';
   }
 }

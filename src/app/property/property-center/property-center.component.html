@@ -5,7 +5,7 @@
   <div class="main_btns">
     <app-top-menu-button [name]="'Notifications'" [iconSrc]="'assets/other_icons/notification.png'">
     </app-top-menu-button>
-    <app-top-menu-button [name]="'Profile'" [iconSrc]="'assets/other_icons/profile.png'"></app-top-menu-button>
+    <app-top-menu-button [name]="userFirstName" [iconSrc]="avatar"></app-top-menu-button>
   </div>
 </header>
 
@@ -13,8 +13,9 @@
   <nav class="main_nav">
     <a routerLink="/properties"><i class="fa fa-compass" aria-hidden="true"></i>Explore</a>
     <a routerLink="/properties/home"><i class="fa fa-heart-o" aria-hidden="true"></i>Featured</a>
-    <a routerLink="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
-    <a routerLink="/admin" class="admin_center"><i class="fa fa-unlock-alt" aria-hidden="true"></i>Admin Center</a>
+    <a *ngIf="!authService.isLoggedIn" routerLink="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
+    <a *ngIf="authService.isLoggedIn" routerLink="/" (click)="logout()" ><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a>
+    <a routerLink="/admin" class="admin_center" *ngIf="authService.isAdmin"><i class="fa fa-unlock-alt" aria-hidden="true"></i>Admin Center</a>
     <a [routerLink]="['/properties','create']"><i class="fa fa-plus" aria-hidden="true"></i>Create New Property</a>
   </nav>
   <div class="content_container">
