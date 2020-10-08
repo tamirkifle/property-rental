@@ -9,13 +9,16 @@ import { UserDetailComponent } from '../user-detail/user-detail.component';
 })
 export class UserLineComponent implements OnInit {
   @Input() user: User;
+  @Input() clickable = true;
   active = false;
   constructor() {}
 
   ngOnInit(): void {}
 
   showUserDetail() {
-    this.active = true;
+    if(this.clickable){
+      this.active = true;
+    }
   }
   closeUserDetail(){
     this.active = false;
