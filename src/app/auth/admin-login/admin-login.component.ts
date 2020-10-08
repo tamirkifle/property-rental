@@ -15,8 +15,8 @@ export class AdminLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(username, password){
-    this.authService.login(username, password);
+  login(user, password){
+    this.authService.login({user, password});
     if (this.authService.redirectUrl) {
       this.router.navigateByUrl(this.authService.redirectUrl);
     }

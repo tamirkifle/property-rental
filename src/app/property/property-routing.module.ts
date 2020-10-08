@@ -12,6 +12,7 @@ import {
 import { Property } from './property';
 import { EditPropertyComponent } from './edit-property/edit-property.component';
 import { CanDeactivateGuard } from '../can-deactivate.guard';
+import { RoleGuard } from '../auth/role.guard';
 
 const propertyRoutes: Routes = [
   {
@@ -33,6 +34,7 @@ const propertyRoutes: Routes = [
         component: EditPropertyComponent,
         resolve: { property: PropertyResolver },
         canDeactivate: [CanDeactivateGuard],
+        canActivate: [RoleGuard],
       },
       {
         path: 'home',
@@ -43,6 +45,7 @@ const propertyRoutes: Routes = [
         path: 'create',
         component: CreatePropertyComponent,
         canDeactivate: [CanDeactivateGuard],
+        canActivate: [RoleGuard],
       },
     ],
   },

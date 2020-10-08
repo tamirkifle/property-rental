@@ -7,17 +7,20 @@ import { User } from '../user/user';
 export class AuthService {
   currentUser: User;
   redirectUrl: string;
-  isLoggedIn = false;
+  private _isLoggedIn = false;
 
+  get isLoggedIn(){
+    return this._isLoggedIn;
+  }
   constructor() { }
 
-  login(userName: string, password: string): void {
-    if (userName === 'hello' && password === 'hello'){
-      this.isLoggedIn = true;
+  login(credentials: {user: string, password: string}): void {
+    if (credentials.user === 'test' && credentials.password === 'secret'){
+      this._isLoggedIn = true;
     }
   }
 
   logout(): void {
-    this.isLoggedIn = false;
+    this._isLoggedIn = false;
   }
 }
