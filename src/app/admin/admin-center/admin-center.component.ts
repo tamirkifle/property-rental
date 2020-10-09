@@ -13,6 +13,7 @@ export class AdminCenterComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.redirectUrl = null;
     this.avatar = this.authService.currentUser ? this.authService.currentUser.avatar : 'assets/other_icons/profile.png';
     this.userFirstName = this.authService.currentUser ? this.authService.currentUser.firstname : 'Admin';
   }

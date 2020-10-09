@@ -18,6 +18,7 @@ export class PropertyCenterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.authService.redirectUrl = null;
     this.route.queryParamMap.subscribe((params) => {
       this.searchTerm = params.get('s') || '';
     });
