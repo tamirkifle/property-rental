@@ -2,7 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Property } from '../property';
 import { User } from '../../user/user';
 import { UserService } from '../../user/user.service';
-import { Observable, of, Subscription } from 'rxjs';
+import { PropertyService } from '../property.service';
+import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,8 +15,12 @@ import { Observable, of, Subscription } from 'rxjs';
 export class PropertyItemComponent implements OnInit {
   @Input() property: Property;
   postCreatorUser: User;
+  favorited: boolean = false;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,
+              private propertyService: PropertyService,
+              private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getUser(this.property.postCreator);
@@ -31,8 +37,37 @@ export class PropertyItemComponent implements OnInit {
       .join('');
   }
 
-  getUser(username: string){
+  getUser(username: string) {
     this.userService.getUsers()
-    .subscribe(users => this.postCreatorUser = users.find(user => user.username === username));
+      .subscribe(users => {
+        this.postCreatorUser = users.find(user => user.username === username);
+        if (this.postCreatorUser.favorites) {
+          this.postCreatorUser.favorites.forEach(fav => {
+            if (this.property.id === fav) {
+              this.favorited = true;
+            }
+          });
+        }
+      }
+      );
+  }
+
+  toggleFavorite(favBtn: HTMLElement) {
+
+    if (!this.authService.isLoggedIn) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    if (favBtn.classList.contains('fa-heart-o')) {//isn't favorited
+      this.propertyService.likeProperty(this.property.id).subscribe(() => {
+        favBtn.classList.remove('fa-heart-o');
+      });
+    }
+    else{ //is favorited
+      this.propertyService.unlikeProperty(this.property.id).subscribe(() => {
+        favBtn.classList.add('fa-heart-o');
+      });
+    }
   }
 }

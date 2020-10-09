@@ -8,6 +8,7 @@ export interface User {
   avatar: string;
   posts: number;
   isAdmin?: boolean;
+  favorites?: number[]; //property ids
   rating?:
     0
     | 0.01

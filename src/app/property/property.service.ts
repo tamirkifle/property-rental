@@ -7,6 +7,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FilterByPipe } from '../shared/filter-by.pipe';
 import { PropertyFilterPipe } from '../shared/property-filter.pipe';
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,9 +16,10 @@ import { PropertyFilterPipe } from '../shared/property-filter.pipe';
 })
 export class PropertyService {
 
-  private propertiesURL = 'api/properties';  // URL to web api
+  private propertiesURL = 'api/properties';  // URL to property web api
+  private usersURL = 'api/users';  // URL to users web api
 
-  constructor(private http: HttpClient, private filterBy: FilterByPipe, private search: PropertyFilterPipe) { }
+  constructor(private http: HttpClient, private authService: AuthService, private filterBy: FilterByPipe, private search: PropertyFilterPipe) { }
 
   getProperties(options?: PropertyOptions): Observable<Property[]> {
     return this.http.get<Property[]>(this.propertiesURL)
@@ -58,5 +61,17 @@ export class PropertyService {
     this.http
       .put(this.propertiesURL, editedProperty)
       .subscribe((result) => console.log('Successfully Added'));
+  }
+
+  likeProperty(propertyId) {
+    if (!this.authService.currentUser.favorites) {
+      this.authService.currentUser.favorites = [];
+    }
+    this.authService.currentUser.favorites.push(propertyId);
+    return this.http.put(this.usersURL, this.authService.currentUser);
+  }
+  unlikeProperty(propertyId){
+    this.authService.currentUser.favorites = this.authService.currentUser.favorites.filter(id => id !== propertyId);
+    return this.http.put(this.usersURL, this.authService.currentUser);
   }
 }

@@ -1,6 +1,7 @@
 <div class="post">
     <div class="post_img_container">
         <img src="{{ property.propertyImages[0] }}" class="post_img" alt="Property Photo">
+        <div class="favorite-btn" (click)="toggleFavorite(favBtn)"><i class="fa fa-heart" [class.fa-heart-o]="!favorited" #favBtn></i></div>
     </div>
     <div class="post_info">
         <div class="post_desc">
