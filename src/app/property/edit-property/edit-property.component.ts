@@ -52,12 +52,7 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
   }
 
   goBack(): void {
-    // this.location.back();
-    let parent = this.route.snapshot.pathFromRoot[1].url[0].path;
-    if (parent === 'admin') {
-      parent += '/properties';
-    }
-    this.router.navigate([parent], { queryParamsHandling: 'preserve' });
+    this.router.navigate(['..'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
   }
 
   getUser(username: string) {
