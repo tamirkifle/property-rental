@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PropertyListComponent } from './property-list/property-list.component';
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
-import { FeaturedComponent } from './featured/featured.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 import { PropertyCenterComponent } from './property-center/property-center.component';
 import { CreatePropertyComponent } from './create-property/create-property.component';
 import {
@@ -38,7 +38,7 @@ const propertyRoutes: Routes = [
       },
       {
         path: 'favorites',
-        component: FeaturedComponent,
+        component: FavoritesComponent,
         canActivate: [RoleGuard],
         resolve: { favorites: FavoritesResolver },
       },

@@ -4,11 +4,11 @@ import { PropertyService } from '../property.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-featured',
-  templateUrl: './featured.component.html',
-  styleUrls: ['./featured.component.css']
+  selector: 'app-favorites',
+  templateUrl: './favorites.component.html',
+  styleUrls: ['./favorites.component.css']
 })
-export class FeaturedComponent implements OnInit {
+export class FavoritesComponent implements OnInit {
   properties: Property[];
   searchText = '';
   filterOptions: string[] = [];

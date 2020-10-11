@@ -1,14 +1,14 @@
 :host{
     margin: 0 auto;
 }
-.featured_items{
+.favorites_items{
     text-align: center;
 }
-.featured_item{
+.favorites_item{
     display: inline-block;
     cursor: pointer;
 }
-.featured_title{
+.favorites_title{
     text-align: center;
     font-size: 2rem;
     margin-bottom: 2rem;

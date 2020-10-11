@@ -1,0 +1,11 @@
+<div class="favorites">
+    <!-- <h3 class="favorites_title">Today's Favorites Properties</h3> -->
+    <app-filter></app-filter>
+    <div class="favorites_items" *ngIf="properties && properties.length !== 0">
+        <app-property-item *ngFor="let property of properties | propertyFilter:searchText | filterBy:filterOptions" [property]="property" class="favorites_item"
+            routerLink="/properties/detail/{{property.id}}"></app-property-item>
+    </div>
+    <h2 class="favorites_items" style="margin-top: 3rem" *ngIf="!properties || properties.length === 0">
+        You have no favorited items
+    </h2>
+</div>
