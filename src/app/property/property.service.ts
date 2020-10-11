@@ -56,6 +56,11 @@ export class PropertyService {
     );
   }
 
+  addProperty(createdProperty){
+    return this.http
+      .post(this.propertiesURL, createdProperty);
+  }
+
   updateProperty(editedProperty){
     console.log('in update property:', editedProperty);
     return this.http

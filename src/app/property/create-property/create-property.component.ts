@@ -8,6 +8,7 @@ import { Observable, of } from 'rxjs';
 import { DialogService } from '../../dialog.service';
 import { isEqualWith } from 'lodash-es';
 import { AuthService } from 'src/app/auth/auth.service';
+import { PropertyService } from '../property.service';
 
 @Component({
   selector: 'app-create-property',
@@ -31,7 +32,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
   };
   url = 'api/properties';
   constructor(
-    private http: HttpClient,
+    private propertyService: PropertyService,
     private router: Router,
     private dialogService: DialogService,
     private route: ActivatedRoute,
@@ -46,10 +47,10 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     if (this.createdProperty.propertyTitle === null && this.createdProperty.bedrooms && this.createdProperty.location) {
       this.createdProperty.propertyTitle = `${this.createdProperty.bedrooms} House in ${this.createdProperty.location}`;
     }
-    this.http
-      .post(this.url, this.createdProperty)
-      .subscribe((result) => console.log('Successfully Added'));
-    this.router.navigate(['admin/properties']);
+    this.propertyService.addProperty(this.createdProperty)
+      .subscribe(() => {
+        this.router.navigate(['admin/properties']);
+      });
   }
   canDeactivate(): Observable<boolean> {
     const emptyProperty: Property = {
