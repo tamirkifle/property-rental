@@ -53,7 +53,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
       .subscribe((added: Property) => {
         this.authService.currentUser.posts.push(added.id);
         this.userService.updateUser(this.authService.currentUser).subscribe(() => {
-          console.log(this.authService.currentUser.posts);
+          this.createdProperty.id = added.id;
           this.router.navigate(['/properties']);
         });
       });
@@ -77,6 +77,9 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
       if (one === '' && two === null || one === null && two === ''){
         return true;
       }
+    }
+    if(this.createdProperty.id !== null){
+      return of(true);
     }
     if (isEqualWith(this.createdProperty, emptyProperty, customComparison)) {
       return of(true);
