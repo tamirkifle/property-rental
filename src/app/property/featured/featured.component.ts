@@ -19,9 +19,9 @@ export class FeaturedComponent implements OnInit {
     this.route.queryParamMap.subscribe((params) => {
       this.searchText = params.get('s');
       if (params.get('by')) {
-        this.filterOptions = params.get('by').split(',');
+        this.filterOptions = params.getAll('by');
       }
     });
-    this.properties = this.route.snapshot.data.properties.slice(0, 2);
+    this.properties = this.route.snapshot.data.favorites;
   }
 }

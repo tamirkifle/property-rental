@@ -7,7 +7,7 @@ import { PropertyCenterComponent } from './property-center/property-center.compo
 import { CreatePropertyComponent } from './create-property/create-property.component';
 import {
   PropertyResolver,
-  PropertiesResolver,
+  PropertiesResolver, FavoritesResolver
 } from './property-resolver.service';
 import { Property } from './property';
 import { EditPropertyComponent } from './edit-property/edit-property.component';
@@ -37,9 +37,10 @@ const propertyRoutes: Routes = [
         canActivate: [RoleGuard],
       },
       {
-        path: 'home',
+        path: 'favorites',
         component: FeaturedComponent,
-        resolve: { properties: PropertiesResolver },
+        canActivate: [RoleGuard],
+        resolve: { favorites: FavoritesResolver },
       },
       {
         path: 'create',
