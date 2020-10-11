@@ -7,7 +7,7 @@ import { CanComponentDeactivate } from '../../can-deactivate.guard';
 import { Observable, of } from 'rxjs';
 import { DialogService } from '../../dialog.service';
 import { isEqualWith } from 'lodash-es';
-import { UserService } from '../../user/user.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-create-property',
@@ -35,14 +35,14 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     private router: Router,
     private dialogService: DialogService,
     private route: ActivatedRoute,
-    private userService: UserService
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {}
 
   onFormSubmit() {
     // post creator should be set to logged in user through a service
-    this.createdProperty.postCreator = 'allhouseset';
+    this.createdProperty.postCreator = this.authService.currentUser.username;
     if (this.createdProperty.propertyTitle === null && this.createdProperty.bedrooms && this.createdProperty.location) {
       this.createdProperty.propertyTitle = `${this.createdProperty.bedrooms} House in ${this.createdProperty.location}`;
     }
