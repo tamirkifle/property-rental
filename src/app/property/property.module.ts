@@ -5,7 +5,6 @@ import { PropertyRoutingModule } from './property-routing.module';
 import { PropertyItemComponent } from './property-item/property-item.component';
 import { PropertyListComponent } from './property-list/property-list.component';
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
-import { FavoritesComponent } from './favorites/favorites.component';
 import { UserModule } from '../user/user.module';
 import { SharedModule } from '../shared/shared.module';
 import { PropertyCenterComponent } from './property-center/property-center.component';
@@ -22,7 +21,6 @@ import { EditPropertyComponent } from './edit-property/edit-property.component';
     PropertyItemComponent,
     PropertyListComponent,
     PropertyDetailComponent,
-    FavoritesComponent,
     PropertyCenterComponent,
     CreatePropertyComponent,
     EditPropertyComponent,

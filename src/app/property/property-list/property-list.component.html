@@ -1,5 +1,11 @@
 <div class="post-list">
     <app-filter></app-filter>
-    <app-property-item *ngFor="let property of properties | filterBy:filterOptions | propertyFilter:searchText " [property]="property"
+    <div class="properties_container" *ngIf="properties && properties.length !== 0">
+        <app-property-item *ngFor="let property of properties | filterBy:filterOptions | propertyFilter:searchText" [property]="property"
         (click)="!$event.target.classList.contains('fa-heart') ? showPropertyDetail(property.id) : false"></app-property-item>
+    </div>
+    <h2 class="no_properties_msg" *ngIf="!properties || properties.length === 0">
+        No Properties to show
+    </h2>
+
 </div>
