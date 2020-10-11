@@ -36,6 +36,7 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
     if (this.editedProperty.amenities) {
       this.amenitiesString = this.editedProperty.amenities.join(', ');
     }
+    this.getUser(this.property.postCreator);
     console.log(this.property);
   }
 
@@ -57,6 +58,17 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
       parent += '/properties';
     }
     this.router.navigate([parent], { queryParamsHandling: 'preserve' });
+  }
+
+  getUser(username: string) {
+    this.userService
+      .getUsers()
+      .subscribe(
+        (users) =>
+          (this.postCreatorUser = users.find(
+            (user) => user.username === username
+          ))
+      );
   }
 
   goToDetail() {
