@@ -40,4 +40,7 @@ export class UserService {
     );
   }
 
+  updateUser(user){
+    return this.http.put(this.usersURL, user);
+  }
 }

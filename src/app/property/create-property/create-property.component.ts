@@ -9,6 +9,7 @@ import { DialogService } from '../../dialog.service';
 import { isEqualWith } from 'lodash-es';
 import { AuthService } from 'src/app/auth/auth.service';
 import { PropertyService } from '../property.service';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-create-property',
@@ -36,7 +37,8 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     private router: Router,
     private dialogService: DialogService,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {}
@@ -48,8 +50,12 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
       this.createdProperty.propertyTitle = `${this.createdProperty.bedrooms} House in ${this.createdProperty.location}`;
     }
     this.propertyService.addProperty(this.createdProperty)
-      .subscribe(() => {
-        this.router.navigate(['admin/properties']);
+      .subscribe((added: Property) => {
+        this.authService.currentUser.posts.push(added.id);
+        this.userService.updateUser(this.authService.currentUser).subscribe(() => {
+          console.log(this.authService.currentUser.posts);
+          this.router.navigate(['/properties']);
+        });
       });
   }
   canDeactivate(): Observable<boolean> {
