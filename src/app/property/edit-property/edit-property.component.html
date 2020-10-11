@@ -1,5 +1,5 @@
 <div class="signup_container">
-    <form class="signup_form" #form="ngForm" (ngSubmit)="onFormSubmit()">
+    <form class="signup_form" #form="ngForm" (ngSubmit)="save()">
         <div class="signup_top">
             <h1>Edit Property</h1>
         </div>
@@ -58,9 +58,9 @@
             <!-- Put Image Showcase here -->
         </div>
 
-        <button class="signup_btn btn">Preview</button>
-        <button type="submit" class="signup_btn btn" (click)="save()">Save Property</button>
-        <button class="signup_btn btn" (click)="goToDetail()">Cancel</button>
+        <button type="button" class="signup_btn btn">Preview</button>
+        <button type="submit" class="signup_btn btn">Save Property</button>
+        <button type="button" class="signup_btn btn" (click)="goToDetail()">Cancel</button>
     </form>
 
 </div>
