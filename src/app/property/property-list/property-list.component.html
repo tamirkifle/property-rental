@@ -2,7 +2,7 @@
     <app-filter></app-filter>
     <div class="properties_container" *ngIf="properties && properties.length !== 0">
         <app-property-item *ngFor="let property of properties | filterBy:filterOptions | propertyFilter:searchText" [property]="property"
-        (click)="!$event.target.classList.contains('fa-heart') ? showPropertyDetail(property.id) : false"></app-property-item>
+        (click)="!$event.target.classList.contains('fa-heart') ? showPropertyDetail(property.id) : false" (removedFavorite)="removeFavorite($event)"></app-property-item>
     </div>
     <h2 class="no_properties_msg" *ngIf="!properties || properties.length === 0">
         No Properties to show

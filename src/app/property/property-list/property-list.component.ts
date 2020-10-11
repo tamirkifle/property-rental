@@ -2,6 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Property } from '../property';
 import { PropertyService } from '../property.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-property-list',
@@ -50,5 +51,13 @@ export class PropertyListComponent implements OnInit {
 
   showPropertyDetail(id){
     this.router.navigate([`/properties/detail/${id}`], {queryParamsHandling: 'preserve'});
+  }
+
+  removeFavorite(propId){
+
+    console.log('propID', propId);
+    this.properties = this.properties.filter(p => p.id !== propId);
+    console.log(this.properties);
+
   }
 }

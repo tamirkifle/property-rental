@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Property } from '../property';
 import { User } from '../../user/user';
 import { UserService } from '../../user/user.service';
@@ -14,9 +14,9 @@ import { Router } from '@angular/router';
 })
 export class PropertyItemComponent implements OnInit {
   @Input() property: Property;
+  @Output() removedFavorite: EventEmitter<any> = new EventEmitter();
   postCreatorUser: User;
   favorited: boolean = false;
-
   constructor(private userService: UserService,
               private propertyService: PropertyService,
               private authService: AuthService,
@@ -64,6 +64,7 @@ export class PropertyItemComponent implements OnInit {
     else{ //is favorited
       this.propertyService.unlikeProperty(this.property.id).subscribe(() => {
         favBtn.classList.add('fa-heart-o');
+        this.removedFavorite.emit(this.property.id);
       });
     }
   }
