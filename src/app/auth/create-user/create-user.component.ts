@@ -17,7 +17,7 @@ export class CreateUserComponent implements OnInit {
     username: null,
     avatar: 'assets/placeholders/avatar.png',
     // id: null, //is id a required field for a user or should it bot because it should be automaitically added at the backend
-    posts: 0,
+    posts: [],
   };
 
   url = 'api/users';

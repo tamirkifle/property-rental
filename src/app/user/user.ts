@@ -6,7 +6,7 @@ export interface User {
   firstname: string;
   lastname: string;
   avatar: string;
-  posts: number;
+  posts: number[];
   isAdmin?: boolean;
   favorites?: number[]; //property ids
   rating?:

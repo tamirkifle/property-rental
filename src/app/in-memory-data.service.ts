@@ -18,7 +18,7 @@ export class InMemoryDataService implements InMemoryDbService {
         firstname: 'Ethio',
         lastname: 'Delala',
         avatar: 'assets/guy-avatars/guy-4.jpg',
-        posts: 0,
+        posts: [11, 14, 15, 16],
         rating: 4.2,
       },
       {
@@ -29,7 +29,7 @@ export class InMemoryDataService implements InMemoryDbService {
         firstname: 'Mahlet',
         lastname: 'Getachew',
         avatar: 'assets/lady-avatars/lady-3.jpg',
-        posts: 0,
+        posts: [12],
         rating: 3.2,
       },
       {
@@ -40,7 +40,7 @@ export class InMemoryDataService implements InMemoryDbService {
         firstname: 'Meseret',
         lastname: 'Leykun',
         avatar: 'assets/lady-avatars/lady-4.jpg',
-        posts: 0,
+        posts: [13],
         rating: 3.6,
       },
       {
@@ -51,7 +51,7 @@ export class InMemoryDataService implements InMemoryDbService {
         firstname: 'AllHouse',
         lastname: 'Ethiopia',
         avatar: 'assets/guy-avatars/guy-2.jpg',
-        posts: 0,
+        posts: [17],
         rating: 5,
         isAdmin: true,
       },
