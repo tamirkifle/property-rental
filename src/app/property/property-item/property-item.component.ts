@@ -23,7 +23,6 @@ export class PropertyItemComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.getUser(this.property.postCreator);
     if (this.authService.isLoggedIn && this.authService.currentUser.favorites) {
       if (this.authService.currentUser.favorites.includes(this.property.id)){
         this.favorited = true;
@@ -40,13 +39,6 @@ export class PropertyItemComponent implements OnInit {
         (length - 1 - i) % 3 === 0 && i !== length - 1 ? item + ',' : item
       )
       .join('');
-  }
-
-  getUser(username: string) {
-    this.userService.getUsers()
-      .subscribe(users => {
-        this.postCreatorUser = users.find(user => user.username === username);
-      });
   }
 
   toggleFavorite(favBtn: HTMLElement) {

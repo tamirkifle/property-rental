@@ -42,7 +42,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
   onFormSubmit() {
     // post creator should be set to logged in user through a service
-    this.createdProperty.postCreator = this.authService.currentUser.username;
+    this.createdProperty.postCreator = this.authService.currentUser;
     if (this.createdProperty.propertyTitle === null && this.createdProperty.bedrooms && this.createdProperty.location) {
       this.createdProperty.propertyTitle = `${this.createdProperty.bedrooms} House in ${this.createdProperty.location}`;
     }

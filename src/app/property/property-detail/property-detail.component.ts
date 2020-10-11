@@ -22,7 +22,6 @@ export class PropertyDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.property = this.route.snapshot.data.property;
-    this.getUser(this.property.postCreator);
     console.log(this.property);
   }
 
@@ -46,14 +45,4 @@ export class PropertyDetailComponent implements OnInit {
     this.router.navigate([parent], {queryParamsHandling: 'preserve'});
   }
 
-  getUser(username: string) {
-    this.userService
-      .getUsers()
-      .subscribe(
-        (users) =>
-          (this.postCreatorUser = users.find(
-            (user) => user.username === username
-          ))
-      );
-  }
 }

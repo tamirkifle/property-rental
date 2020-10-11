@@ -1,3 +1,4 @@
+import { User } from '../user/user';
 export interface Property {
   id: number;
   propertyTitle: string;
@@ -5,7 +6,7 @@ export interface Property {
   location: string;
   listPrice: number;
   priceType: 'Fixed' | 'Negotiable';
-  postCreator: string;
+  postCreator: User;
   propertyImages: string[];
   bathrooms?: number;
   areaInM2?: number;
