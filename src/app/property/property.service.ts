@@ -58,9 +58,8 @@ export class PropertyService {
 
   updateProperty(editedProperty){
     console.log('in update property:', editedProperty);
-    this.http
-      .put(this.propertiesURL, editedProperty)
-      .subscribe((result) => console.log('Successfully Added'));
+    return this.http
+      .put(this.propertiesURL, editedProperty);
   }
 
   likeProperty(propertyId) {

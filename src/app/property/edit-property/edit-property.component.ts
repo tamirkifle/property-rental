@@ -70,7 +70,6 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
           ))
       );
   }
-  onFormSubmit() {}
 
   goToDetail() {
     this.router.navigate(['..'], {
@@ -84,10 +83,14 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
         .split(',')
         .map((a) => a.trim());
     }
-    this.propertyService.updateProperty(this.editedProperty);
-    this.router.navigate(['..'], {
-      relativeTo: this.route,
-    });
+    this.propertyService.updateProperty(this.editedProperty).subscribe(() => {
+      this.property = this.editedProperty;
+      this.router.navigate(['..'], {
+        relativeTo: this.route,
+      });
+    }
+    );
+
   }
 
   canDeactivate(): Observable<boolean> {
