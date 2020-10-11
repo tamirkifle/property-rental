@@ -24,6 +24,11 @@ export class PropertyItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser(this.property.postCreator);
+    if (this.authService.isLoggedIn && this.authService.currentUser.favorites) {
+      if (this.authService.currentUser.favorites.includes(this.property.id)){
+        this.favorited = true;
+      }
+    }
   }
 
   addCommas(num): string {
@@ -41,15 +46,7 @@ export class PropertyItemComponent implements OnInit {
     this.userService.getUsers()
       .subscribe(users => {
         this.postCreatorUser = users.find(user => user.username === username);
-        if (this.postCreatorUser.favorites) {
-          this.postCreatorUser.favorites.forEach(fav => {
-            if (this.property.id === fav) {
-              this.favorited = true;
-            }
-          });
-        }
-      }
-      );
+      });
   }
 
   toggleFavorite(favBtn: HTMLElement) {
