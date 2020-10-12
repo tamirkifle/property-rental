@@ -1,8 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Property } from '../property';
-import { PropertyService } from '../property.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-property-list',
@@ -12,7 +10,6 @@ import { BehaviorSubject } from 'rxjs';
 export class PropertyListComponent implements OnInit {
   properties: Property[];
   filterOptions: string[] = [];
-  // selectedProperty: Property;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,12 +28,10 @@ export class PropertyListComponent implements OnInit {
     });
 
   }
-  ngOnChanges(){
-    console.log(this.route.snapshot.queryParams.options);
+
+  get path(){
+    return this.route.snapshot.url.length === 0 ? 'properties' : 'favorites';
   }
-  // onSelect(property: Property): void{
-  //   this.selectedProperty = property;
-  // }
 
   addCommas(num): string {
     const str = String(num);
