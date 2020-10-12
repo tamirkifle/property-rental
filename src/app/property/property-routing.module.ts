@@ -6,12 +6,13 @@ import { PropertyCenterComponent } from './property-center/property-center.compo
 import { CreatePropertyComponent } from './create-property/create-property.component';
 import {
   PropertyResolver,
-  PropertiesResolver, FavoritesResolver
+  PropertiesResolver, FavoritesResolver, PropertyUserResolver
 } from './property-resolver.service';
 import { Property } from './property';
 import { EditPropertyComponent } from './edit-property/edit-property.component';
 import { CanDeactivateGuard } from '../can-deactivate.guard';
 import { RoleGuard } from '../auth/role.guard';
+import { CanEditGuard } from '../auth/can-edit.guard';
 
 const propertyRoutes: Routes = [
   {
@@ -26,14 +27,14 @@ const propertyRoutes: Routes = [
       {
         path: 'detail/:id',
         component: PropertyDetailComponent,
-        resolve: { property: PropertyResolver },
+        resolve: { property: PropertyResolver, user: PropertyUserResolver },
       },
       {
         path: 'detail/:id/edit',
         component: EditPropertyComponent,
-        resolve: { property: PropertyResolver },
+        resolve: { property: PropertyResolver},
         canDeactivate: [CanDeactivateGuard],
-        canActivate: [RoleGuard],
+        canActivate: [RoleGuard, CanEditGuard],
       },
       {
         path: 'favorites',

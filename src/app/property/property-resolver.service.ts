@@ -8,12 +8,15 @@ import { combineLatest, Observable, of } from 'rxjs';
 import { Property } from './property';
 import { PropertyService } from './property.service';
 import { AuthService } from '../auth/auth.service';
+import { User } from '../user/user';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PropertyResolver implements Resolve<Property> {
-  constructor(private propertyService: PropertyService) {}
+  constructor(private propertyService: PropertyService, private userService: UserService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -23,6 +26,24 @@ export class PropertyResolver implements Resolve<Property> {
     return this.propertyService.getProperty(+id);
   }
 }
+
+@Injectable({
+  providedIn: 'root',
+})
+export class PropertyUserResolver implements Resolve<User> {
+  constructor(private propertyService: PropertyService, private userService: UserService) {}
+
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<User> {
+    const id = route.paramMap.get('id');
+    return this.propertyService.getProperty(+id).pipe(
+      switchMap(property => this.userService.getUser(property.postCreator))
+    );
+  }
+}
+
 @Injectable({
   providedIn: 'root',
 })

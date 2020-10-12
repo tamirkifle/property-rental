@@ -23,10 +23,8 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService,
     private propertyService: PropertyService,
     private router: Router,
-    private http: HttpClient,
     private dialogService: DialogService
   ) {}
 
@@ -36,8 +34,6 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
     if (this.editedProperty.amenities) {
       this.amenitiesString = this.editedProperty.amenities.join(', ');
     }
-    this.getUser(this.property.postCreator);
-    console.log(this.property);
   }
 
   addCommas(num): string {
@@ -52,24 +48,8 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
   }
 
   goBack(): void {
+    console.log('this.property: ', this.property, 'this.editedProperty: ', this.editedProperty);
     this.router.navigate(['..'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
-  }
-
-  getUser(username: string) {
-    this.userService
-      .getUsers()
-      .subscribe(
-        (users) =>
-          (this.postCreatorUser = users.find(
-            (user) => user.username === username
-          ))
-      );
-  }
-
-  goToDetail() {
-    this.router.navigate(['..'], {
-      relativeTo: this.route,
-    });
   }
 
   save() {

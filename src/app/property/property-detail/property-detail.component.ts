@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
 
 import { PropertyService } from '../property.service';
 import { Property } from '../property';
 import { User } from '../../user/user';
 import { UserService } from '../../user/user.service';
 import { AuthService } from '../../auth/auth.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-property-detail',
@@ -18,13 +19,14 @@ export class PropertyDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
+    private propertyService: PropertyService,
     private router: Router,
     private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
     this.property = this.route.snapshot.data.property;
-    this.getUser(this.property.postCreator);
+    this.postCreatorUser = this.route.snapshot.data.user;
   }
 
   addCommas(num): string {
@@ -42,16 +44,6 @@ export class PropertyDetailComponent implements OnInit {
     this.router.navigate(['../..'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
   }
 
-  getUser(username: string) {
-    this.userService
-      .getUsers()
-      .subscribe(
-        (users) =>
-          (this.postCreatorUser = users.find(
-            (user) => user.username === username
-          ))
-      );
-  }
   get isAuthorizedToEdit(){
     console.log(this.authService.isLoggedIn, this.authService.currentUser);
     return this.authService.isLoggedIn && (this.authService.currentUser.username === this.postCreatorUser.username);
