@@ -24,6 +24,7 @@ export class PropertyListComponent implements OnInit {
       }
       // console.log(this.searchText, this.filterOptions);
       this.properties = this.route.snapshot.data.properties;
+      console.log(this.properties);
 
     });
 

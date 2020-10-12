@@ -67,6 +67,27 @@ export class FavoritesResolver implements Resolve<Property[]> {
 @Injectable({
   providedIn: 'root',
 })
+export class UserPostsResolver implements Resolve<Property[]> {
+  constructor(private propertyService: PropertyService, private authService: AuthService) {}
+
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<Property[]> {
+    const userPostsIds = this.authService.currentUser.posts;
+    if (userPostsIds && userPostsIds.length !== 0){
+      combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(+postID))).subscribe(r => console.log(r));
+      return combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(+postID)));
+    }
+    else{
+      return of([]);
+    }
+  }
+}
+
+@Injectable({
+  providedIn: 'root',
+})
 export class PropertiesResolver implements Resolve<Property[]> {
   constructor(private propertyService: PropertyService) {}
 

@@ -6,7 +6,7 @@ import { PropertyCenterComponent } from './property-center/property-center.compo
 import { CreatePropertyComponent } from './create-property/create-property.component';
 import {
   PropertyResolver,
-  PropertiesResolver, FavoritesResolver, PropertyUserResolver
+  PropertiesResolver, FavoritesResolver, PropertyUserResolver, UserPostsResolver
 } from './property-resolver.service';
 import { Property } from './property';
 import { EditPropertyComponent } from './edit-property/edit-property.component';
@@ -35,6 +35,12 @@ const propertyRoutes: Routes = [
         resolve: { property: PropertyResolver},
         canDeactivate: [CanDeactivateGuard],
         canActivate: [RoleGuard, CanEditGuard],
+      },
+      {
+        path: 'myposts',
+        component: PropertyListComponent,
+        resolve: { properties: UserPostsResolver},
+        canActivate: [RoleGuard],
       },
       {
         path: 'favorites',
