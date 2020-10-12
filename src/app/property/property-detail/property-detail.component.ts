@@ -5,6 +5,7 @@ import { PropertyService } from '../property.service';
 import { Property } from '../property';
 import { User } from '../../user/user';
 import { UserService } from '../../user/user.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-property-detail',
@@ -17,13 +18,13 @@ export class PropertyDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
     this.property = this.route.snapshot.data.property;
     this.getUser(this.property.postCreator);
-    console.log(this.property);
   }
 
   addCommas(num): string {
@@ -50,5 +51,9 @@ export class PropertyDetailComponent implements OnInit {
             (user) => user.username === username
           ))
       );
+  }
+  get isAuthorizedToEdit(){
+    console.log(this.authService.isLoggedIn, this.authService.currentUser);
+    return this.authService.isLoggedIn && (this.authService.currentUser.username === this.postCreatorUser.username);
   }
 }
