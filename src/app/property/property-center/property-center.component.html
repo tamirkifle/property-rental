@@ -13,7 +13,7 @@
   <nav class="main_nav">
     <a routerLink="/properties"><i class="fa fa-compass" aria-hidden="true"></i>Explore</a>
     <a routerLink="/properties/favorites"><i class="fa fa-heart-o" aria-hidden="true"></i>Favorites</a>
-    <a *ngIf="!authService.isLoggedIn" routerLink="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
+    <a *ngIf="!authService.isLoggedIn" (click)="goToLoginPage()"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
     <a *ngIf="authService.isLoggedIn" routerLink="/" (click)="logout()" ><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a>
     <a routerLink="/admin" class="admin_center" *ngIf="authService.isAdmin"><i class="fa fa-unlock-alt" aria-hidden="true"></i>Admin Center</a>
     <a [routerLink]="['/properties','create']"><i class="fa fa-plus" aria-hidden="true"></i>Create New Property</a>

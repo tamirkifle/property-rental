@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 
 @Component({
@@ -46,5 +46,10 @@ export class PropertyCenterComponent implements OnInit {
     this.authService.logout();
     this.avatar = 'assets/other_icons/profile.png';
     this.userFirstName = 'Profile';
+  }
+
+  goToLoginPage(){
+    this.authService.redirectUrl = this.router.url;
+    this.router.navigateByUrl('/login');
   }
 }
