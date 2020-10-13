@@ -2,7 +2,7 @@
 .filter_cpt{
     border-left: 1px solid #0085c3;
 }
-.filter_cpt:last-child{
+.filter_cpt:last-of-type{
     border-right: 1px solid #0085c3;
 }
 .filter_container{
