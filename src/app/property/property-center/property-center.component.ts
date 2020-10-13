@@ -35,8 +35,7 @@ export class PropertyCenterComponent implements OnInit {
       return;
     }
     this.searchTerm = searchTerm;
-    this.router.navigate([], {
-      relativeTo: this.route,
+    this.router.navigate(['/properties'], {
       queryParams: { s: searchTerm },
       // queryParamsHandling: 'merge',
     });
