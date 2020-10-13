@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { combineLatest, Observable, of } from 'rxjs';
-import { Property } from './property';
+import { Property, PropertyOptions } from './property';
 import { PropertyService } from './property.service';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../user/user';
@@ -92,7 +92,10 @@ export class PropertiesResolver implements Resolve<Property[]> {
   constructor(private propertyService: PropertyService) {}
 
   resolve(
+    route: ActivatedRouteSnapshot
   ): Observable<Property[]> {
-    return this.propertyService.getProperties();
+    const options: PropertyOptions = {search: route.queryParams.s, filterBy: route.queryParamMap.getAll('by')};
+    console.log('in resolver: ', JSON.stringify(options));
+    return this.propertyService.getProperties(options);
   }
 }

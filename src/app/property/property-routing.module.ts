@@ -23,6 +23,7 @@ const propertyRoutes: Routes = [
         path: '',
         component: PropertyListComponent,
         resolve: { properties: PropertiesResolver },
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
       },
       {
         path: 'detail/:id',

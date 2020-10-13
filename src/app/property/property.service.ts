@@ -4,7 +4,7 @@ import { Property, PropertyOptions } from './property';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FilterByPipe } from '../shared/filter-by.pipe';
 import { PropertyFilterPipe } from '../shared/property-filter.pipe';
 import { AuthService } from '../auth/auth.service';
@@ -22,10 +22,21 @@ export class PropertyService {
   constructor(private http: HttpClient, private authService: AuthService, private filterBy: FilterByPipe, private search: PropertyFilterPipe) { }
 
   getProperties(options?: PropertyOptions): Observable<Property[]> {
+    if (options){
+        let params = new HttpParams();
+        if (options.search){
+          params = params.append('s', options.search);
+        }
+        if (options.filterBy && options.filterBy.length !== 0){
+          options.filterBy.forEach(filter => params = params.append('by', filter));
+        }
+        return this.http.get<Property[]>(this.propertiesURL, { params });
+
+    }
     return this.http.get<Property[]>(this.propertiesURL)
     .pipe(
-      map(properties => options ? this.filterBy.transform(properties, options.filterBy) : properties),
-      map(properties => options ? this.search.transform(properties, options.search) : properties),
+      // map(properties => options ? this.filterBy.transform(properties, options.filterBy) : properties),
+      // map(properties => options ? this.search.transform(properties, options.search) : properties),
       catchError(this.handleError<Property[]>('getProperties', []))
     );
   }
