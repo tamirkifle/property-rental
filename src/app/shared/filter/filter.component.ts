@@ -36,7 +36,10 @@ export class FilterComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.snapshot.queryParamMap.getAll('by').forEach(option => this.activeOptions.push(option));
+    this.route.queryParamMap.subscribe(params => {
+      this.activeOptions = [];
+      params.getAll('by').forEach(option => this.activeOptions.push(option));
+    });
     this.route.queryParamMap.subscribe((params) => {
         this.pageQueries = params.getAll('by');
     });

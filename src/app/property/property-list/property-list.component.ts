@@ -23,10 +23,9 @@ export class PropertyListComponent implements OnInit {
         this.filterOptions = params.getAll('by');
       }
       // console.log(this.searchText, this.filterOptions);
-      this.properties = this.route.snapshot.data.properties;
-      console.log(this.properties);
-
+      
     });
+    this.route.data.subscribe(data => this.properties = data.properties);
 
   }
 
@@ -50,6 +49,17 @@ export class PropertyListComponent implements OnInit {
     console.log('propID', propId);
     this.properties = this.properties.filter(p => p.id !== propId);
     console.log(this.properties);
+
+  }
+
+  removeFilter(filter){
+    this.filterOptions = this.filterOptions.filter(fOpt => filter !== fOpt );
+    this.router.navigate([],
+      {
+        relativeTo: this.route,
+        queryParams: { by: this.filterOptions },
+        queryParamsHandling: 'merge',
+    });
 
   }
 }

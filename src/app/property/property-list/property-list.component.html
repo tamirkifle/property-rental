@@ -1,11 +1,18 @@
 <div class="post-list">
     <app-filter></app-filter>
+    <h4 class="search_info" *ngIf="searchText">
+        Showing search results for {{searchText}}
+    </h4>
+    <div class="active_filters" *ngIf="filterOptions && filterOptions.length !== 0">
+        <span class="filtered_by">Filtered by: </span>
+        <span *ngFor="let filter of filterOptions" class="filter_card">{{filter}}<button class="close_filter_btn" (click)="removeFilter(filter)">×</button></span>
+    </div>
     <div class="properties_container" *ngIf="properties && properties.length !== 0">
         <app-property-item *ngFor="let property of properties | filterBy:filterOptions | propertyFilter:searchText" [property]="property"
         (click)="!$event.target.classList.contains('fa-heart') ? showPropertyDetail(property.id) : false" (removedFavorite)="removeFavorite($event)"></app-property-item>
     </div>
-    <h2 class="no_properties_msg" *ngIf="!properties || properties.length === 0">
+    <h5 class="no_properties_msg" *ngIf="!properties || properties.length === 0">
         No posts to show
-    </h2>
+    </h5>
 
 </div>
