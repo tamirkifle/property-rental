@@ -30,10 +30,6 @@ export class PropertyListComponent implements OnInit {
 
   }
 
-  get path(){
-    return this.route.snapshot.url.length === 0 ? 'properties' : 'favorites';
-  }
-
   addCommas(num): string {
     const str = String(num);
     const length = str.length;

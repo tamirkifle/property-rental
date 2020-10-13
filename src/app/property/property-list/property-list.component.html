@@ -5,7 +5,7 @@
         (click)="!$event.target.classList.contains('fa-heart') ? showPropertyDetail(property.id) : false" (removedFavorite)="removeFavorite($event)"></app-property-item>
     </div>
     <h2 class="no_properties_msg" *ngIf="!properties || properties.length === 0">
-        No {{path}} to show
+        No posts to show
     </h2>
 
 </div>
