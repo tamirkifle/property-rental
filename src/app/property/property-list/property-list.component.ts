@@ -62,4 +62,14 @@ export class PropertyListComponent implements OnInit {
     });
 
   }
+
+  resetFilters(){
+    this.filterOptions = [];
+    this.router.navigate([],
+      {
+        relativeTo: this.route,
+        queryParams: { by: this.filterOptions },
+        queryParamsHandling: 'merge',
+    });
+  }
 }

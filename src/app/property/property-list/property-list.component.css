@@ -50,9 +50,11 @@
     cursor: pointer;
     outline: none;
 }
-/* .filter_card::after{
-content: ", ";
+.reset_filters_btn{
+    border: none;
+    background-color: white;
+    text-decoration: underline;
+    margin-left: 1rem;
+    cursor: pointer;
+    color: black;
 }
-.filter_card:last-of-type::after{
-    content: "";
- } */

@@ -6,6 +6,7 @@
     <div class="active_filters" *ngIf="filterOptions && filterOptions.length !== 0">
         <span class="filtered_by">Filtered by: </span>
         <span *ngFor="let filter of filterOptions" class="filter_card">{{filter}}<button class="close_filter_btn" (click)="removeFilter(filter)">×</button></span>
+        <a (click)="resetFilters()" class="reset_filters_btn">Reset Filters</a>
     </div>
     <div class="properties_container" *ngIf="properties && properties.length !== 0">
         <app-property-item *ngFor="let property of properties | filterBy:filterOptions | propertyFilter:searchText" [property]="property"
