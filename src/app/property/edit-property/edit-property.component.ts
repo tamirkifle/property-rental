@@ -58,6 +58,9 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
         .split(',')
         .map((a) => a.trim());
     }
+    if (this.editedProperty.propertyImages.length === 0){
+      this.editedProperty.propertyImages.push('assets/placeholders/no_img.png');
+    }
     this.propertyService.updateProperty(this.editedProperty).subscribe(() => {
       this.property = this.editedProperty;
       this.router.navigate(['..'], {
