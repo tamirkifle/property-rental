@@ -16,6 +16,7 @@ import { switchMap } from 'rxjs/operators';
 export class PropertyDetailComponent implements OnInit {
   property: Property;
   postCreatorUser: User;
+  imageObject: Array<object>;
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
@@ -27,6 +28,9 @@ export class PropertyDetailComponent implements OnInit {
   ngOnInit(): void {
     this.property = this.route.snapshot.data.property;
     this.postCreatorUser = this.route.snapshot.data.user;
+    this.imageObject = this.property.propertyImages.map(imageLink => {
+      return {image: imageLink, thumbImage: imageLink, title: this.property.propertyTitle};
+    });
   }
 
   addCommas(num): string {

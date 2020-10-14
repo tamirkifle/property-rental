@@ -6,8 +6,9 @@
             </svg>
             <button routerLink="edit" class="edit_btn" *ngIf="isAuthorizedToEdit">Edit</button>
         </div>
-        
-        <app-image-slider [property]=property></app-image-slider>
+        <div class="slider_container">
+            <ng-image-slider [images]="imageObject" [imageSize]="{width: '100%', height: '550px', space: 0}" [animationSpeed]="'0.1'" #nav></ng-image-slider>
+        </div>
     <div class="post_info">
         <div class="post_desc">
             <div class="post_title">

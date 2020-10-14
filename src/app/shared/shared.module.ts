@@ -2,18 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
-import { ImageSliderComponent } from './image-slider/image-slider.component';
+// import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { RatingComponent } from './rating/rating.component';
 import { TopMenuButtonComponent } from './top-menu-button/top-menu-button.component';
 import { FilterComponent } from './filter/filter.component';
 import { FilterByComponent } from './filter-by/filter-by.component';
 import { PropertyFilterPipe } from './property-filter.pipe';
 import { FilterByPipe } from './filter-by.pipe';
+import { NgImageSliderModule } from 'ng-image-slider';
+
 
 @NgModule({
   declarations: [
     RatingComponent,
-    ImageSliderComponent,
+    // ImageSliderComponent,
     TopMenuButtonComponent,
     FilterComponent,
     FilterByComponent,
@@ -22,15 +24,17 @@ import { FilterByPipe } from './filter-by.pipe';
   ],
   imports: [
     CommonModule,
-    SharedRoutingModule
+    SharedRoutingModule,
+    NgImageSliderModule
   ],
   exports: [
     RatingComponent,
-    ImageSliderComponent,
+    // ImageSliderComponent,
     TopMenuButtonComponent,
     FilterComponent,
     PropertyFilterPipe,
-    FilterByPipe
+    FilterByPipe,
+    NgImageSliderModule
   ]
 })
 export class SharedModule { }

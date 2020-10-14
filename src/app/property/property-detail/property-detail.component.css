@@ -101,6 +101,10 @@
     float:right;
     border: 1px solid black;
 }
+
+.slider_container{
+    margin: 0 40px;
+}
 @media(min-width: 900px){
 
 }
