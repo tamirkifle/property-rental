@@ -39,6 +39,7 @@ export class ImageSliderComponent implements OnInit {
         i.classList.remove('left');
         i.classList.remove('right');
         i.classList.remove('showing');
+        i.classList.remove('hidden');
     });
     if (dir === 'right') {
       allImages[currentIndex].classList.add('left');
@@ -46,7 +47,7 @@ export class ImageSliderComponent implements OnInit {
         'showing'
       );
       allImages[indexStep(allImages, currentIndex, 2)].classList.add(
-        'right'
+        'right', 'hidden'
       );
     } else if (dir === 'left') {
       allImages[currentIndex].classList.add('right');
@@ -54,7 +55,7 @@ export class ImageSliderComponent implements OnInit {
         'showing'
       );
       allImages[indexStep(allImages, currentIndex, -2)].classList.add(
-        'left'
+        'left', 'hidden'
       );
     }
   }

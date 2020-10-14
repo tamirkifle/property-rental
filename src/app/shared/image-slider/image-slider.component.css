@@ -61,3 +61,7 @@
 .post_img.right{
     transform: translateX(100%);
 }
+.post_img.hidden{
+    visibility: hidden;
+}
+
