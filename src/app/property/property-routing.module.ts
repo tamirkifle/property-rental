@@ -35,7 +35,7 @@ const propertyRoutes: Routes = [
         component: EditPropertyComponent,
         resolve: { property: PropertyResolver},
         canDeactivate: [CanDeactivateGuard],
-        canActivate: [RoleGuard, CanEditGuard],
+        // canActivate: [RoleGuard, CanEditGuard],
       },
       {
         path: 'myposts',

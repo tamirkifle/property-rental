@@ -104,6 +104,25 @@
 
 .slider_container{
     margin: 0 40px;
+    position: relative;
+}
+.slider_btn{
+    position: absolute;
+    top:50%;
+    border:none;
+    background: none;
+    outline:none;
+    cursor: pointer;
+    z-index: 999;
+}
+.left_slider_btn{
+    left: -40px;
+    transform: scale(1.5);
+
+}
+.right_slider_btn{
+    right: -40px;
+    transform: scale(1.5);
 }
 @media(min-width: 900px){
 
