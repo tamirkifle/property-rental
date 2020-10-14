@@ -193,6 +193,55 @@ h1 {
   .one_line input#amenities{
       flex-basis: 100%;
   }
+  .images{
+    height: 100px;
+
+  }
+  .property_image_container{
+    display: inline-block;
+    width:100px;
+    height:100%;
+    vertical-align: top;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+  }
+  .property_image{
+    width:100%;
+    height:100%;
+    object-fit: contain;
+    border: 2px solid lightblue;
+  }
+  .add_images_btn{
+    width:100px;
+    height:100px;
+    color: lightblue;
+    font-size: 2rem;
+    margin: 0;
+  }
+
+
+  .remove_img_btn{
+    display: none;
+  }
+.property_image_container:hover .remove_img_btn{
+    display: block;
+    background-color: lightblue;
+    border: 1px solid lightblue;
+    color: #707070;
+    border-radius: 50%;
+    padding: 0;
+    position: absolute;
+    top: -8px;
+    right: -4px;
+    line-height: 1rem;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+}
+
   @media (max-width: 880px) {
     .landing_main {
       display: block;

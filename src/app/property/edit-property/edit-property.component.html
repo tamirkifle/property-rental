@@ -4,6 +4,16 @@
             <h1>Edit Property</h1>
         </div>
         <div class="one_line">
+            <label>Images:</label>
+            <div class="images">
+                <div class="property_image_container" *ngFor="let pImage of property.propertyImages">
+                    <img src="{{pImage}}" alt="" class="property_image">
+                    <button class="remove_img_btn">×</button>
+                </div>
+                <button type="button" class="add_images_btn">+</button>
+            </div>
+        </div>
+        <div class="one_line">
             <label for="bedrooms">Bedrooms:</label>
             <input type="text" placeholder="No. of Bedrooms" id="bedrooms" name="bedrooms" class="inputfield"
             [(ngModel)]="editedProperty.bedrooms">
@@ -37,6 +47,7 @@
             <input type="text" placeholder="Area in m²" id="areaInM2" name="areaInM2" class="inputfield"
             [(ngModel)]="editedProperty.areaInM2">
         </div>
+
         <!-- <div class="amenities_input">
             <label for="balcony">Balcony</label>
             <input type="checkbox" name="balcony" id="balcony">
