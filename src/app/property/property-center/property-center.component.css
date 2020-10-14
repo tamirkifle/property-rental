@@ -1,5 +1,5 @@
 nav a:visited,
-a:link {
+a:link, nav a {
   color: #334953;
 }
 nav a:hover {
