@@ -50,11 +50,21 @@
     cursor: pointer;
     outline: none;
 }
-.reset_filters_btn{
+.clear_filters_btn{
     border: none;
     background-color: white;
     text-decoration: underline;
     margin-left: 1rem;
     cursor: pointer;
     color: black;
+}
+
+.clear_search_btn{
+    border: none;
+    background-color: white;
+    text-decoration: underline;
+    margin-left: 1rem;
+    cursor: pointer;
+    color: black;
+    font-size: 1rem;
 }

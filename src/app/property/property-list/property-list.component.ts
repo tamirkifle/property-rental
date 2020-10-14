@@ -9,13 +9,13 @@ import { Property } from '../property';
 })
 export class PropertyListComponent implements OnInit {
   properties: Property[];
-  filterOptions: string[] = [];
+  filterOptions: string[] = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router
   ) {}
-  searchText = '';
+  searchText: string = null;
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       this.searchText = params.get('s');
@@ -63,12 +63,22 @@ export class PropertyListComponent implements OnInit {
 
   }
 
-  resetFilters(){
+  clearFilters(){
     this.filterOptions = [];
     this.router.navigate([],
       {
         relativeTo: this.route,
         queryParams: { by: this.filterOptions },
+        queryParamsHandling: 'merge',
+    });
+  }
+
+  clearSearch(){
+    this.searchText = null;
+    this.filterOptions = null;
+    this.router.navigate([],
+      {
+        queryParams: { s: this.searchText, by: this.filterOptions },
         queryParamsHandling: 'merge',
     });
   }
