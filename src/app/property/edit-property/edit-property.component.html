@@ -6,9 +6,9 @@
         <div class="one_line">
             <label>Images:</label>
             <div class="images">
-                <div class="property_image_container" *ngFor="let pImage of property.propertyImages">
+                <div class="property_image_container" *ngFor="let pImage of editedProperty.propertyImages">
                     <img src="{{pImage}}" alt="" class="property_image">
-                    <button class="remove_img_btn">×</button>
+                    <button type="button" class="remove_img_btn" (click)="removeImage(pImage)">×</button>
                 </div>
                 <button type="button" class="add_images_btn">+</button>
             </div>

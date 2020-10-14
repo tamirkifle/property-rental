@@ -68,6 +68,10 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
 
   }
 
+  removeImage(pImage){
+    this.editedProperty.propertyImages = this.editedProperty.propertyImages.filter(img => img !== pImage);
+    console.log(this.editedProperty);
+  }
   canDeactivate(): Observable<boolean> {
     if (isEqual(this.property, this.editedProperty)) {
       return of(true);
