@@ -31,17 +31,6 @@ export class PropertyItemComponent implements OnInit {
     }
   }
 
-  addCommas(num): string {
-    const str = String(num);
-    const length = str.length;
-    return str
-      .split('')
-      .map((item, i) =>
-        (length - 1 - i) % 3 === 0 && i !== length - 1 ? item + ',' : item
-      )
-      .join('');
-  }
-
   getUser(username: string) {
     this.userService.getUsers()
       .subscribe(users => {
@@ -67,5 +56,9 @@ export class PropertyItemComponent implements OnInit {
         this.removedFavorite.emit(this.property.id);
       });
     }
+  }
+
+  formatCurrency(number){
+    return (new Intl.NumberFormat('et', { style: 'currency', currency: 'ETB' }).format(number));
   }
 }
