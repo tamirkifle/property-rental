@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Property } from '../property';
-import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { User } from '../../user/user';
 import { CanComponentDeactivate } from '../../can-deactivate.guard';
 import { Observable, of } from 'rxjs';
 import { DialogService } from '../../dialog.service';
@@ -32,6 +30,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     levels: null,
   };
   url = 'api/properties';
+  images: File[];
   constructor(
     private propertyService: PropertyService,
     private router: Router,
@@ -43,7 +42,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
   ngOnInit(): void {}
 
-  onFormSubmit() {
+  onFormSubmit(propertyData) {
     // post creator should be set to logged in user through a service
     this.createdProperty.postCreator = this.authService.currentUser.username;
     if (this.createdProperty.propertyTitle === null && this.createdProperty.bedrooms && this.createdProperty.location) {
@@ -57,6 +56,23 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
           this.router.navigate(['/properties']);
         });
       });
+
+    const fd = new FormData();
+    propertyData.amenities = propertyData.amenities.split(',').map(item => item.trim()).filter(item => item !== '');
+    for (const key in propertyData) {
+      if (Object.prototype.hasOwnProperty.call(propertyData, key)) {
+        this.createdProperty[key] = propertyData[key];
+      }
+    }
+    fd.append('property', JSON.stringify(this.createdProperty));
+    this.images?.forEach((image, i) => {
+      fd.append(`image${i + 1}`, image);
+    });
+
+    fd.forEach((value, key) => {
+      console.log(key, ': ', value);
+    });
+
   }
   canDeactivate(): Observable<boolean> {
     const emptyProperty: Property = {
@@ -91,5 +107,9 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
   cancelCreation(){
     this.router.navigate(['..'], {relativeTo: this.route} );
+  }
+
+  updateImages(files: FileList){
+    this.images = Array.from(files);
   }
 }

@@ -1,26 +1,26 @@
 <div class="signup_container">
-    <form class="signup_form" #form="ngForm" (ngSubmit)="onFormSubmit()">
+    <form class="signup_form" #form="ngForm" (ngSubmit)="onFormSubmit(form.value)" #htmlForm>
         <div class="signup_top">
             <h1>Create a New Property</h1>
         </div>
         <input type="text" placeholder="No. of Bedrooms" id="bedrooms" name="bedrooms" class="inputfield"
-            [(ngModel)]="createdProperty.bedrooms">
+            ngModel>
         <input type="text" placeholder="No. of Bathrooms" id="bathrooms" name="bathrooms" class="inputfield"
-            [(ngModel)]="createdProperty.bathrooms">
+        ngModel>
         <div class="price_input">
             <input type="text" placeholder="List Price" id="listPrice" name="listPrice" class="inputfield"
-                [(ngModel)]="createdProperty.listPrice">
-            <select name="priceType" id="priceType" [(ngModel)]="createdProperty.priceType">
-                <option value="Negotiable">Negotiable</option>
+            ngModel>
+            <select name="priceType" id="priceType" [ngModel]="'Negotiable'">
+                <option value="Negotiable" selected>Negotiable</option>
                 <option value="Fixed">Fixed</option>
             </select>
         </div>
         <input type="text" placeholder="Post title (optional)" id="propertyTitle" name="propertyTitle"
-            class="inputfield" [(ngModel)]="createdProperty.propertyTitle">
+            class="inputfield" ngModel>
         <input type="text" placeholder="Location" id="location" name="location" class="inputfield"
-            [(ngModel)]="createdProperty.location">
+        ngModel>
         <input type="text" placeholder="Area in m²" id="areaInM2" name="areaInM2" class="inputfield"
-            [(ngModel)]="createdProperty.areaInM2">
+        ngModel>
         <!-- <div class="amenities_input">
             <label for="balcony">Balcony</label>
             <input type="checkbox" name="balcony" id="balcony">
@@ -31,12 +31,12 @@
         </div> -->
 
         <input type="text" placeholder="Other Amenities e.g. Backyard, Jacuzzi, Balcony" id="amenities" name="amenities"
-            class="inputfield" [(ngModel)]="createdProperty.amenities">
+            class="inputfield" ngModel>
         <!-- <input type="text" placeholder="Details" id="details" name="details" class="inputfield"
             [(ngModel)]="createdProperty.details"> -->
         <div class="images_input" style="margin-top: 2rem">
             <label for="images">Upload Images</label>
-            <input type="file" name="images" id="images">
+            <input type="file" name="images" accept=".jpeg, .jpg, .png" multiple="true" id="images" (change)="updateImages(imageInput.files)" #imageInput>
         </div>
         <div class="one_line">
             <button type="submit" class="signup_btn btn">Create Property</button>
