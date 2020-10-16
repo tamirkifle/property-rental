@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../user/user';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UserService } from '../../user/user.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-create-user',
@@ -21,14 +22,17 @@ export class CreateUserComponent implements OnInit {
   };
 
   url = 'api/users';
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   onFormSubmit(user: User) {
-    this.http
-      .post(this.url, user)
-      .subscribe((result) => console.log('Successfully Added'));
-    this.router.navigate(['admin/users']);
+    this.userService.addUser(user).subscribe((createdUser: User) => {
+      this.authService.login({user: createdUser.username, password: createdUser.password}).subscribe((result) => {
+        if (result === true){
+          this.router.navigate(['/properties']);
+        }
+      });
+  });
   }
 }

@@ -17,6 +17,8 @@
                     </select>
                 </div>
             </div> -->
+            <input type="text" placeholder="User Name" name="userName" class="inputfield"
+                [(ngModel)]="createdUser.username">
             <input type="text" placeholder="Phone Number / Email" id="phoneEmail" name="phoneEmail" class="inputfield"
                 [(ngModel)]="createdUser.contact">
             <input type="password" placeholder="Password" name="password" class="inputfield">
@@ -26,8 +28,6 @@
                 [(ngModel)]="createdUser.firstname">
             <input type="text" placeholder="Last Name" name="lastName" class="inputfield"
                 [(ngModel)]="createdUser.lastname">
-            <input type="text" placeholder="User Name" name="userName" class="inputfield"
-                [(ngModel)]="createdUser.username">
             <button type="submit" class="signup_btn btn">Sign Up</button>
         </form>
 

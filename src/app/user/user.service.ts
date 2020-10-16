@@ -43,4 +43,8 @@ export class UserService {
   updateUser(user){
     return this.http.put(this.usersURL, user);
   }
+
+  addUser(user){
+    return this.http.post(this.usersURL, user);
+  }
 }
