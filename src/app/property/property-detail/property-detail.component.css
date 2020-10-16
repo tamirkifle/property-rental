@@ -124,6 +124,12 @@
     right: -40px;
     transform: scale(1.5);
 }
+
+
+button:disabled svg,
+button[disabled] svg{
+    fill: #a0a0a0;
+}
 @media(min-width: 900px){
 
 }

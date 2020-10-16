@@ -7,11 +7,30 @@
             <button routerLink="edit" class="edit_btn" *ngIf="isAuthorizedToEdit">Edit</button>
         </div>
         <div class="slider_container">
-            <button class="slider_btn left_slider_btn" (click)="slider.prev()"><img
-            src="assets/other_icons/backward_arrow_small.svg" alt="Image Slide Left Button"></button>
+            <button class="slider_btn left_slider_btn" [disabled]="property.propertyImages.length <= 1" (click)="slider.prev()">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8.1" height="11.4" viewBox="0 0 8.1 11.4">
+                <defs>
+                  <clipPath id="clip-path">
+                    <rect width="8.1" height="11.4" fill="none"/>
+                  </clipPath>
+                </defs>
+                <g id="Backward_arrow_small" data-name="Backward arrow small" clip-path="url(#clip-path)">
+                  <path id="Path_36" data-name="Path 36" d="M5.7,8.1,0,1.859,1.7,0l4,4.382L9.7,0l1.7,1.859Z" transform="translate(8.1) rotate(90)"/>
+                </g>
+              </svg>
+            </button>
             <ng-image-slider [infinite]="true" [images]="imageObject" [imageSize]="{width: '100%', height: '550px', space: 0}" [showArrow]="false" [animationSpeed]="0.5" #slider></ng-image-slider>
-            <button class="slider_btn right_slider_btn" (click)="slider.next()"><img
-            src="assets/other_icons/forward_arrow_small.svg" alt="Image Slide Right Button"></button>
+            <button class="slider_btn right_slider_btn" [disabled]="property.propertyImages.length <= 1" (click)="slider.next()"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8.1" height="13.4" viewBox="0 0 8.1 13.4">
+                <defs>
+                  <clipPath id="clip-path">
+                    <rect width="8.1" height="13.4" fill="none"/>
+                  </clipPath>
+                </defs>
+                <g id="Forward_arrow_small" data-name="Forward arrow small" clip-path="url(#clip-path)">
+                  <path id="Path_36" data-name="Path 36" d="M6.7,8.1,0,1.859,2,0,6.7,4.382,11.4,0l2,1.859Z" transform="translate(0 13.4) rotate(-90)"/>
+                </g>
+              </svg>
+            </button>
         </div>
     <div class="post_info">
         <div class="post_desc">
