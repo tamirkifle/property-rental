@@ -48,7 +48,7 @@ export class PropertyCenterComponent implements OnInit {
   }
 
   goToLoginPage(){
-    this.authService.redirectUrl = this.router.url;
+    this.authService.redirectUrl = this.router.url.split('?')[0];
     this.router.navigateByUrl('/login');
   }
 }
