@@ -1,6 +1,7 @@
 nav a:visited,
 a:link, nav a {
   color: #334953;
+  cursor: pointer;
 }
 nav a:hover {
   color: #039be5;
