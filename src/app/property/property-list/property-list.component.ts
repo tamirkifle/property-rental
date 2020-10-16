@@ -41,11 +41,10 @@ export class PropertyListComponent implements OnInit {
   }
 
   removeFavorite(propId){
-
-    console.log('propID', propId);
+    if (this.router.url !== '/properties/favorites'){
+      return;
+    }
     this.properties = this.properties.filter(p => p.id !== propId);
-    console.log(this.properties);
-
   }
 
   removeFilter(filter){
