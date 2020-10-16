@@ -42,7 +42,19 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
   ngOnInit(): void {}
 
-  onFormSubmit(propertyData) {
+  onFormSubmit() {
+
+    const fd = new FormData();
+    fd.append('property', JSON.stringify(this.createdProperty));
+    this.images?.forEach((image, i) => {
+      fd.append(`image${i + 1}`, image);
+    });
+
+    fd.forEach((value, key) => {
+      console.log(key, ': ', value);
+    });
+
+
     // post creator should be set to logged in user through a service
     this.createdProperty.postCreator = this.authService.currentUser.username;
     if (this.createdProperty.propertyTitle === null && this.createdProperty.bedrooms && this.createdProperty.location) {
@@ -54,25 +66,9 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
         this.userService.updateUser(this.authService.currentUser).subscribe(() => {
           this.createdProperty.id = added.id;
           this.router.navigate(['/properties']);
+          console.log('created property: ', this.createdProperty);
         });
       });
-
-    const fd = new FormData();
-    propertyData.amenities = propertyData.amenities.split(',').map(item => item.trim()).filter(item => item !== '');
-    for (const key in propertyData) {
-      if (Object.prototype.hasOwnProperty.call(propertyData, key)) {
-        this.createdProperty[key] = propertyData[key];
-      }
-    }
-    fd.append('property', JSON.stringify(this.createdProperty));
-    this.images?.forEach((image, i) => {
-      fd.append(`image${i + 1}`, image);
-    });
-
-    fd.forEach((value, key) => {
-      console.log(key, ': ', value);
-    });
-
   }
   canDeactivate(): Observable<boolean> {
     const emptyProperty: Property = {
@@ -94,7 +90,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
         return true;
       }
     }
-    if(this.createdProperty.id !== null){
+    if (this.createdProperty.id !== null){
       return of(true);
     }
     if (isEqualWith(this.createdProperty, emptyProperty, customComparison)) {
@@ -111,5 +107,9 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
   updateImages(files: FileList){
     this.images = Array.from(files);
+  }
+
+  updateAmenities(amenities){
+    this.createdProperty.amenities = amenities.split(',').map(item => item.trim()).filter(item => item !== '');
   }
 }
