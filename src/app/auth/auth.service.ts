@@ -19,14 +19,14 @@ export class AuthService {
   }
 
   get isAdmin(){
-    return this._isLoggedIn;
+    return this.currentUser?.isAdmin;
   }
   constructor(private userService: UserService) { }
 
   login(credentials: {user: string, password: string}): Observable<boolean> {
     return this.userService.getUser(credentials.user).pipe(
       map(user => {
-        if (user || (credentials.user === 'test' && credentials.password === 'secret')){
+        if (user){
           this.currentUser = user;
           this._isLoggedIn = true;
           return true;
