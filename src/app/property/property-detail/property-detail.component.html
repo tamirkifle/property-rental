@@ -9,7 +9,7 @@
         <div class="slider_container">
             <button class="slider_btn left_slider_btn" (click)="slider.prev()"><img
             src="assets/other_icons/backward_arrow_small.svg" alt="Image Slide Left Button"></button>
-            <ng-image-slider [images]="imageObject" [imageSize]="{width: '100%', height: '550px', space: 0}" [showArrow]="false" [animationSpeed]="'0.1'" #slider></ng-image-slider>
+            <ng-image-slider [infinite]="true" [images]="imageObject" [imageSize]="{width: '100%', height: '550px', space: 0}" [showArrow]="false" [animationSpeed]="'0.1'" #slider></ng-image-slider>
             <button class="slider_btn right_slider_btn" (click)="slider.next()"><img
             src="assets/other_icons/forward_arrow_small.svg" alt="Image Slide Right Button"></button>
         </div>
