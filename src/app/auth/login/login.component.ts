@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   uname: string;
   password: string;
+  invalidTry = false;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {

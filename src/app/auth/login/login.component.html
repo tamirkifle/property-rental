@@ -3,7 +3,7 @@
         <img src="../../assets/images/landing.png" alt="Property Rental Logo">
     </div>
     <div class="login_container">
-        <form action="" class="signin_form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
+        <form action="" class="signin_form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)" novalidate>
             <div class="signin_top">
                 <h1 class="signin_title">Sign In</h1><a routerLink="/properties" class="skip_link">Skip to
                     Properties</a>
@@ -17,10 +17,18 @@
                     </select>
                 </div>
             </div>
-            <input type="text" placeholder="User Name/ Email" class="username_input" name="user" ngModel>
-            <input type="password" placeholder="Password" class="password_input" name="password" ngModel>
+            <div class="">
+                <input type="text" placeholder="User Name/ Email" class="username_input" name="user" required ngModel>
+                <span *ngIf="(loginForm.controls.user?.invalid && loginForm.controls.user.touched) || (loginForm.controls.user?.invalid && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
+            </div>
+            <div class="">
+                <input type="password" placeholder="Password" class="password_input" name="password" required ngModel>
+                <span *ngIf="(loginForm.controls.password?.invalid && loginForm.controls.password.touched) || (loginForm.controls.password?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
+            </div>
             <a href="#" class="forgot_password">Forgot Password?</a>
-            <button type="submit" class="login_btn btn">Log In</button>
+            <span (mouseenter)="invalidTry = true" (mouseleave)="invalidTry = false">
+            <button type="submit" class="login_btn btn"  [disabled]="loginForm.invalid">Log In</button>
+             </span> 
             <a routerLink="/create" class="create_account">Create Account</a>
             <p class="options_label">Or Sign Up With</p>
             <button href="#" class="fb btn">

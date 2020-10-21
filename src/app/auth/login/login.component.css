@@ -67,6 +67,9 @@ button {
   margin-bottom: 1rem;
   cursor: pointer;
 }
+button:disabled{
+  cursor: not-allowed;
+}
 a {
   display: inline-block;
   text-decoration: none;
