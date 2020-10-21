@@ -4,12 +4,12 @@
         Showing search results for {{searchText}}
         <a (click)="clearSearch()" class="clear_search_btn">Clear Search</a>
     </h4>
-    <div class="active_filters" *ngIf="filterOptions && filterOptions.length !== 0">
+    <div class="active_filters" *ngIf="filterOptions?.length !== 0">
         <span class="filtered_by">Filtered by: </span>
         <span *ngFor="let filter of filterOptions" class="filter_card">{{filter}}<button class="close_filter_btn" (click)="removeFilter(filter)">×</button></span>
         <a (click)="clearFilters()" class="clear_filters_btn">Clear Filters</a>
     </div>
-    <div class="properties_container" *ngIf="properties && properties.length !== 0">
+    <div class="properties_container" *ngIf="properties?.length !== 0">
         <app-property-item *ngFor="let property of properties | filterBy:filterOptions | propertyFilter:searchText" [property]="property"
         (click)="!$event.target.classList.contains('fa-heart') ? showPropertyDetail(property.id) : false" (removedFavorite)="removeFavorite($event)"></app-property-item>
     </div>

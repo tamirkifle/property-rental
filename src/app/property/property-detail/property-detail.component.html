@@ -7,7 +7,7 @@
             <button routerLink="edit" class="edit_btn" *ngIf="isAuthorizedToEdit">Edit</button>
         </div>
         <div class="slider_container">
-            <button class="slider_btn left_slider_btn" [disabled]="property.propertyImages.length <= 1" (click)="slider.prev()">
+            <button class="slider_btn left_slider_btn" [disabled]="property.propertyImages?.length <= 1" (click)="slider.prev()">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8.1" height="11.4" viewBox="0 0 8.1 11.4">
                 <defs>
                   <clipPath id="clip-path">
@@ -20,7 +20,7 @@
               </svg>
             </button>
             <ng-image-slider [infinite]="true" [images]="imageObject" [imageSize]="{width: '100%', height: '550px', space: 0}" [showArrow]="false" [animationSpeed]="0.5" #slider></ng-image-slider>
-            <button class="slider_btn right_slider_btn" [disabled]="property.propertyImages.length <= 1" (click)="slider.next()"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8.1" height="13.4" viewBox="0 0 8.1 13.4">
+            <button class="slider_btn right_slider_btn" [disabled]="property.propertyImages?.length <= 1" (click)="slider.next()"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8.1" height="13.4" viewBox="0 0 8.1 13.4">
                 <defs>
                   <clipPath id="clip-path">
                     <rect width="8.1" height="13.4" fill="none"/>
@@ -49,7 +49,7 @@
             <div class="detail_item" *ngIf="property.areaInM2"><img src="../../assets/detail_icons/areaInM2.png" class="detail_img"/><span class="detail_text">{{property.areaInM2}} M<sup>2</sup></span></div>
             <div class="detail_item" *ngIf="property.levels"><img src="../../assets/detail_icons/levels.png" class="detail_img"/><span class="detail_text">{{property.levels}}</span></div>
         </div>
-        <div class="post_amenities" *ngIf="property.amenities !== undefined && property.amenities.length !== 0">
+        <div class="post_amenities" *ngIf="property.amenities?.length !== 0">
             <h4 class="amenity_title">Amenities</h4>
             <span class="amenity_item" *ngFor="let amenity of property.amenities">{{amenity}}</span>
         </div>
