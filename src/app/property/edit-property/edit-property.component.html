@@ -1,5 +1,5 @@
 <div class="signup_container">
-    <form class="signup_form" #form="ngForm" (ngSubmit)="save()">
+    <form class="signup_form" #edPrForm="ngForm" (ngSubmit)="save()">
         <div class="signup_top">
             <h1>Edit Property</h1>
         </div>
@@ -15,8 +15,12 @@
         </div>
         <div class="one_line">
             <label for="bedrooms">Bedrooms:</label>
-            <input type="text" placeholder="No. of Bedrooms" id="bedrooms" name="bedrooms" class="inputfield"
-            [(ngModel)]="editedProperty.bedrooms">
+            <span style="position: relative;">
+                <input style="display: block; width: 100%;" type="text" placeholder="No. of Bedrooms" id="bedrooms" name="bedrooms" class="inputfield"
+                [(ngModel)]="editedProperty.bedrooms" required>
+                <span *ngIf="(edPrForm.controls.bedrooms?.invalid && edPrForm.controls.bedrooms.touched) || (edPrForm.controls.bedrooms?.invalid  && invalidTry)" class="required"><em>Required</em></span>
+            </span>
+
         </div>
         <div class="one_line">
             <label for="bathrooms">Bathrooms:</label>
@@ -25,12 +29,16 @@
         </div>
         <div class="price_input one_line">
             <label for="listPrice">List Price:</label>
-            <input type="text" placeholder="List Price" id="listPrice" name="listPrice" class="inputfield"
-            [(ngModel)]="editedProperty.listPrice">
+            <span style="position: relative;">
+                <input style="display: block; width: 100%" type="text" placeholder="List Price" id="listPrice" name="listPrice" class="inputfield"
+                [(ngModel)]="editedProperty.listPrice" required>
+                <span *ngIf="(edPrForm.controls.listPrice?.invalid && edPrForm.controls.listPrice.touched) || (edPrForm.controls.listPrice?.invalid  && invalidTry)" class="required"><em>Required</em></span>
+            </span>
             <select name="priceType" id="priceType" [(ngModel)]="editedProperty.priceType">
                 <option value="Negotiable" [selected]="editedProperty.priceType === 'Negotiable'">Negotiable</option>
                 <option value="Fixed" [selected]="editedProperty.priceType === 'Fixed'">Fixed</option>
             </select>
+
         </div>
         <div class="one_line">
             <label for="propertyTitle">Property Title:</label>
@@ -39,8 +47,12 @@
         </div>
         <div class="one_line">
             <label for="location">Location:</label>
-            <input type="text" placeholder="Location" id="location" name="location" class="inputfield"
-            [(ngModel)]="editedProperty.location">
+            <span style="position: relative;">
+                <input style="display: block;" type="text" placeholder="Location" id="location" name="location" class="inputfield"
+                [(ngModel)]="editedProperty.location" required>
+                <span *ngIf="(edPrForm.controls.location?.invalid && edPrForm.controls.location.touched) || (edPrForm.controls.location?.invalid  && invalidTry)" class="required"><em>Required</em></span>
+            </span>
+            
         </div>
         <div class="one_line">
             <label for="areaInM2">Area in m²:</label>
@@ -66,7 +78,9 @@
             value="{{editedProperty.details"> -->
 
         <button type="button" class="signup_btn btn">Preview</button>
-        <button type="submit" class="signup_btn btn">Save Property</button>
+        <span (mouseenter)="invalidTry = true" (mouseleave)="invalidTry = false">
+            <button type="submit" class="signup_btn btn" [disabled]="edPrForm.invalid">Save Property</button>
+        </span>
         <button type="button" class="signup_btn btn" (click)="goBack()">Cancel</button>
     </form>
 

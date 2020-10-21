@@ -20,7 +20,7 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
   postCreatorUser: User;
   editedProperty: Property;
   amenitiesString: string;
-
+  invalidTry = false;
   constructor(
     private route: ActivatedRoute,
     private propertyService: PropertyService,
