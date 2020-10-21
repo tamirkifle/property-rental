@@ -1,26 +1,33 @@
 <div class="signup_container">
-    <form class="signup_form" #form="ngForm" (ngSubmit)="onFormSubmit()">
+    <form class="signup_form" #crPrForm="ngForm" (ngSubmit)="onFormSubmit()">
         <div class="signup_top">
             <h1>Create a New Property</h1>
         </div>
         <input type="text" placeholder="No. of Bedrooms" id="bedrooms" name="bedrooms" class="inputfield"
-            [(ngModel)]="createdProperty.bedrooms">
+            ngModel (ngModelChange)="createdProperty.bedrooms = $event" required>
+        <span *ngIf="(crPrForm.controls.bedrooms?.invalid && crPrForm.controls.bedrooms.touched) || (crPrForm.controls.bedrooms?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
+
         <input type="text" placeholder="No. of Bathrooms" id="bathrooms" name="bathrooms" class="inputfield"
-        [(ngModel)]="createdProperty.bathrooms">
+        ngModel (ngModelChange)="createdProperty.bathrooms = $event">
         <div class="price_input">
-            <input type="text" placeholder="List Price" id="listPrice" name="listPrice" class="inputfield"
-            [(ngModel)]="createdProperty.listPrice">
-            <select name="priceType" id="priceType" [(ngModel)]="createdProperty.priceType">
+            <span>
+                <input type="text" placeholder="List Price" id="listPrice" name="listPrice" class="inputfield"
+                ngModel (ngModelChange)="createdProperty.listPrice = $event" required>
+                <span *ngIf="(crPrForm.controls.listPrice?.invalid && crPrForm.controls.listPrice.touched) || (crPrForm.controls.listPrice?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
+            </span>
+            <select name="priceType" id="priceType" (ngModelChange)="createdProperty.priceType = $event">
                 <option value="Negotiable" selected>Negotiable</option>
                 <option value="Fixed">Fixed</option>
             </select>
         </div>
         <input type="text" placeholder="Post title (optional)" id="propertyTitle" name="propertyTitle"
-            class="inputfield" [(ngModel)]="createdProperty.propertyTitle">
-        <input type="text" placeholder="Location" id="location" name="location" class="inputfield"
-        [(ngModel)]="createdProperty.location">
+            class="inputfield" ngModel (ngModelChange)="createdProperty.propertyTitle = $event">
+        <div class="">
+            <input type="text" placeholder="Location" id="location" name="location" class="inputfield" ngModel (ngModelChange)="createdProperty.location = $event" required>
+            <span *ngIf="(crPrForm.controls.location?.invalid && crPrForm.controls.location.touched) || (crPrForm.controls.location?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
+        </div>
         <input type="text" placeholder="Area in m²" id="areaInM2" name="areaInM2" class="inputfield"
-        [(ngModel)]="createdProperty.areaInM2">
+        ngModel (ngModelChange)="createdProperty.areaInM2 = $event">
         <!-- <div class="amenities_input">
             <label for="balcony">Balcony</label>
             <input type="checkbox" name="balcony" id="balcony">
@@ -33,13 +40,15 @@
         <input type="text" placeholder="Other Amenities e.g. Backyard, Jacuzzi, Balcony" id="amenities" name="amenities"
             class="inputfield" ngModel (ngModelChange)="updateAmenities($event)">
         <!-- <input type="text" placeholder="Details" id="details" name="details" class="inputfield"
-            [(ngModel)]="createdProperty.details"> -->
+            ngModel (ngModelChange)="createdProperty.details = $event"> -->
         <div class="images_input" style="margin-top: 2rem">
             <label for="images">Upload Images</label>
             <input type="file" name="images" accept=".jpeg, .jpg, .png" multiple="true" id="images" (change)="updateImages(imageInput.files)" #imageInput>
         </div>
         <div class="one_line">
-            <button type="submit" class="signup_btn btn">Create Property</button>
+            <span (mouseenter)="invalidTry = true" (mouseleave)="invalidTry = false">
+                <button type="submit" class="signup_btn btn" [disabled]="crPrForm.invalid">Create Property</button>
+            </span>
             <button type="button" class="signup_btn btn" (click)="cancelCreation()">Cancel</button>
         </div>
     </form>

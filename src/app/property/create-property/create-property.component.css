@@ -186,6 +186,10 @@ input[type="checkbox"] {
   width:auto;
   margin-right: 1rem;
 }
+
+button:disabled{
+  cursor: not-allowed;
+}
 @media (max-width: 880px) {
   .landing_main {
     display: block;

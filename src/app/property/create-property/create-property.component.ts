@@ -29,8 +29,8 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     bathrooms: null,
     levels: null,
   };
-  url = 'api/properties';
   images: File[];
+  invalidTry = false;
   constructor(
     private propertyService: PropertyService,
     private router: Router,
@@ -111,5 +111,9 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
   updateAmenities(amenities){
     this.createdProperty.amenities = amenities.split(',').map(item => item.trim()).filter(item => item !== '');
+  }
+
+  log(event){
+    console.log(event);
   }
 }
