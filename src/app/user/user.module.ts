@@ -5,11 +5,13 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserLineComponent } from './user-line/user-line.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { SharedModule } from '../shared/shared.module';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     UserLineComponent,
     UserDetailComponent,
+    UserProfileComponent,
   ],
   imports: [
     CommonModule,

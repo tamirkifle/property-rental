@@ -13,6 +13,7 @@ import { EditPropertyComponent } from './edit-property/edit-property.component';
 import { CanDeactivateGuard } from '../can-deactivate.guard';
 import { RoleGuard } from '../auth/role.guard';
 import { CanEditGuard } from '../auth/can-edit.guard';
+import { UserProfileComponent } from '../user/user-profile/user-profile.component';
 
 const propertyRoutes: Routes = [
   {
@@ -42,6 +43,12 @@ const propertyRoutes: Routes = [
         component: PropertyListComponent,
         resolve: { properties: UserPostsResolver},
         canActivate: [RoleGuard],
+      },
+      {
+        path: 'myprofile',
+        component: UserProfileComponent,
+        // resolve: { properties: UserResolver},
+        // canActivate: [RoleGuard],
       },
       {
         path: 'favorites',
