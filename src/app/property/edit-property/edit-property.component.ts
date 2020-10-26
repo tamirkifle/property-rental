@@ -9,6 +9,7 @@ import { CanComponentDeactivate } from 'src/app/can-deactivate.guard';
 import { Observable, of } from 'rxjs';
 import { DialogService } from '../../dialog.service';
 import { clone, isEqual } from 'lodash-es';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-edit-property',
@@ -24,6 +25,8 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
   constructor(
     private route: ActivatedRoute,
     private propertyService: PropertyService,
+    private authService: AuthService,
+    private userService: UserService,
     private router: Router,
     private dialogService: DialogService
   ) {}
@@ -82,5 +85,16 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
     return this.dialogService.confirm(
       'All unsaved changes will be lost, do you want to continue?'
     );
+  }
+
+  deleteProperty(property){
+
+    this.propertyService.deleteProperty(property).subscribe(() => {
+      this.authService.currentUser.posts = this.authService.currentUser.posts.filter(id => id !== property.id);
+      this.userService.updateUser(this.authService.currentUser).subscribe(() => {
+        this.router.navigateByUrl('/properties');
+      });
+    });
+
   }
 }

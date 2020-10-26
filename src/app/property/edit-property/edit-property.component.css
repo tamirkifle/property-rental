@@ -126,7 +126,12 @@ h1 {
     background-color: #0085c3;
     text-align: left;
   }
-  
+  .delete_btn {
+    margin: 3rem 1rem 0rem 0rem;
+    background-color: #c30031;
+    text-align: left;
+  }
+    
   .create_account {
     text-decoration: underline;
     margin-bottom: calc(0.875 * 1.48vh);

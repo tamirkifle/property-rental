@@ -81,6 +81,7 @@
         <span (mouseenter)="invalidTry = true" (mouseleave)="invalidTry = false">
             <button type="submit" class="signup_btn btn" [disabled]="edPrForm.invalid">Save Property</button>
         </span>
+        <button type="button" class="delete_btn btn" (click)="deleteProperty(property)">Delete Property</button>
         <button type="button" class="signup_btn btn" (click)="goBack()">Cancel</button>
     </form>
 

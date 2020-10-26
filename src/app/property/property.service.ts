@@ -19,6 +19,10 @@ export class PropertyService {
   private propertiesURL = 'api/properties';  // URL to property web api
   private usersURL = 'api/users';  // URL to users web api
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   constructor(private http: HttpClient, private authService: AuthService, private filterBy: FilterByPipe, private search: PropertyFilterPipe) { }
 
   getProperties(options?: PropertyOptions): Observable<Property[]> {
@@ -88,5 +92,11 @@ export class PropertyService {
   unlikeProperty(propertyId){
     this.authService.currentUser.favorites = this.authService.currentUser.favorites.filter(id => id !== propertyId);
     return this.http.put(this.usersURL, this.authService.currentUser);
+  }
+
+  deleteProperty(property){
+    const id = typeof property === 'number' ? property : property.id;
+    const url = `${this.propertiesURL}/${id}`;
+    return this.http.delete<Property>(url, this.httpOptions);
   }
 }
