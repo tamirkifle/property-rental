@@ -88,13 +88,23 @@ export class EditPropertyComponent implements OnInit, CanComponentDeactivate {
   }
 
   deleteProperty(property){
-
-    this.propertyService.deleteProperty(property).subscribe(() => {
-      this.authService.currentUser.posts = this.authService.currentUser.posts.filter(id => id !== property.id);
-      this.userService.updateUser(this.authService.currentUser).subscribe(() => {
-        this.router.navigateByUrl('/properties');
-      });
+    if (!this.authService.isLoggedIn){//SAFETY MEASURE
+      this.router.navigateByUrl('/login');
+      return;
+    }
+    if (!this.authService.currentUser?.posts.includes(this.property.id)){//SAFETY MEASURE
+      this.router.navigateByUrl('/properties');
+      return;
+    }
+    this.dialogService.confirm('Property will be forever deleted, are you sure?').subscribe((yesDelete) => {
+      if (yesDelete){
+        this.propertyService.deleteProperty(property).subscribe(() => {
+          this.authService.currentUser.posts = this.authService.currentUser.posts.filter(id => id !== property.id);
+          this.userService.updateUser(this.authService.currentUser).subscribe(() => {
+            this.router.navigateByUrl('/properties');
+          });
+        });
+      }
     });
-
   }
 }
