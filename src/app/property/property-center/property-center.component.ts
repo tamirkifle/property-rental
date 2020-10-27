@@ -25,12 +25,14 @@ export class PropertyCenterComponent implements OnInit {
     this.route.queryParamMap.subscribe((params) => {
       this.searchTerm = params.get('s') || '';
     });
+
     this.avatar = this.authService.currentUser ? this.authService.currentUser.avatar : 'assets/other_icons/profile.png';
     this.userFirstName = this.authService.currentUser ? this.authService.currentUser.firstname : 'Profile';
+
     this.userService.profileChanged.subscribe(() => {
       this.avatar = this.authService.currentUser ? this.authService.currentUser.avatar : 'assets/other_icons/profile.png';
       this.userFirstName = this.authService.currentUser ? this.authService.currentUser.firstname : 'Profile';
-    })
+    });
   }
   onSearch(searchTerm) {
     if (!searchTerm) {
@@ -59,9 +61,4 @@ export class PropertyCenterComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
-  updateProfile(){
-    console.log('updating');
-    this.avatar = this.authService.currentUser.avatar;
-    this.userFirstName = this.authService.currentUser.firstname;
-  }
 }
