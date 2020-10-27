@@ -3,6 +3,8 @@
     margin: 0 15px;
     text-align: center;
     cursor: pointer;
+    max-width: 90px;
+    overflow: hidden;
 }
 
 .top_btn_icon{

@@ -20,7 +20,7 @@
     <a [routerLink]="['/properties','create']"><i class="fa fa-plus" aria-hidden="true"></i>Create New Property</a>
   </nav>
   <div class="content_container">
-    <router-outlet></router-outlet>
+    <router-outlet (profileChanged)="updateProfile()"></router-outlet>
   </div>
 </div>
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { User } from './user';
 
 import { Observable, of } from 'rxjs';
@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-
+  profileChanged = new EventEmitter();
   private usersURL = 'api/users';
 
   constructor(private http: HttpClient) { }
@@ -40,11 +40,18 @@ export class UserService {
     );
   }
 
-  updateUser(user){
+  updateUser(user, avatarFile?){
+    var fd = new FormData();
+    if (avatarFile){
+      fd.append('image', avatarFile);
+    }
+    fd.append('user', user);
     return this.http.put(this.usersURL, user);
   }
 
   addUser(user){
     return this.http.post(this.usersURL, user);
   }
+
+  
 }

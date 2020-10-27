@@ -1,7 +1,9 @@
 <div class="container" *ngIf="user">
     <div class="user_detail_card">
         <a class="close_btn" aria-hidden="true" (click)="closeDetail()">╳</a>
-        <div class="user_avatar"><img src="{{user.avatar}}" alt="User Avatar"></div>
+        <div class="user_avatar col-12">
+            <img src="{{user.avatar}}" alt="User Avatar"  style="width: 150px; height: 150px;">
+        </div>
         <div class="user_details">
             <div class="user_name">{{user.firstname}} {{user.lastname}}</div>
             <div class="user_address">Addis Ababa, Ethiopia</div>

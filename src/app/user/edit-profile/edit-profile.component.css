@@ -1,6 +1,11 @@
-.avatar_container img {
+.avatar_container img{
     border-radius: 50%;
+    width: 150px; 
+    height: 150px;
+    display: block;
+    margin: auto;
 }
+
 
 input {
     margin: 0;

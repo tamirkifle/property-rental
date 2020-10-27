@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from '../user';
@@ -11,6 +11,7 @@ import { UserService } from '../user.service';
 })
 export class EditProfileComponent implements OnInit {
   user: User;
+  newAvatar: File = null;
   constructor(
     private authService: AuthService,
     private userService: UserService,
@@ -22,8 +23,17 @@ export class EditProfileComponent implements OnInit {
     this.user = this.authService.currentUser;
   }
 
+  avatarChanged(imageFile){
+    const reader = new FileReader();
+    reader.readAsDataURL(imageFile);
+    reader.addEventListener('load', () => this.user.avatar = String(reader.result));
+    this.newAvatar = imageFile;
+  }
+
   updateProfile(user){
-    this.userService.updateUser(user).subscribe(u => {
+    this.userService.updateUser(user, this.newAvatar).subscribe(res => {
+      this.authService.currentUser = this.user;
+      this.userService.profileChanged.emit();
       this.router.navigate(['..'], {
         relativeTo: this.route,
       });
