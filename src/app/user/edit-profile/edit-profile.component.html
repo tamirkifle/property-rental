@@ -12,7 +12,7 @@
             <input type="file" name="avatar_upload" id="avatar_upload" accept=".jpeg, .jpg, .png" style="display: none" (change)="avatarChanged(avatar_upload.files[0])" #avatar_upload>
             <div class="text-center">
               <button class="btn" (click)="avatar_upload.click()">Change</button>
-              <button class="btn">Remove</button>
+              <button class="btn"(click)="removeAvatar()">Remove</button>
             </div>
         </div>
         <div class="col-md-8">

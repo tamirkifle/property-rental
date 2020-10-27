@@ -30,6 +30,11 @@ export class EditProfileComponent implements OnInit {
     this.newAvatar = imageFile;
   }
 
+  removeAvatar(){
+    this.newAvatar = null;
+    this.user.avatar = 'assets/placeholders/avatar.png';
+  }
+
   updateProfile(user){
     this.userService.updateUser(user, this.newAvatar).subscribe(res => {
       this.authService.currentUser = this.user;
