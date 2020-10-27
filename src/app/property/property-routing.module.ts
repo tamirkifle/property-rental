@@ -47,8 +47,7 @@ const propertyRoutes: Routes = [
       {
         path: 'myprofile',
         component: UserProfileComponent,
-        // resolve: { properties: UserResolver},
-        // canActivate: [RoleGuard],
+        canActivate: [RoleGuard],
       },
       {
         path: 'favorites',
