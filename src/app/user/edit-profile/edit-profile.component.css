@@ -1,0 +1,32 @@
+.avatar_container img {
+    border-radius: 50%;
+}
+
+input {
+    margin: 0;
+    font-family: inherit;
+    /* padding: calc(1 * 1.48vh) calc(1 * 1.48vh) calc(13 / 16 * 1.48vh); */
+    border: none;
+    line-height: calc(21 / 16 * 1.48vh);
+    outline: none;
+    /* min-height: 50px; */
+    color: black;
+    font-size: 1rem;
+    /* margin-bottom: calc(1 * 1.48vh); */
+    border-bottom: 1px solid rgba(0, 133, 195, 0.3);
+    display: block;
+    width: 80%;
+}
+
+hr {
+    visibility: hidden;
+}
+
+input:focus {
+    border-bottom: 1px solid rgba(0, 133, 195);
+}
+
+input::placeholder {
+    font-size: 1rem;
+    color: #8b8b8b;
+}

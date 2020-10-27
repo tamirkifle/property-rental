@@ -1,0 +1,59 @@
+<div class="container pt-4 pl-4">
+    <div class="row m-0">
+        <h2 class="mb-4">My Profile</h2>
+        <button class="btn offset-md-8" (click)="updateProfile(user)">Save Changes</button>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3 avatar_container m-4">
+            <img src="{{user.avatar}}" alt="Avatar">
+        </div>
+        <div class="col-md-8">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label class="mb-0" for="username">Username</label>
+                  </div>
+                  <input class="col-sm-9 text-secondary" placeholder="Your email..." name="email" id="username" [(ngModel)]="user.username">
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label class="mb-0">First Name</label>
+                  </div>
+                  <input class="col-sm-9 text-secondary" placeholder="Your first name..." name="firstname" [(ngModel)]="user.firstname">
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label class="mb-0">Last Name</label>
+                  </div>
+                  <input class="col-sm-9 text-secondary" placeholder="Your last name..." name="lastname" [(ngModel)]="user.lastname">
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label class="mb-0">Email</label>
+                  </div>
+                  <input class="col-sm-9 text-secondary" placeholder="Your email..." name="email" [(ngModel)]="user.contact">
+                </div>
+                <hr>
+                <!-- <div class="row">
+                  <div class="col-sm-3">
+                    <label class="mb-0">Phone</label>
+                  </div>
+                  <input class="col-sm-9 text-secondary" placeholder="Your phone number..." name="phonenumber">
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label class="mb-0">Address</label>
+                  </div>
+                  <input class="col-sm-9 text-secondary" placeholder="Your first name..." name="firstname" [(ngModel)]="user.address">
+                </div> -->
+              </div>
+            </div>
+    </div>
+    
+</div>

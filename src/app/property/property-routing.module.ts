@@ -14,6 +14,7 @@ import { CanDeactivateGuard } from '../can-deactivate.guard';
 import { RoleGuard } from '../auth/role.guard';
 import { CanEditGuard } from '../auth/can-edit.guard';
 import { UserProfileComponent } from '../user/user-profile/user-profile.component';
+import { EditProfileComponent } from '../user/edit-profile/edit-profile.component';
 
 const propertyRoutes: Routes = [
   {
@@ -47,6 +48,11 @@ const propertyRoutes: Routes = [
       {
         path: 'myprofile',
         component: UserProfileComponent,
+        canActivate: [RoleGuard],
+      },
+      {
+        path: 'myprofile/edit',
+        component: EditProfileComponent,
         canActivate: [RoleGuard],
       },
       {
