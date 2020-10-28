@@ -18,10 +18,9 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
   createdProperty: Property = {
     bedrooms: null,
     id: null,
-    listPrice: null,
-    location: null,
+    price: {amount: null, type: 'Negotiable'},
+    address: {city: null, area: null},
     postCreator: null,
-    priceType: 'Negotiable',
     propertyImages: ['assets/placeholders/no_img.png'],
     propertyTitle: null,
     amenities: null,
@@ -38,9 +37,9 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     private route: ActivatedRoute,
     private authService: AuthService,
     private userService: UserService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onFormSubmit() {
 
@@ -57,8 +56,13 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
     // post creator should be set to logged in user through a service
     this.createdProperty.postCreator = this.authService.currentUser.username;
-    if (this.createdProperty.propertyTitle === null && this.createdProperty.bedrooms && this.createdProperty.location) {
-      this.createdProperty.propertyTitle = `${this.createdProperty.bedrooms} House in ${this.createdProperty.location}`;
+    if (
+      this.createdProperty.propertyTitle === null
+      && this.createdProperty.bedrooms
+      && this.createdProperty.address.area
+      && this.createdProperty.address.city
+      ) {
+      this.createdProperty.propertyTitle = `${this.createdProperty.bedrooms} House in ${this.createdProperty.address.area}, ${this.createdProperty.address.city}`;
     }
     this.propertyService.addProperty(this.createdProperty)
       .subscribe((added: Property) => {
@@ -74,10 +78,9 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     const emptyProperty: Property = {
       bedrooms: null,
       id: null,
-      listPrice: null,
-      location: null,
+      price: { amount: null, type: 'Negotiable' },
+      address: { city: null, area: null },
       postCreator: null,
-      priceType: 'Negotiable',
       propertyImages: ['assets/placeholders/no_img.png'],
       propertyTitle: null,
       amenities: null,
@@ -85,12 +88,12 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
       bathrooms: null,
       levels: null,
     };
-    function customComparison(one, two){
-      if (one === '' && two === null || one === null && two === ''){
+    function customComparison(one, two) {
+      if (one === '' && two === null || one === null && two === '') {
         return true;
       }
     }
-    if (this.createdProperty.id !== null){
+    if (this.createdProperty.id !== null) {
       return of(true);
     }
     if (isEqualWith(this.createdProperty, emptyProperty, customComparison)) {
@@ -101,19 +104,19 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     );
   }
 
-  cancelCreation(){
-    this.router.navigate(['..'], {relativeTo: this.route} );
+  cancelCreation() {
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 
-  updateImages(files: FileList){
+  updateImages(files: FileList) {
     this.images = Array.from(files);
   }
 
-  updateAmenities(amenities){
+  updateAmenities(amenities) {
     this.createdProperty.amenities = amenities.split(',').map(item => item.trim()).filter(item => item !== '');
   }
 
-  log(event){
+  log(event) {
     console.log(event);
   }
 }

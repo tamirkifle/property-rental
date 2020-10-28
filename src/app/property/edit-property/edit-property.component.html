@@ -31,12 +31,12 @@
             <label for="listPrice">List Price:</label>
             <span style="position: relative;">
                 <input style="display: block; width: 100%" type="text" placeholder="List Price" id="listPrice" name="listPrice" class="inputfield"
-                [(ngModel)]="editedProperty.listPrice" required>
+                [(ngModel)]="editedProperty.price.amount" required>
                 <span *ngIf="(edPrForm.controls.listPrice?.invalid && edPrForm.controls.listPrice.touched) || (edPrForm.controls.listPrice?.invalid  && invalidTry)" class="required"><em>Required</em></span>
             </span>
-            <select name="priceType" id="priceType" [(ngModel)]="editedProperty.priceType">
-                <option value="Negotiable" [selected]="editedProperty.priceType === 'Negotiable'">Negotiable</option>
-                <option value="Fixed" [selected]="editedProperty.priceType === 'Fixed'">Fixed</option>
+            <select name="priceType" id="priceType" [(ngModel)]="editedProperty.price.type">
+                <option value="Negotiable" [selected]="editedProperty.price.type === 'Negotiable'">Negotiable</option>
+                <option value="Fixed" [selected]="editedProperty.price.type === 'Fixed'">Fixed</option>
             </select>
 
         </div>
@@ -46,13 +46,20 @@
             class="inputfield" [(ngModel)]="editedProperty.propertyTitle">
         </div>
         <div class="one_line">
-            <label for="location">Location:</label>
+            <label for="location">City:</label>
             <span style="position: relative;">
-                <input style="display: block;" type="text" placeholder="Location" id="location" name="location" class="inputfield"
-                [(ngModel)]="editedProperty.location" required>
-                <span *ngIf="(edPrForm.controls.location?.invalid && edPrForm.controls.location.touched) || (edPrForm.controls.location?.invalid  && invalidTry)" class="required"><em>Required</em></span>
+                <input style="display: block;" type="text" placeholder="City" id="city" name="city" class="inputfield"
+                [(ngModel)]="editedProperty.address.city" required>
+                <span *ngIf="(edPrForm.controls.city?.invalid && edPrForm.controls.city.touched) || (edPrForm.controls.city?.invalid  && invalidTry)" class="required"><em>Required</em></span>
             </span>
-            
+        </div>
+        <div class="one_line">
+            <label for="location">Neighborhood:</label>
+            <span style="position: relative;">
+                <input style="display: block;" type="text" placeholder="Location" id="neighborhood" name="neighborhood" class="inputfield"
+                [(ngModel)]="editedProperty.address.area" required>
+                <span *ngIf="(edPrForm.controls.neighborhood?.invalid && edPrForm.controls.neighborhood.touched) || (edPrForm.controls.neighborhood?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
+            </span>
         </div>
         <div class="one_line">
             <label for="areaInM2">Area in m²:</label>

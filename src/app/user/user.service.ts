@@ -46,12 +46,18 @@ export class UserService {
       fd.append('image', avatarFile);
     }
     fd.append('user', user);
+
+    //change to fd
     return this.http.put(this.usersURL, user);
   }
 
-  addUser(user){
+  addUser(user, password){
+    var fd = new FormData();
+    fd.append('password', password);
+    fd.append('user', user);
+
+    //change to fd
     return this.http.post(this.usersURL, user);
   }
 
-  
 }

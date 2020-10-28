@@ -2,9 +2,9 @@ export interface Property {
   id: number;
   propertyTitle: string;
   bedrooms: number;
-  location: string;
-  listPrice: number;
-  priceType: 'Fixed' | 'Negotiable';
+  address: {city: string, subCity?: string, area: string, coordinates?: string};
+  price: {amount: number, type: 'Fixed' | 'Negotiable'};
+  notes?: string;
   postCreator: string;
   propertyImages: string[];
   bathrooms?: number;
@@ -12,6 +12,21 @@ export interface Property {
   levels?: string;
   amenities?: string[];
 }
+
+// export interface Property {
+//   id: number;
+//   propertyTitle: string;
+//   bedrooms: number;
+//   location: string;
+//   listPrice: number;
+//   priceType: 'Fixed' | 'Negotiable';
+//   postCreator: string;
+//   propertyImages: string[];
+//   bathrooms?: number;
+//   areaInM2?: number;
+//   levels?: string;
+//   amenities?: string[];
+// }
 
 export interface PropertyOptions {
   search: string;

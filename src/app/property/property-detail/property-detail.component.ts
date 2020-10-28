@@ -33,17 +33,6 @@ export class PropertyDetailComponent implements OnInit {
     });
   }
 
-  addCommas(num): string {
-    const str = String(num);
-    const length = str.length;
-    return str
-      .split('')
-      .map((item, i) =>
-        (length - 1 - i) % 3 === 0 && i !== length - 1 ? item + ',' : item
-      )
-      .join('');
-  }
-
   goBack(): void {
     this.router.navigate(['../..'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
   }

@@ -12,7 +12,7 @@ import { AuthService } from '../auth.service';
 export class CreateUserComponent implements OnInit {
   createdUser: User = {
     contact: null,
-    password: null,
+    // password: null,
     firstname: null,
     lastname: null,
     username: null,
@@ -26,9 +26,9 @@ export class CreateUserComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onFormSubmit(user: User) {
-    this.userService.addUser(user).subscribe((createdUser: User) => {
-      this.authService.login({user: createdUser.username, password: createdUser.password}).subscribe((result) => {
+  onFormSubmit(password) {
+    this.userService.addUser(this.createdUser, password).subscribe((createdUser: User) => {
+      this.authService.login({user: createdUser.username, password: password}).subscribe((result) => {
         if (result === true){
           this.router.navigate(['/properties']);
         }

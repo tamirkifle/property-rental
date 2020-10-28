@@ -3,7 +3,7 @@
         <img src="../../assets/images/landing.png" alt="Property Rental Logo">
     </div>
     <div class="signup_container">
-        <form class="signup_form" #form="ngForm" (ngSubmit)="onFormSubmit(createdUser)">
+        <form class="signup_form" #form="ngForm" (ngSubmit)="onFormSubmit(form.value.password)">
             <div class="signup_top">
                 <h1 class="signup_title">Sign Up</h1><a routerLink="/properties" class="skip_link">Skip to
                     Properties</a>
@@ -23,7 +23,7 @@
                 [(ngModel)]="createdUser.contact">
             <input type="password" placeholder="Password" name="password" class="inputfield">
             <input type="password" placeholder="Confirm Password" name="confirmPassword" class="inputfield"
-                [(ngModel)]="createdUser.password">
+                ngModel>
             <input type="text" placeholder="First Name" name="firstName" class="inputfield"
                 [(ngModel)]="createdUser.firstname">
             <input type="text" placeholder="Last Name" name="lastName" class="inputfield"
