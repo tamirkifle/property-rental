@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(credentials).subscribe(
       resp => {
       if (resp === true) {
+        this.authService.userChanged.emit();
         this.authService.redirectUrl ? this.router.navigate([this.authService.redirectUrl]) : this.router.navigate(['/properties']);
       }
     });

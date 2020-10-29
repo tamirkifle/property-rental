@@ -7,7 +7,6 @@ import { PropertyListComponent } from './property-list/property-list.component';
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
 import { UserModule } from '../user/user.module';
 import { SharedModule } from '../shared/shared.module';
-import { PropertyCenterComponent } from './property-center/property-center.component';
 import { CreatePropertyComponent } from './create-property/create-property.component';
 import { FormsModule } from '@angular/forms';
 import { FilterByPipe } from '../shared/filter-by.pipe';
@@ -21,7 +20,6 @@ import { EditPropertyComponent } from './edit-property/edit-property.component';
     PropertyItemComponent,
     PropertyListComponent,
     PropertyDetailComponent,
-    PropertyCenterComponent,
     CreatePropertyComponent,
     EditPropertyComponent,
   ],
@@ -30,7 +28,7 @@ import { EditPropertyComponent } from './edit-property/edit-property.component';
     UserModule,
     SharedModule,
     PropertyRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [
     PropertyItemComponent,

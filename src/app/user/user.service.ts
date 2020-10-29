@@ -9,7 +9,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-  profileChanged = new EventEmitter();
   private usersURL = 'api/users';
 
   constructor(private http: HttpClient) { }

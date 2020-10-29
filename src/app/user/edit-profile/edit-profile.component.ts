@@ -38,7 +38,7 @@ export class EditProfileComponent implements OnInit {
   updateProfile(user){
     this.userService.updateUser(user, this.newAvatar).subscribe(res => {
       this.authService.currentUser = this.user;
-      this.userService.profileChanged.emit();
+      this.authService.userChanged.emit();
       this.router.navigate(['..'], {
         relativeTo: this.route,
       });

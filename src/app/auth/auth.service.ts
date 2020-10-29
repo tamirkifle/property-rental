@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  userChanged = new EventEmitter();
+
   currentUser: User = null;
   redirectUrl: string;
   _isAdmin = false;
@@ -48,9 +50,10 @@ export class AuthService {
       })
     );
   }
-  logout(): void {
+  logout(): Observable<true> {
     this.currentUser = null;
     this._isLoggedIn = false;
     this._isAdmin = false;
+    return of(true);
   }
 }

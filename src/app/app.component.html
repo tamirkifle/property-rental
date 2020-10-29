@@ -1,3 +1,42 @@
-<router-outlet></router-outlet>
-
-<!-- <app-user-detail></app-user-detail> -->
+<!-- Header -->
+<header class="main-header py-4">
+    <div class="container">
+      <nav class="navbar nav-pills navbar-expand-md custom-white">
+        <h1 class="navbar-brand text-white">Property Rental</h1>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#main-nav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="main-nav">
+          <ul class="navbar-nav ml-auto flex-md-wrap justify-content-center">
+            <li class="nav-item text-center d-inline-block my-auto"><a class="btn nav-link shadow-none d-inline-block px-3" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="/properties">Feed</a></li>
+            <li class="nav-item text-center d-inline-block my-auto"><a class="btn nav-link shadow-none px-3" routerLinkActive="active" routerLink="/properties/favorites">Favorites</a></li>
+            <li class="nav-item text-center d-inline-block my-auto" *ngIf="authService.isLoggedIn"><a class="btn nav-link shadow-none d-inline-block px-3" routerLinkActive="active" routerLink="/properties/myposts">My
+                Properties</a></li>
+            <li class="nav-item text-center d-inline-block my-auto" *ngIf="authService.isLoggedIn && authService.isAdmin"><a class="btn nav-link shadow-none d-inline-block px-3" routerLinkActive="active"
+                routerLink="/admin">Admin Center</a></li>
+            <li class="nav-item text-center d-inline-block my-auto"><a class="btn nav-link shadow-none d-inline-block px-3" routerLinkActive="active" routerLink="/properties/create">New Property</a></li>
+            <li class="nav-item text-center d-inline-block my-auto" *ngIf="!authService.isLoggedIn"><a class="btn nav-link shadow-none d-inline-block px-3"
+              routerLinkActive="active" (click)="goToLoginPage()">Login</a></li>
+            <li class="nav-item text-center d-inline-block my-auto" *ngIf="authService.isLoggedIn">
+              <a class="btn nav-link shadow-none d-inline-block px-3"
+              routerLinkActive="active" routerLink="myprofile">Welcome {{userFirstName}}</a>
+            </li>
+            <li class="nav-item text-center d-inline-block my-auto" *ngIf="authService.isLoggedIn"><a class="btn nav-link shadow-none px-3" routerLinkActive="active"
+                (click)="logout()">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="search_container mx-auto mt-5 col-10 p-0 col-sm-8 col-md-6">
+      <input type="text" class="search_input" placeholder="Search" [value]="searchTerm" #searchField>
+      <button class="search_btn" (click)="onSearch(searchField.value)"><img src="assets/other_icons/search.png"
+          alt=""></button>
+    </div>
+  </header>
+  <div class="main">
+    <div class="mx-auto main-router-outlet">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  
+  <footer class="login_footer"><span>© Property Rental 2020</span></footer>
