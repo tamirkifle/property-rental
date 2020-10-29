@@ -2,15 +2,17 @@
 :root{
     --primary-blue: #28b6f6;
     --primary-grey: #707070;
+    height: 100%;
 }
 *{
     box-sizing: border-box;
 }
 
+body{
+    height: 100%;
+}
 body, h1, h2, h3, h4, h5, h6, p{
-    margin: 0;
     font-family: 'Segeo UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: #394047;
 }
 
 
