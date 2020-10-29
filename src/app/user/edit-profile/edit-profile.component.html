@@ -41,9 +41,9 @@
                 <hr>
                 <div class="row">
                   <div class="col-sm-3">
-                    <label class="mb-0">Email</label>
+                    <label class="mb-0">{{user.contact[0].type | titlecase }}</label>
                   </div>
-                  <input class="col-sm-9 text-secondary" placeholder="Your email..." name="email" [(ngModel)]="user.contact">
+                  <input class="col-sm-9 text-secondary" placeholder="Your {{user.contact[0].type | titlecase }}..." name="email" [(ngModel)]="user.contact[0].value">
                 </div>
                 <hr>
                 <!-- <div class="row">
