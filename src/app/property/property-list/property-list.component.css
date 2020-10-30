@@ -1,7 +1,8 @@
 .properties_container{
+    margin: 1rem;
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-around;
 
 }
 
@@ -68,3 +69,8 @@
     color: black;
     font-size: 1rem;
 }
+
+
+
+ 
+ 

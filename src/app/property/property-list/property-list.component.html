@@ -10,7 +10,7 @@
         <a (click)="clearFilters()" class="clear_filters_btn">Clear Filters</a>
     </div>
     <div class="properties_container" *ngIf="properties?.length !== 0">
-        <app-property-item *ngFor="let property of properties | filterBy:filterOptions | propertyFilter:searchText" [property]="property"
+        <app-property-item *ngFor="let property of properties" [property]="property"
         (click)="!$event.target.classList.contains('fa-heart') ? showPropertyDetail(property.id) : false" (removedFavorite)="removeFavorite($event)"></app-property-item>
     </div>
     <h5 class="no_properties_msg" *ngIf="!properties || properties.length === 0">

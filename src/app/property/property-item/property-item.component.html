@@ -1,20 +1,59 @@
-<div class="post">
-    <div class="post_img_container">
-        <img src="{{ property.propertyImages[0] }}" class="post_img" alt="Property Photo">
-        <div class="favorite-btn" (click)="toggleFavorite(favBtn)"><i class="fa fa-heart" [class.fa-heart-o]="!favorited" #favBtn></i></div>
-    </div>
-    <div class="post_info">
-        <div class="post_desc">
-            <div class="post_title">
-                {{ property.bedrooms }} Bedroom House In {{property.address.area}}, {{property.address.city}}
+<!-- BIG CARD -->
+
+<div class="card card-brand bg-card m-2 btn p-0 text-left">
+    <img src="{{ property.propertyImages[0] }}" class="card-img-top" alt="Property Photo">
+    <div class="card-body py-2 px-3">
+        <div class="row">
+            <div class="col-8">
+                <p class="card-title font-weight-bold">{{ property.bedrooms }} Bedroom House In {{property.address.area}},
+                    {{property.address.city}}</p>
+                <p class="card-subtitle mb-1 text-muted">2 Hrs Ago</p>
             </div>
-            <div class="post_price">
-                <div class="post_price_amt">{{property.price.amount | number:'1.0-2'}} Birr</div>
-                <div class="post_price_type">{{property.price.type}} Price</div>
+            <div class="col-4 text-right">
+                <p class="mb-1 font-weight-bold">{{property.price.amount | number:'1.0-2'}} Birr</p>
+                <p class="card-subtitle mb-1 text-muted">{{property.price.type}}</p>
             </div>
         </div>
-        <div class="post_creator">
-            <app-user-line [clickable]="false" [user]="postCreatorUser"></app-user-line>
+    </div>
+    <!-- <div class="card-footer px-2 pb-2">
+        <div class="row">
+            <app-user-line class="col-9" [clickable]="false" [user]="postCreatorUser"></app-user-line>
+            <div class="col-3 text-right" (click)="toggleFavorite(favBtn)">
+                <a class=" card-link text-brand-grey btn"><i class="mr-2 fa fa-heart-o"
+                    aria-hidden="true" #favBtn></i></a>
+            </div>
+        </div>
+    </div> -->
+    <div class="card-footer bg-transparent py-3 px-3">
+        <div class="row text-center text-muted font-weight-bold">
+            <div class="col" (click)="toggleFavorite(favBtn)">
+                <a class=" card-link text-brand-grey btn"><i class="mr-2 fa fa-heart-o"
+                    aria-hidden="true" #favBtn></i>Favorite</a>
+            </div>
+            <div class="col">
+                <a class="card-link text-brand-grey btn"><i class="mr-2 fa fa-share" aria-hidden="true"></i>Share</a>
+            </div>
         </div>
     </div>
 </div>
+
+
+<!-- SMALL Card 
+
+<div class="card rounded-sm m-5" style="max-width: 450px;">
+    <div class="row no-gutters">
+      <div class="col-5">
+        <img src="assets/1.jpg" class="card-img rounded-0 h-100" alt="Property Photo">
+    </div>
+      <div class="col-7">
+        <div class="card-body px-3 py-2">
+          <h6 class="card-title">3 Bedroom House In Merkato, Addis Ababa</h6>
+          <h6 class="text-muted">8,000 Birr</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Fixed Price</h6>
+          <a class="card-link text-brand-primary font-weight-bold"><i class="mr-2 fa fa-heart-o" aria-hidden="true"></i>Favorite</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+-->

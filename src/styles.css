@@ -16,6 +16,35 @@ body, h1, h2, h3, h4, h5, h6, p{
 }
 
 
+.bg-semi-transparent{
+    opacity: 85%;
+}
+.bg-card{
+    background-color: #f7f7f7!important;
+}
+.bg-brand-grey{
+    background-color: #707070!important;
+}
+.text-brand-grey{
+    color: #707070!important;
+}
+.bg-brand-primary{
+    background-color: #0085c3!important;
+}
+.text-brand-primary{
+    color: #0085c3!important;
+}
+
+.btn-outline-brand-primary{
+    color: #0085c3!important;
+}
+.btn-outline-brand-primary:hover{
+    background-color: #0085c3!important;
+    color: white!important;
+}
+/* Bootstrap overrides */
+
+
 /* body{
     background-color: #e2e2e2;
 } */
