@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Property } from '../property';
+import { PropertyService } from '../property.service';
 
 @Component({
   selector: 'app-property-list',
@@ -13,13 +14,14 @@ export class PropertyListComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private propertyService: PropertyService
   ) {}
   searchText: string = null;
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       this.searchText = params.get('s');
-      this.filterOptions = params.getAll('by');
+      this.filterOptions = params.getAll('by').filter(query => this.propertyService.allFilterOptions.includes(query));
     });
     this.route.data.subscribe(data => this.properties = data.properties);
 

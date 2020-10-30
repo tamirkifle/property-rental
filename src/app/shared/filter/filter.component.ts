@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FilterByComponent } from '../filter-by/filter-by.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { flatten } from 'lodash-es';
+import { PropertyService } from '../../property/property.service';
 
 @Component({
   selector: 'app-filter',
@@ -8,7 +10,6 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./filter.component.css'],
 })
 export class FilterComponent implements OnInit {
-  pageQueries: string[];
   filterItems = [
     {
       name: 'City',
@@ -32,54 +33,36 @@ export class FilterComponent implements OnInit {
     },
   ];
   activeOptions: string[] = [];
-  activeComp: FilterByComponent = null;
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute, private propertyService: PropertyService) { }
 
   ngOnInit(): void {
+    this.propertyService.allFilterOptions = flatten(this.filterItems.map(filter => filter.options));
     this.route.queryParamMap.subscribe(params => {
       this.activeOptions = [];
-      params.getAll('by').forEach(option => this.activeOptions.push(option));
-    });
-    this.route.queryParamMap.subscribe((params) => {
-        this.pageQueries = params.getAll('by');
+      params.getAll('by').forEach(option => {
+        {
+          if (this.propertyService.allFilterOptions.includes(option)) {
+            this.activeOptions.push(option);
+          }
+          console.log(this.activeOptions);
+        }
+      });
     });
   }
-  // activateOnly(event: any): void {
-  //   const clickedField: HTMLElement = event.currentTarget;
-  //   const activeFields = clickedField.parentElement.parentElement.querySelectorAll(
-  //     '.active'
-  //   );
-  //   if (activeFields.length === 0) {
-  //     clickedField.classList.add('active');
-  //     return;
-  //   } else {
-  //     if (clickedField.classList.contains('active')) {
-  //       clickedField.classList.remove('active');
-  //       return;
-  //     } else {
-  //       activeFields.forEach((field) => field.classList.remove('active'));
-  //       clickedField.classList.add('active');
-  //     }
-  //   }
-  // }
 
-  resetActiveOption(filterByComponent) {
-    if (this.activeComp && this.activeComp !== filterByComponent) {
-      this.activeComp.showOptions = false;
-    }
-    this.activeComp = filterByComponent;
-  }
-  addToActiveOptions(optionObj) {
-    if (optionObj.checked) {
-      this.activeOptions.push(optionObj.option);
+  updateActiveOptions(optionName, checked) {
+    if (checked) {
+      if (!this.activeOptions.includes(optionName)) {
+        this.activeOptions.push(optionName);
+      }
     } else {
       this.activeOptions = this.activeOptions.filter(
-        (option) => !(option === optionObj.option)
+        (option) => !(option === optionName)
       );
     }
   }
+
   filterBySelected() {
-    this.activeComp.showOptions = false;
     this.router.navigate([], {
       queryParams: { by: this.activeOptions },
       relativeTo: this.route,
@@ -87,7 +70,24 @@ export class FilterComponent implements OnInit {
     });
   }
 
-  closeFilterOptions() {
-    this.activeComp.showOptions = false;
+  removeFilter(filter) {
+    this.activeOptions = this.activeOptions.filter(fOpt => filter !== fOpt);
+    this.router.navigate([],
+      {
+        relativeTo: this.route,
+        queryParams: { by: this.activeOptions },
+        queryParamsHandling: 'merge',
+      });
+
+  }
+
+  clearFilters() {
+    this.activeOptions = [];
+    this.router.navigate([],
+      {
+        relativeTo: this.route,
+        queryParams: { by: this.activeOptions },
+        queryParamsHandling: 'merge',
+      });
   }
 }

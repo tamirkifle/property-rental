@@ -1,4 +1,4 @@
-
+/* 
 .filter_cpt{
     border-left: 1px solid #0085c3;
 }
@@ -37,4 +37,7 @@
   .apply_btn{
       position: relative;
       z-index: 1000;
-  }
+  } */
+.filter-item{
+    margin-left: -1px;
+}

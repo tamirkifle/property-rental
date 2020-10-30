@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class PropertyService {
-
+  allFilterOptions = [];
   private propertiesURL = 'api/properties';  // URL to property web api
   private usersURL = 'api/users';  // URL to users web api
 

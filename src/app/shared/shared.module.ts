@@ -6,7 +6,6 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { RatingComponent } from './rating/rating.component';
 import { TopMenuButtonComponent } from './top-menu-button/top-menu-button.component';
 import { FilterComponent } from './filter/filter.component';
-import { FilterByComponent } from './filter-by/filter-by.component';
 import { PropertyFilterPipe } from './property-filter.pipe';
 import { FilterByPipe } from './filter-by.pipe';
 import { NgImageSliderModule } from 'ng-image-slider';
@@ -18,7 +17,6 @@ import { NgImageSliderModule } from 'ng-image-slider';
     // ImageSliderComponent,
     TopMenuButtonComponent,
     FilterComponent,
-    FilterByComponent,
     PropertyFilterPipe,
     FilterByPipe,
   ],

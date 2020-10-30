@@ -16,7 +16,7 @@ import { UserService } from '../user/user.service';
   providedIn: 'root',
 })
 export class PropertyResolver implements Resolve<Property> {
-  constructor(private propertyService: PropertyService, private userService: UserService) {}
+  constructor(private propertyService: PropertyService, private userService: UserService) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -31,7 +31,7 @@ export class PropertyResolver implements Resolve<Property> {
   providedIn: 'root',
 })
 export class PropertyUserResolver implements Resolve<User> {
-  constructor(private propertyService: PropertyService, private userService: UserService) {}
+  constructor(private propertyService: PropertyService, private userService: UserService) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -48,17 +48,17 @@ export class PropertyUserResolver implements Resolve<User> {
   providedIn: 'root',
 })
 export class FavoritesResolver implements Resolve<Property[]> {
-  constructor(private propertyService: PropertyService, private authService: AuthService) {}
+  constructor(private propertyService: PropertyService, private authService: AuthService) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Property[]> {
     const favoriteIds = this.authService.currentUser.favorites;
-    if (favoriteIds && favoriteIds.length !== 0){
+    if (favoriteIds && favoriteIds.length !== 0) {
       return combineLatest(favoriteIds.map(favID => this.propertyService.getProperty(+favID)));
     }
-    else{
+    else {
       return of([]);
     }
   }
@@ -68,18 +68,18 @@ export class FavoritesResolver implements Resolve<Property[]> {
   providedIn: 'root',
 })
 export class UserPostsResolver implements Resolve<Property[]> {
-  constructor(private propertyService: PropertyService, private authService: AuthService) {}
+  constructor(private propertyService: PropertyService, private authService: AuthService) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Property[]> {
     const userPostsIds = this.authService.currentUser.posts;
-    if (userPostsIds && userPostsIds.length !== 0){
+    if (userPostsIds && userPostsIds.length !== 0) {
       combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(+postID))).subscribe(r => console.log(r));
       return combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(+postID)));
     }
-    else{
+    else {
       return of([]);
     }
   }
@@ -89,12 +89,14 @@ export class UserPostsResolver implements Resolve<Property[]> {
   providedIn: 'root',
 })
 export class PropertiesResolver implements Resolve<Property[]> {
-  constructor(private propertyService: PropertyService) {}
+  constructor(private propertyService: PropertyService) { }
 
   resolve(
     route: ActivatedRouteSnapshot
   ): Observable<Property[]> {
-    const options: PropertyOptions = {search: route.queryParams.s, filterBy: route.queryParamMap.getAll('by')};
+    const options: PropertyOptions = {
+      search: route.queryParams.s,
+      filterBy: route.queryParamMap.getAll('by').filter(query => this.propertyService.allFilterOptions.includes(query))};
     console.log('in resolver: ', JSON.stringify(options));
     return this.propertyService.getProperties(options);
   }

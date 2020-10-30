@@ -1,6 +1,27 @@
 <div class="filter_container" #filterContainer>
-    <app-filter-by *ngFor="let filterItem of filterItems" class="filter_cpt" (fieldToggle)="resetActiveOption($event)" (optionSelected)="addToActiveOptions($event)" [filterDetails]="filterItem"></app-filter-by>
-    <button class="apply_btn" (click)=filterBySelected()>Apply</button>
+    <!-- <app-filter-by *ngFor="let filterItem of filterItems" class="filter_cpt" (fieldToggle)="resetActiveOption($event)" (optionSelected)="addToActiveOptions($event)" [filterDetails]="filterItem"></app-filter-by> -->
+    <div class="container d-flex justify-content-center py-2">
+        <div class="text-center mr-3">
+            <span class="filter-item border-left border-right d-inline-block btn p-0 text-brand-primary align-top"
+                *ngFor="let filter of filterItems">
+                <div class="dropdown">
+                    <span class="px-3 dropdown-toggle" data-toggle="dropdown">
+                        <span class="mr-3">{{filter.name}}</span>
+                    </span>
+                    <div class="dropdown-menu bg-semi-transparent">
+                        <form class="pt-3">
+                            <div *ngFor="let option of filter.options" class="form-group pl-4 text-left">
+                                <div class="form-check">
+                                    <input class="form-check-input" (change)="updateActiveOptions(option, $event.target.checked)" [checked]="activeOptions.includes(option)"
+                                        type="checkbox" name="{{option}}" id="{{option}}">
+                                    <label class="form-check-label text-nowrap d-inline-block w-100 pr-4" for="{{option}}">{{option}}</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </span>
+        </div>
+        <button class="btn btn-outline-brand-primary py-0" (click)=filterBySelected()>Apply</button>
+    </div>
 </div>
-<div class="overlay" [class.active]="activeComp && activeComp.showOptions" (click)="closeFilterOptions()"></div>
-
