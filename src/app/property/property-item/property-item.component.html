@@ -27,7 +27,7 @@
     <div class="card-footer bg-transparent py-3 px-3">
         <div class="row text-center text-muted font-weight-bold">
             <div class="col" (click)="toggleFavorite(favBtn)">
-                <a class=" card-link text-brand-grey btn"><i class="mr-2 fa fa-heart-o"
+                <a class="card-link text-brand-grey btn" [class.text-brand-primary]="favorited"><i class="mr-2 fa fa-heart" [class.fa-heart-o]="!favorited"
                     aria-hidden="true" #favBtn></i>Favorite</a>
             </div>
             <div class="col">

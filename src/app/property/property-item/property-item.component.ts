@@ -45,14 +45,14 @@ export class PropertyItemComponent implements OnInit {
       return;
     }
 
-    if (favBtn.classList.contains('fa-heart-o')) {//isn't favorited
+    if (!this.authService.currentUser?.favorites?.includes(this.property.id)) {//isn't favorited
       this.propertyService.likeProperty(this.property.id).subscribe(() => {
-        favBtn.classList.remove('fa-heart-o');
+        this.favorited = true;
       });
     }
     else{ //is favorited
       this.propertyService.unlikeProperty(this.property.id).subscribe(() => {
-        favBtn.classList.add('fa-heart-o');
+        this.favorited = false;
         this.removedFavorite.emit(this.property.id);
       });
     }

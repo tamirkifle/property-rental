@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
-    --primary-blue: #28b6f6;
+    --primary-blue: #0085c3;
     --primary-grey: #707070;
     height: 100%;
 }
@@ -29,17 +29,17 @@ body, h1, h2, h3, h4, h5, h6, p{
     color: #707070!important;
 }
 .bg-brand-primary{
-    background-color: #0085c3!important;
+    background-color: var(--primary-blue)!important;
 }
 .text-brand-primary{
-    color: #0085c3!important;
+    color: var(--primary-blue)!important;
 }
 
 .btn-outline-brand-primary{
-    color: #0085c3!important;
+    color: var(--primary-blue)!important;
 }
 .btn-outline-brand-primary:hover{
-    background-color: #0085c3!important;
+    background-color: var(--primary-blue)!important;
     color: white!important;
 }
 /* Bootstrap overrides */
