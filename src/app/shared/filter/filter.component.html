@@ -1,5 +1,4 @@
-<div class="filter_container" #filterContainer>
-    <!-- <app-filter-by *ngFor="let filterItem of filterItems" class="filter_cpt" (fieldToggle)="resetActiveOption($event)" (optionSelected)="addToActiveOptions($event)" [filterDetails]="filterItem"></app-filter-by> -->
+<div class="filter_container">
     <div class="container d-flex justify-content-center py-2">
         <div class="text-center mr-3">
             <span class="filter-item border-left border-right d-inline-block btn p-0 text-brand-primary align-top"
@@ -9,12 +8,12 @@
                         <span class="mr-3">{{filter.name}}</span>
                     </span>
                     <div class="dropdown-menu bg-semi-transparent">
-                        <form class="pt-3">
-                            <div *ngFor="let option of filter.options" class="form-group pl-4 text-left">
+                        <form class="pt-2">
+                            <div *ngFor="let option of filter.options" class="form-group mb-0 pl-4 text-left">
                                 <div class="form-check">
-                                    <input class="form-check-input" (change)="updateActiveOptions(option, $event.target.checked)" [checked]="activeOptions.includes(option)"
+                                    <input class="form-check-input py-2" (change)="updateActiveOptions(option, $event.target.checked)" [checked]="activeOptions.includes(option)"
                                         type="checkbox" name="{{option}}" id="{{option}}">
-                                    <label class="form-check-label text-nowrap d-inline-block w-100 pr-4" for="{{option}}">{{option}}</label>
+                                    <label class="form-check-label text-nowrap d-inline-block w-100 pr-4 pl-1 py-2" for="{{option}}">{{option}}</label>
                                 </div>
                             </div>
                         </form>
