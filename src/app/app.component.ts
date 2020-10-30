@@ -54,9 +54,8 @@ export class AppComponent {
     });
   }
 
-  goToLoginPage(){
+  saveRedirect(){
     this.authService.redirectUrl = this.router.url.split('?')[0];
-    this.router.navigateByUrl('/login');
   }
 
 }
