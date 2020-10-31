@@ -29,16 +29,16 @@
       </div>
       <div class="card-body">
         <div class="card-title row mb-0">
-          <h1 class="col-9 h5">{{ property.bedrooms }} Bedroom House In {{property.address.area}},
+          <h1 class="col-md-9 h5">{{ property.bedrooms }} Bedroom House In {{property.address.area}},
             {{property.address.city}}</h1>
-          <div class="col-3 text-right">
+          <div class="col-md-3 text-right">
             <p class="mb-0">{{property.price.amount | number:'1.0-2'}} Birr</p>
             <p class="text-muted">{{property.price.type}} Price</p>
           </div>
         </div>
         <div class="row border-top pb-2 pt-3 mb-0">
-          <h2 class="h6 col-3 mr-3">Details</h2>
-          <div class="col-auto d-flex flex-column flex-wrap" style="max-height: 120px;">
+          <h2 class="h6 col-md-3 col-sm-4">Details</h2>
+          <div class="col-sm-auto d-flex flex-column flex-wrap mh-custom">
             <div class="mb-2 mr-4"><img src="../../assets/detail_icons/bedrooms.png" class="mr-3 mb-1"
                 style="width: 20px; height: 20px;" /><span class="">{{property.bedrooms}} Bedroom</span></div>
             <div class="mb-2 mr-4" *ngIf="property.bathrooms"><img src="../../assets/detail_icons/bathrooms.png"
@@ -52,23 +52,23 @@
           </div>
         </div>
         <div class="row border-top pb-2 pt-3 mb-0" *ngIf="property.amenities?.length !== 0">
-          <h2 class="h6 col-3 mr-3">Amenities</h2>
-          <div class="col-auto d-flex flex-column flex-wrap" style="max-height: 120px;">
+          <h2 class="h6 col-md-3 col-sm-4 text-nowrap">Amenities</h2>
+          <div class="col-sm-auto d-flex flex-column flex-wrap" style="max-height: 120px;">
             <div class="mb-2 mr-4" *ngFor="let amenity of property.amenities">{{ amenity }}</div>
           </div>
         </div>
         <div class="row border-top pb-2 pt-3 mb-0" *ngIf="property.address">
-          <h2 class="h6 col-3 mr-3">Location</h2>
-          <div class="col-auto d-flex flex-column flex-wrap" style="max-height: 120px;">
+          <h2 class="h6 col-md-3 col-sm-4">Location</h2>
+          <div class="col-sm-auto d-flex flex-column flex-wrap" style="max-height: 120px;">
             <div class="mr-4">{{ property.address.area ? property.address.area + ', ': ''}} {{ property.address.city }}
             </div>
             <div class="mb-2 mr-4 text-muted" *ngIf="property.address?.subCity">{{ property.address.subCity}}</div>
           </div>
         </div>
         <div class="row border-top pb-2 pt-3" *ngIf="property.address">
-          <h2 class="h6 col-3 mr-3 text-nowrap">Neighborhood</h2>
-          <div class="col-auto d-flex flex-column flex-wrap" style="max-height: 120px;">
-            <div class="mb-2 mr-4">Restaurant</div>
+          <h2 class="h6 col-md-3 col-sm-4 text-nowrap">Neighborhood</h2>
+          <div class="col-sm-auto d-flex flex-column flex-wrap" style="max-height: 120px;">
+            <span class="mb-2 mr-4 align-top">Restaurant</span>
             <div class="mb-2 mr-4">School</div>
             <div class="mb-2 mr-4">Supermarket</div>
           </div>

@@ -24,11 +24,23 @@
     transform: scale(1.5);
 }
 
+/* Overrides */
+
+.h6{
+    line-height: 1.5;
+}
+
 
 button:disabled svg,
 button[disabled] svg{
     fill: #a0a0a0;
 }
-@media(min-width: 900px){
-
+.mh-custom{
+    max-height: 120px;
 }
+@media (max-width: 576px) {
+    .mh-custom{
+        max-height: none;
+    }
+}
+

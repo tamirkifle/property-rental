@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4 text-md-right">
+    <div class="col-md-4 text-right">
         <a class="mb-2 text-brand-grey d-block text-nowrap" href="tel:{{user.contact[0]?.type === 'phone' ? user.contact[0].value : user.contact[1].value}}" *ngIf="user.contact[0]?.type === 'phone' || user.contact[1]?.type === 'phone'">
             <!-- <img src="assets/other_icons/phone.png" class="mr-2" style="width: 20px;" alt="Phone icon"> -->
             <span class="mr-2">☎︎</span>
