@@ -1,10 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8.1" height="13.4" viewBox="0 0 8.1 13.4">
-  <defs>
-    <clipPath id="clip-path">
-      <rect width="8.1" height="13.4" fill="none"/>
-    </clipPath>
-  </defs>
-  <g id="Forward_arrow_small" data-name="Forward arrow small" clip-path="url(#clip-path)">
-    <path id="Path_36" data-name="Path 36" d="M6.7,8.1,0,1.859,2,0,6.7,4.382,11.4,0l2,1.859Z" transform="translate(0 13.4) rotate(-90)"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="8.1" height="13.4" viewBox="0 0 8.1 13.4">
+  <path id="Path_36" data-name="Path 36" d="M6.7,8.1,0,1.859,2,0,6.7,4.382,11.4,0l2,1.859Z" transform="translate(0 13.4) rotate(-90)"/>
 </svg>

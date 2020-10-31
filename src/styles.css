@@ -15,7 +15,9 @@ body, h1, h2, h3, h4, h5, h6, p{
     font-family: 'Segeo UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-
+.pointable{
+    cursor: pointer;
+}
 .bg-semi-transparent{
     opacity: 85%;
 }
@@ -33,14 +35,19 @@ body, h1, h2, h3, h4, h5, h6, p{
 }
 .text-brand-primary{
     color: var(--primary-blue)!important;
+    fill: var(--primary-blue)!important;
 }
 
 .btn-outline-brand-primary{
     color: var(--primary-blue)!important;
+    fill: var(--primary-blue)!important;
+
 }
 .btn-outline-brand-primary:hover{
     background-color: var(--primary-blue)!important;
     color: white!important;
+    fill: white!important;
+
 }
 /* Bootstrap overrides */
 

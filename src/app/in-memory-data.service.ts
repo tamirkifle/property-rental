@@ -13,7 +13,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 11,
         username: 'edelala',
-        contact: [{type: 'email', value: 'edelala@gmail.com'}],
+        contact: [{type: 'email', value: 'edelala@gmail.com'}, {type: 'phone', value: '0921232343'}],
         // password: '1234',
         firstname: 'Ethio',
         lastname: 'Delala',

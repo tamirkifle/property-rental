@@ -1,8 +1,39 @@
+<div class="row">
+    <div class="card bg-transparent border-0 mb-3 pointable col-md-8" *ngIf="user" (click)="showUserDetail()">
+        <div class="row no-gutters">
+            <div class="col-auto">
+                <img src="{{user.avatar}}" class="card-img rounded-circle" style="width: 60px; height: 60px;"
+                    alt="{{user.firstname}} Avatar">
+            </div>
+            <div class="col-8">
+                <div class="card-body p-0 pl-4">
+                    <p class="card-title mb-0 font-weight-bold">{{user.firstname}} {{user.lastname}}</p>
+                    <p class="card-text mb-2 text-brand-grey font-italic font-weight-bold">{{user.posts.length}}
+                        Post{{user.posts.length != 1?'s':''}}</p>
+                    <app-rating [rating]="user.rating"></app-rating>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 text-md-right">
+        <a class="mb-2 text-brand-grey d-block text-nowrap" href="tel:{{user.contact[0]?.type === 'phone' ? user.contact[0].value : user.contact[1].value}}" *ngIf="user.contact[0]?.type === 'phone' || user.contact[1]?.type === 'phone'">
+            <!-- <img src="assets/other_icons/phone.png" class="mr-2" style="width: 20px;" alt="Phone icon"> -->
+            <span class="mr-2">☎︎</span>
+            {{user.contact[0]?.type === 'phone' ? user.contact[0].value : user.contact[1].value}}
+        </a>
+        <a class="mb-2 text-brand-grey d-block text-nowrap" href="mailto:{{user.contact[0]?.type === 'email' ? user.contact[0].value : user.contact[1].value}}" *ngIf="user.contact[0]?.type === 'email' || user.contact[1]?.type === 'email'">
+            <span class="mr-2">✉️</span>
+            {{user.contact[0]?.type === 'email' ? user.contact[0].value : user.contact[1].value}}
+        </a>
+        
+    </div>
+</div>
+<!-- 
 <div class="user_line_container" *ngIf="user" (click)=showUserDetail()>
-    <div class="post_creator_avatar"><img src="{{user.avatar}}" alt="User Avatar"></div>
+    <img src="" alt="">
     <div class="post_creator_details">
         <div class="post_creator_name">{{user.firstname}} {{user.lastname}}</div>
         <div class="post_creator_sub">{{user.posts.length}} Post{{user.posts.length != 1?'s':''}}</div>
     </div>
-</div>
+</div> -->
 <app-user-detail [user]=user [class.hidden]="!active" (closeMe)="closeUserDetail()"></app-user-detail>
