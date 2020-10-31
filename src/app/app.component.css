@@ -105,9 +105,9 @@ nav a {
 } */
 .main-header{
     background-image: linear-gradient(
-      to top,
-     rgba(255, 255, 255,0.55), 
-     rgba(41, 181,246, 0.45)), url(/assets/pexels-andrea-piacquadio-1.png);
+      to bottom,
+     rgba(124, 124, 124, 0.55), 
+     rgba(145, 201, 228, 0.55)), url(/assets/pexels-andrea-piacquadio-1.png);
     background-size: cover;
     /* background-position: left; */
     /* min-height: 300px; */
@@ -174,7 +174,7 @@ nav a {
   }
 
   .main-router-outlet{
-      min-height: calc(100vh - 254px); 
+      min-height: calc(100vh - 222px); 
   }
   @media (max-width: 576px){
     .main-header{

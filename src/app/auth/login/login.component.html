@@ -1,46 +1,52 @@
 <div class="landing_main">
     <div class="landing_container">
-        <img src="../../assets/images/landing.png" alt="Property Rental Logo">
+        <img src="assets/images/landing.png" alt="Property Rental Logo">
     </div>
     <div class="login_container">
-        <form action="" class="signin_form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)" novalidate>
-            <div class="signin_top">
-                <h1 class="signin_title">Sign In</h1><a routerLink="/properties" class="skip_link">Skip to
-                    Properties</a>
+        <form action="" class="signin_form mt-1" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)" novalidate>
+            <div class="text-left">
+                <label for="" class="m-0"><small>Username / Email</small></label>
+                <input type="text" placeholder="Your username or email here...." class="login_input d-block w-100" name="user"
+                    required ngModel>
+                <span
+                    *ngIf="(loginForm.controls.user?.invalid && loginForm.controls.user.touched) || (loginForm.controls.user?.invalid && invalidTry)"
+                    style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
             </div>
-            <div class="account_type">
-                <label for="account_type_input" class="account_type_label">Account Type</label>
-                <div class="at_input_container">
-                    <select name="account_type" id="account_type_input">
-                        <option value="normal">Tenant (Default)</option>
-                        <option value="normal">Broker</option>
-                    </select>
-                </div>
+            <div class="text-left">
+                <label for="" class="m-0"><small>Password</small></label>
+                <input type="password" placeholder="Your password here..." class="login_input d-block w-100" name="password" required
+                    ngModel>
+                <span
+                    *ngIf="(loginForm.controls.password?.invalid && loginForm.controls.password.touched) || (loginForm.controls.password?.invalid  && invalidTry)"
+                    style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
             </div>
-            <div class="">
-                <input type="text" placeholder="User Name/ Email" class="username_input" name="user" required ngModel>
-                <span *ngIf="(loginForm.controls.user?.invalid && loginForm.controls.user.touched) || (loginForm.controls.user?.invalid && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
+            <div class="text-right mb-2">
+                <a href="#" class="text-brand-primary mt-2">Forgot Password?</a>
             </div>
-            <div class="">
-                <input type="password" placeholder="Password" class="password_input" name="password" required ngModel>
-                <span *ngIf="(loginForm.controls.password?.invalid && loginForm.controls.password.touched) || (loginForm.controls.password?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
-            </div>
-            <a href="#" class="forgot_password">Forgot Password?</a>
+
             <span (mouseenter)="invalidTry = true" (mouseleave)="invalidTry = false">
-            <button type="submit" class="login_btn btn"  [disabled]="loginForm.invalid">Log In</button>
-             </span> 
-            <a routerLink="/create" class="create_account">Create Account</a>
-            <p class="options_label">Or Sign Up With</p>
-            <button href="#" class="fb btn">
+                <button type="submit" class="btn bg-brand-primary btn-block py-2 mb-3 text-white"
+                    [disabled]="loginForm.invalid">Sign In</button>
+            </span>
+
+                <div class="row mb-3">
+                    <hr class="col">
+                    <span class="col-auto text-muted">or</span>
+                    <hr class="col">
+            </div>
+            <button href="#" class="fb rounded-sm btn w-75 mx-auto py-2 mb-3">
                 <i class="fa fa-facebook fa-fw"></i> Login with Facebook
             </button>
-              <button href="#" class="twitter btn">
+            <button href="#" class="twitter rounded-sm btn w-75 mx-auto py-2 mb-3">
                 <i class="fa fa-twitter fa-fw"></i> Login with Twitter
-              </button>
-              <button href="#" class="google btn">
+            </button>
+            <button href="#" class="google rounded-sm btn w-75 mx-auto py-2 mb-3">
                 <i class="fa fa-google fa-fw"></i> Login with Google+
-              </button>
+            </button>
+            <a routerLink="/create" class="btn text-brand-primary btn-link mt-2">
+                <i class="fa fa-envelope fa-fw"></i> Sign Up with Email
+            </a>
         </form>
+        
     </div>
 </div>
-<footer class="login_footer"><span>© Property Rental 2020</span></footer>
