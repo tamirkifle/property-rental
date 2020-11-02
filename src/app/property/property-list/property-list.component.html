@@ -1,5 +1,7 @@
 <div class="post-list">
-    <app-filter></app-filter>
+    <div class="sticky-top bg-white">
+        <app-filter></app-filter>
+    </div>
     <h4 class="search_info" *ngIf="searchText">
         Showing search results for {{searchText}}
         <a (click)="clearSearch()" class="clear_search_btn">Clear Search</a>
