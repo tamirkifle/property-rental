@@ -1,10 +1,10 @@
-<h1 class="h3 p-4 m-0 bg-light">Create New Property</h1>
-<form class="p-4 bg-light">
-    <div class="form-section mb-2">
-        <h2 class="text-brand-primary h5 p-3">Location</h2>
+<h1 class="h3 p-4 m-0 bg-light text-center text-md-left">Create New Property</h1>
+<form class="p-4 bg-light row m-0">
+    <div class="form-section mb-2 mw-420px mx-auto col-md-6 col-lg-4">
+        <h2 class="text-brand-primary h5 p-3">Location <small class="text-muted">(1/4)</small></h2>
         <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
-            <label for="city" class="col-4 col-md-auto col-form-label text-brand-grey mr-2">City</label>
-            <div class="col-7 ml-auto mw-100">
+            <label for="city" class="col-3 col-md-auto col-form-label text-brand-grey">City</label>
+            <div class="col-7 ml-auto">
                 <select class="form-control border-0 ml-auto w-auto" id="city">
                     <option value="" selected disabled hidden>Select</option>
                     <option>Addis Ababa</option>
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
             <label for="subCity" class="col-4 col-md-auto col-form-label text-brand-grey">Sub City</label>
-            <div class="col-7 ml-auto mw-100">
+            <div class="col-7 ml-auto">
                 <select class="form-control border-0 ml-auto w-auto" id="subCity">
                     <option value="" selected disabled hidden>Select</option>
                     <option>Addis Ababa</option>
@@ -29,17 +29,19 @@
             </div>
         </div>
         <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
-            <label for="neighborhoodInput" class="col-2 col-md-auto col-form-label text-brand-grey">Neighborhood</label>
+            <label for="neighborhoodInput"
+                class="col-2 col-md-5 col-lg-2 col-form-label text-brand-grey">Neighborhood</label>
             <div class="col-7 ml-auto">
                 <input type="text" class="form-control text-input-brand" id="neighborhoodInput">
             </div>
         </div>
     </div>
-    <div class="form-section mb-2">
-        <h2 class="text-brand-primary h5 p-3">House Info</h2>
+    <div class="form-section mb-2 mw-420px mx-auto col-md-6 col-lg-4">
+        <h2 class="text-brand-primary h5 p-3">House Info <small class="text-muted">(2/4)</small></h2>
         <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
-            <label for="cityInput" class="col-4 col-md-auto col-form-label text-brand-grey">Type of House</label>
-            <div class="col-7 col-md-auto ml-auto mw-100">
+            <label for="cityInput" class="col-4 col-md-5 col-lg-5 col-form-label text-brand-grey">Type of
+                House</label>
+            <div class="col-7 col-md-7 col-lg-7 ml-auto">
                 <select class="form-control border-0 ml-auto w-auto" id="cityInput">
                     <option value="" selected disabled hidden>Select</option>
                     <option>Addis Ababa</option>
@@ -70,17 +72,27 @@
         </div>
         <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
             <label for="amenities" class="col-4 col-md-auto col-form-label text-brand-grey">Amenities</label>
-            <div class="col-5 ml-auto">
-                <input type="text" min="0" class="form-control text-input-brand" id="amenities">
+            <div class="col-8 ml-auto">
+                <div class="input-group">
+                    <input type="text" class="form-control text-input-brand" id="amenities">
+                    <div class="input-group-append m-0">
+                        <button class="input-group-text bg-white border border-secondary rounded-pill" id="price">Add</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="form-section mb-2">
-        <h2 class="text-brand-primary h5 p-3">Price</h2>
+    <div class="form-section mb-2 mw-420px mx-auto col-md-6 col-lg-4">
+        <h2 class="text-brand-primary h5 p-3">Price <small class="text-muted">(3/4)</small></h2>
         <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
             <label for="price" class="col-2 col-md-auto col-form-label text-brand-grey">Price</label>
             <div class="col-7 ml-auto">
-                <input type="number" min="0" class="form-control text-input-brand" id="price">
+                <div class="input-group">
+                    <input type="number" min="0" class="form-control text-input-brand" id="price">
+                    <div class="input-group-append">
+                        <span class="input-group-text bg-white border-0 pb-0 pt-3 text-muted">Birr</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
@@ -93,10 +105,12 @@
                 </select>
             </div>
         </div>
-        <h2 class="text-brand-primary h5 p-3">Photos</h2>
+    </div>
+    <div class="form-section mb-2 mw-420px mx-auto ml-lg-0 col-md-6 col-lg-4 justify-self-start">
+        <h2 class="text-brand-primary h5 p-3">Photos <small class="text-muted">(4/4)</small></h2>
         <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3"
             (click)="photosInput.click()">
-            <label for="photos" class="col-2 col-md-auto col-form-label text-brand-grey">Add Photos</label>
+            <label for="photos" class="col-5 col-md-auto col-form-label text-brand-grey">Add Photos</label>
             <div class="col-7 ml-auto">
                 <input type="file" name="photos" accept=".jpeg, .jpg, .png" multiple="true" id="photos" hidden
                     (change)="updateImages(photosInput.files)" #photosInput>
@@ -108,6 +122,9 @@
 
             </div>
         </div>
+    </div>
+    <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary bg-brand-primary text-white rounded-pill px-5 py-2" style="width: 300px"><span class="h6">Create</span></button>
     </div>
 </form>
 
