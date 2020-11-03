@@ -18,17 +18,18 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
   createdProperty: Property = {
     bedrooms: null,
     id: null,
-    price: {amount: null, type: 'Negotiable'},
-    address: {city: null, area: null},
+    price: { amount: null, type: 'Negotiable' },
+    address: { city: null, area: null },
     postCreator: null,
     propertyImages: ['assets/placeholders/no_img.png'],
     propertyTitle: null,
-    amenities: null,
+    amenities: [],
     areaInM2: null,
     bathrooms: null,
     levels: null,
   };
-  images: File[];
+  imagePreviews: string[] = [];
+  images: File[] = [];
   invalidTry = false;
   constructor(
     private propertyService: PropertyService,
@@ -55,14 +56,16 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
 
     // post creator should be set to logged in user through a service
+    this.images.length !== 0 ? this.createdProperty.propertyImages = this.imagePreviews : '';//just to preview images
+
     this.createdProperty.postCreator = this.authService.currentUser.username;
     if (
       this.createdProperty.propertyTitle === null
       && this.createdProperty.bedrooms
-      && this.createdProperty.address.area
       && this.createdProperty.address.city
-      ) {
-      this.createdProperty.propertyTitle = `${this.createdProperty.bedrooms} House in ${this.createdProperty.address.area}, ${this.createdProperty.address.city}`;
+    ) {
+      console.log(this.createdProperty.address.area);
+      this.createdProperty.propertyTitle = `${this.createdProperty.bedrooms} Bedroom  House in ${this.createdProperty.address.area ? this.createdProperty.address.area + ',' : ''} ${this.createdProperty.address.city}`;
     }
     this.propertyService.addProperty(this.createdProperty)
       .subscribe((added: Property) => {
@@ -109,7 +112,18 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
   }
 
   updateImages(files: FileList) {
-    this.images = Array.from(files);
+    for (const imgFile of Array.from(files))  {
+      if (!this.images.includes(imgFile)){
+        this.images.push(imgFile);
+      }
+      const reader = new FileReader();
+      reader.readAsDataURL(imgFile);
+      reader.addEventListener('load', () => {
+        if (!this.imagePreviews.includes(String(reader.result))) {
+          this.imagePreviews.push(String(reader.result));
+        }
+      });
+    }
   }
 
   updateAmenities(amenities) {
@@ -118,5 +132,28 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
   log(event) {
     console.log(event);
+  }
+
+  addAmenity(amenities) {
+    amenities = amenities.split(',').map(item => item.trim()).filter(item => item !== '');//add multiple separated with commas
+    for (const amenity of amenities){
+      if (amenity && !this.createdProperty.amenities.includes(amenity)) {
+        this.createdProperty.amenities.push(amenity);
+      }
+    }
+  }
+
+  removeAmenity(amenity) {
+    this.createdProperty.amenities = this.createdProperty.amenities.filter(item => item !== amenity);
+  }
+
+  removeImage(image, pInput) {
+    this.images = this.images.filter(img => img !== image);
+    console.log(pInput.files);
+  }
+  makeInvalid(submitBtn){
+    if (submitBtn.disabled){
+      this.invalidTry = true;
+    }
   }
 }

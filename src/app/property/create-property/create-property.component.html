@@ -60,7 +60,7 @@
             </div>
             <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3"
                 #bedroomsGroup>
-                <label for="noOfBedrooms" class="col-4 col-md-auto col-xl-4 col-form-label text-brand-grey">No. of
+                <label for="noOfBedrooms" class="col-4 col-md-auto col-form-label text-brand-grey">No. of
                     Bedrooms</label>
                 <div class="col-5 ml-auto">
                     <input type="number" min="0" class="form-control text-input-brand" id="noOfBedrooms" name="bedrooms"
@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
-                <label for="noOfBathrooms" class="col-4 col-md-auto col-xl-4 col-form-label text-brand-grey">No. of
+                <label for="noOfBathrooms" class="col-7 col-md-auto col-form-label text-brand-grey">No. of
                     Bathrooms</label>
                 <div class="col-5 ml-auto">
                     <input type="number" min="0" class="form-control text-input-brand" id="noOfBathrooms"
@@ -80,16 +80,16 @@
                 </div>
             </div>
             <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
-                <label for="noOfFloors" class="col-4 col-md-auto col-xl-4 col-form-label text-brand-grey">No. of
+                <label for="noOfFloors" class="col-7 col-md-auto col-form-label text-brand-grey">No. of
                     Floors</label>
                 <div class="col-5 ml-auto">
                     <input type="number" min="0" class="form-control text-input-brand" id="noOfFloors">
                 </div>
             </div>
             <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
-                <label for="areaInM2" class="col-5 col-md-auto col-xl-5 col-form-label text-brand-grey">Area in
+                <label for="areaInM2" class="col-6 col-md-auto col-form-label text-brand-grey">Area in
                     m<sup>2</sup></label>
-                <div class="col-7 ml-auto">
+                <div class="col-6 ml-auto">
                     <div class="input-group">
                         <input type="number" min="0" step="100" class="form-control text-input-brand" id="areaInM2"
                             name="areaInM2" ngModel (ngModelChange)="createdProperty.areaInM2 = $event">
@@ -106,19 +106,19 @@
                         class="col-4 col-md-auto col-form-label col-xl-4 text-brand-grey">Amenities</label>
                     <div class="col-8 ml-auto">
                         <div class="input-group">
-                            <input type="text" class="form-control text-input-brand" id="amenities" name="amenities"
-                                ngModel>
+                            <input type="text" class="form-control text-input-brand" id="amenities" name="amenities" #amenityInput>
                             <div class="input-group-append m-0">
-                                <button
-                                    class="input-group-text bg-white border border-secondary rounded-pill">Add</button>
+                                <button type="button" 
+                                    class="input-group-text bg-white border border-secondary rounded-pill" (click)="addAmenity(amenityInput.value);amenityInput.value=''">Add</button>
                             </div>
                         </div>
                         
                     </div>
                 </div>
-                <div class="">
+                <div class="d-flex flex-wrap">
                  <!-- Added Amenities -->
-                <span class="mx-2 p-2 rounded-pill bg-white">Backyard</span>
+                <small *ngFor="let amenity of createdProperty.amenities" class="mb-2 mx-2 py-2 px-2 rounded-pill bg-card text-brand-grey border border-brand-grey amenities-item">{{amenity}}<button (click)="removeAmenity(amenity)" type="button" class="remove_img_btn">×</button>
+                </small>
                 </div>
             </div>
         </div>
@@ -165,12 +165,19 @@
                     </div>
                 </div>
             </div>
+            <div class="images">
+                <div class="property_image_container" *ngFor="let pImage of imagePreviews">
+                    <img src="{{pImage}}" alt="" class="property_image">
+                    <button type="button" class="remove_img_btn" (click)="removeImage(pImage, photosInput)">×</button>
+                </div>
+                <!-- <button type="button" class="add_images_btn" (click)="photosInput.click()">+</button> -->
+            </div>
         </div>
         <div class="col-12 text-center mt-3 row mx-auto">
-            <span (mouseenter)="invalidTry = true" (mouseleave)="invalidTry = false"
+            <span (mouseenter)="makeInvalid(submitBtn)"
                 class="offset-sm-2 col-sm-4 offset-md-3 col-md-3 offset-lg-4 col-lg-2 mb-2">
                 <button type="submit" [disabled]="crPrForm.invalid"
-                    class="btn bg-brand-primary text-white rounded-pill px-5 py-2 w-100 w-sm-auto"><span
+                    class="btn bg-brand-primary text-white rounded-pill px-5 py-2 w-100 w-sm-auto" #submitBtn><span
                         class="h6">Create</span></button>
             </span>
             <span class="col-sm-4 col-md-3 col-lg-2">
@@ -179,9 +186,6 @@
             </span>
         </div>
     </form>
-    <div class="">
-        {{crPrForm.value | json}}
-    </div>
 </div>
 
 <!-- 
