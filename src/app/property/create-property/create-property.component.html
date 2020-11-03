@@ -1,3 +1,118 @@
+<h1 class="h3 mb-4">Create New Property</h1>
+<form class="p-4 bg-light">
+    <div class="form-section mb-2">
+        <h2 class="text-brand-primary h5 p-3">Location</h2>
+        <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
+            <label for="city" class="col-4 col-md-auto col-form-label text-brand-grey mr-2">City</label>
+            <div class="col-7 ml-auto mw-100">
+                <select class="form-control border-0 ml-auto w-auto" id="city">
+                    <option value="" selected disabled hidden>Select</option>
+                    <option>Addis Ababa</option>
+                    <option>Mekele</option>
+                    <option>Arba Minch</option>
+                    <option>Gondar</option>
+                    <option>Bahirdar</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
+            <label for="subCity" class="col-4 col-md-auto col-form-label text-brand-grey">Sub City</label>
+            <div class="col-7 ml-auto mw-100">
+                <select class="form-control border-0 ml-auto w-auto" id="subCity">
+                    <option value="" selected disabled hidden>Select</option>
+                    <option>Addis Ababa</option>
+                    <option>Mekele</option>
+                    <option>Arba Minch</option>
+                    <option>Gondar</option>
+                    <option>Bahirdar</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
+            <label for="neighborhoodInput" class="col-2 col-md-auto col-form-label text-brand-grey">Neighborhood</label>
+            <div class="col-7 ml-auto">
+                <input type="text" class="form-control text-input-brand" id="neighborhoodInput">
+            </div>
+        </div>
+    </div>
+    <div class="form-section mb-2">
+        <h2 class="text-brand-primary h5 p-3">House Info</h2>
+        <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
+            <label for="cityInput" class="col-4 col-md-auto col-form-label text-brand-grey">Type of House</label>
+            <div class="col-7 col-md-auto ml-auto mw-100">
+                <select class="form-control border-0 ml-auto w-auto" id="cityInput">
+                    <option value="" selected disabled hidden>Select</option>
+                    <option>Addis Ababa</option>
+                    <option>Mekele</option>
+                    <option>Arba Minch</option>
+                    <option>Gondar</option>
+                    <option>Bahirdar</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
+            <label for="noOfBedrooms" class="col-4 col-md-auto col-form-label text-brand-grey">No. of Bedrooms</label>
+            <div class="col-5 ml-auto">
+                <input type="number" min="0" class="form-control text-input-brand" id="noOfBedrooms">
+            </div>
+        </div>
+        <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
+            <label for="noOfBathrooms" class="col-4 col-md-auto col-form-label text-brand-grey">No. of Bathrooms</label>
+            <div class="col-5 ml-auto">
+                <input type="number" min="0" class="form-control text-input-brand" id="noOfBathrooms">
+            </div>
+        </div>
+        <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
+            <label for="noOfFloors" class="col-4 col-md-auto col-form-label text-brand-grey">No. of Floors</label>
+            <div class="col-5 ml-auto">
+                <input type="number" min="0" class="form-control text-input-brand" id="noOfFloors">
+            </div>
+        </div>
+        <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
+            <label for="amenities" class="col-4 col-md-auto col-form-label text-brand-grey">Amenities</label>
+            <div class="col-5 ml-auto">
+                <input type="text" min="0" class="form-control text-input-brand" id="amenities">
+            </div>
+        </div>
+    </div>
+    <div class="form-section mb-2">
+        <h2 class="text-brand-primary h5 p-3">Price</h2>
+        <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
+            <label for="price" class="col-2 col-md-auto col-form-label text-brand-grey">Price</label>
+            <div class="col-7 ml-auto">
+                <input type="number" min="0" class="form-control text-input-brand" id="price">
+            </div>
+        </div>
+        <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
+            <label for="priceType" class="col-5 col-md-auto col-form-label text-brand-grey">Price Type</label>
+            <div class="col-7 ml-auto">
+                <select name="priceType" id="priceType" class="form-control border-0 ml-auto w-auto"
+                    (ngModelChange)="createdProperty.price.type = $event">
+                    <option value="Negotiable" selected>Negotiable</option>
+                    <option value="Fixed">Fixed</option>
+                </select>
+            </div>
+        </div>
+        <h2 class="text-brand-primary h5 p-3">Photos</h2>
+        <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3"
+            (click)="photosInput.click()">
+            <label for="photos" class="col-2 col-md-auto col-form-label text-brand-grey">Add Photos</label>
+            <div class="col-7 ml-auto">
+                <input type="file" name="photos" accept=".jpeg, .jpg, .png" multiple="true" id="photos" hidden
+                    (change)="updateImages(photosInput.files)" #photosInput>
+                <div class="text-right">
+                    <!-- <button class="border-0 bg-white"><img src="assets/take_photo.png" alt=""></button> -->
+                    <button class="border-0 bg-white"><img src="assets/attachment.png" alt=""
+                            (click)="photosInput.click()"></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- 
+    
 <div class="signup_container">
     <form class="signup_form" #crPrForm="ngForm" (ngSubmit)="onFormSubmit()">
         <div class="signup_top">
@@ -32,19 +147,10 @@
         </div>
         <input type="text" placeholder="Area in m²" id="areaInM2" name="areaInM2" class="inputfield"
         ngModel (ngModelChange)="createdProperty.areaInM2 = $event">
-        <!-- <div class="amenities_input">
-            <label for="balcony">Balcony</label>
-            <input type="checkbox" name="balcony" id="balcony">
-            <label for="backyard">Backyard</label>
-            <input type="checkbox" name="backyard" id="backyard">
-            <label for="jacuzzi">Jacuzzi</label>
-            <input type="checkbox" name="jacuzzi" id="jacuzzi">
-        </div> -->
 
         <input type="text" placeholder="Other Amenities e.g. Backyard, Jacuzzi, Balcony" id="amenities" name="amenities"
             class="inputfield" ngModel (ngModelChange)="updateAmenities($event)">
-        <!-- <input type="text" placeholder="Details" id="details" name="details" class="inputfield"
-            ngModel (ngModelChange)="createdProperty.details = $event"> -->
+        
         <div class="images_input" style="margin-top: 2rem">
             <label for="images">Upload Images</label>
             <input type="file" name="images" accept=".jpeg, .jpg, .png" multiple="true" id="images" (change)="updateImages(imageInput.files)" #imageInput>
@@ -57,4 +163,4 @@
         </div>
     </form>
 
-</div>
+</div> -->

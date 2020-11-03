@@ -25,10 +25,10 @@ body, h1, h2, h3, h4, h5, h6, p{
     background-color: #f7f7f7!important;
 }
 .bg-brand-grey{
-    background-color: #707070!important;
+    background-color: var(--primary-grey)!important;
 }
 .text-brand-grey{
-    color: #707070!important;
+    color: var(--primary-grey)!important;
 }
 .bg-brand-primary{
     background-color: var(--primary-blue)!important;
@@ -48,6 +48,17 @@ body, h1, h2, h3, h4, h5, h6, p{
     color: white!important;
     fill: white!important;
 
+}
+
+.text-input-brand{
+    border: 0!important;
+    border-radius: 0!important;
+    border-bottom: 1px solid var(--primary-grey)!important;
+}
+.text-input-brand:focus{
+    outline: none!important;
+    box-shadow: unset!important;
+    border-bottom: 1px solid var(--primary-blue)!important;
 }
 /* Bootstrap overrides */
 
