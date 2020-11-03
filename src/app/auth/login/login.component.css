@@ -1,6 +1,7 @@
 .landing_main {
   display: flex;
   flex-flow: row wrap;
+  min-height: var(--router-outlet-height);
 }
 .landing_container {
   background-color: #29b5f6;
@@ -41,7 +42,7 @@
 }
 
 input {
-  padding: calc(1 * 1.48vh) calc(1 * 1.48vh) calc(13 / 16 * 1.48vh);
+  /* padding: calc(1 * 1.48vh) calc(1 * 1.48vh) calc(13 / 16 * 1.48vh); */
   border: none;
   line-height: calc(21 / 16 * 1.48vh);
   outline: none;

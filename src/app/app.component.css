@@ -174,7 +174,7 @@ nav a {
   }
 
   .main-router-outlet{
-      min-height: calc(100vh - 222px); 
+      min-height: var(--router-outlet-height); 
   }
   @media (max-width: 576px){
     .main-header{

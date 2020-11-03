@@ -2,6 +2,7 @@
 :root{
     --primary-blue: #0085c3;
     --primary-grey: #707070;
+    --router-outlet-height: calc(100vh - 222px);
     height: 100%;
 }
 *{
@@ -63,7 +64,7 @@ body, h1, h2, h3, h4, h5, h6, p{
 
 
 .mw-420px{
-    max-width: 420px!important;
+    width: 320px!important;
 }
 /* Bootstrap overrides */
 
