@@ -86,7 +86,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
       postCreator: null,
       propertyImages: ['assets/placeholders/no_img.png'],
       propertyTitle: null,
-      amenities: null,
+      amenities: [],
       areaInM2: null,
       bathrooms: null,
       levels: null,
