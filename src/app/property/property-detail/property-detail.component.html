@@ -28,13 +28,13 @@
         </button>
       </div>
       <div class="card-body">
-        <div class="card-title row mb-0">
-          <h1 class="col-md-9 h5">{{ property.bedrooms }} Bedroom House In {{property.address.area}},
-            {{property.address.city}}</h1>
-          <div class="col-md-3 text-right">
-            <p class="mb-0">{{property.price.amount | number:'1.0-2'}} Birr</p>
+        <div class="card-title pb-2 pt-3 row mb-0">
+          <h2 class=" d-inline h6 col-md-3 col-sm-4 col-auto">Price: </h2>
+          <div class="d-inline col-auto">
+            <p class="mb-1">{{property.price.amount | number:'1.0-2'}} Birr</p>
             <p class="text-muted">{{property.price.type}} Price</p>
           </div>
+          
         </div>
         <div class="row border-top pb-2 pt-3 mb-0">
           <h2 class="h6 col-md-3 col-sm-4">Details</h2>
