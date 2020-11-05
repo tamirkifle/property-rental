@@ -10,29 +10,81 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./create-user.component.css'],
 })
 export class CreateUserComponent implements OnInit {
+  // id?: number;
+  // username: string;
+  // firstname: string;
+  // lastname: string;
+  // displayname?: string;
+  // contact: {type: 'phone'|'email', value: string}[]; //phone or email
+  // avatar?: string;
+  // address?: {city: string, sub_city: string, area: string};
+  // company?: string;
+  // about?: string;
+  // posts: number[];
+  // favorites?: number[]; //property ids
+  // // password: string;
+  // isAdmin?: boolean;
+  // rating?:
+
   createdUser: User = {
-    contact: null,
-    // password: null,
+    username: null,
     firstname: null,
     lastname: null,
-    username: null,
-    avatar: 'assets/placeholders/avatar.png',
-    // id: null, //is id a required field for a user or should it bot because it should be automaitically added at the backend
+    contact: [],
+    avatar: null, // 'assets/placeholders/avatar.png'
+    address: { city: null, sub_city: null, area: null },
+    company: null,
+    about: null,
     posts: [],
+    favorites: [],
   };
 
+  userEmail: string;
+  userPhone: string;
+  userPass: string;
+  customError: string;
+  invalidTry = false;
+
   url = 'api/users';
-  constructor(private userService: UserService, private authService: AuthService, private router: Router) {}
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  onFormSubmit(password) {
-    this.userService.addUser(this.createdUser, password).subscribe((createdUser: User) => {
-      this.authService.login({user: createdUser.username, password: password}).subscribe((result) => {
-        if (result === true){
+  checkContact() {
+    if (!this.userEmail && !this.userPhone) {
+      this.customError = 'Please enter an email or phone';
+      return false;
+    }
+    return true;
+  }
+  onFormSubmit() {
+    if (!this.checkContact()){
+      return;
+    }
+    if (!this.userEmail && !this.userPhone) {
+      this.customError = 'Email or phone required';
+      console.log(this.customError);
+      return;
+    }
+    if (this.userEmail) {
+      this.createdUser.contact.push({ type: 'email', value: this.userEmail });
+    }
+    if (this.userPhone) {
+      this.createdUser.contact.push({ type: 'phone', value: this.userPhone });
+    }
+    if (!this.createdUser.avatar) {
+      this.createdUser.avatar = 'assets/placeholders/avatar.png';
+    }
+    this.userService.addUser(this.createdUser, this.userPass).subscribe((createdUser: User) => {
+      this.authService.login({ user: createdUser.username, password: this.userPass }).subscribe((result) => {
+        if (result === true) {
           this.router.navigate(['/properties']);
         }
       });
-  });
+    });
+  }
+
+  log(x){
+    console.log(x);
   }
 }

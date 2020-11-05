@@ -1,22 +1,147 @@
 <div class="landing_main">
     <div class="landing_container">
-        <img src="../../assets/images/landing.png" alt="Property Rental Logo">
+        <img src="assets/images/landing2.png" alt="Property Rental Logo">
+    </div>
+    <div class="login_container">
+        <form action="" class="signin_form mt-1" #userForm="ngForm" (ngSubmit)="onFormSubmit()" novalidate>
+            <div class="row m-0 flex-column mh-sm-620px">
+                <div class="text-left pb-3 mr-sm-5">
+                    <label for="firstname" class="m-0"><small>First Name</small></label>
+                    <input type="text" placeholder="Your first name" class="login_input d-block w-100" name="firstname"
+                        id="firstname" required ngModel (ngModelChange)="this.createdUser.firstname = $event">
+                    <span
+                        *ngIf="(userForm.controls.firstname?.invalid && userForm.controls.firstname.touched) || (userForm.controls.firstname?.invalid && invalidTry)"
+                        style="float: right;font-size: 14px; line-height:0; color: red;"><em>Required</em></span>
+                </div>
+                <div class="text-left pb-3 mr-sm-5">
+                    <label for="lastname" class="m-0"><small>Last Name</small></label>
+                    <input type="text" placeholder="Your last name" class="login_input d-block w-100" name="lastname"
+                        id="lastname" required ngModel (ngModelChange)="this.createdUser.lastname = $event">
+                    <span
+                        *ngIf="(userForm.controls.lastname?.invalid && userForm.controls.lastname.touched) || (userForm.controls.lastname?.invalid && invalidTry)"
+                        style="float: right;font-size: 14px; line-height:0; color: red;"><em>Required</em></span>
+                </div>
+                <div class="pb-3">
+                    <div class="text-left pb-3 mr-sm-5">
+                        <label for="email" class="m-0"><small>Email</small></label>
+                        <input type="email" placeholder="Your email" class="login_input d-block w-100" name="email"
+                            id="email" ngModel (ngModelChange)="this.userEmail = $event">
+                    </div>
+                    <div class="text-left mr-sm-5">
+                        <label for="phone" class="m-0"><small>Phone Number</small></label>
+                        <input type="tel" placeholder="Your phone number" class="login_input d-block w-100" name="phone"
+                            id="phone" ngModel (ngModelChange)="this.userPhone = $event">
+                    </div>
+                    <span
+                    *ngIf="customError"
+                    style="float: right;font-size: 14px;line-height:0; color: red; margin-left: -10px"><em>{{customError}}</em></span>
+                </div>
+                
+                <div class="pb-3">
+                    <div class="text-left pb-3 mr-sm-5">
+                        <label for="username" class="m-0"><small>Username</small></label>
+                        <input type="text" placeholder="Choose a username" class="login_input d-block w-100" name="username"
+                            id="username" required ngModel (ngModelChange)="this.createdUser.username = $event">
+                        <span
+                            *ngIf="(userForm.controls.username?.invalid && userForm.controls.username.touched) || (userForm.controls.username?.invalid && invalidTry)"
+                            style="float: right;font-size: 14px; line-height:0; color: red;"><em>Required</em></span>
+                    </div>
+                    <div class="text-left pb-3 mr-sm-5">
+                        <label for="password" class="m-0"><small>Password</small></label>
+                        <input type="password" placeholder="Your password here..." class="login_input d-block w-100"
+                            name="password" id="password" required ngModel (ngModelChange)="this.userPass = $event">
+                        <span
+                            *ngIf="(userForm.controls.password?.invalid && userForm.controls.password.touched) || (userForm.controls.password?.invalid  && invalidTry)"
+                            style="float: right;font-size: 14px; line-height:0; color: red;"><em>Required</em></span>
+                    </div>
+                    <div class="text-left mr-sm-5">
+                        <label for="passwordConf" class="m-0"><small>Confirm Password</small></label>
+                        <input type="password" placeholder="Enter password again..." class="login_input d-block w-100"
+                            name="passwordConf" id="passwordConf" required ngModel>
+                        <span
+                            *ngIf="(userForm.controls.passwordConf?.invalid && userForm.controls.passwordConf.touched) || (userForm.controls.passwordConf?.invalid  && invalidTry)"
+                            style="float: right;font-size: 14px; line-height:0; color: red;"><em>Required</em></span>
+                    </div>
+                    <span
+                    *ngIf="userForm.controls.passwordConf?.valid && userForm.controls.passwordConf?.touched && (userForm.controls.passwordConf?.value !== userPass)"
+                    style="float: right;font-size: 14px; line-height:0" class="text-warning"><em>The passwords do not match</em></span>
+                    <span
+                    *ngIf="userForm.controls.passwordConf?.valid && userForm.controls.passwordConf?.touched && (userForm.controls.passwordConf?.value === userPass)"
+                    style="float: right;font-size: 14px; line-height:0;" class="text-success"><em>The passwords match</em></span>
+                </div>
+
+                <div class="text-left pb-3 mr-sm-3">
+                    <label for="company" class="m-0"><small>Organization Name</small></label>
+                    <input type="text" placeholder="Your company name" class="login_input d-block w-100" name="company"
+                        id="company" ngModel (ngModelChange)="this.createdUser.company = $event">
+                </div>
+                <div class="text-left pb-3 mr-sm-3">
+                    <label for="city" class="m-0"><small>City</small></label>
+                    <input type="text" placeholder="Enter your city here" class="login_input d-block w-100" name="city"
+                        id="city" required ngModel (ngModelChange)="this.createdUser.address.city = $event">
+                    <span
+                        *ngIf="(userForm.controls.city?.invalid && userForm.controls.city?.touched) || (userForm.controls.city?.invalid && invalidTry)"
+                        style="float: right;font-size: 14px; line-height:0; color: red;"><em>Required</em></span>
+                </div>
+                <div class="text-left pb-3 mr-sm-3">
+                    <label for="subCity" class="m-0"><small>Sub City</small></label>
+                    <input type="text" placeholder="Enter your sub-city here" class="login_input d-block w-100"
+                        name="subCity" id="subCity" required ngModel (ngModelChange)="this.createdUser.address.sub_city = $event">
+                    <span
+                        *ngIf="(userForm.controls.subCity?.invalid && userForm.controls.subCity?.touched) || (userForm.controls.subCity?.invalid && invalidTry)"
+                        style="float: right;font-size: 14px; line-height:0; color: red;"><em>Required</em></span>
+                </div>
+                <div class="text-left pb-3 mr-sm-3">
+                    <label for="neighborhood" class="m-0"><small>Neighborhood</small></label>
+                    <input type="text" placeholder="Enter your area here" class="login_input d-block w-100"
+                        name="neighborhood" id="neighborhood" required ngModel (ngModelChange)="this.createdUser.address.area = $event">
+                    <span
+                        *ngIf="(userForm.controls.neighborhood?.invalid && userForm.controls.neighborhood?.touched) || (userForm.controls.neighborhood?.invalid && invalidTry)"
+                        style="float: right;font-size: 14px; line-height:0; color: red;"><em>Required</em></span>
+                </div>
+                <div class="text-left pb-3">
+                    <label for="aboutme" class="mb-2"><small>About me</small></label>
+                    <textarea rows="5" class="login_input d-block w-100" placeholder="Write something about you" name="aboutme"
+                        id="aboutme" ngModel (ngModelChange)="this.createdUser.about = $event"></textarea>
+                </div>
+            </div>
+            <span (mouseenter)="invalidTry = true; checkContact();log(userForm.controls.passwordConf)" class="d-block pt-3 mx-auto" style="max-width: 528px">
+                <button type="submit" class="btn bg-brand-primary btn-block py-2 mb-3 text-white"
+                    [disabled]="userForm.invalid || userPass !== userForm.controls.passwordConf?.value" >Create Account</button>
+            </span>
+
+            <div class="row mb-3">
+                <hr class="col">
+                <span class="col-auto text-muted">or</span>
+                <hr class="col">
+            </div>
+            <button href="#" class="fb rounded-sm btn w-75 mx-auto py-2 mb-3">
+                <i class="fa fa-facebook fa-fw"></i> Sign Up with Facebook
+            </button>
+            <button href="#" class="twitter rounded-sm btn w-75 mx-auto py-2 mb-3">
+                <i class="fa fa-twitter fa-fw"></i> Sign Up with Twitter
+            </button>
+            <button href="#" class="google rounded-sm btn w-75 mx-auto py-2 mb-3">
+                <i class="fa fa-google fa-fw"></i> Sign Up with Google+
+            </button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+<!-- <div class="landing_main">
+    <div class="landing_container">
+        <img src="assets/images/landing.png" alt="Property Rental Logo">
     </div>
     <div class="signup_container">
-        <form class="signup_form" #form="ngForm" (ngSubmit)="onFormSubmit(form.value.password)">
+        <form class="signup_form" #form="ngForm" (ngSubmit)="onFormSubmit(form.value.password)" autocomplete="off">
             <div class="signup_top">
                 <h1 class="signup_title">Sign Up</h1><a routerLink="/properties" class="skip_link">Skip to
                     Properties</a>
             </div>
-            <!-- <div class="account_type">
-                <label for="account_type_input" class="account_type_label">Account Type</label>
-                <div class="at_input_container">
-                    <select name="account_type" id="account_type_input">
-                        <option value="normal">Tenant (Default)</option>
-                        <option value="normal">Broker</option>
-                    </select>
-                </div>
-            </div> -->
             <input type="text" placeholder="User Name" name="userName" class="inputfield"
                 [(ngModel)]="createdUser.username">
             <input type="text" placeholder="Phone Number / Email" id="phoneEmail" name="phoneEmail" class="inputfield"
@@ -32,5 +157,4 @@
         </form>
 
     </div>
-</div>
-<footer class="signup_footer"><span>© Property Rental 2020</span></footer>
+</div> -->

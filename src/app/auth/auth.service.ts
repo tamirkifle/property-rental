@@ -30,6 +30,7 @@ export class AuthService {
       map(user => {
         if (user){
           this.currentUser = user;
+          this.userChanged.emit();
           this._isLoggedIn = true;
           return true;
         }

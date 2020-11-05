@@ -1,84 +1,86 @@
 .landing_main {
   display: flex;
-  flex-flow: row wrap;
-  font-size: 0;
+  flex-flow: row nowrap;
+  min-height: var(--router-outlet-height);
 }
+
 .landing_container {
-  background-color: rgba(0, 133, 195, 0.41);
-  flex-basis: 40%;
-  min-height: calc(100vh - 50px);
+  background-color: #29b5f6;
+  flex-basis: 36%;
+  margin-left: 4%;
+  text-align: center;
 }
+
 .landing_container img {
-  width: 133%;
+  width: 70%;
+  margin: 0 auto;
   min-height: 100%;
-  height: calc(100vh - 50px);
-  object-fit: cover;
-  object-position: -130px 4%;
+  /* height: calc(100vh - 50px); */
+  object-fit: contain;
+  object-position: center;
 }
-.signup_container {
+
+.login_container {
   background-color: white;
   flex-basis: 60%;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-.signup_footer {
+
+.login_footer {
   background-color: #6e6e6e;
   flex-basis: 100%;
   padding: 1rem 0;
   font-size: 13px;
   color: white;
   text-align: center;
+  height: 50px;
 }
 
 /* FORM */
-.signup_form {
+
+.signin_form {
   padding: calc(2.5 * 1.48vh) calc(4 * 1.48vh) calc(1.5 * 1.48vh);
-  width: 528px;
+  /* width: 528px; */
   text-align: center;
 }
 
-input,
-button {
-  display: block;
-  width: 100%;
-}
 input {
-  padding: calc(1 * 1.48vh) calc(1 * 1.48vh) calc(13 / 16 * 1.48vh);
+  /* padding: calc(1 * 1.48vh) calc(1 * 1.48vh) calc(13 / 16 * 1.48vh); */
   border: none;
   line-height: calc(21 / 16 * 1.48vh);
   outline: none;
-  min-height: 50px;
-    color: black;
-    font-size: 1rem;
+  min-height: 40px;
+  font-size: 16px;
 }
+
 input:focus {
   border-bottom: 1px solid rgba(0, 133, 195);
 }
+
 input::placeholder {
   font-size: 1rem;
   color: #8b8b8b;
 }
-button {
-  padding: 14px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  margin-bottom: 1rem;
-  cursor: pointer;
+
+button:disabled {
+  cursor: not-allowed;
 }
+
 a {
   display: inline-block;
   text-decoration: none;
   color: inherit;
 }
-a,
-p {
+
+a, p {
   font-size: 1rem;
 }
 
 /* Title */
-.signup_title {
+
+.signin_title {
   font-size: 24px;
   margin-bottom: calc(3 * 1.48vh);
   text-align: left;
@@ -92,18 +94,20 @@ p {
   font-size: 20px;
 }
 
-.account_type_label,
-.at_input_container {
+.account_type_label, .at_input_container {
   display: inline-block;
   width: 50%;
   min-width: 140px;
 }
+
 .account_type_label {
   text-align: left;
 }
+
 .at_input_container {
   text-align: right;
 }
+
 #account_type_input {
   width: 86px;
   border: none;
@@ -113,32 +117,39 @@ p {
   padding: 1px;
 }
 
-.inputfield {
-  margin-bottom: calc(1 * 1.48vh);
+.login_input {
+  margin-bottom: 0.5rem;
   border-bottom: 1px solid rgba(0, 133, 195, 0.3);
 }
 
-.forgot_password {
-  margin-bottom: calc(3.5 * 1.48vh);
+textarea.login_input {
+  margin-bottom: calc(1* 1.48vh);
+  border: 1px solid rgba(0, 133, 195, 0.3);
 }
 
-.signup_btn {
-  margin-top: 3rem;
-  background-color: #0085c3;
+textarea.login_input:focus {
+  outline: none;
+  border: 1px solid rgba(0, 133, 195);
+}
+
+.forgot_password {
+  margin-bottom: calc(2.5 * 1.48vh);
 }
 
 .create_account {
   text-decoration: underline;
   margin-bottom: calc(0.875 * 1.48vh);
 }
+
 .options_label {
-  margin-bottom: calc(4 * 1.48vh);
+  margin-bottom: calc(2 * 1.48vh);
 }
 
-.signup_title {
+.signin_title {
   display: inline-block;
   width: 50%;
 }
+
 .skip_link {
   /* float: right; */
   color: green;
@@ -150,16 +161,33 @@ p {
   width: 50%;
   font-size: 18px;
 }
-@media (max-width: 880px) {
+
+.fb {
+  background-color: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background-color: #55ACEE;
+  color: white;
+}
+
+.google {
+  background-color: #dd4b39;
+  color: white;
+}
+@media(min-width: 576px) {
+  .mh-sm-620px{
+    max-height: 620px;
+  }
+}
+
+@media(max-width: 920px) {
   .landing_main {
     display: block;
   }
-
   .landing_container {
-    display: block;
-    min-height: auto;
-    height: 150px;
-    overflow: hidden;
+    display: none;
   }
   .landing_container img {
     /* height: 100px; */
@@ -167,8 +195,7 @@ p {
     object-fit: contain;
     object-position: 80px -160px;
   }
-  .account_type_label,
-  .at_input_container {
+  .account_type_label, .at_input_container {
     text-align: center;
   }
 }
