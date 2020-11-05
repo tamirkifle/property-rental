@@ -8,7 +8,7 @@
 }
 
 .card-brand {
-  width: 450px;
+  max-width: 450px;
 }
 
 
