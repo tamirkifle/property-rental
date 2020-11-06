@@ -30,7 +30,7 @@ export class CreateUserComponent implements OnInit {
     username: null,
     firstname: null,
     lastname: null,
-    contact: [],
+    contact: {phone: null, email: null},
     avatar: null, // 'assets/placeholders/avatar.png'
     address: { city: null, sub_city: null, area: null },
     company: null,
@@ -52,7 +52,7 @@ export class CreateUserComponent implements OnInit {
   ngOnInit(): void { }
 
   checkContact() {
-    if (!this.userEmail && !this.userPhone) {
+    if (!this.createdUser.contact.phone && !this.createdUser.contact.email) {
       this.customError = 'Please enter an email or phone';
       return false;
     }
@@ -61,17 +61,6 @@ export class CreateUserComponent implements OnInit {
   onFormSubmit() {
     if (!this.checkContact()){
       return;
-    }
-    if (!this.userEmail && !this.userPhone) {
-      this.customError = 'Email or phone required';
-      console.log(this.customError);
-      return;
-    }
-    if (this.userEmail) {
-      this.createdUser.contact.push({ type: 'email', value: this.userEmail });
-    }
-    if (this.userPhone) {
-      this.createdUser.contact.push({ type: 'phone', value: this.userPhone });
     }
     if (!this.createdUser.avatar) {
       this.createdUser.avatar = 'assets/placeholders/avatar.png';

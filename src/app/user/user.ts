@@ -4,7 +4,7 @@ export interface User {
   firstname: string;
   lastname: string;
   displayname?: string;
-  contact: {type: 'phone'|'email', value: string}[]; //phone or email
+  contact: {phone: string, email: string}; //phone or email
   avatar?: string;
   address?: {city: string, sub_city: string, area: string};
   company?: string;

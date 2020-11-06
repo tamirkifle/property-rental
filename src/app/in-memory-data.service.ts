@@ -13,7 +13,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 11,
         username: 'edelala',
-        contact: [{type: 'email', value: 'edelala@gmail.com'}, {type: 'phone', value: '0921232343'}],
+        contact: {email: 'edelala@gmail.com', phone: '0921232343'},
         // password: '1234',
         firstname: 'Ethio',
         lastname: 'Delala',
@@ -28,7 +28,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 12,
         username: 'mahletg',
-        contact: [{type: 'email', value: 'mahletg@gmail.com'}],
+        contact: {email: 'mahletg@gmail.com', phone: null},
         // password: '1234',
         firstname: 'Mahlet',
         lastname: 'Getachew',
@@ -39,7 +39,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 13,
         username: 'mesimesi',
-        contact: [{type: 'email', value: 'mesimesi@gmail.com'}],
+        contact: {email: 'mesimesi@gmail.com', phone: null},
         // password: '1234',
         firstname: 'Meseret',
         lastname: 'Leykun',
@@ -50,7 +50,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 14,
         username: 'allhouseset',
-        contact: [{type: 'email', value: 'allhouseset@gmail.com'}],
+        contact: {email: 'allhouseset@gmail.com', phone: null},
         // password: '1234',
         firstname: 'AllHouse',
         lastname: 'Ethiopia',

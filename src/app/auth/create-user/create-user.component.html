@@ -25,12 +25,12 @@
                     <div class="text-left pb-3 mr-sm-5">
                         <label for="email" class="m-0"><small>Email</small></label>
                         <input type="email" placeholder="Your email" class="login_input d-block w-100" name="email"
-                            id="email" ngModel (ngModelChange)="this.userEmail = $event">
+                            id="email" ngModel (ngModelChange)="createdUser.contact.email = $event">
                     </div>
                     <div class="text-left mr-sm-5">
                         <label for="phone" class="m-0"><small>Phone Number</small></label>
                         <input type="tel" placeholder="Your phone number" class="login_input d-block w-100" name="phone"
-                            id="phone" ngModel (ngModelChange)="this.userPhone = $event">
+                            id="phone" ngModel (ngModelChange)="createdUser.contact.phone = $event">
                     </div>
                     <span
                     *ngIf="customError"
