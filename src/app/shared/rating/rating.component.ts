@@ -13,6 +13,7 @@ import {
 })
 export class RatingComponent implements OnInit, AfterViewInit {
   @Input() rating = 0;
+  @Input() align: string = null;
   @Input() type: 'input' | 'display' = 'display';
   @ViewChild('ratingContainer') ratingContainer;
   private stars: HTMLElement[];
@@ -22,14 +23,20 @@ export class RatingComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {}
   ngAfterViewInit(): void {
-    this.stars = Array.from(
-      this.ratingContainer.nativeElement.querySelectorAll('.star')
-    );
-    if (this.type === 'input') {
-      this.generateInputRating();
-    } else {
-      this.generateRating();
+    if (this.rating && this.align === 'left'){
+      this.ratingContainer.nativeElement.style.transformOrigin = 'left';
     }
+    if (this.rating){
+      this.stars = Array.from(
+        this.ratingContainer.nativeElement.querySelectorAll('.star')
+      );
+      if (this.type === 'input') {
+        this.generateInputRating();
+      } else {
+        this.generateRating();
+      }
+    }
+
   }
   generateRating(): void {
     this.ratingContainer.nativeElement.title = this.rating;

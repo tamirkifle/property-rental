@@ -37,6 +37,7 @@ export class CreateUserComponent implements OnInit {
     about: null,
     posts: [],
     favorites: [],
+    rating: null,
   };
 
   userEmail: string;

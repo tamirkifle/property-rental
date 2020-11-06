@@ -10,7 +10,7 @@
                     <p class="card-title mb-0 font-weight-bold">{{user.firstname}} {{user.lastname}}</p>
                     <p class="card-text mb-2 text-brand-grey font-italic font-weight-bold">{{user.posts.length}}
                         Post{{user.posts.length != 1?'s':''}}</p>
-                    <app-rating [rating]="user.rating"></app-rating>
+                    <app-rating [align]="'left'" [rating]="user.rating"></app-rating>
                 </div>
             </div>
         </div>

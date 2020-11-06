@@ -3,13 +3,13 @@
   <!-- <button class="btn offset-md-8" routerLink="edit">Edit Profile</button> -->
   <div class="row m-0">
     <div class="text-center mb-4 mx-auto col-12 col-md-4">
-      <img src="{{user.avatar}}" class="rounded-circle" alt="Avatar" style="width: 112px; height: 112px;">
-      <div class="d-flex mx-auto mb-3" style="max-width: 180px;">
+      <img src="{{user.avatar}}" class="rounded-circle mb-3" alt="Avatar" style="width: 112px; height: 112px;">
+      <div class="d-flex mx-auto mb-3 justify-content-between" style="max-width: 180px;">
         <button class="btn btn-link text-brand-primary font-weight-bold">Change</button>
         <button class="btn btn-link text-danger font-weight-bold">Remove</button>
       </div>
       <div class="mx-auto">
-        <app-rating class="ml-4" [rating]="user.rating"></app-rating>
+        <app-rating [rating]="user.rating"></app-rating>
       </div>
     </div>
 
