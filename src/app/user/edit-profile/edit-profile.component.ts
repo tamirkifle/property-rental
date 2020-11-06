@@ -12,6 +12,7 @@ import { UserService } from '../user.service';
 export class EditProfileComponent implements OnInit {
   user: User;
   newAvatar: File = null;
+
   constructor(
     private authService: AuthService,
     private userService: UserService,
@@ -21,6 +22,7 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.currentUser;
+
   }
 
   avatarChanged(imageFile){
@@ -32,11 +34,11 @@ export class EditProfileComponent implements OnInit {
 
   removeAvatar(){
     this.newAvatar = null;
-    this.user.avatar = 'assets/placeholders/avatar.png';
+    this.user.avatar = null;
   }
 
-  updateProfile(user){
-    this.userService.updateUser(user, this.newAvatar).subscribe(res => {
+  onSave(){
+    this.userService.updateUser(this.user, this.newAvatar).subscribe(res => {
       this.authService.currentUser = this.user;
       this.authService.userChanged.emit();
       this.router.navigate(['..'], {

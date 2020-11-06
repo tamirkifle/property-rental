@@ -1,4 +1,218 @@
-<div class="container pt-4 pl-4">
+<div class="container py-5" *ngIf="user">
+  <!-- <h1 class="h4 mt-4 mb-5 text-center">Your Profile</h1> -->
+  <div class="row m-0">
+    <input type="file" name="avatar_upload" id="avatar_upload" accept=".jpeg, .jpg, .png" style="display: none" (change)="avatarChanged(avatar_upload.files[0])" #avatar_upload>
+    <div *ngIf="user.avatar" class="text-center mb-4 mx-auto col-12 col-md-4">
+      <img src="{{user.avatar}}" class="rounded-circle mb-3" alt="Avatar" style="width: 112px; height: 112px;">
+      <div *ngIf="user.avatar" class="d-flex mx-auto mb-3 justify-content-between" style="max-width: 180px;">
+        <button class="btn btn-link text-brand-primary font-weight-bold" (click)="avatar_upload.click()">Change</button>
+        <button class="btn btn-link text-danger font-weight-bold" (click)="removeAvatar()">Remove</button>
+      </div>
+      <div class="mx-auto">
+        <app-rating [rating]="user.rating"></app-rating>
+      </div>
+    </div>
+    <div *ngIf="!user.avatar" class="text-center mb-4 mx-auto col-12 col-md-4">
+      <img src="assets/placeholders/avatar.png" class="rounded-circle mb-3" alt="Avatar"
+        style="width: 112px; height: 112px;">
+      <div class="d-flex mx-auto mb-3 justify-content-center" style="max-width: 180px;">
+        <button class="btn btn-link text-brand-primary font-weight-bold" (click)="avatar_upload.click()">Add Avatar</button>
+      </div>
+      <div class="mx-auto">
+        <app-rating [rating]="user.rating"></app-rating>
+      </div>
+    </div>
+
+
+    <div class="mx-auto col-md-8">
+      <form class="card mb-4 border-0" #editProfileForm="ngForm" (ngSubmit)="onSave()">
+        <div class="text-right">
+          <button type="submit" class="btn btn-outline-brand-primary mr-3"
+            [disabled]="editProfileForm.invalid || (!user.contact.phone && !user.contact.email)"><i
+              class="fa fa-save mr-2" aria-hidden="true"></i>Save
+            Changes</button>
+          <button type="button" class="btn btn-outline-brand-primary" routerLink="/myprofile">Cancel</button>
+        </div>
+        <div class="card-body">
+          <div class="">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-1">Username</h6>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" placeholder="Your username" class="text-secondary custom-input d-inline-block w-100"
+                  name="username" id="username" required [(ngModel)]="user.username">
+                <span *ngIf="editProfileForm.controls.username?.invalid"
+                  style="display: block; float: right;font-size: 14px; line-height:1; color: red;"><em>Required</em></span>
+              </div>
+
+            </div>
+          </div>
+          <div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-1">Display Name</h6>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" placeholder="Your display name"
+                  class="text-secondary custom-input d-inline-block w-100" name="displayname" id="displayname"
+                  [(ngModel)]="user.displayname">
+              </div>
+            </div>
+          </div>
+          <div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-1">First Name</h6>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" placeholder="Your first name"
+                  class="text-secondary custom-input d-inline-block w-100" name="firstname" id="firstname" required
+                  [(ngModel)]="user.firstname">
+                <span *ngIf="editProfileForm.controls.firstname?.invalid"
+                  style="display: block; float: right;font-size: 14px; line-height:1; color: red;"><em>Required</em></span>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-1">Last Name</h6>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" placeholder="Your last name" class="text-secondary custom-input d-inline-block w-100"
+                  name="lastname" id="lastname" required [(ngModel)]="user.lastname">
+                <span *ngIf="editProfileForm.controls.lastname?.invalid"
+                  style="display: block; float: right;font-size: 14px; line-height:1; color: red;"><em>Required</em></span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-1">Email</h6>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" placeholder="Your email" class="text-secondary custom-input d-inline-block w-100"
+                  name="email" id="email" [(ngModel)]="user.contact.email">
+                <span *ngIf="!editProfileForm.controls.email?.value && !editProfileForm.controls.phone?.value"
+                  style="display: block; float: right;font-size: 14px; line-height:1; color: red;"><em>Email or Phone
+                    required</em></span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-1">Phone</h6>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" placeholder="Your phone" class="text-secondary custom-input d-inline-block w-100"
+                  name="phone" id="phone" [(ngModel)]="user.contact.phone">
+                <span *ngIf="!editProfileForm.controls.email?.value && !editProfileForm.controls.phone?.value"
+                  style="display: block; float: right;font-size: 14px; line-height:1; color: red;"><em>Email or Phone
+                    required</em></span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-1">City</h6>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" placeholder="Your city" class="text-secondary custom-input d-inline-block w-100"
+                  name="city" id="city" required [(ngModel)]="user.address.city">
+                <span *ngIf="editProfileForm.controls.city?.invalid"
+                  style="display: block; float: right;font-size: 14px; line-height:1; color: red;"><em>Required</em></span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-1">Sub-City</h6>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" placeholder="Your sub-city" class="text-secondary custom-input d-inline-block w-100"
+                  name="sub_city" id="sub_city" required [(ngModel)]="user.address.sub_city">
+                <span *ngIf="editProfileForm.controls.sub_city?.invalid"
+                  style="display: block; float: right;font-size: 14px; line-height:1; color: red;"><em>Required</em></span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-1">Area</h6>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" placeholder="Your neighborhood"
+                  class="text-secondary custom-input d-inline-block w-100" name="neighborhood" id="neighborhood"
+                  required [(ngModel)]="user.address.area">
+                <span *ngIf="editProfileForm.controls.neighborhood?.invalid"
+                  style="display: block; float: right;font-size: 14px; line-height:1; color: red;"><em>Required</em></span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-1 text-nowrap">Organization</h6>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" placeholder="Your company" class="text-secondary custom-input d-inline-block w-100"
+                  name="company" id="company" [(ngModel)]="user.company">
+              </div>
+            </div>
+          </div>
+          <div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-1">About Me</h6>
+              </div>
+              <div class="col-sm-9">
+                <textarea rows="5" type="text" placeholder="Something about you..."
+                  class="text-secondary w-100 custom-input d-inline-block" name="about" id="about"
+                  [(ngModel)]="user.about"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+  <!-- id?: number;
+  username: string;
+  firstname: string;
+  lastname: string;
+  displayname?: string;
+  contact: {type: 'phone'|'email', value: string}[]; //phone or email
+  avatar?: string;
+  address?: {city: string, sub_city: string, area: string};
+  company?: string;
+  about?: string;
+  posts: number[];
+  favorites?: number[]; //property ids
+  // password: string;
+  isAdmin?: boolean;
+  rating?: -->
+
+
+  <!-- <div class="container pt-4 pl-4">
     <div class="row m-0">
         <h2 class="mb-4">My Profile</h2>
         <button class="btn offset-md-8" (click)="updateProfile(user)">Save Changes</button>
@@ -46,21 +260,8 @@
                   <input class="col-sm-9 text-secondary" placeholder="Your {{user.contact[0].type | titlecase }}..." name="email" [(ngModel)]="user.contact[0].value">
                 </div>
                 <hr>
-                <!-- <div class="row">
-                  <div class="col-sm-3">
-                    <label class="mb-0">Phone</label>
-                  </div>
-                  <input class="col-sm-9 text-secondary" placeholder="Your phone number..." name="phonenumber">
-                </div>
-                <hr>
-                <div class="row">
-                  <div class="col-sm-3">
-                    <label class="mb-0">Address</label>
-                  </div>
-                  <input class="col-sm-9 text-secondary" placeholder="Your first name..." name="firstname" [(ngModel)]="user.address">
-                </div> -->
               </div>
             </div>
     </div>
     
-</div>
+</div> -->

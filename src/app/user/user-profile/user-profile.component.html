@@ -1,19 +1,18 @@
-<div class="container py-5">
+<div class="container py-5" *ngIf="user">
   <!-- <h1 class="h4 mt-4 mb-5 text-center">Your Profile</h1> -->
-  <!-- <button class="btn offset-md-8" routerLink="edit">Edit Profile</button> -->
   <div class="row m-0">
     <div class="text-center mb-4 mx-auto col-12 col-md-4">
-      <img src="{{user.avatar}}" class="rounded-circle mb-3" alt="Avatar" style="width: 112px; height: 112px;">
-      <div class="d-flex mx-auto mb-3 justify-content-between" style="max-width: 180px;">
-        <button class="btn btn-link text-brand-primary font-weight-bold">Change</button>
-        <button class="btn btn-link text-danger font-weight-bold">Remove</button>
-      </div>
+      <img src="{{user.avatar}}" class="rounded-circle mb-4" alt="Avatar" style="width: 112px; height: 112px;">
       <div class="mx-auto">
         <app-rating [rating]="user.rating"></app-rating>
       </div>
     </div>
 
     <div class="mx-auto col-md-8">
+      <div class="text-right">
+        <button class="btn btn-outline-brand-primary offset-md-8" routerLink="edit"><i class="fa fa-pencil mr-2" aria-hidden="true"></i>Edit
+          Profile</button>
+      </div>
       <div class="card mb-4 border-0">
         <div class="card-body">
           <div class="">
@@ -59,25 +58,25 @@
               </div>
             </div>
           </div>
-          <div *ngIf="user.contact[0]">
+          <div *ngIf="user.contact.email">
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <h6 class="mb-1">{{user.contact[0].type | titlecase }}</h6>
+                <h6 class="mb-1">Email</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{user.contact[0].value}}
+                {{user.contact.email}}
               </div>
             </div>
           </div>
-          <div *ngIf="user.contact[1]">
+          <div *ngIf="user.contact.phone">
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <h6 class="mb-1">{{user.contact[1].type | titlecase }}</h6>
+                <h6 class="mb-1">Phone</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{user.contact[1].value}}
+                {{user.contact.phone}}
               </div>
             </div>
           </div>
@@ -117,7 +116,7 @@
           <div *ngIf="user.company">
             <hr>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-sm-3 text-nowrap">
                 <h6 class="mb-1">Organization</h6>
               </div>
               <div class="col-sm-9 text-secondary">
