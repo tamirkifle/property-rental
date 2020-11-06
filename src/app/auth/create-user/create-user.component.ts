@@ -62,9 +62,6 @@ export class CreateUserComponent implements OnInit {
     if (!this.checkContact()){
       return;
     }
-    if (!this.createdUser.avatar) {
-      this.createdUser.avatar = 'assets/placeholders/avatar.png';
-    }
     this.userService.addUser(this.createdUser, this.userPass).subscribe((createdUser: User) => {
       this.authService.login({ user: createdUser.username, password: this.userPass }).subscribe((result) => {
         if (result === true) {
