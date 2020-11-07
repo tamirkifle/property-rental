@@ -9,7 +9,7 @@ export interface Property {
   propertyImages: string[];
   bathrooms?: number;
   areaInM2?: number;
-  levels?: string;
+  levels?: number;
   amenities?: string[];
 }
 

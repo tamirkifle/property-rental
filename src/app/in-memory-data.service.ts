@@ -71,7 +71,7 @@ export class InMemoryDataService implements InMemoryDbService {
         propertyImages: ['assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg', 'assets/4.jpg'],
         amenities: ['Fixed Kitchen Cabinet', 'Balcony'],
         bathrooms: 2,
-        levels: 'Ground',
+        levels: 1,
         areaInM2: 400,
       },
       {
