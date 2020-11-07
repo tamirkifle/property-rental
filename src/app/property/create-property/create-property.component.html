@@ -117,7 +117,7 @@
                 </div>
                 <div class="d-flex flex-wrap">
                  <!-- Added Amenities -->
-                <small *ngFor="let amenity of createdProperty.amenities" class="mb-2 mx-2 py-2 px-2 rounded-pill bg-card text-brand-grey border border-brand-grey amenities-item">{{amenity}}<button (click)="removeAmenity(amenity)" type="button" class="remove_img_btn">×</button>
+                 <small *ngFor="let amenity of createdProperty.amenities" class="mb-2 mx-2 py-2 px-2 rounded-pill bg-card text-brand-grey border border-brand-grey amenities-item">{{amenity}}<button (click)="removeAmenity(amenity)" type="button" class="remove_img_btn">×</button>
                 </small>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                 <label for="photos" class="col-5 col-md-auto col-xl-5 col-form-label text-brand-grey">Add Photos</label>
                 <div class="col-7 ml-auto">
                     <input type="file" name="photos" accept=".jpeg, .jpg, .png" multiple="true" id="photos" hidden
-                        (change)="updateImages(photosInput.files)" #photosInput>
+                        (change)="addToImages(photosInput.files)" #photosInput>
                     <div class="text-right">
                         <!-- <button class="border-0 bg-white"><img src="assets/take_photo.png" alt=""></button> -->
                         <button type="button" class="border-0 bg-white"><img src="assets/attachment.png" alt=""
@@ -166,9 +166,9 @@
                 </div>
             </div>
             <div class="images">
-                <div class="property_image_container" *ngFor="let pImage of imagePreviews">
-                    <img src="{{pImage}}" alt="" class="property_image">
-                    <button type="button" class="remove_img_btn" (click)="removeImage(pImage, photosInput)">×</button>
+                <div class="property_image_container remove-container" *ngFor="let pImage of imagePreviews; let i = index">
+                    <img src="{{pImage}}" alt="" class="property_image" title="{{images[i].name}}">
+                    <button type="button" class="remove_img_btn" (click)="removeImage(pImage)">×</button>
                 </div>
                 <!-- <button type="button" class="add_images_btn" (click)="photosInput.click()">+</button> -->
             </div>

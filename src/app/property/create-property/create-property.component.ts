@@ -111,17 +111,25 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     this.router.navigate(['..'], { relativeTo: this.route });
   }
 
-  updateImages(files: FileList) {
+  addToImages(files: FileList) {
+    const newFiles = [];
+    console.log('filelist: ', files);
     for (const imgFile of Array.from(files))  {
       if (!this.images.includes(imgFile)){
+        newFiles.push(imgFile);
         this.images.push(imgFile);
       }
+    }
+    console.log('this.images', this.images);
+    this.addToPreviews(newFiles);
+  }
+
+  addToPreviews(files: File[]){
+    for (const imgFile of files){
       const reader = new FileReader();
       reader.readAsDataURL(imgFile);
       reader.addEventListener('load', () => {
-        if (!this.imagePreviews.includes(String(reader.result))) {
-          this.imagePreviews.push(String(reader.result));
-        }
+      this.imagePreviews.push(String(reader.result));
       });
     }
   }
@@ -147,9 +155,17 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     this.createdProperty.amenities = this.createdProperty.amenities.filter(item => item !== amenity);
   }
 
-  removeImage(image, pInput) {
-    this.images = this.images.filter(img => img !== image);
-    console.log(pInput.files);
+  removeImage(preview) {
+    console.log('preview to remove:', preview);
+    this.imagePreviews = this.imagePreviews.filter((pr, i) => {
+      if (pr === preview){
+        this.images = this.images.filter((image, j) => j !== i);
+        return false;
+      }
+      return true;
+    });
+    console.log('this.images:', this.images);
+    console.log('this.previews:', this.imagePreviews);
   }
   makeInvalid(submitBtn){
     if (submitBtn.disabled){
