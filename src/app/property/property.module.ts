@@ -11,7 +11,6 @@ import { CreatePropertyComponent } from './create-property/create-property.compo
 import { FormsModule } from '@angular/forms';
 import { FilterByPipe } from '../shared/filter-by.pipe';
 import { PropertyFilterPipe } from '../shared/property-filter.pipe';
-import { EditPropertyComponent } from './edit-property/edit-property.component';
 
 
 
@@ -21,7 +20,6 @@ import { EditPropertyComponent } from './edit-property/edit-property.component';
     PropertyListComponent,
     PropertyDetailComponent,
     CreatePropertyComponent,
-    EditPropertyComponent,
   ],
   imports: [
     CommonModule,

@@ -28,6 +28,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     bathrooms: null,
     levels: null,
   };
+  editing = false;
   imagePreviews: string[] = [];
   images: File[] = [];
   invalidTry = false;
@@ -40,9 +41,37 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     private userService: UserService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (this.route.snapshot.data.property){
+      this.createdProperty = this.route.snapshot.data.property;
+      this.editing = true;
+    }
 
-  onFormSubmit() {
+  }
+
+  onEdit() {
+    const fd = new FormData();
+    fd.append('property', JSON.stringify(this.createdProperty));
+    this.images?.forEach((image, i) => {
+      fd.append(`image${i + 1}`, image);
+    });
+
+
+    fd.forEach((value, key) => {
+      console.log(key, ': ', value);
+    });
+
+    // just to preview images
+    this.imagePreviews.forEach(img => this.createdProperty.propertyImages.push(img));
+    this.imagePreviews = [];
+
+    this.propertyService.updateProperty(this.createdProperty)
+      .subscribe((prop: Property) => {
+        this.router.navigate(['..'], { relativeTo: this.route });
+        console.log('edited property: ', prop);
+    });
+  }
+  onCreate() {
 
     const fd = new FormData();
     fd.append('property', JSON.stringify(this.createdProperty));
@@ -56,7 +85,10 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
 
     // post creator should be set to logged in user through a service
-    this.images.length !== 0 ? this.createdProperty.propertyImages = this.imagePreviews : '';//just to preview images
+    
+    // just to preview images
+    this.images.length !== 0 ? this.imagePreviews.forEach(img => this.createdProperty.propertyImages.push(img)) : '';
+    // just to preview images
 
     this.createdProperty.postCreator = this.authService.currentUser.username;
     if (
@@ -167,9 +199,34 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
     console.log('this.images:', this.images);
     console.log('this.previews:', this.imagePreviews);
   }
+
+  removeCurrentImage(image){
+    this.createdProperty.propertyImages = this.createdProperty.propertyImages.filter(img => img !== image);
+  }
   makeInvalid(submitBtn){
     if (submitBtn.disabled){
       this.invalidTry = true;
     }
+  }
+
+  deleteProperty(property){
+    if (!this.authService.isLoggedIn){//SAFETY MEASURE
+      this.router.navigateByUrl('/login');
+      return;
+    }
+    if (!this.authService.currentUser?.posts.includes(this.createdProperty.id)){//SAFETY MEASURE
+      this.router.navigateByUrl('/login');
+      return;
+    }
+    this.dialogService.confirm('Property will be forever deleted, are you sure?').subscribe((yesDelete) => {
+      if (yesDelete){
+        this.propertyService.deleteProperty(property).subscribe(() => {
+          this.authService.currentUser.posts = this.authService.currentUser.posts.filter(id => id !== property.id);
+          this.userService.updateUser(this.authService.currentUser).subscribe(() => {
+            this.router.navigateByUrl('/properties/myposts');
+          });
+        });
+      }
+    });
   }
 }

@@ -8,9 +8,9 @@ import {
   PropertiesResolver, FavoritesResolver, PropertyUserResolver, UserPostsResolver
 } from './property-resolver.service';
 import { Property } from './property';
-import { EditPropertyComponent } from './edit-property/edit-property.component';
 import { CanDeactivateGuard } from '../can-deactivate.guard';
 import { RoleGuard } from '../auth/role.guard';
+import { CanEditGuard } from '../auth/can-edit.guard';
 
 const propertyRoutes: Routes = [
   {
@@ -29,10 +29,10 @@ const propertyRoutes: Routes = [
       },
       {
         path: 'detail/:id/edit',
-        component: EditPropertyComponent,
+        component: CreatePropertyComponent,
         resolve: { property: PropertyResolver},
         canDeactivate: [CanDeactivateGuard],
-        // canActivate: [RoleGuard, CanEditGuard],
+        canActivate: [RoleGuard, CanEditGuard],
       },
       {
         path: 'myposts',
