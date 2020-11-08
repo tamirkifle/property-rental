@@ -44,6 +44,7 @@ export class PropertyListComponent implements OnInit {
   }
 
   showPropertyDetail(id){
+    console.log('iddet', id);
     this.router.navigate([`/properties/detail/${id}`], {queryParamsHandling: 'preserve'});
   }
 

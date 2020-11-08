@@ -11,18 +11,24 @@ export class LoginComponent implements OnInit {
   uname: string;
   password: string;
   invalidTry = false;
+  errorMessage = null;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
   onSubmit(credentials){
+    this.errorMessage = null;
     this.authService.login(credentials).subscribe(
       resp => {
-      if (resp === true) {
         this.authService.userChanged.emit();
         this.authService.redirectUrl ? this.router.navigate([this.authService.redirectUrl]) : this.router.navigate(['/properties']);
-      }
+    },
+    err => {
+      this.errorMessage = err.message;
+      console.log(String(this.errorMessage));
+
     });
 
   }

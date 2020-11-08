@@ -8,6 +8,10 @@ import { isEqualWith } from 'lodash-es';
 import { AuthService } from 'src/app/auth/auth.service';
 import { PropertyService } from '../property.service';
 import { UserService } from '../../user/user.service';
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from '@angular/fire/storage';
 
 @Component({
   templateUrl: './add-edit-property.component.html',
@@ -60,14 +64,24 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
       console.log(key, ': ', value);
     });
 
-    this.imagePreviews.forEach(img => this.currentProperty.propertyImages.push(img)); // just to preview images
-    this.imagePreviews = []; // so no double previews show
+    // this.imagePreviews.forEach(img => this.currentProperty.propertyImages.push(img)); // just to preview images
+    // this.imagePreviews = []; // so no double previews show
 
     this.propertyService.updateProperty(this.currentProperty)
-      .subscribe((prop: Property) => {
+      .subscribe((doc) => {
         this.router.navigate(['..'], { relativeTo: this.route });
-        console.log('edited property: ', prop);
+        // console.log('edited property: ', prop);
     });
+
+    // this.propertyService.addProperty(this.currentProperty)
+    //   .subscribe((doc) => {
+    //     this.authService.currentUser.posts.push(doc.id);
+    //     this.userService.updateUser(this.authService.currentUser).subscribe(() => {
+    //       this.currentProperty.id = doc.id;
+    //       this.router.navigate(['/properties']);
+    //       console.log('created property: ', this.currentProperty);
+    //     });
+    //   });
   }
   onCreate() {
 
@@ -83,23 +97,25 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
 
 
     // post creator should be set to logged in user through a service
-    this.imagePreviews.forEach(img => this.currentProperty.propertyImages.push(img)); // just to preview images
-    this.imagePreviews = []; // so no double previews show
+    // just to preview images
+    // this.imagePreviews.forEach(img => this.currentProperty.propertyImages.push(img)); 
+    // so no double previews show
+    // this.imagePreviews = []; 
 
-    this.currentProperty.postCreator = this.authService.currentUser.username;
-    if (
-      this.currentProperty.propertyTitle === null
-      && this.currentProperty.bedrooms
-      && this.currentProperty.address.city
-    ) {
-      console.log(this.currentProperty.address.neighborhood);
-      this.currentProperty.propertyTitle = `${this.currentProperty.bedrooms} Bedroom  House in ${this.currentProperty.address.neighborhood ? this.currentProperty.address.neighborhood + ',' : ''} ${this.currentProperty.address.city}`;
-    }
+    this.currentProperty.postCreator = this.authService.currentUser.id;
+    // if (
+    //   this.currentProperty.propertyTitle === null
+    //   && this.currentProperty.bedrooms
+    //   && this.currentProperty.address.city
+    // ) {
+      // console.log(this.currentProperty.address.neighborhood);
+      // this.currentProperty.propertyTitle = `${this.currentProperty.bedrooms} Bedroom  House in ${this.currentProperty.address.neighborhood ? this.currentProperty.address.neighborhood + ',' : ''} ${this.currentProperty.address.city}`;
+    // }
     this.propertyService.addProperty(this.currentProperty)
-      .subscribe((added: Property) => {
-        this.authService.currentUser.posts.push(added.id);
+      .subscribe((doc) => {
+        this.authService.currentUser.posts.push(doc.id);
         this.userService.updateUser(this.authService.currentUser).subscribe(() => {
-          this.currentProperty.id = added.id;
+          this.currentProperty.id = doc.id;
           this.router.navigate(['/properties']);
           console.log('created property: ', this.currentProperty);
         });

@@ -12,6 +12,7 @@ export class AppComponent {
   searchTerm = '';
   avatar = 'assets/other_icons/profile.png';
   userFirstName = 'Profile';
+  isLoggedIn = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,

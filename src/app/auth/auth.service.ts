@@ -1,9 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
-import { map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-
+import { map, switchMap, tap } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
   userChanged = new EventEmitter();
 
+  authState$;
   currentUser: User = null;
   redirectUrl: string;
   _isAdmin = false;
@@ -23,20 +24,44 @@ export class AuthService {
   get isAdmin(){
     return this.currentUser?.isAdmin;
   }
-  constructor(private userService: UserService) { }
-
-  login(credentials: {user: string, password: string}): Observable<boolean> {
-    return this.userService.getUser(credentials.user).pipe(
-      map(user => {
+  constructor(private userService: UserService, private fAuth: AngularFireAuth, private fsdb: AngularFireAuth) { 
+    this.authState$ = this.fAuth.authState.pipe(
+      switchMap(user => {
         if (user){
-          this.currentUser = user;
-          this.userChanged.emit();
-          this._isLoggedIn = true;
-          return true;
+          return this.userService.getUser(user.uid);
         }
-        return false;
+        else{
+          of(null);
+        }
       })
     );
+    this.authState$.subscribe(user => {
+      console.log(user);
+      this._isLoggedIn = true;
+      this.currentUser = user;
+      this.userChanged.emit();
+    });
+  }
+
+  login({email, password}): Observable<any> {
+      return from(this.fAuth.signInWithEmailAndPassword(email, password));
+
+
+    // return this.userService.getUser(credentials.user).pipe(
+    //   map(user => {
+    //     if (user){
+    //       this.currentUser = user;
+    //       this.userChanged.emit();
+    //       this._isLoggedIn = true;
+    //       return true;
+    //     }
+    //     return false;
+    //   })
+    // );
+  }
+
+  createUser(email, password){
+    return from(this.fAuth.createUserWithEmailAndPassword(email, password));
   }
   adminLogin(credentials){
     return this.userService.getUser(credentials.user).pipe(
@@ -52,9 +77,14 @@ export class AuthService {
     );
   }
   logout(): Observable<true> {
-    this.currentUser = null;
-    this._isLoggedIn = false;
-    this._isAdmin = false;
-    return of(true);
+    return from(this.fAuth.signOut()).pipe(
+      map(() => {
+      this.currentUser = null;
+      this._isLoggedIn = false;
+      this._isAdmin = false;
+      return true;
+      }),
+      );
+
   }
 }

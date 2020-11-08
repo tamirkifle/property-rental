@@ -63,13 +63,17 @@ export class CreateUserComponent implements OnInit {
     if (!this.checkContact()){
       return;
     }
-    this.userService.addUser(this.createdUser, this.userPass).subscribe((createdUser: User) => {
-      this.authService.login({ user: createdUser.username, password: this.userPass }).subscribe((result) => {
-        if (result === true) {
-          this.router.navigate(['/properties']);
-        }
-      });
-    });
+    this.authService.createUser(this.createdUser.contact.email, this.userPass).subscribe(res => {
+      console.log(res);
+    }
+    );
+    // this.userService.addUser(this.createdUser, this.userPass).subscribe((createdUser: User) => {
+    //   this.authService.login({ user: createdUser.username, password: this.userPass }).subscribe((result) => {
+    //     if (result === true) {
+    //       this.router.navigate(['/properties']);
+    //     }
+    //   });
+    // });
   }
 
   log(x){

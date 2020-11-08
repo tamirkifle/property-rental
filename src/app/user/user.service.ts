@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { User } from './user';
 
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -76,7 +76,7 @@ export class UserService {
     fd.append('user', user);
 
     //change to fd
-    return this.http.put(this.usersURL, user);
+    return from(this.fsdb.collection('users').doc(user.id).set(user));
   }
 
   addUser(user, password){

@@ -23,6 +23,7 @@ export class PropertyResolver implements Resolve<Property> {
     state: RouterStateSnapshot
   ): Observable<Property> {
     const id = route.paramMap.get('id');
+    console.log('idres', id);
     return this.propertyService.getProperty(id);
   }
 }
@@ -76,7 +77,7 @@ export class UserPostsResolver implements Resolve<Property[]> {
   ): Observable<Property[]> {
     const userPostsIds = this.authService.currentUser.posts;
     if (userPostsIds && userPostsIds.length !== 0) {
-      combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(postID))).subscribe(r => console.log(r));
+      // combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(postID))).subscribe(r => console.log(r));
       return combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(postID)));
     }
     else {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Property, PropertyOptions } from './property';
 // import { MOCKPROPERTIES } from './mock-properties';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { catchError, map, take, tap } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -42,38 +42,48 @@ export class PropertyService {
 
     }
     // [{
-    //   id: '12',
     //   username: 'mahletg',
     //   contact: {email: 'mahletg@gmail.com', phone: null},
     //   // password: '1234',
     //   firstname: 'Mahlet',
     //   lastname: 'Getachew',
     //   avatar: 'assets/lady-avatars/lady-3.jpg',
-    //   posts: ['12'],
+    //   posts: [],
     //   rating: 3.2,
     // },
     // {
-    //   id: '13',
     //   username: 'mesimesi',
     //   contact: {email: 'mesimesi@gmail.com', phone: null},
     //   // password: '1234',
     //   firstname: 'Meseret',
     //   lastname: 'Leykun',
     //   avatar: 'assets/lady-avatars/lady-4.jpg',
-    //   posts: ['13'],
+    //   posts: [],
     //   rating: 3.6,
     // },
     // {
-    //   id: '14',
     //   username: 'allhouseset',
     //   contact: {email: 'allhouseset@gmail.com', phone: null},
     //   // password: '1234',
     //   firstname: 'AllHouse',
     //   lastname: 'Ethiopia',
     //   avatar: 'assets/guy-avatars/guy-2.jpg',
-    //   posts: ['17'],
+    //   posts: [],
     //   rating: 5,
     //   isAdmin: true,
+    // },{
+    //   username: 'edelala',
+    //   contact: {email: 'edelala@gmail.com', phone: '0921232343'},
+    //   // password: '1234',
+    //   firstname: 'Ethio',
+    //   lastname: 'Delala',
+    //   displayname: 'EDDIE HOUSE',
+    //   company: 'Eddie Corp',
+    //   about: 'Hard working house broker in the Addis Ababa, Bole area',
+    //   address: {city: 'Addis Ababa', subCity: 'Kirkos', neighborhood: 'Meskel Flower'},
+    //   avatar: 'assets/guy-avatars/guy-4.jpg',
+    //   posts: [],
+    //   rating: 4.2,
     // }].forEach(prop => this.fsdb.collection("users").add(prop)
     //   .then(function (docRef) {
     //     console.log("Document written with ID: ", docRef.id);
@@ -81,15 +91,31 @@ export class PropertyService {
     //   .catch(function (error) {
     //     console.error("Error adding document: ", error);
     //   }));
+    // this.fsdb.collection("users").doc("PhAKssNv53cItMFziSghnVh0DmF3").set({
+    //       username: 'mesimesi',
+    //       contact: {email: 'mesimesi@gmail.com', phone: null},
+    //       // password: '1234',
+    //       firstname: 'Meseret',
+    //       lastname: 'Leykun',
+    //       avatar: 'assets/lady-avatars/lady-4.jpg',
+    //       posts: [],
+    //       rating: 3.6,
+    //     }
+    //     ).then(function (docRef) {
+    //     console.log("Document written with ID: ");
+    //   }).catch(function (error) {
+    //     console.error("Error adding document: ", error);
+    //   });
+
     return this.fsdb.collection('properties').get().pipe(
       map(snapshot => snapshot.docChanges()),
       map(values => {
         return values.map(value => {
           const data: any = value.doc.data();
-          console.log(data);
+          console.log(value);
           return {
-            id: value.doc.id as string,
             ...data,
+            id: value.doc.id as string,
 
           } as Property;
         });
@@ -118,13 +144,15 @@ export class PropertyService {
   }
 
   getProperty(id: string): Observable<Property> {
+    console.log('id', id);
     return this.fsdb.collection('properties').doc(id).get().pipe(
       tap(snapshot => console.log(snapshot.data())),
       map(snapshot => snapshot.data()),
       map(data => {
+        console.log('userservice', id, data);
         return {
-          id,
           ...data,
+          id,
 
 
         } as Property;
@@ -137,14 +165,15 @@ export class PropertyService {
   }
 
   addProperty(createdProperty) {
-    return this.http
-      .post(this.propertiesURL, createdProperty);
+
+    return from(this.fsdb.collection('properties').add(createdProperty));
+    // return this.http
+    //   .post(this.propertiesURL, createdProperty);
   }
 
   updateProperty(editedProperty) {
     console.log('in update property:', editedProperty);
-    return this.http
-      .put(this.propertiesURL, editedProperty);
+    return from(this.fsdb.collection('properties').doc(editedProperty.id).set(editedProperty));
   }
 
   likeProperty(propertyId) {
@@ -169,7 +198,9 @@ export class PropertyService {
     // NOT IMPLEMENTED: get all realted properties to property
     return this.getProperties()
       .pipe(
-        take(6)
+        map(properties => {
+          return properties.splice(0, 7);
+        }),
       );
   }
 }

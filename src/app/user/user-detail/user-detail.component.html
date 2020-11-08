@@ -7,7 +7,7 @@
         <div class="user_details">
             <div class="user_name">{{user.firstname}} {{user.lastname}}</div>
             <div class="user_address">Addis Ababa, Ethiopia</div>
-            <div class="user_posts">{{user.posts.length}} Post{{user.posts.length != 1?'s':''}}</div>
+            <div class="user_posts">{{user.posts?.length}} Post{{user.posts?.length != 1?'s':''}}</div>
             <app-rating [rating]="user.rating"></app-rating>
         </div>
         <div class="rate_user">

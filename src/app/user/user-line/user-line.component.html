@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="card bg-transparent border-0 mb-3 pointable col-md-8" *ngIf="user" (click)="showUserDetail()">
+<div class="row" *ngIf="user" >
+    <div class="card bg-transparent border-0 mb-3 pointable col-md-8" (click)="showUserDetail()">
         <div class="row no-gutters">
             <div class="col-auto">
                 <img src="{{user.avatar}}" class="card-img rounded-circle" style="width: 60px; height: 60px;"
@@ -8,8 +8,8 @@
             <div class="col-8">
                 <div class="card-body p-0 pl-4">
                     <p class="card-title mb-0 font-weight-bold">{{user.firstname}} {{user.lastname}}</p>
-                    <p class="card-text mb-2 text-brand-grey font-italic font-weight-bold">{{user.posts.length}}
-                        Post{{user.posts.length != 1?'s':''}}</p>
+                    <p class="card-text mb-2 text-brand-grey font-italic font-weight-bold">{{user.posts?.length}}
+                        Post{{user.posts?.length != 1?'s':''}}</p>
                     <app-rating [align]="'left'" [rating]="user.rating"></app-rating>
                 </div>
             </div>
