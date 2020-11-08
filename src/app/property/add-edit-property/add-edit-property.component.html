@@ -1,7 +1,7 @@
 <div class="bg-light" style="min-height: var(--router-outlet-height);">
     <h1 *ngIf="!editing" class="h3 p-4 m-0 bg-light text-center text-md-left">Create New Property</h1>
     <h1 *ngIf="editing" class="h3 p-4 m-0 bg-light text-center text-md-left">Edit Property</h1>
-    <form class="p-4 row m-0" #crPrForm="ngForm" (ngSubmit)="editing ? onEdit() : onCreate()">
+    <form class="p-4 row m-0" #propertyForm="ngForm" (ngSubmit)="editing ? onEdit() : onCreate()">
         <div class="form-section mb-2 mw-420px mx-auto col-md-6 col-lg-4 col-xl-3">
             <h2 class="text-brand-primary h5 p-3">Location <small class="text-muted">(1/4)</small></h2>
             <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3"
@@ -9,7 +9,7 @@
                 <label for="city" class="col-3 col-md-auto col-xl-3 col-form-label text-brand-grey">City</label>
                 <div class="col-7 ml-auto">
                     <select class="form-control border-0 ml-auto w-100" id="city" name="city" ngModel
-                        [(ngModel)]="createdProperty.address.city" required>
+                        [(ngModel)]="currentProperty.address.city" required>
                         <option value="" selected disabled hidden>Select</option>
                         <option value="Addis Ababa">Addis Ababa</option>
                         <option value="Mekele">Mekele</option>
@@ -18,7 +18,7 @@
                         <option value="Bahir Dar">Bahirdar</option>
                     </select>
                     <small class="d-block text-danger text-right"
-                        *ngIf="(crPrForm.controls.city?.invalid && crPrForm.controls.city.touched) || (crPrForm.controls.city?.invalid  && invalidTry)">{{((crPrForm.controls.city?.invalid && crPrForm.controls.city.touched) || (crPrForm.controls.city?.invalid  && invalidTry)) ? cityGroup.classList.add('border-danger') : cityGroup.classList.remove('border-danger')}}Required</small>
+                        *ngIf="(propertyForm.controls.city?.invalid && propertyForm.controls.city.touched) || (propertyForm.controls.city?.invalid  && invalidTry)">{{((propertyForm.controls.city?.invalid && propertyForm.controls.city.touched) || (propertyForm.controls.city?.invalid  && invalidTry)) ? cityGroup.classList.add('border-danger') : cityGroup.classList.remove('border-danger')}}Required</small>
 
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <label for="subCity" class="col-4 col-md-auto col-xl-4 col-form-label text-brand-grey">Sub City</label>
                 <div class="col-7 ml-auto">
                     <select class="form-control border-0 ml-auto w-100" id="subCity" name="subCity" ngModel
-                        [(ngModel)]="createdProperty.address.subCity">
+                        [(ngModel)]="currentProperty.address.subCity">
                         <option value="" selected disabled hidden>Select</option>
                         <option value="Kirkos">Kirkos</option>
                         <option value="Bole">Bole</option>
@@ -40,7 +40,7 @@
                     class="col-2 col-md-5 col-lg-2 col-form-label text-brand-grey">Neighborhood</label>
                 <div class="col-7 ml-auto">
                     <input type="text" class="form-control text-input-brand" id="neighborhoodInput" name="neighborhood"
-                        [(ngModel)]="createdProperty.address.area">
+                        [(ngModel)]="currentProperty.address.area">
                 </div>
             </div>
         </div>
@@ -65,9 +65,9 @@
                     Bedrooms</label>
                 <div class="col-5 ml-auto">
                     <input type="number" min="0" class="form-control text-input-brand" id="noOfBedrooms" name="bedrooms"
-                        [(ngModel)]="createdProperty.bedrooms" required>
+                        [(ngModel)]="currentProperty.bedrooms" required>
                     <small class="d-block text-danger text-right"
-                        *ngIf="(crPrForm.controls.bedrooms?.invalid && crPrForm.controls.bedrooms.touched) || (crPrForm.controls.bedrooms?.invalid  && invalidTry)">{{((crPrForm.controls.bedrooms?.invalid && crPrForm.controls.bedrooms.touched) || (crPrForm.controls.bedrooms?.invalid  && invalidTry)) ? bedroomsGroup.classList.add('border-danger') : bedroomsGroup.classList.remove('border-danger')}}Required</small>
+                        *ngIf="(propertyForm.controls.bedrooms?.invalid && propertyForm.controls.bedrooms.touched) || (propertyForm.controls.bedrooms?.invalid  && invalidTry)">{{((propertyForm.controls.bedrooms?.invalid && propertyForm.controls.bedrooms.touched) || (propertyForm.controls.bedrooms?.invalid  && invalidTry)) ? bedroomsGroup.classList.add('border-danger') : bedroomsGroup.classList.remove('border-danger')}}Required</small>
 
 
                 </div>
@@ -77,14 +77,14 @@
                     Bathrooms</label>
                 <div class="col-5 ml-auto">
                     <input type="number" min="0" class="form-control text-input-brand" id="noOfBathrooms"
-                        name="bathrooms" [(ngModel)]="createdProperty.bathrooms">
+                        name="bathrooms" [(ngModel)]="currentProperty.bathrooms">
                 </div>
             </div>
             <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
                 <label for="noOfFloors" class="col-7 col-md-auto col-form-label text-brand-grey">No. of
                     Floors</label>
                 <div class="col-5 ml-auto">
-                    <input type="number" min="0" class="form-control text-input-brand" id="noOfFloors" name="noOfFloors" [(ngModel)]="createdProperty.levels">
+                    <input type="number" min="0" class="form-control text-input-brand" id="noOfFloors" name="noOfFloors" [(ngModel)]="currentProperty.levels">
                 </div>
             </div>
             <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
@@ -93,7 +93,7 @@
                 <div class="col-6 ml-auto">
                     <div class="input-group">
                         <input type="number" min="0" step="100" class="form-control text-input-brand" id="areaInM2"
-                            name="areaInM2" [(ngModel)]="createdProperty.areaInM2">
+                            name="areaInM2" [(ngModel)]="currentProperty.areaInM2">
                         <div class="input-group-append">
                             <span class="input-group-text bg-white border-0 pb-0 pt-3 text-muted">m<sup>2</sup></span>
                         </div>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="d-flex flex-wrap">
                     <!-- Added Amenities -->
-                    <small *ngFor="let amenity of createdProperty.amenities"
+                    <small *ngFor="let amenity of currentProperty.amenities"
                         class="mb-2 mx-2 py-2 px-2 rounded-pill bg-card text-brand-grey border border-brand-grey remove-container">{{amenity}}
                         <button (click)="removeAmenity(amenity)" type="button"
                             class="btn p-0 ml-1 text-brand-grey remove-amenity-btn"><i class="fa fa-times-circle"
@@ -138,13 +138,13 @@
                 <div class="col-7 ml-auto">
                     <div class="input-group">
                         <input type="number" min="0" step="500" class="form-control text-input-brand" id="price"
-                            name="listPrice" [(ngModel)]="createdProperty.price.amount" required>
+                            name="listPrice" [(ngModel)]="currentProperty.price.amount" required>
                         <div class="input-group-append">
                             <span class="input-group-text bg-white border-0 pb-0 pt-3 text-muted">Birr</span>
                         </div>
                     </div>
                     <small class="d-block text-danger text-right"
-                        *ngIf="(crPrForm.controls.listPrice?.invalid && crPrForm.controls.listPrice.touched) || (crPrForm.controls.listPrice?.invalid  && invalidTry)">{{((crPrForm.controls.listPrice?.invalid && crPrForm.controls.listPrice.touched) || (crPrForm.controls.listPrice?.invalid  && invalidTry)) ? listPriceGroup.classList.add('border-danger') : ""}}Required</small>
+                        *ngIf="(propertyForm.controls.listPrice?.invalid && propertyForm.controls.listPrice.touched) || (propertyForm.controls.listPrice?.invalid  && invalidTry)">{{((propertyForm.controls.listPrice?.invalid && propertyForm.controls.listPrice.touched) || (propertyForm.controls.listPrice?.invalid  && invalidTry)) ? listPriceGroup.classList.add('border-danger') : ""}}Required</small>
                 </div>
             </div>
             <div class="form-group row align-items-center m-0 rounded-pill bg-white p-2 border border-brand-grey mb-3">
@@ -152,7 +152,7 @@
                     Type</label>
                 <div class="col-7 ml-auto">
                     <select name="priceType" id="priceType" class="form-control border-0 ml-auto w-100" name="priceType"
-                        [(ngModel)]="createdProperty.price.type">
+                        [(ngModel)]="currentProperty.price.type">
                         <option value="Negotiable" selected>Negotiable</option>
                         <option value="Fixed">Fixed</option>
                     </select>
@@ -175,7 +175,7 @@
             </div>
             <div class="images">
                 <div class="property_image_container remove-container"
-                    *ngFor="let pImage of createdProperty.propertyImages">
+                    *ngFor="let pImage of currentProperty.propertyImages">
                     <img src="{{pImage}}" alt="" class="property_image">
                     <button type="button" class="remove_img_btn" (click)="removeCurrentImage(pImage)">×</button>
                 </div>
@@ -190,13 +190,13 @@
         <div class="col-12 text-center mt-3 row justify-content-center mx-auto">
             <span *ngIf="!editing" (mouseenter)="makeInvalid(createBtn)"
                 class="col-sm-4 col-md-3 col-lg-2 mb-2">
-                <button type="submit" [disabled]="crPrForm.invalid"
+                <button type="submit" [disabled]="propertyForm.invalid"
                     class="btn bg-brand-primary text-white rounded-pill px-5 py-2 w-100 w-sm-auto" style="max-width: 300px" #createBtn><span
                         class="h6">Create</span></button>
             </span>
             <span *ngIf="editing" (mouseenter)="makeInvalid(saveBtn)"
                 class="col-sm-4 col-md-3 col-lg-2 mb-2">
-                <button type="submit" [disabled]="crPrForm.invalid"
+                <button type="submit" [disabled]="propertyForm.invalid"
                     class="btn bg-brand-primary text-white rounded-pill py-2 w-100 w-sm-auto" style="max-width: 300px" #saveBtn><span
                         class="h6">Save</span></button>
             </span>
@@ -208,7 +208,7 @@
 
             <span *ngIf="editing" class="col-sm-4 col-md-3 col-lg-2 mb-2">
                 <button type="button" class="btn bg-danger text-white rounded-pill py-2 w-100 w-sm-auto"
-                    (click)="deleteProperty(createdProperty)" style="max-width: 300px">Delete Property</button>
+                    (click)="deleteProperty(currentProperty)" style="max-width: 300px">Delete Property</button>
             </span>
         </div>
     </form>
@@ -217,39 +217,39 @@
 <!-- 
     
 <div class="signup_container">
-    <form class="signup_form" #crPrForm="ngForm" (ngSubmit)="onFormSubmit()">
+    <form class="signup_form" #propertyForm="ngForm" (ngSubmit)="onFormSubmit()">
         <div class="signup_top">
             <h1>Create a New Property</h1>
         </div>
         <input type="text" placeholder="No. of Bedrooms" id="bedrooms" name="bedrooms" class="inputfield"
-            ngModel (ngModelChange)="createdProperty.bedrooms = $event" required>
-        <span *ngIf="(crPrForm.controls.bedrooms?.invalid && crPrForm.controls.bedrooms.touched) || (crPrForm.controls.bedrooms?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
+            ngModel (ngModelChange)="currentProperty.bedrooms = $event" required>
+        <span *ngIf="(propertyForm.controls.bedrooms?.invalid && propertyForm.controls.bedrooms.touched) || (propertyForm.controls.bedrooms?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
 
         <input type="text" placeholder="No. of Bathrooms" id="bathrooms" name="bathrooms" class="inputfield"
-        ngModel (ngModelChange)="createdProperty.bathrooms = $event">
+        ngModel (ngModelChange)="currentProperty.bathrooms = $event">
         <div class="price_input">
             <span>
                 <input type="text" placeholder="List Price" id="listPrice" name="listPrice" class="inputfield"
-                ngModel (ngModelChange)="createdProperty.price.amount = $event" required>
-                <span *ngIf="(crPrForm.controls.listPrice?.invalid && crPrForm.controls.listPrice.touched) || (crPrForm.controls.listPrice?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
+                ngModel (ngModelChange)="currentProperty.price.amount = $event" required>
+                <span *ngIf="(propertyForm.controls.listPrice?.invalid && propertyForm.controls.listPrice.touched) || (propertyForm.controls.listPrice?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
             </span>
-            <select name="priceType" id="priceType" (ngModelChange)="createdProperty.price.type = $event">
+            <select name="priceType" id="priceType" (ngModelChange)="currentProperty.price.type = $event">
                 <option value="Negotiable" selected>Negotiable</option>
                 <option value="Fixed">Fixed</option>
             </select>
         </div>
         <input type="text" placeholder="Post title (optional)" id="propertyTitle" name="propertyTitle"
-            class="inputfield" ngModel (ngModelChange)="createdProperty.propertyTitle = $event">
+            class="inputfield" ngModel (ngModelChange)="currentProperty.propertyTitle = $event">
         <div class="">
-            <input type="text" placeholder="City" id="city" name="city" class="inputfield" ngModel (ngModelChange)="createdProperty.address.city = $event" required>
-            <span *ngIf="(crPrForm.controls.city?.invalid && crPrForm.controls.city.touched) || (crPrForm.controls.city?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
+            <input type="text" placeholder="City" id="city" name="city" class="inputfield" ngModel (ngModelChange)="currentProperty.address.city = $event" required>
+            <span *ngIf="(propertyForm.controls.city?.invalid && propertyForm.controls.city.touched) || (propertyForm.controls.city?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
         </div>
         <div class="">
-            <input type="text" placeholder="Neighborhood" id="neighborhood" name="neighborhood" class="inputfield" ngModel (ngModelChange)="createdProperty.address.area = $event" required>
-            <span *ngIf="(crPrForm.controls.neighborhood?.invalid && crPrForm.controls.neighborhood.touched) || (crPrForm.controls.neighborhood?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
+            <input type="text" placeholder="Neighborhood" id="neighborhood" name="neighborhood" class="inputfield" ngModel (ngModelChange)="currentProperty.address.area = $event" required>
+            <span *ngIf="(propertyForm.controls.neighborhood?.invalid && propertyForm.controls.neighborhood.touched) || (propertyForm.controls.neighborhood?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
         </div>
         <input type="text" placeholder="Area in m²" id="areaInM2" name="areaInM2" class="inputfield"
-        ngModel (ngModelChange)="createdProperty.areaInM2 = $event">
+        ngModel (ngModelChange)="currentProperty.areaInM2 = $event">
 
         <input type="text" placeholder="Other Amenities e.g. Backyard, Jacuzzi, Balcony" id="amenities" name="amenities"
             class="inputfield" ngModel (ngModelChange)="updateAmenities($event)">
@@ -260,7 +260,7 @@
         </div>
         <div class="one_line">
             <span (mouseenter)="invalidTry = true" (mouseleave)="invalidTry = false">
-                <button type="submit" class="signup_btn btn" [disabled]="crPrForm.invalid">Create Property</button>
+                <button type="submit" class="signup_btn btn" [disabled]="propertyForm.invalid">Create Property</button>
             </span>
             <button type="button" class="signup_btn btn" (click)="cancelCreation()">Cancel</button>
         </div>

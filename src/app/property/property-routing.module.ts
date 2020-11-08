@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PropertyListComponent } from './property-list/property-list.component';
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
-import { CreatePropertyComponent } from './create-property/create-property.component';
+import { AddEditPropertyComponent } from './add-edit-property/add-edit-property.component';
 import {
   PropertyResolver,
   PropertiesResolver, FavoritesResolver, PropertyUserResolver, UserPostsResolver
@@ -29,7 +29,7 @@ const propertyRoutes: Routes = [
       },
       {
         path: 'detail/:id/edit',
-        component: CreatePropertyComponent,
+        component: AddEditPropertyComponent,
         resolve: { property: PropertyResolver},
         canDeactivate: [CanDeactivateGuard],
         canActivate: [RoleGuard, CanEditGuard],
@@ -48,7 +48,7 @@ const propertyRoutes: Routes = [
       },
       {
         path: 'create',
-        component: CreatePropertyComponent,
+        component: AddEditPropertyComponent,
         canDeactivate: [CanDeactivateGuard],
         canActivate: [RoleGuard],
       },

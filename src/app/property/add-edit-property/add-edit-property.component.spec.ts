@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreatePropertyComponent } from './create-property.component';
+import { AddEditPropertyComponent } from './add-edit-property.component';
 
-describe('CreatePropertyComponent', () => {
-  let component: CreatePropertyComponent;
-  let fixture: ComponentFixture<CreatePropertyComponent>;
+describe('AddEditPropertyComponent', () => {
+  let component: AddEditPropertyComponent;
+  let fixture: ComponentFixture<AddEditPropertyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreatePropertyComponent ]
+      declarations: [ AddEditPropertyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreatePropertyComponent);
+    fixture = TestBed.createComponent(AddEditPropertyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

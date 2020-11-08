@@ -10,12 +10,11 @@ import { PropertyService } from '../property.service';
 import { UserService } from '../../user/user.service';
 
 @Component({
-  selector: 'app-create-property',
-  templateUrl: './create-property.component.html',
-  styleUrls: ['./create-property.component.css'],
+  templateUrl: './add-edit-property.component.html',
+  styleUrls: ['./add-edit-property.component.css'],
 })
-export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
-  createdProperty: Property = {
+export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate {
+  currentProperty: Property = {
     bedrooms: null,
     id: null,
     price: { amount: null, type: 'Negotiable' },
@@ -43,7 +42,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
   ngOnInit(): void {
     if (this.route.snapshot.data.property){
-      this.createdProperty = this.route.snapshot.data.property;
+      this.currentProperty = this.route.snapshot.data.property;
       this.editing = true;
     }
 
@@ -51,7 +50,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
   onEdit() {
     const fd = new FormData();
-    fd.append('property', JSON.stringify(this.createdProperty));
+    fd.append('property', JSON.stringify(this.currentProperty));
     this.images?.forEach((image, i) => {
       fd.append(`image${i + 1}`, image);
     });
@@ -61,11 +60,10 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
       console.log(key, ': ', value);
     });
 
-    // just to preview images
-    this.imagePreviews.forEach(img => this.createdProperty.propertyImages.push(img));
-    this.imagePreviews = [];
+    this.imagePreviews.forEach(img => this.currentProperty.propertyImages.push(img)); // just to preview images
+    this.imagePreviews = []; // so no double previews show
 
-    this.propertyService.updateProperty(this.createdProperty)
+    this.propertyService.updateProperty(this.currentProperty)
       .subscribe((prop: Property) => {
         this.router.navigate(['..'], { relativeTo: this.route });
         console.log('edited property: ', prop);
@@ -74,7 +72,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
   onCreate() {
 
     const fd = new FormData();
-    fd.append('property', JSON.stringify(this.createdProperty));
+    fd.append('property', JSON.stringify(this.currentProperty));
     this.images?.forEach((image, i) => {
       fd.append(`image${i + 1}`, image);
     });
@@ -85,27 +83,25 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
 
 
     // post creator should be set to logged in user through a service
-    
-    // just to preview images
-    this.images.length !== 0 ? this.imagePreviews.forEach(img => this.createdProperty.propertyImages.push(img)) : '';
-    // just to preview images
+    this.imagePreviews.forEach(img => this.currentProperty.propertyImages.push(img)); // just to preview images
+    this.imagePreviews = []; // so no double previews show
 
-    this.createdProperty.postCreator = this.authService.currentUser.username;
+    this.currentProperty.postCreator = this.authService.currentUser.username;
     if (
-      this.createdProperty.propertyTitle === null
-      && this.createdProperty.bedrooms
-      && this.createdProperty.address.city
+      this.currentProperty.propertyTitle === null
+      && this.currentProperty.bedrooms
+      && this.currentProperty.address.city
     ) {
-      console.log(this.createdProperty.address.area);
-      this.createdProperty.propertyTitle = `${this.createdProperty.bedrooms} Bedroom  House in ${this.createdProperty.address.area ? this.createdProperty.address.area + ',' : ''} ${this.createdProperty.address.city}`;
+      console.log(this.currentProperty.address.area);
+      this.currentProperty.propertyTitle = `${this.currentProperty.bedrooms} Bedroom  House in ${this.currentProperty.address.area ? this.currentProperty.address.area + ',' : ''} ${this.currentProperty.address.city}`;
     }
-    this.propertyService.addProperty(this.createdProperty)
+    this.propertyService.addProperty(this.currentProperty)
       .subscribe((added: Property) => {
         this.authService.currentUser.posts.push(added.id);
         this.userService.updateUser(this.authService.currentUser).subscribe(() => {
-          this.createdProperty.id = added.id;
+          this.currentProperty.id = added.id;
           this.router.navigate(['/properties']);
-          console.log('created property: ', this.createdProperty);
+          console.log('created property: ', this.currentProperty);
         });
       });
   }
@@ -128,10 +124,10 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
         return true;
       }
     }
-    if (this.createdProperty.id !== null) {
+    if (this.currentProperty.id !== null) {
       return of(true);
     }
-    if (isEqualWith(this.createdProperty, emptyProperty, customComparison)) {
+    if (isEqualWith(this.currentProperty, emptyProperty, customComparison)) {
       return of(true);
     }
     return this.dialogService.confirm(
@@ -167,7 +163,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
   }
 
   updateAmenities(amenities) {
-    this.createdProperty.amenities = amenities.split(',').map(item => item.trim()).filter(item => item !== '');
+    this.currentProperty.amenities = amenities.split(',').map(item => item.trim()).filter(item => item !== '');
   }
 
   log(event) {
@@ -177,14 +173,14 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
   addAmenity(amenities) {
     amenities = amenities.split(',').map(item => item.trim()).filter(item => item !== '');//add multiple separated with commas
     for (const amenity of amenities){
-      if (amenity && !this.createdProperty.amenities.includes(amenity)) {
-        this.createdProperty.amenities.push(amenity);
+      if (amenity && !this.currentProperty.amenities.includes(amenity)) {
+        this.currentProperty.amenities.push(amenity);
       }
     }
   }
 
   removeAmenity(amenity) {
-    this.createdProperty.amenities = this.createdProperty.amenities.filter(item => item !== amenity);
+    this.currentProperty.amenities = this.currentProperty.amenities.filter(item => item !== amenity);
   }
 
   removeImage(preview) {
@@ -201,7 +197,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
   }
 
   removeCurrentImage(image){
-    this.createdProperty.propertyImages = this.createdProperty.propertyImages.filter(img => img !== image);
+    this.currentProperty.propertyImages = this.currentProperty.propertyImages.filter(img => img !== image);
   }
   makeInvalid(submitBtn){
     if (submitBtn.disabled){
@@ -214,7 +210,7 @@ export class CreatePropertyComponent implements OnInit, CanComponentDeactivate {
       this.router.navigateByUrl('/login');
       return;
     }
-    if (!this.authService.currentUser?.posts.includes(this.createdProperty.id)){//SAFETY MEASURE
+    if (!this.authService.currentUser?.posts.includes(this.currentProperty.id)){//SAFETY MEASURE
       this.router.navigateByUrl('/login');
       return;
     }
