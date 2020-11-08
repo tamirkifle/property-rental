@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Property, PropertyOptions } from './property';
 // import { MOCKPROPERTIES } from './mock-properties';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, take, tap } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FilterByPipe } from '../shared/filter-by.pipe';
@@ -98,5 +98,13 @@ export class PropertyService {
     const id = typeof property === 'number' ? property : property.id;
     const url = `${this.propertiesURL}/${id}`;
     return this.http.delete<Property>(url, this.httpOptions);
+  }
+
+  getRelatedProperties(id){
+      // NOT IMPLEMENTED: get all realted properties to property
+      return this.http.get<Property[]>(this.propertiesURL)
+      .pipe(
+        take(6)
+      );
   }
 }

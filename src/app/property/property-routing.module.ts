@@ -11,6 +11,7 @@ import { Property } from './property';
 import { CanDeactivateGuard } from '../can-deactivate.guard';
 import { RoleGuard } from '../auth/role.guard';
 import { CanEditGuard } from '../auth/can-edit.guard';
+import { RelatedListResolver } from './property-resolver.service';
 
 const propertyRoutes: Routes = [
   {
@@ -25,7 +26,7 @@ const propertyRoutes: Routes = [
       {
         path: 'detail/:id',
         component: PropertyDetailComponent,
-        resolve: { property: PropertyResolver, user: PropertyUserResolver },
+        resolve: { property: PropertyResolver, user: PropertyUserResolver, relatedItems: RelatedListResolver},
       },
       {
         path: 'detail/:id/edit',

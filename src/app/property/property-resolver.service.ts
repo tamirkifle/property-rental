@@ -101,3 +101,18 @@ export class PropertiesResolver implements Resolve<Property[]> {
     return this.propertyService.getProperties(options);
   }
 }
+
+@Injectable({
+  providedIn: 'root',
+})
+export class RelatedListResolver implements Resolve<Property[]> {
+  constructor(private propertyService: PropertyService, private userService: UserService) { }
+
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<Property[]> {
+    const id = route.paramMap.get('id');
+    return this.propertyService.getRelatedProperties(+id);
+  }
+}

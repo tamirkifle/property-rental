@@ -22,6 +22,7 @@ export class PropertyDetailComponent implements OnInit {
   media$: Observable<MediaChange[]>;
   customImageSize = { width: '100%', height: '500px', space: 0 };
   currentBreakPoint: string;
+  relatedItems: Property[];
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
@@ -50,6 +51,7 @@ export class PropertyDetailComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.property = data.property;
       this.postCreatorUser = data.user;
+      this.relatedItems = this.shuffle(data.relatedItems);
       this.isAuthorizedToEdit = this.authService.isLoggedIn && (this.authService.currentUser.username === this.postCreatorUser.username);
       this.imageObject = [];
       this.imageObject = this.property.propertyImages.map(imageLink => {
@@ -66,4 +68,24 @@ export class PropertyDetailComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['../..'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
   }
+
+   shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
+  
 }
