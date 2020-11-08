@@ -1,5 +1,5 @@
 export interface Property {
-  id: number;
+  id: string;
   propertyTitle: string;
   bedrooms: number;
   address: {city: string, subCity?: string, neighborhood: string, coordinates?: string};

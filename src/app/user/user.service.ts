@@ -4,6 +4,7 @@ import { User } from './user';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class UserService {
   private usersURL = 'api/users';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private fsdb: AngularFirestore) { }
   
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -27,16 +28,44 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]>{
-    return this.http.get<User[]>(this.usersURL)
-    .pipe(
-      catchError(this.handleError('getUsers', []))
+    // return this.http.get<User[]>(this.usersURL)
+    // .pipe(
+    //   catchError(this.handleError('getUsers', []))
+    // );
+
+    return this.fsdb.collection('users').get().pipe(
+      map(snapshot => snapshot.docChanges()),
+      map(values => {
+        return values.map(value => {
+          const data: any = value.doc.data();
+          return {
+            id: value.doc.id as string,
+            ...data,
+
+
+          } as User;
+        });
+      }),
+      catchError(this.handleError<User[]>(`getProperties`)),
     );
   }
 
-  getUser(username): Observable<User>{
-    return this.getUsers().pipe(
-      map(users => users.find(user => user.username === username))
-    );
+  getUser(id): Observable<User>{
+    return this.fsdb.collection('users').doc(id).get().pipe(
+      map(snapshot => snapshot.data()),
+      map(data => {
+        return {
+          id,
+          ...data,
+
+        } as User;
+      })
+      
+      );
+
+    // return this.getUsers().pipe(
+    //   map(users => users.find(user => user.username === id))
+    // );
   }
 
   updateUser(user, avatarFile?){

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "property-rental-fca0f": {
+      "hosting": {
+        "property-rental": [
+          "property-rental-fca0f"
+        ]
+      }
+    }
+  }
+}

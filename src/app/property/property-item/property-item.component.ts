@@ -31,8 +31,8 @@ export class PropertyItemComponent implements OnInit {
     }
   }
 
-  getUser(username: string) {
-    this.userService.getUser(username)
+  getUser(userid: string) {
+    this.userService.getUser(userid)
       .subscribe(user => {
         this.postCreatorUser = user;
       });

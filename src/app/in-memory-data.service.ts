@@ -11,7 +11,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
     const users: User[] = [
       {
-        id: 11,
+        id: '11',
         username: 'edelala',
         contact: {email: 'edelala@gmail.com', phone: '0921232343'},
         // password: '1234',
@@ -22,47 +22,47 @@ export class InMemoryDataService implements InMemoryDbService {
         about: 'Hard working house broker in the Addis Ababa, Bole area',
         address: {city: 'Addis Ababa', subCity: 'Kirkos', neighborhood: 'Meskel Flower'},
         avatar: 'assets/guy-avatars/guy-4.jpg',
-        posts: [11, 14, 15, 16],
+        posts: ['11', '14', '15', '16'],
         rating: 4.2,
       },
       {
-        id: 12,
+        id: '12',
         username: 'mahletg',
         contact: {email: 'mahletg@gmail.com', phone: null},
         // password: '1234',
         firstname: 'Mahlet',
         lastname: 'Getachew',
         avatar: 'assets/lady-avatars/lady-3.jpg',
-        posts: [12],
+        posts: ['12'],
         rating: 3.2,
       },
       {
-        id: 13,
+        id: '13',
         username: 'mesimesi',
         contact: {email: 'mesimesi@gmail.com', phone: null},
         // password: '1234',
         firstname: 'Meseret',
         lastname: 'Leykun',
         avatar: 'assets/lady-avatars/lady-4.jpg',
-        posts: [13],
+        posts: ['13'],
         rating: 3.6,
       },
       {
-        id: 14,
+        id: '14',
         username: 'allhouseset',
         contact: {email: 'allhouseset@gmail.com', phone: null},
         // password: '1234',
         firstname: 'AllHouse',
         lastname: 'Ethiopia',
         avatar: 'assets/guy-avatars/guy-2.jpg',
-        posts: [17],
+        posts: ['17'],
         rating: 5,
         isAdmin: true,
       },
     ];
     const properties: Property[] = [
       {
-        id: 11,
+        id: '11',
         propertyTitle: '',
         bedrooms: 3,
         address: {city: 'Addis Ababa', subCity: 'Bole', neighborhood: 'Bole'},
@@ -75,7 +75,7 @@ export class InMemoryDataService implements InMemoryDbService {
         areaInM2: 400,
       },
       {
-        id: 12,
+        id: '12',
         propertyTitle: '',
         bedrooms: 8,
         address: {city: 'Addis Ababa', subCity: 'Bole', neighborhood: 'Hayahulet'},
@@ -85,7 +85,7 @@ export class InMemoryDataService implements InMemoryDbService {
         amenities: [],
       },
       {
-        id: 13,
+        id: '13',
         propertyTitle: 'Quick Rental Needed Great Price',
         bedrooms: 3,
         address: {city: 'Addis Ababa', neighborhood: 'Yerer'},
@@ -95,7 +95,7 @@ export class InMemoryDataService implements InMemoryDbService {
         amenities: ['Backyard', 'Nice View'],
       },
       {
-        id: 14,
+        id: '14',
         propertyTitle: '',
         bedrooms: 3,
         address: {city: 'Addis Ababa', neighborhood: 'Addis Ketema'},
@@ -105,7 +105,7 @@ export class InMemoryDataService implements InMemoryDbService {
         amenities: ['Backyard', 'Nice View'],
       },
       {
-        id: 15,
+        id: '15',
         propertyTitle: '',
         bedrooms: 3,
         address: {city: 'Addis Ababa', neighborhood: 'Merkato'},
@@ -115,7 +115,7 @@ export class InMemoryDataService implements InMemoryDbService {
         amenities: ['Backyard', 'Nice View'],
       },
       {
-        id: 16,
+        id: '16',
         propertyTitle: '',
         bedrooms: 3,
         address: {city: 'Addis Ababa', subCity: 'Kirkos', neighborhood: 'Meskel Flower'},
@@ -125,7 +125,7 @@ export class InMemoryDataService implements InMemoryDbService {
         amenities: ['Backyard', 'Nice View'],
       },
       {
-        id: 17,
+        id: '17',
         propertyTitle: '',
         bedrooms: 3,
         address: {city: 'Addis Ababa', subCity: 'Kirkos', neighborhood: 'Gotera'},
@@ -144,9 +144,9 @@ export class InMemoryDataService implements InMemoryDbService {
   // the method below returns the initial number (11).
   // if the properties array is not empty, the method below returns the highest
   // property id + 1.
-  genId(properties: Property[]): number {
-    return properties.length > 0
-      ? Math.max(...properties.map((property) => property.id)) + 1
-      : 11;
+  genId(properties: Property[]): string {
+    return String(properties.length > 0
+      ? Math.max(...properties.map((property) => Number(property.id))) + 1
+      : 11);
   }
 }

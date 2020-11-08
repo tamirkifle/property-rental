@@ -27,6 +27,7 @@ export class CreateUserComponent implements OnInit {
   // rating?:
 
   createdUser: User = {
+    id: null,
     username: null,
     firstname: null,
     lastname: null,

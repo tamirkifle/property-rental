@@ -16,14 +16,14 @@
         </div>
     </div>
     <div class="col-md-4 text-left">
-        <a class="mb-2 text-brand-grey d-block text-nowrap" href="tel:{{user.contact[0]?.type === 'phone' ? user.contact[0].value : user.contact[1].value}}" *ngIf="user.contact[0]?.type === 'phone' || user.contact[1]?.type === 'phone'">
+        <a class="mb-2 text-brand-grey d-block text-nowrap" href="tel:{{user.contact.phone}}" *ngIf="user.contact?.phone">
             <!-- <img src="assets/other_icons/phone.png" class="mr-2" style="width: 20px;" alt="Phone icon"> -->
             <span class="mr-2">☎︎</span>
-            {{user.contact[0]?.type === 'phone' ? user.contact[0].value : user.contact[1].value}}
+            {{user.contact.phone}}
         </a>
-        <a class="mb-2 text-brand-grey d-block text-nowrap" href="mailto:{{user.contact[0]?.type === 'email' ? user.contact[0].value : user.contact[1].value}}" *ngIf="user.contact[0]?.type === 'email' || user.contact[1]?.type === 'email'">
+        <a class="mb-2 text-brand-grey d-block text-nowrap" href="mailto:{{user.contact.email}}" *ngIf="user.contact?.email">
             <span class="mr-2">✉️</span>
-            {{user.contact[0]?.type === 'email' ? user.contact[0].value : user.contact[1].value}}
+            {{user.contact.email}}
         </a>
         
     </div>

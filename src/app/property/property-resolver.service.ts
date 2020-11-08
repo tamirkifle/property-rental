@@ -9,7 +9,7 @@ import { Property, PropertyOptions } from './property';
 import { PropertyService } from './property.service';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../user/user';
-import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { UserService } from '../user/user.service';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class PropertyResolver implements Resolve<Property> {
     state: RouterStateSnapshot
   ): Observable<Property> {
     const id = route.paramMap.get('id');
-    return this.propertyService.getProperty(+id);
+    return this.propertyService.getProperty(id);
   }
 }
 
@@ -38,7 +38,7 @@ export class PropertyUserResolver implements Resolve<User> {
     state: RouterStateSnapshot
   ): Observable<User> {
     const id = route.paramMap.get('id');
-    return this.propertyService.getProperty(+id).pipe(
+    return this.propertyService.getProperty(id).pipe(
       switchMap(property => this.userService.getUser(property.postCreator))
     );
   }
@@ -56,7 +56,7 @@ export class FavoritesResolver implements Resolve<Property[]> {
   ): Observable<Property[]> {
     const favoriteIds = this.authService.currentUser.favorites;
     if (favoriteIds && favoriteIds.length !== 0) {
-      return combineLatest(favoriteIds.map(favID => this.propertyService.getProperty(+favID)));
+      return combineLatest(favoriteIds.map(favID => this.propertyService.getProperty(favID)));
     }
     else {
       return of([]);
@@ -76,8 +76,8 @@ export class UserPostsResolver implements Resolve<Property[]> {
   ): Observable<Property[]> {
     const userPostsIds = this.authService.currentUser.posts;
     if (userPostsIds && userPostsIds.length !== 0) {
-      combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(+postID))).subscribe(r => console.log(r));
-      return combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(+postID)));
+      combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(postID))).subscribe(r => console.log(r));
+      return combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(postID)));
     }
     else {
       return of([]);
@@ -98,7 +98,7 @@ export class PropertiesResolver implements Resolve<Property[]> {
       search: route.queryParams.s,
       filterBy: route.queryParamMap.getAll('by').filter(query => this.propertyService.allFilterOptions.includes(query))};
     console.log('in resolver: ', JSON.stringify(options));
-    return this.propertyService.getProperties(options);
+    return this.propertyService.getProperties();
   }
 }
 
