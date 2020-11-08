@@ -105,6 +105,9 @@
                         id="aboutme" ngModel (ngModelChange)="this.createdUser.about = $event"></textarea>
                 </div>
             </div>
+            <div class="card bg-danger" *ngIf="errorMessage">
+                <div class="card-text text-white">{{errorMessage}}</div>
+            </div>
             <span (mouseenter)="invalidTry = true; checkContact();log(userForm.controls.passwordConf)" class="d-block pt-3 mx-auto" style="max-width: 528px">
                 <button type="submit" class="btn bg-brand-primary btn-block py-2 mb-3 text-white"
                     [disabled]="userForm.invalid || userPass !== userForm.controls.passwordConf?.value" >Create Account</button>

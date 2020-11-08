@@ -10,6 +10,7 @@ import { PropertyFilterPipe } from '../shared/property-filter.pipe';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -27,10 +28,11 @@ export class PropertyService {
     private http: HttpClient,
     private authService: AuthService,
     private fsdb: AngularFirestore,
+    private userService: UserService,
   ) { }
 
   getProperties(options?: PropertyOptions): Observable<Property[]> {
-    if (options) {
+    if (options && (options.search || options.filterBy?.length > 0)) {
       let params = new HttpParams();
       if (options.search) {
         params = params.append('s', options.search);
@@ -38,8 +40,13 @@ export class PropertyService {
       if (options.filterBy && options.filterBy.length !== 0) {
         options.filterBy.forEach(filter => params = params.append('by', filter));
       }
-      return this.http.get<Property[]>(this.propertiesURL, { params });
+      // const propRef = this.fsdb.collection('properties', ref => {
+      //   if(filter)
+      //   return ref;
 
+      // });
+      
+      // return this.http.get<Property[]>(this.propertiesURL, { params });
     }
     // [{
     //   username: 'mahletg',
@@ -181,17 +188,19 @@ export class PropertyService {
       this.authService.currentUser.favorites = [];
     }
     this.authService.currentUser.favorites.push(propertyId);
-    return this.http.put(this.usersURL, this.authService.currentUser);
+    return this.userService.updateUser(this.authService.currentUser);
   }
   unlikeProperty(propertyId) {
     this.authService.currentUser.favorites = this.authService.currentUser.favorites.filter(id => id !== propertyId);
-    return this.http.put(this.usersURL, this.authService.currentUser);
+    return this.userService.updateUser(this.authService.currentUser);
+
   }
 
   deleteProperty(property) {
-    const id = typeof property === 'number' ? property : property.id;
-    const url = `${this.propertiesURL}/${id}`;
-    return this.http.delete<Property>(url, this.httpOptions);
+    const id = typeof property === 'string' ? property : property.id;
+    // const url = `${this.propertiesURL}/${id}`;
+    // return this.http.delete<Property>(url, this.httpOptions);
+    return from(this.fsdb.collection("properties").doc(id).delete());
   }
 
   getRelatedProperties(id) {

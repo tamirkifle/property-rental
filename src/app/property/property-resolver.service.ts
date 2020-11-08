@@ -99,7 +99,7 @@ export class PropertiesResolver implements Resolve<Property[]> {
       search: route.queryParams.s,
       filterBy: route.queryParamMap.getAll('by').filter(query => this.propertyService.allFilterOptions.includes(query))};
     console.log('in resolver: ', JSON.stringify(options));
-    return this.propertyService.getProperties();
+    return this.propertyService.getProperties(options);
   }
 }
 

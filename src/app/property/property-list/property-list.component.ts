@@ -24,7 +24,6 @@ export class PropertyListComponent implements OnInit {
       this.searchText = params.get('s');
       this.filterOptions = params.getAll('by').filter(query => this.propertyService.allFilterOptions.includes(query));
     });
-    console.log('here2');
     this.route.data.subscribe(data => {
       this.properties = data.properties;
       console.log(data);

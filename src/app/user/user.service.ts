@@ -79,13 +79,13 @@ export class UserService {
     return from(this.fsdb.collection('users').doc(user.id).set(user));
   }
 
-  addUser(user, password){
-    var fd = new FormData();
-    fd.append('password', password);
-    fd.append('user', user);
+  // addUser(user, password){
+  //   var fd = new FormData();
+  //   fd.append('password', password);
+  //   fd.append('user', user);
 
-    //change to fd
-    return this.http.post(this.usersURL, user);
-  }
+  //   //change to fd
+  //   return this.http.post(this.usersURL, user);
+  // }
 
 }

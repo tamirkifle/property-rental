@@ -60,8 +60,20 @@ export class AuthService {
     // );
   }
 
-  createUser(email, password){
-    return from(this.fAuth.createUserWithEmailAndPassword(email, password));
+  createUser(createdUser: User, password){
+    console.log(createdUser);
+    return from(this.fAuth.createUserWithEmailAndPassword(createdUser.contact.email, password)).pipe(
+      switchMap(user => {
+        if (user){
+          console.log(user);
+          createdUser.id = user.user.uid;
+          return this.userService.updateUser(createdUser);
+        }
+        else{
+          of(null);
+        }
+      }),
+    );
   }
   adminLogin(credentials){
     return this.userService.getUser(credentials.user).pipe(
