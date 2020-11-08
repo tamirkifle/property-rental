@@ -53,6 +53,11 @@ export class PropertyDetailComponent implements OnInit {
     this.imageObject = this.property.propertyImages.map(imageLink => {
       return { image: imageLink, thumbImage: imageLink, title: this.property.propertyTitle };
     });
+    if (this.imageObject?.length === 0) {
+      this.imageObject.push(
+        { image: 'assets/placeholders/no_img.png', thumbImage: 'assets/placeholders/no_img.png', title: this.property.propertyTitle }
+      );
+    }
   }
 
   goBack(): void {

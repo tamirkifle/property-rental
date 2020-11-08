@@ -1,7 +1,7 @@
 <!-- BIG CARD -->
 
 <div class="card card-brand bg-card m-2 mb-4 btn p-0 text-left">
-    <img src="{{ property.propertyImages[0] }}" class="card-img-top" alt="Property Photo">
+    <img src="{{ property.propertyImages[0] ? property.propertyImages[0] : 'assets/placeholders/no_img.png' }}" class="card-img-top" alt="Property Photo">
     <div class="card-body py-2 px-3">
         <div class="row">
             <div class="col-8">
