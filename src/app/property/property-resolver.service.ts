@@ -23,7 +23,6 @@ export class PropertyResolver implements Resolve<Property> {
     state: RouterStateSnapshot
   ): Observable<Property> {
     const id = route.paramMap.get('id');
-    console.log('idres', id);
     return this.propertyService.getProperty(id);
   }
 }
@@ -98,7 +97,6 @@ export class PropertiesResolver implements Resolve<Property[]> {
     const options: PropertyOptions = {
       search: route.queryParams.s,
       filterBy: route.queryParamMap.getAll('by').filter(query => this.propertyService.allFilterOptions.includes(query))};
-    console.log('in resolver: ', JSON.stringify(options));
     return this.propertyService.getProperties(options);
   }
 }

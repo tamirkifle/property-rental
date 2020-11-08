@@ -36,7 +36,7 @@ export class PropertyDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.media$.subscribe(mq => {
-      console.log(mq[0].mqAlias);
+      // console.log(mq[0].mqAlias);
       this.currentBreakPoint = mq[0].mqAlias;
       if (this.currentBreakPoint === 'xs') {
         this.customImageSize = { width: '100%', height: '300px', space: 0 };

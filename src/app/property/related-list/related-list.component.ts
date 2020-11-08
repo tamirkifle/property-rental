@@ -12,7 +12,6 @@ export class RelatedListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.relatedItems);
   }
 
 }

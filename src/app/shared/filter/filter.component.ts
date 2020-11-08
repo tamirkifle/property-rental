@@ -44,7 +44,6 @@ export class FilterComponent implements OnInit {
           if (this.propertyService.allFilterOptions.includes(option)) {
             this.activeOptions.push(option);
           }
-          console.log(this.activeOptions);
         }
       });
     });

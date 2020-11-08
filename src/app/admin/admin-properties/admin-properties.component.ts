@@ -13,7 +13,6 @@ export class AdminPropertiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProperties();
-    console.log(this.propertyService.getProperties());
   }
 
   getProperties(): void {

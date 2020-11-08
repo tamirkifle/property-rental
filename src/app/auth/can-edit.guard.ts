@@ -17,7 +17,6 @@ export class CanEditGuard implements CanActivate {
       const id = next.paramMap.get('id');
       return this.authService.authState$.pipe(
         map((user: User) => {
-          console.log(user);
           if (user && user.posts.includes(id)) {
             return true;
           }

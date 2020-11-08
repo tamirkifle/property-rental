@@ -13,7 +13,6 @@ export class AdminUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
-    setTimeout(() => console.log(this.users), 2000);
   }
 
   getUsers(){

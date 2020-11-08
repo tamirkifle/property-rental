@@ -119,7 +119,6 @@ export class PropertyService {
       map(values => {
         return values.map(value => {
           const data: any = value.doc.data();
-          console.log(value);
           return {
             ...data,
             id: value.doc.id as string,
@@ -151,12 +150,10 @@ export class PropertyService {
   }
 
   getProperty(id: string): Observable<Property> {
-    console.log('id', id);
     return this.fsdb.collection('properties').doc(id).get().pipe(
-      tap(snapshot => console.log(snapshot.data())),
+      // tap(snapshot => console.log(snapshot.data())),
       map(snapshot => snapshot.data()),
       map(data => {
-        console.log('userservice', id, data);
         return {
           ...data,
           id,
@@ -179,7 +176,6 @@ export class PropertyService {
   }
 
   updateProperty(editedProperty) {
-    console.log('in update property:', editedProperty);
     return from(this.fsdb.collection('properties').doc(editedProperty.id).set(editedProperty));
   }
 

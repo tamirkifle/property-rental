@@ -36,7 +36,6 @@ export class AuthService {
       })
     );
     this.authState$.subscribe(user => {
-      console.log(user);
       this._isLoggedIn = true;
       this.currentUser = user;
       this.userChanged.emit();
@@ -61,11 +60,9 @@ export class AuthService {
   }
 
   createUser(createdUser: User, password){
-    console.log(createdUser);
     return from(this.fAuth.createUserWithEmailAndPassword(createdUser.contact.email, password)).pipe(
       switchMap(user => {
         if (user){
-          console.log(user);
           createdUser.id = user.user.uid;
           return this.userService.updateUser(createdUser);
         }

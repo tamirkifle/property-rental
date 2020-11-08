@@ -60,9 +60,9 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
     });
 
 
-    fd.forEach((value, key) => {
-      console.log(key, ': ', value);
-    });
+    // fd.forEach((value, key) => {
+      // console.log(key, ': ', value);
+    // });
 
     // this.imagePreviews.forEach(img => this.currentProperty.propertyImages.push(img)); // just to preview images
     // this.imagePreviews = []; // so no double previews show
@@ -117,7 +117,7 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
         this.userService.updateUser(this.authService.currentUser).subscribe(() => {
           this.currentProperty.id = doc.id;
           this.router.navigate(['/properties']);
-          console.log('created property: ', this.currentProperty);
+          // console.log('created property: ', this.currentProperty);
         });
       });
   }
@@ -157,14 +157,14 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
 
   addToImages(files: FileList) {
     const newFiles = [];
-    console.log('filelist: ', files);
+    // console.log('filelist: ', files);
     for (const imgFile of Array.from(files))  {
       if (!this.images.includes(imgFile)){
         newFiles.push(imgFile);
         this.images.push(imgFile);
       }
     }
-    console.log('this.images', this.images);
+    // console.log('this.images', this.images);
     this.addToPreviews(newFiles);
   }
 
@@ -200,7 +200,7 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
   }
 
   removeImage(preview) {
-    console.log('preview to remove:', preview);
+    // console.log('preview to remove:', preview);
     this.imagePreviews = this.imagePreviews.filter((pr, i) => {
       if (pr === preview){
         this.images = this.images.filter((image, j) => j !== i);
@@ -208,8 +208,8 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
       }
       return true;
     });
-    console.log('this.images:', this.images);
-    console.log('this.previews:', this.imagePreviews);
+    // console.log('this.images:', this.images);
+    // console.log('this.previews:', this.imagePreviews);
   }
 
   removeCurrentImage(image){
