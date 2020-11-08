@@ -18,7 +18,7 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
     bedrooms: null,
     id: null,
     price: { amount: null, type: 'Negotiable' },
-    address: { city: null, area: null },
+    address: { city: null, neighborhood: null },
     postCreator: null,
     propertyImages: [],
     propertyTitle: null,
@@ -92,8 +92,8 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
       && this.currentProperty.bedrooms
       && this.currentProperty.address.city
     ) {
-      console.log(this.currentProperty.address.area);
-      this.currentProperty.propertyTitle = `${this.currentProperty.bedrooms} Bedroom  House in ${this.currentProperty.address.area ? this.currentProperty.address.area + ',' : ''} ${this.currentProperty.address.city}`;
+      console.log(this.currentProperty.address.neighborhood);
+      this.currentProperty.propertyTitle = `${this.currentProperty.bedrooms} Bedroom  House in ${this.currentProperty.address.neighborhood ? this.currentProperty.address.neighborhood + ',' : ''} ${this.currentProperty.address.city}`;
     }
     this.propertyService.addProperty(this.currentProperty)
       .subscribe((added: Property) => {
@@ -110,7 +110,7 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
       bedrooms: null,
       id: null,
       price: { amount: null, type: 'Negotiable' },
-      address: { city: null, area: null },
+      address: { city: null, neighborhood: null },
       postCreator: null,
       propertyImages: [],
       propertyTitle: null,

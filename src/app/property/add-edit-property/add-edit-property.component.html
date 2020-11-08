@@ -40,7 +40,7 @@
                     class="col-2 col-md-5 col-lg-2 col-form-label text-brand-grey">Neighborhood</label>
                 <div class="col-7 ml-auto">
                     <input type="text" class="form-control text-input-brand" id="neighborhoodInput" name="neighborhood"
-                        [(ngModel)]="currentProperty.address.area">
+                        [(ngModel)]="currentProperty.address.neighborhood">
                 </div>
             </div>
         </div>
@@ -245,7 +245,7 @@
             <span *ngIf="(propertyForm.controls.city?.invalid && propertyForm.controls.city.touched) || (propertyForm.controls.city?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
         </div>
         <div class="">
-            <input type="text" placeholder="Neighborhood" id="neighborhood" name="neighborhood" class="inputfield" ngModel (ngModelChange)="currentProperty.address.area = $event" required>
+            <input type="text" placeholder="Neighborhood" id="neighborhood" name="neighborhood" class="inputfield" ngModel (ngModelChange)="currentProperty.address.neighborhood = $event" required>
             <span *ngIf="(propertyForm.controls.neighborhood?.invalid && propertyForm.controls.neighborhood.touched) || (propertyForm.controls.neighborhood?.invalid  && invalidTry)" style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
         </div>
         <input type="text" placeholder="Area in m²" id="areaInM2" name="areaInM2" class="inputfield"

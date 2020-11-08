@@ -91,25 +91,25 @@
               </div>
             </div>
           </div>
-          <div *ngIf="user.address?.sub_city">
+          <div *ngIf="user.address?.subCity">
             <hr>
             <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-1">Sub-City</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{user.address?.sub_city}}
+                {{user.address?.subCity}}
               </div>
             </div>
           </div>
-          <div *ngIf="user.address?.area">
+          <div *ngIf="user.address?.neighborhood">
             <hr>
             <div class="row">
               <div class="col-sm-3">
                 <h6 class="mb-1">Area</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{user.address?.area}}
+                {{user.address?.neighborhood}}
               </div>
             </div>
           </div>
@@ -149,7 +149,7 @@
   displayname?: string;
   contact: {type: 'phone'|'email', value: string}[]; //phone or email
   avatar?: string;
-  address?: {city: string, sub_city: string, area: string};
+  address?: {city: string, subCity: string, neighborhood: string};
   company?: string;
   about?: string;
   posts: number[];

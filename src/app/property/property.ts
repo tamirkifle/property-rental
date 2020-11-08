@@ -2,7 +2,7 @@ export interface Property {
   id: number;
   propertyTitle: string;
   bedrooms: number;
-  address: {city: string, subCity?: string, area: string, coordinates?: string};
+  address: {city: string, subCity?: string, neighborhood: string, coordinates?: string};
   price: {amount: number, type: 'Fixed' | 'Negotiable'};
   notes?: string;
   postCreator: string;

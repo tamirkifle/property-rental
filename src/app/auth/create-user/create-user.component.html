@@ -86,7 +86,7 @@
                 <div class="text-left pb-3 mr-sm-3">
                     <label for="subCity" class="m-0"><small>Sub City</small></label>
                     <input type="text" placeholder="Enter your sub-city here" class="login_input d-block w-100"
-                        name="subCity" id="subCity" required ngModel (ngModelChange)="this.createdUser.address.sub_city = $event">
+                        name="subCity" id="subCity" required ngModel (ngModelChange)="this.createdUser.address.subCity = $event">
                     <span
                         *ngIf="(userForm.controls.subCity?.invalid && userForm.controls.subCity?.touched) || (userForm.controls.subCity?.invalid && invalidTry)"
                         style="float: right;font-size: 14px; line-height:0; color: red;"><em>Required</em></span>
@@ -94,7 +94,7 @@
                 <div class="text-left pb-3 mr-sm-3">
                     <label for="neighborhood" class="m-0"><small>Neighborhood</small></label>
                     <input type="text" placeholder="Enter your area here" class="login_input d-block w-100"
-                        name="neighborhood" id="neighborhood" required ngModel (ngModelChange)="this.createdUser.address.area = $event">
+                        name="neighborhood" id="neighborhood" required ngModel (ngModelChange)="this.createdUser.address.neighborhood = $event">
                     <span
                         *ngIf="(userForm.controls.neighborhood?.invalid && userForm.controls.neighborhood?.touched) || (userForm.controls.neighborhood?.invalid && invalidTry)"
                         style="float: right;font-size: 14px; line-height:0; color: red;"><em>Required</em></span>

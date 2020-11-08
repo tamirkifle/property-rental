@@ -60,7 +60,7 @@
         <div class="row border-top pb-2 pt-3 mb-0" *ngIf="property.address">
           <h2 class="h6 col-md-3 col-sm-4">Location</h2>
           <div class="col-sm-auto d-flex flex-column flex-wrap" style="max-height: 120px;">
-            <div class="mr-4">{{ property.address.area ? property.address.area + ', ': ''}} {{ property.address.city }}
+            <div class="mr-4">{{ property.address.neighborhood ? property.address.neighborhood + ', ': ''}} {{ property.address.city }}
             </div>
             <div class="mb-2 mr-4 text-muted" *ngIf="property.address?.subCity">{{ property.address.subCity}}</div>
           </div>

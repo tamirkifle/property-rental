@@ -6,7 +6,7 @@ export interface User {
   displayname?: string;
   contact: {phone: string, email: string}; //phone or email
   avatar?: string;
-  address?: {city: string, sub_city: string, area: string};
+  address?: {city: string, subCity: string, neighborhood: string};
   company?: string;
   about?: string;
   posts: number[];

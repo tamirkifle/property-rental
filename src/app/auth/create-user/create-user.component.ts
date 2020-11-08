@@ -17,7 +17,7 @@ export class CreateUserComponent implements OnInit {
   // displayname?: string;
   // contact: {type: 'phone'|'email', value: string}[]; //phone or email
   // avatar?: string;
-  // address?: {city: string, sub_city: string, area: string};
+  // address?: {city: string, subCity: string, neighborhood: string};
   // company?: string;
   // about?: string;
   // posts: number[];
@@ -32,7 +32,7 @@ export class CreateUserComponent implements OnInit {
     lastname: null,
     contact: {phone: null, email: null},
     avatar: null, // 'assets/placeholders/avatar.png'
-    address: { city: null, sub_city: null, area: null },
+    address: { city: null, subCity: null, neighborhood: null },
     company: null,
     about: null,
     posts: [],

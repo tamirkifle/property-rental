@@ -142,8 +142,8 @@
               </div>
               <div class="col-sm-9">
                 <input type="text" placeholder="Your sub-city" class="text-secondary custom-input d-inline-block w-100"
-                  name="sub_city" id="sub_city" required [(ngModel)]="user.address.sub_city">
-                <span *ngIf="editProfileForm.controls.sub_city?.invalid"
+                  name="subCity" id="subCity" required [(ngModel)]="user.address.subCity">
+                <span *ngIf="editProfileForm.controls.subCity?.invalid"
                   style="display: block; float: right;font-size: 14px; line-height:1; color: red;"><em>Required</em></span>
               </div>
             </div>
@@ -157,7 +157,7 @@
               <div class="col-sm-9">
                 <input type="text" placeholder="Your neighborhood"
                   class="text-secondary custom-input d-inline-block w-100" name="neighborhood" id="neighborhood"
-                  required [(ngModel)]="user.address.area">
+                  required [(ngModel)]="user.address.neighborhood">
                 <span *ngIf="editProfileForm.controls.neighborhood?.invalid"
                   style="display: block; float: right;font-size: 14px; line-height:1; color: red;"><em>Required</em></span>
               </div>
@@ -202,7 +202,7 @@
   displayname?: string;
   contact: {type: 'phone'|'email', value: string}[]; //phone or email
   avatar?: string;
-  address?: {city: string, sub_city: string, area: string};
+  address?: {city: string, subCity: string, neighborhood: string};
   company?: string;
   about?: string;
   posts: number[];
