@@ -1,0 +1,40 @@
+.card-img{
+    /* height: 320px; */
+    object-fit: cover;
+}
+
+
+/* 
+  Bootstrap Media Queries Overrides
+*/
+
+/* Small devices (landscape phones, 576px and up) */
+
+@media (min-width: 576px) {}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+@media (min-width: 768px) {
+    .card-brand {
+        /* border: 1px solid blue; */
+        width: 344px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+
+@media (min-width: 992px) {
+    .card-brand {
+        /* border: 1px solid green; */
+        width: 430px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {
+    .card-brand {
+        /* border: 1px solid violet; */
+        width: 369px;
+    }
+}

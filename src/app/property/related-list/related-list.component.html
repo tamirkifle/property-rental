@@ -1,0 +1,15 @@
+<div class="card bg-card rounded-sm my-3" *ngFor="let property of relatedProperties;">
+    <div class="row align-items-center no-gutters">
+      <div class="col-5">
+        <img src="{{ property.propertyImages[0] ? property.propertyImages[0] : 'assets/placeholders/no_img.png' }}" class="card-img rounded-0 h-100" alt="Property Photo">
+    </div>
+      <div class="col-7">
+        <div class="card-body px-3 py-2">
+          <h6 class="card-title">{{property.bedrooms}} Bedroom House In {{property.address.area}}, {{property.address.city}}</h6>
+          <h6 class="text-muted">{{property.price.amount | number:'1.0-2'}} Birr</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{property.price.type}}</h6>
+          <a class="card-link text-brand-primary font-weight-bold"><i class="mr-2 fa fa-heart-o" aria-hidden="true"></i>Favorite</a>
+        </div>
+      </div>
+    </div>
+  </div>
