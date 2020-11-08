@@ -68,7 +68,7 @@ export class InMemoryDataService implements InMemoryDbService {
         address: {city: 'Addis Ababa', subCity: 'Bole', area: 'Bole'},
         price: {amount: 2000, type: 'Negotiable'},
         postCreator: 'edelala',
-        propertyImages: ['assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg', 'assets/4.jpg'],
+        propertyImages: ['assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg'],
         amenities: ['Fixed Kitchen Cabinet', 'Balcony'],
         bathrooms: 2,
         levels: 1,
@@ -81,7 +81,7 @@ export class InMemoryDataService implements InMemoryDbService {
         address: {city: 'Addis Ababa', subCity: 'Bole', area: 'Hayahulet'},
         price: {amount: 10000, type: 'Negotiable'},
         postCreator: 'mahletg',
-        propertyImages: ['assets/2.jpg', 'assets/3.jpg', 'assets/4.jpg', 'assets/1.jpg'],
+        propertyImages: ['assets/2.jpg', 'assets/4.jpg', 'assets/1.jpg'],
         amenities: [],
       },
       {
@@ -91,7 +91,7 @@ export class InMemoryDataService implements InMemoryDbService {
         address: {city: 'Addis Ababa', area: 'Yerer'},
         price: {amount: 19000, type: 'Negotiable'},
         postCreator: 'mesimesi',
-        propertyImages: ['assets/3.jpg', 'assets/4.jpg', 'assets/1.jpg', 'assets/2.jpg'],
+        propertyImages: ['assets/3.jpg', 'assets/4.jpg', 'assets/1.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
       {
@@ -101,7 +101,7 @@ export class InMemoryDataService implements InMemoryDbService {
         address: {city: 'Addis Ababa', area: 'Addis Ketema'},
         price: {amount: 49000, type: 'Negotiable'},
         postCreator: 'edelala',
-        propertyImages: ['assets/4.jpg', 'assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg'],
+        propertyImages: ['assets/4.jpg', 'assets/2.jpg', 'assets/3.jpg'],
         amenities: ['Backyard', 'Nice View'],
       },
       {

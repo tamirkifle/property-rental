@@ -1,4 +1,4 @@
-<div class="card bg-card rounded-sm my-3" *ngFor="let property of relatedProperties;">
+<div class="card bg-card rounded-sm my-3 pointable" *ngFor="let property of relatedProperties" [routerLink]="['/properties/detail', property.id]">
     <div class="row align-items-center no-gutters">
       <div class="col-5">
         <img src="{{ property.propertyImages[0] ? property.propertyImages[0] : 'assets/placeholders/no_img.png' }}" class="card-img rounded-0 h-100" alt="Property Photo">

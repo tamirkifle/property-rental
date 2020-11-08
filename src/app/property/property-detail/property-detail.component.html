@@ -16,7 +16,7 @@
               transform="translate(8.1) rotate(90)" />
           </svg>
         </button>
-        <ng-image-slider [infinite]="true" [images]="imageObject" [imageSize]="customImageSize"
+        <ng-image-slider [infinite]="false" [images]="imageObject" [imageSize]="customImageSize"
           [showArrow]="false" [manageImageRatio]="true" [animationSpeed]="0.5" #slider>
         </ng-image-slider>
         <button class="slider_btn right_slider_btn" [disabled]="property.propertyImages?.length <= 1"
