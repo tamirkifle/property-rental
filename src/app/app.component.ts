@@ -49,8 +49,6 @@ export class AppComponent {
 
   logout () {
     this.authService.logout().subscribe(res => {
-      this.avatar = 'assets/other_icons/profile.png';
-      this.userFirstName = 'Profile';
       this.router.navigate(['/']);
     });
   }

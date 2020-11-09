@@ -31,14 +31,22 @@ export class AuthService {
           return this.userService.getUser(user.uid);
         }
         else{
-          of(null);
+          return of(null);
         }
       })
     );
     this.authState$.subscribe(user => {
-      this._isLoggedIn = true;
-      this.currentUser = user;
-      this.userChanged.emit();
+      if (user){
+        this._isLoggedIn = true;
+        this.currentUser = user;
+        this.userChanged.emit();
+      }
+      else{
+        this._isLoggedIn = false;
+        this.currentUser = null;
+        this.userChanged.emit();
+      }
+      console.log('authState', user);
     });
   }
 
@@ -85,15 +93,8 @@ export class AuthService {
       })
     );
   }
-  logout(): Observable<true> {
-    return from(this.fAuth.signOut()).pipe(
-      map(() => {
-      this.currentUser = null;
-      this._isLoggedIn = false;
-      this._isAdmin = false;
-      return true;
-      }),
-      );
+  logout(): Observable<any> {
+    return from(this.fAuth.signOut());
 
   }
 }
