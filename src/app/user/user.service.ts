@@ -29,13 +29,14 @@ export class UserService {
   getUsers(): Observable<User[]>{
     return this.http.get<User[]>(this.usersURL)
     .pipe(
-      catchError(this.handleError('getUsers', []))
+      catchError(this.handleError<User[]>('getUsers', []))
     );
   }
 
   getUser(username): Observable<User>{
     return this.getUsers().pipe(
-      map(users => users.find(user => user.username === username))
+      map(users => users.find(user => user.username === username)),
+      catchError(this.handleError<User>('getUser'))
     );
   }
 
@@ -47,7 +48,9 @@ export class UserService {
     fd.append('user', user);
 
     //change to fd
-    return this.http.put(this.usersURL, user);
+    return this.http.put(this.usersURL, user).pipe(
+      catchError(this.handleError('updateUser'))
+    );
   }
 
   addUser(user, password){
@@ -56,7 +59,9 @@ export class UserService {
     fd.append('user', user);
 
     //change to fd
-    return this.http.post(this.usersURL, user);
+    return this.http.post(this.usersURL, user).pipe(
+      catchError(this.handleError<User>('addUser'))
+    );
   }
 
 }

@@ -4,7 +4,7 @@
     <input type="file" name="avatar_upload" id="avatar_upload" accept=".jpeg, .jpg, .png" style="display: none" (change)="avatarChanged(avatar_upload.files[0])" #avatar_upload>
     <div *ngIf="user.avatar" class="text-center mb-4 mx-auto col-12 col-md-4">
       <img src="{{user.avatar}}" class="rounded-circle mb-3" alt="Avatar" style="width: 112px; height: 112px;">
-      <div *ngIf="user.avatar" class="d-flex mx-auto mb-3 justify-content-between" style="max-width: 180px;">
+      <div class="d-flex mx-auto mb-3 justify-content-between" style="max-width: 180px;">
         <button class="btn btn-link text-brand-primary font-weight-bold" (click)="avatar_upload.click()">Change</button>
         <button class="btn btn-link text-danger font-weight-bold" (click)="removeAvatar()">Remove</button>
       </div>

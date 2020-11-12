@@ -23,7 +23,12 @@ export class PropertyService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient, private authService: AuthService, private filterBy: FilterByPipe, private search: PropertyFilterPipe) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private filterBy: FilterByPipe,
+    private search: PropertyFilterPipe
+    ) { }
 
   getProperties(options?: PropertyOptions): Observable<Property[]> {
     if (options){
@@ -39,8 +44,6 @@ export class PropertyService {
     }
     return this.http.get<Property[]>(this.propertiesURL)
     .pipe(
-      // map(properties => options ? this.filterBy.transform(properties, options.filterBy) : properties),
-      // map(properties => options ? this.search.transform(properties, options.search) : properties),
       catchError(this.handleError<Property[]>('getProperties', []))
     );
   }
@@ -73,13 +76,17 @@ export class PropertyService {
 
   addProperty(createdProperty){
     return this.http
-      .post(this.propertiesURL, createdProperty);
+      .post(this.propertiesURL, createdProperty).pipe(
+        catchError(this.handleError<Property>(`addProperty`))
+      );;
   }
 
   updateProperty(editedProperty){
     console.log('in update property:', editedProperty);
     return this.http
-      .put(this.propertiesURL, editedProperty);
+      .put(this.propertiesURL, editedProperty).pipe(
+        catchError(this.handleError(`updateProperty`))
+      );
   }
 
   likeProperty(propertyId) {
@@ -87,24 +94,33 @@ export class PropertyService {
       this.authService.currentUser.favorites = [];
     }
     this.authService.currentUser.favorites.push(propertyId);
-    return this.http.put(this.usersURL, this.authService.currentUser);
+    return this.http.put(this.usersURL, this.authService.currentUser).pipe(
+      catchError(this.handleError(`likeProperty`))
+    );
   }
+
   unlikeProperty(propertyId){
     this.authService.currentUser.favorites = this.authService.currentUser.favorites.filter(id => id !== propertyId);
-    return this.http.put(this.usersURL, this.authService.currentUser);
+    return this.http.put(this.usersURL, this.authService.currentUser).pipe(
+      catchError(this.handleError(`unlikeProperty`))
+    );
   }
 
   deleteProperty(property){
     const id = typeof property === 'number' ? property : property.id;
     const url = `${this.propertiesURL}/${id}`;
-    return this.http.delete<Property>(url, this.httpOptions);
+    return this.http.delete(url, this.httpOptions).pipe(
+      catchError(this.handleError(`deleteProperty`))
+    );
   }
 
   getRelatedProperties(id){
       // NOT IMPLEMENTED: get all realted properties to property
       return this.http.get<Property[]>(this.propertiesURL)
       .pipe(
-        take(6)
+        map(properties => properties.filter(p => p.id !== id)),
+        map(properties => properties.splice(0, 7)),
+        catchError(this.handleError<Property[]>(`getRelatedProperties`, []))
       );
   }
 }
