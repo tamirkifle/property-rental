@@ -235,7 +235,6 @@ export class PropertyService {
             from(this.fsdb.collection('properties').doc(editedPropertyCopy.id).set(editedPropertyCopy)).subscribe(
               () => {
                 done.next(done);
-                this.router.navigate(['..'], {relativeTo: this.route});
               }
             );
           });
