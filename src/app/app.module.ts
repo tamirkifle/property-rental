@@ -7,7 +7,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PropertyModule } from './property/property.module';
@@ -37,7 +36,7 @@ import { environment } from '../environments/environment';
 
   ],
   providers: [
-    { provide: BUCKET, useValue: 'my-bucket-name' }
+    // { provide: BUCKET, useValue: 'my-bucket-name' }
   ],
   bootstrap: [AppComponent]
 })

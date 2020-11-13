@@ -66,7 +66,7 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['../..'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
+    this.router.navigate(['..'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
   }
 
    shuffle(array) {
