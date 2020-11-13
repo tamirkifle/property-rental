@@ -5,11 +5,13 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { getAllUsersURL, updateUserURL, createUserURL } from 'src/app/api';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private usersURL = 'api/users';
+  // private usersURL = 'api/users';
 
   constructor(private http: HttpClient) { }
   
@@ -27,7 +29,7 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]>{
-    return this.http.get<User[]>(this.usersURL)
+    return this.http.get<User[]>(getAllUsersURL)
     .pipe(
       catchError(this.handleError<User[]>('getUsers', []))
     );
@@ -48,7 +50,7 @@ export class UserService {
     fd.append('user', user);
 
     //change to fd
-    return this.http.put(this.usersURL, user).pipe(
+    return this.http.put(updateUserURL, user).pipe(
       catchError(this.handleError('updateUser'))
     );
   }
@@ -59,7 +61,7 @@ export class UserService {
     fd.append('user', user);
 
     //change to fd
-    return this.http.post(this.usersURL, user).pipe(
+    return this.http.post(createUserURL, user).pipe(
       catchError(this.handleError<User>('addUser'))
     );
   }

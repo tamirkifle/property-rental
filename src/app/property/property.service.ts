@@ -9,6 +9,8 @@ import { FilterByPipe } from '../shared/filter-by.pipe';
 import { PropertyFilterPipe } from '../shared/property-filter.pipe';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { getAllPropertiesURL, getPropertyBaseURL, createPropertyURL, updatePropertyURL, deletePropertyURL } from 'src/app/api';
+import { updateUserURL } from '../api';
 
 
 @Injectable({
@@ -16,8 +18,8 @@ import { Router } from '@angular/router';
 })
 export class PropertyService {
   allFilterOptions = [];
-  private propertiesURL = 'api/properties';  // URL to property web api
-  private usersURL = 'api/users';  // URL to users web api
+  // private propertiesURL = 'api/properties';
+  // private usersURL = 'api/users';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -31,7 +33,7 @@ export class PropertyService {
     ) { }
 
   getProperties(options?: PropertyOptions): Observable<Property[]> {
-    if (options){
+    if (options && (options.search && options.filterBy)){
         let params = new HttpParams();
         if (options.search){
           params = params.append('s', options.search);
@@ -39,10 +41,10 @@ export class PropertyService {
         if (options.filterBy && options.filterBy.length !== 0){
           options.filterBy.forEach(filter => params = params.append('by', filter));
         }
-        return this.http.get<Property[]>(this.propertiesURL, { params });
+        return this.http.get<Property[]>(getAllPropertiesURL, { params });
 
     }
-    return this.http.get<Property[]>(this.propertiesURL)
+    return this.http.get<Property[]>(getAllPropertiesURL)
     .pipe(
       catchError(this.handleError<Property[]>('getProperties', []))
     );
@@ -68,7 +70,7 @@ export class PropertyService {
   }
 
   getProperty(id: number): Observable<Property> {
-    const url = `${this.propertiesURL}/${id}`;
+    const url = `${getPropertyBaseURL}/${id}`;
     return this.http.get<Property>(url).pipe(
       catchError(this.handleError<Property>(`getProperty id=${id}`))
     );
@@ -76,7 +78,7 @@ export class PropertyService {
 
   addProperty(createdProperty){
     return this.http
-      .post(this.propertiesURL, createdProperty).pipe(
+      .post(createPropertyURL, createdProperty).pipe(
         catchError(this.handleError<Property>(`addProperty`))
       );;
   }
@@ -84,7 +86,7 @@ export class PropertyService {
   updateProperty(editedProperty){
     console.log('in update property:', editedProperty);
     return this.http
-      .put(this.propertiesURL, editedProperty).pipe(
+      .put(updatePropertyURL, editedProperty).pipe(
         catchError(this.handleError(`updateProperty`))
       );
   }
@@ -94,21 +96,21 @@ export class PropertyService {
       this.authService.currentUser.favorites = [];
     }
     this.authService.currentUser.favorites.push(propertyId);
-    return this.http.put(this.usersURL, this.authService.currentUser).pipe(
+    return this.http.put(updateUserURL, this.authService.currentUser).pipe(
       catchError(this.handleError(`likeProperty`))
     );
   }
 
   unlikeProperty(propertyId){
     this.authService.currentUser.favorites = this.authService.currentUser.favorites.filter(id => id !== propertyId);
-    return this.http.put(this.usersURL, this.authService.currentUser).pipe(
+    return this.http.put(updateUserURL, this.authService.currentUser).pipe(
       catchError(this.handleError(`unlikeProperty`))
     );
   }
 
   deleteProperty(property){
     const id = typeof property === 'number' ? property : property.id;
-    const url = `${this.propertiesURL}/${id}`;
+    const url = `${deletePropertyURL}/${id}`;
     return this.http.delete(url, this.httpOptions).pipe(
       catchError(this.handleError(`deleteProperty`))
     );
@@ -116,7 +118,7 @@ export class PropertyService {
 
   getRelatedProperties(id){
       // NOT IMPLEMENTED: get all realted properties to property
-      return this.http.get<Property[]>(this.propertiesURL)
+      return this.http.get<Property[]>(getAllPropertiesURL)
       .pipe(
         map(properties => properties.filter(p => p.id !== id)),
         map(properties => properties.splice(0, 7)),

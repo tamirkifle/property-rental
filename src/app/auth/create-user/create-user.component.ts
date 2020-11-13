@@ -46,7 +46,7 @@ export class CreateUserComponent implements OnInit {
   customError: string;
   invalidTry = false;
 
-  url = 'api/users';
+  // url = 'api/users';
   constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void { }
