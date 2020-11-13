@@ -1,26 +1,42 @@
-<div class="filter_container">
-    <div class="container d-flex justify-content-center py-2">
-        <div class="text-center mr-3">
-            <span class="filter-item border-left border-right d-inline-block btn p-0 text-brand-primary align-top"
-                *ngFor="let filter of filterItems">
-                <div class="dropdown">
-                    <span class="px-3 dropdown-toggle" data-toggle="dropdown">
-                        <span class="mr-3">{{filter.name}}</span>
-                    </span>
-                    <div class="dropdown-menu bg-semi-transparent">
-                        <form class="pt-2">
-                            <div *ngFor="let option of filter.options" class="form-group mb-0 pl-4 text-left">
-                                <div class="form-check">
-                                    <input class="form-check-input py-2" (change)="updateActiveOptions(option, $event.target.checked)" [checked]="activeOptions.includes(option)"
-                                        type="checkbox" name="{{option}}" id="{{option}}">
-                                    <label class="form-check-label text-nowrap d-inline-block w-100 pr-4 pl-1 py-2" for="{{option}}">{{option}}</label>
-                                </div>
+<div class="dropdown">
+    <span class="px-3 dropdown-toggle dropdown-no-arrow" data-toggle="dropdown">
+        <button class="btn btn-outline-brand-primary p-1 ml-5 my-2 border-0 rounded-0">
+            <svg id="filter_list-24px_1_" data-name="filter_list-24px (1)" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path id="Path_373" data-name="Path 373" d="M0,0H24V24H0Z" fill="none"/>
+                <path id="Path_374" data-name="Path 374" d="M10,18h4V16H10ZM3,6V8H21V6Zm3,7H18V11H6Z"/>
+              </svg>              
+            Filter By</button>
+    </span>
+    <div class="dropdown-menu bg-semi-transparent"> 
+        <div class="filter_container">
+            <div class="container d-flex flex-wrap justify-content-center py-2">
+                <div class="text-center mr-3">
+                    <span class="filter-item border-left border-right d-inline-block btn p-0 text-brand-primary align-top"
+                        *ngFor="let filter of filterItems">
+                        <div>
+                            <span class="px-3">
+                                <span class="mr-3">{{filter.name}}</span>
+                            </span>
+                            <div class="bg-semi-transparent">
+                                <form class="pt-2">
+                                    <div *ngFor="let option of filter.options" class="form-group mb-0 pl-4 text-left">
+                                        <div class="form-check">
+                                            <input class="form-check-input py-2"
+                                                (change)="updateActiveOptions(option, $event.target.checked)"
+                                                [checked]="activeOptions.includes(option)" type="checkbox" name="{{option}}"
+                                                id="{{option}}">
+                                            <label class="form-check-label text-nowrap d-inline-block w-100 pr-4 pl-1 py-2"
+                                                for="{{option}}">{{option}}</label>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </span>
                 </div>
-            </span>
+                <div class="col-12"></div>
+                <button class="btn btn-outline-brand-primary py-0 px-5 align-self-center text-right" (click)=filterBySelected()>Apply</button>
+            </div>
         </div>
-        <button class="btn btn-outline-brand-primary py-0" (click)=filterBySelected()>Apply</button>
     </div>
 </div>

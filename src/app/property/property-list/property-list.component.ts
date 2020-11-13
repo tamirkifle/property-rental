@@ -22,13 +22,17 @@ export class PropertyListComponent implements OnInit {
     // console.log('ngOnInit');
     this.route.queryParamMap.subscribe((params) => {
       this.searchText = params.get('s');
-      this.filterOptions = params.getAll('by').filter(query => this.propertyService.allFilterOptions.includes(query));
+      this.filterOptions = params.getAll('by');
     });
     this.route.data.subscribe(data => {
       this.properties = data.properties;
       // console.log(data);
     });
 
+  }
+
+  ngAfterViewInit(){
+    this.filterOptions = this.filterOptions.filter(query => this.propertyService.allFilterOptions.includes(query));
   }
 
   addCommas(num): string {

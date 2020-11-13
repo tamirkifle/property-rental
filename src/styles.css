@@ -20,7 +20,7 @@ body, h1, h2, h3, h4, h5, h6, p{
     cursor: pointer;
 }
 .bg-semi-transparent{
-    opacity: 85%;
+    opacity: 95%;
 }
 .bg-card{
     background-color: #f7f7f7!important;
