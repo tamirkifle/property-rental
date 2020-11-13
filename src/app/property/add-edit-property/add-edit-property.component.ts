@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Property } from '../property';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CanComponentDeactivate } from '../../can-deactivate.guard';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { DialogService } from '../../dialog.service';
 import { isEqualWith } from 'lodash-es';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -69,12 +69,12 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
     // this.imagePreviews.forEach(img => this.currentProperty.propertyImages.push(img)); // just to preview images
     // this.imagePreviews = []; // so no double previews show
 
-    this.propertyService.updateProperty(this.currentProperty)
-      .subscribe((doc) => {
+    this.propertyService.updateProperty(this.currentProperty, this.images).subscribe(
+      (done: Subject<any>) => {
         this.router.navigate(['..'], { relativeTo: this.route });
-        // console.log('edited property: ', prop);
-    });
-
+        done.unsubscribe();
+      }
+    );
     // this.propertyService.addProperty(this.currentProperty)
     //   .subscribe((doc) => {
     //     this.authService.currentUser.posts.push(doc.id);
@@ -113,7 +113,17 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
       // console.log(this.currentProperty.address.neighborhood);
       // this.currentProperty.propertyTitle = `${this.currentProperty.bedrooms} Bedroom  House in ${this.currentProperty.address.neighborhood ? this.currentProperty.address.neighborhood + ',' : ''} ${this.currentProperty.address.city}`;
     // }
-    this.propertyService.addProperty(this.currentProperty, this.images);
+    this.propertyService.addProperty(this.currentProperty, this.images).subscribe(
+      (done: Subject<any>) => {
+        if (this.currentProperty.id){
+          this.router.navigate([`/properties/detail/${this.currentProperty.id}`], { relativeTo: this.route });
+        }
+        else{
+          this.router.navigate([`/properties/myposts`], { relativeTo: this.route });
+        }
+        done.unsubscribe();
+      }
+    );
   }
   canDeactivate(): Observable<boolean> {
     const emptyProperty: Property = {
