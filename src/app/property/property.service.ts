@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Property, PropertyOptions } from './property';
 // import { MOCKPROPERTIES } from './mock-properties';
-import { from, Observable, of } from 'rxjs';
-import { catchError, map, take, tap } from 'rxjs/operators';
+import { combineLatest, from, Observable, of } from 'rxjs';
+import { catchError, map, take, tap, finalize, switchMap } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FilterByPipe } from '../shared/filter-by.pipe';
@@ -11,6 +11,8 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserService } from '../user/user.service';
+import { StorageService } from '../storage.service';
+import { AngularFireStorageReference } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +31,8 @@ export class PropertyService {
     private authService: AuthService,
     private fsdb: AngularFirestore,
     private userService: UserService,
+    private fstorage: StorageService,
+    private router: Router
   ) { }
 
   getProperties(options?: PropertyOptions): Observable<Property[]> {
@@ -45,7 +49,7 @@ export class PropertyService {
       //   return ref;
 
       // });
-      
+
       // return this.http.get<Property[]>(this.propertiesURL, { params });
     }
     // [{
@@ -168,44 +172,83 @@ export class PropertyService {
     // );
   }
 
-  addProperty(createdProperty) {
+  addProperty(sentCreatedProperty: Property, images?): void {
+    const createdProperty = Object.assign({}, sentCreatedProperty);
+    createdProperty.postCreator = this.authService.currentUser.id;
 
-    return from(this.fsdb.collection('properties').add(createdProperty));
+    createdProperty.propertyImages = [];
+    if (images && images.length !== 0) {
+      this.fstorage.uploadFiles(images, `propertyImages/${createdProperty.id}`).pipe(
+        finalize(() => {
+          console.log(this.fstorage.refs);
+          combineLatest(this.fstorage.refs.map((ref: AngularFireStorageReference) => ref.getDownloadURL())).subscribe(links => {
+            console.log('links ', links);
+            createdProperty.propertyImages = links;
+            console.log('createdPropertyWithImages ', createdProperty);
+            from(this.fsdb.collection('properties').add(createdProperty)).subscribe(
+              doc => {
+                const id = doc.id;
+                console.log('id', id);
+                sentCreatedProperty.id = id; // so that the canDeactivate guard can pass.pipe(
+                this.authService.currentUser.posts.push(id);
+                this.userService.updateUser(this.authService.currentUser).subscribe(() => {
+                  this.router.navigate(['/properties/myposts']);
+                  // console.log('created property: ', this.currentProperty);
+                });
+              });
+          });
+        })).subscribe();
+  }
+  else{// no images
+    from(this.fsdb.collection('properties').add(createdProperty)).subscribe(
+      doc => {
+        const id = doc.id;
+        console.log('id', id);
+        sentCreatedProperty.id = id; // so that the canDeactivate guard can pass.pipe(
+        this.authService.currentUser.posts.push(id);
+        this.userService.updateUser(this.authService.currentUser).subscribe(() => {
+          this.router.navigate(['/properties/myposts']);
+          // console.log('created property: ', this.currentProperty);
+        });
+      });
+  }
+
+}
+
     // return this.http
-    //   .post(this.propertiesURL, createdProperty);
-  }
+    //   .post(this.propertiesURL, createdProperty)
 
-  updateProperty(editedProperty) {
-    return from(this.fsdb.collection('properties').doc(editedProperty.id).set(editedProperty));
-  }
+updateProperty(editedProperty) {
+  return from(this.fsdb.collection('properties').doc(editedProperty.id).set(editedProperty));
+}
 
-  likeProperty(propertyId) {
-    if (!this.authService.currentUser.favorites) {
-      this.authService.currentUser.favorites = [];
-    }
-    this.authService.currentUser.favorites.push(propertyId);
-    return this.userService.updateUser(this.authService.currentUser);
+likeProperty(propertyId) {
+  if (!this.authService.currentUser.favorites) {
+    this.authService.currentUser.favorites = [];
   }
-  unlikeProperty(propertyId) {
-    this.authService.currentUser.favorites = this.authService.currentUser.favorites.filter(id => id !== propertyId);
-    return this.userService.updateUser(this.authService.currentUser);
+  this.authService.currentUser.favorites.push(propertyId);
+  return this.userService.updateUser(this.authService.currentUser);
+}
+unlikeProperty(propertyId) {
+  this.authService.currentUser.favorites = this.authService.currentUser.favorites.filter(id => id !== propertyId);
+  return this.userService.updateUser(this.authService.currentUser);
 
-  }
+}
 
-  deleteProperty(property) {
-    const id = typeof property === 'string' ? property : property.id;
-    // const url = `${this.propertiesURL}/${id}`;
-    // return this.http.delete<Property>(url, this.httpOptions);
-    return from(this.fsdb.collection("properties").doc(id).delete());
-  }
+deleteProperty(property) {
+  const id = typeof property === 'string' ? property : property.id;
+  // const url = `${this.propertiesURL}/${id}`;
+  // return this.http.delete<Property>(url, this.httpOptions);
+  return from(this.fsdb.collection("properties").doc(id).delete());
+}
 
-  getRelatedProperties(id) {
-    // NOT IMPLEMENTED: get all realted properties to property
-    return this.getProperties()
-      .pipe(
-        map(properties => {
-          return properties.splice(0, 8);
-        }),
-      );
-  }
+getRelatedProperties(id) {
+  // NOT IMPLEMENTED: get all realted properties to property
+  return this.getProperties()
+    .pipe(
+      map(properties => {
+        return properties.splice(0, 8);
+      }),
+    );
+}
 }

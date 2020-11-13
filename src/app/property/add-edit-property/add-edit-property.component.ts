@@ -8,6 +8,7 @@ import { isEqualWith } from 'lodash-es';
 import { AuthService } from 'src/app/auth/auth.service';
 import { PropertyService } from '../property.service';
 import { UserService } from '../../user/user.service';
+import { StorageService } from '../../storage.service';
 import {
   AngularFireStorage,
   AngularFireUploadTask,
@@ -41,7 +42,8 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
     private dialogService: DialogService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private fstorage: StorageService
   ) { }
 
   ngOnInit(): void {
@@ -102,7 +104,7 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
     // so no double previews show
     // this.imagePreviews = []; 
 
-    this.currentProperty.postCreator = this.authService.currentUser.id;
+    // this.currentProperty.postCreator = this.authService.currentUser.id;
     // if (
     //   this.currentProperty.propertyTitle === null
     //   && this.currentProperty.bedrooms
@@ -111,15 +113,7 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
       // console.log(this.currentProperty.address.neighborhood);
       // this.currentProperty.propertyTitle = `${this.currentProperty.bedrooms} Bedroom  House in ${this.currentProperty.address.neighborhood ? this.currentProperty.address.neighborhood + ',' : ''} ${this.currentProperty.address.city}`;
     // }
-    this.propertyService.addProperty(this.currentProperty)
-      .subscribe((doc) => {
-        this.authService.currentUser.posts.push(doc.id);
-        this.userService.updateUser(this.authService.currentUser).subscribe(() => {
-          this.currentProperty.id = doc.id;
-          this.router.navigate(['/properties']);
-          // console.log('created property: ', this.currentProperty);
-        });
-      });
+    this.propertyService.addProperty(this.currentProperty, this.images);
   }
   canDeactivate(): Observable<boolean> {
     const emptyProperty: Property = {
