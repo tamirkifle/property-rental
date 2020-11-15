@@ -10,14 +10,14 @@
     <div class="dropdown-menu" style="opacity: 95%;"> 
         <div class="filter_container">
             <div class="container d-flex flex-wrap justify-content-center py-2">
-                <div class="text-center mr-3">
-                    <span class="filter-item border-left border-right d-inline-block btn p-0 text-brand-primary align-top"
+                <div class="text-left row justify-content-center text-sm-center mr-3">
+                    <div class="filter-item border-left border-right d-block d-sm-inline-block btn p-0 text-brand-primary align-top mb-2"
                         *ngFor="let filterName of filterKeys">
                         <div>
-                            <span class="px-3">
+                            <span class="px-3 text-left text-sm-center">
                                 <span class="mr-3">{{filterName | titlecase}}</span>
                             </span>
-                            <div style="opacity: 95%;">
+                            <div style="opacity: 95%;" >
                                 <form class="pt-2">
                                     <div *ngFor="let option of filterItems[filterName]" class="form-group mb-0 pl-4 text-left">
                                         <div class="form-check">
@@ -32,7 +32,7 @@
                                 </form>
                             </div>
                         </div>
-                    </span>
+                    </div>
                 </div>
                 <div class="col-12"></div>
                 <button class="btn btn-outline-brand-primary py-0 px-5 align-self-center text-right" (click)=filterBySelected()>Apply</button>
