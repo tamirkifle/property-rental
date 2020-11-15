@@ -335,7 +335,7 @@ export class PropertyService {
   // return this.http
   //   .post(this.propertiesURL, createdProperty)
 
-  updateProperty(editedProperty, images?) {
+  updateProperty(editedProperty, images?, linksToRemove?: string[]) {
     const done = new Subject();
 
     editedProperty.bedrooms > 3 ? editedProperty.fourPlus = true : editedProperty.fourPlus = false;
@@ -367,6 +367,11 @@ export class PropertyService {
             }
             from(this.fsdb.collection('properties').doc(editedPropertyCopy.id).set(editedPropertyCopy)).subscribe(
               () => {
+                linksToRemove.forEach(link => {
+                  this.fstorage.refFromURL(link).delete().then(
+                    // () => console.log('image deleted successfully')
+                  ).catch(error => console.error(error));
+                });
                 done.next(done);
               }
             );
@@ -377,6 +382,11 @@ export class PropertyService {
     else {//no new images
       from(this.fsdb.collection('properties').doc(editedProperty.id).set(editedProperty)).subscribe(
         () => {
+          linksToRemove.forEach(link => {
+            this.fstorage.refFromURL(link).delete().then(
+              // () => console.log('image deleted successfully')
+            ).catch(error => console.error(error));
+          });
           done.next(done);
         }
       );
@@ -397,11 +407,19 @@ export class PropertyService {
 
   }
 
-  deleteProperty(property) {
-    const id = typeof property === 'string' ? property : property.id;
+  deleteProperty(property: Property) {
+    // const id = typeof property === 'string' ? property : property.id;
     // const url = `${this.propertiesURL}/${id}`;
     // return this.http.delete<Property>(url, this.httpOptions);
-    return from(this.fsdb.collection("properties").doc(id).delete());
+    return from(this.fsdb.collection("properties").doc(property.id).delete()).pipe(
+      finalize( () => {
+        property.propertyImages.forEach(link => {
+          this.fstorage.refFromURL(link).delete().then(
+            // () => console.log('image deleted successfully')
+          ).catch(error => console.error(error));
+        });
+      })
+    );
   }
 
   getRelatedProperties(id) {

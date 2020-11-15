@@ -37,6 +37,7 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
   imagePreviews: string[] = [];
   images: File[] = [];
   invalidTry = false;
+  removeFromStorage = [];
   constructor(
     private propertyService: PropertyService,
     private router: Router,
@@ -69,8 +70,7 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
 
     // this.imagePreviews.forEach(img => this.currentProperty.propertyImages.push(img)); // just to preview images
     // this.imagePreviews = []; // so no double previews show
-
-    this.propertyService.updateProperty(this.currentProperty, this.images).subscribe(
+    this.propertyService.updateProperty(this.currentProperty, this.images, this.removeFromStorage).subscribe(
       (done: Subject<any>) => {
         this.router.navigate(['..'], { relativeTo: this.route });
         done.unsubscribe();
@@ -218,8 +218,9 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
     // console.log('this.previews:', this.imagePreviews);
   }
 
-  removeCurrentImage(image){
-    this.currentProperty.propertyImages = this.currentProperty.propertyImages.filter(img => img !== image);
+  removeCurrentImage(imageLink){
+    this.currentProperty.propertyImages = this.currentProperty.propertyImages.filter(link => link !== imageLink);
+    this.removeFromStorage.push(imageLink);
   }
   makeInvalid(submitBtn){
     if (submitBtn.disabled){
@@ -232,7 +233,7 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
       this.router.navigateByUrl('/login');
       return;
     }
-    if (!this.authService.currentUser?.posts.includes(this.currentProperty.id)){//SAFETY MEASURE
+    if (!this.authService.currentUser?.posts.includes(this.currentProperty.id) && !this.authService.currentUser.isAdmin){//SAFETY MEASURE
       this.router.navigateByUrl('/login');
       return;
     }

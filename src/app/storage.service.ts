@@ -23,4 +23,7 @@ export class StorageService {
     return combineLatest(changeSnapshots);
 
   }
+  refFromURL(URL){
+    return this.storage.storage.refFromURL(URL)
+  }
 }
