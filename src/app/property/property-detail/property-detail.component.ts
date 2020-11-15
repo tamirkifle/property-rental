@@ -28,7 +28,7 @@ export class PropertyDetailComponent implements OnInit {
     private userService: UserService,
     private propertyService: PropertyService,
     private router: Router,
-    private authService: AuthService,
+    public authService: AuthService,
     media: MediaObserver
   ) {
     this.media$ = media.asObservable();
@@ -52,7 +52,6 @@ export class PropertyDetailComponent implements OnInit {
       this.property = data.property;
       this.postCreatorUser = data.user;
       this.relatedItems = this.shuffle(data.relatedItems);
-      this.isAuthorizedToEdit = this.authService.isLoggedIn && (this.authService.currentUser.username === this.postCreatorUser.username || this.authService.currentUser.isAdmin);
       this.imageObject = [];
       this.imageObject = this.property.propertyImages.map(imageLink => {
         return { image: imageLink, thumbImage: imageLink, title: this.property.propertyTitle };
@@ -63,6 +62,9 @@ export class PropertyDetailComponent implements OnInit {
         );
       }
     });
+    this.authService.authState$.subscribe(() => {
+      this.isAuthorizedToEdit = this.authService.isLoggedIn && (this.authService.currentUser.username === this.postCreatorUser.username || this.authService.currentUser.isAdmin);
+    })
   }
 
   goBack(): void {

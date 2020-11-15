@@ -13,6 +13,7 @@ export class AppComponent {
   avatar = 'assets/other_icons/profile.png';
   userFirstName = 'Profile';
   isLoggedIn = false;
+  isAdmin = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -30,6 +31,12 @@ export class AppComponent {
       this.avatar = this.authService.currentUser ? this.authService.currentUser.avatar : 'assets/other_icons/profile.png';
       this.userFirstName = this.authService.currentUser ? this.authService.currentUser.firstname : 'Profile';
     });
+
+    this.authService.authState$.subscribe(() => {
+      this.isLoggedIn = this.authService.isLoggedIn;
+      this.isAdmin = this.authService.isAdmin;
+
+    })
   }
   onSearch(searchTerm) {
     if (!searchTerm) {
