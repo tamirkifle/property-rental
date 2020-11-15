@@ -14,6 +14,7 @@ export class AppComponent {
   userFirstName = 'Profile';
   isLoggedIn = false;
   isAdmin = false;
+  checkedAuth = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -34,6 +35,7 @@ export class AppComponent {
     });
 
     this.authService.userChanged.subscribe(() => {
+      this.checkedAuth = true;
       this.avatar = this.authService.currentUser ? this.authService.currentUser.avatar : 'assets/other_icons/profile.png';
       this.userFirstName = this.authService.currentUser ? this.authService.currentUser.firstname : 'Profile';
     });
@@ -41,7 +43,6 @@ export class AppComponent {
     this.authService.authState$.subscribe(() => {
       this.isLoggedIn = this.authService.isLoggedIn;
       this.isAdmin = this.authService.isAdmin;
-
     })
   }
   onSearch(searchTerm) {

@@ -6,7 +6,7 @@
         <button class="navbar-toggler" data-toggle="collapse" data-target="#main-nav">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="main-nav">
+        <div class="collapse navbar-collapse" id="main-nav" *ngIf="checkedAuth">
           <ul class="navbar-nav ml-auto flex-md-wrap justify-content-center">
             <li class="nav-item text-center d-inline-block my-auto"><a class="btn nav-link shadow-none d-inline-block px-3" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="/properties">Feed</a></li>
             <li class="nav-item text-center d-inline-block my-auto"><a class="btn nav-link shadow-none px-3" routerLinkActive="active" routerLink="/properties/favorites">Favorites</a></li>
