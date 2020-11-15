@@ -22,6 +22,13 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.currentUser;
+    if (!this.user.address){
+      this.user.address = { city: null, subCity: null, neighborhood: null };
+    }
+    if (!this.user.contact){
+      this.user.contact = { phone: null, email: null };
+    }
+
 
   }
 
