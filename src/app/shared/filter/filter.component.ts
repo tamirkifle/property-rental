@@ -10,33 +10,18 @@ import { PropertyService } from '../../property/property.service';
   styleUrls: ['./filter.component.css'],
 })
 export class FilterComponent implements OnInit {
-  filterItems = [
-    {
-      name: 'City',
-      options: ['Addis Ababa', 'Mekele', 'Bahir Dar', 'Adama'],
-    },
-    {
-      name: 'Sub-City',
-      options: ['Kirkos', 'Bole', 'Lideta', 'Yeka'],
-    },
-    {
-      name: 'Type',
-      options: ['Apartment', 'Full Compound', 'Room(s)'],
-    },
-    {
-      name: 'Number Of Bedrooms',
-      options: ['One Bedroom', 'Two Bedrooms', 'Three Bedrooms', '>3 Bedrooms'],
-    },
-    {
-      name: 'Price Range',
-      options: ['<2000', '2000-3000', '3000-5000', '>5000'],
-    },
-  ];
+  filterItems;
+  filterKeys = [];
   activeOptions: string[] = [];
   constructor(private router: Router, private route: ActivatedRoute, private propertyService: PropertyService) { }
 
   ngOnInit(): void {
-    this.propertyService.allFilterOptions = flatten(this.filterItems.map(filter => filter.options));
+    this.filterItems = this.propertyService.filterItems;
+    for (const key in this.filterItems){
+      if (this.filterItems.hasOwnProperty(key)){
+        this.filterKeys.push(key);
+      }
+    }
     this.route.queryParamMap.subscribe(params => {
       this.activeOptions = [];
       params.getAll('by').forEach(option => {

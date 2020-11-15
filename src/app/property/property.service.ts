@@ -9,7 +9,7 @@ import { FilterByPipe } from '../shared/filter-by.pipe';
 import { PropertyFilterPipe } from '../shared/property-filter.pipe';
 import { AuthService } from '../auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, CollectionReference, DocumentData, Query } from '@angular/fire/firestore';
 import { UserService } from '../user/user.service';
 import { StorageService } from '../storage.service';
 import { AngularFireStorageReference } from '@angular/fire/storage';
@@ -18,6 +18,13 @@ import { AngularFireStorageReference } from '@angular/fire/storage';
   providedIn: 'root',
 })
 export class PropertyService {
+  filterItems = {
+    'city': ['Addis Ababa', 'Mekele', 'Arba Minch', 'Gondar', 'Bahir Dar'],
+    'sub city': ['Kirkos', 'Bole', 'Lideta', 'Yeka'],
+    'type': ['Apartment', 'Condominium', 'Full House', 'House Quarter'],
+    'number of bedrooms': ['One Bedroom', 'Two Bedrooms', 'Three Bedrooms', '>3 Bedrooms'],
+    'price range': ['<=2000', '2000-3000', '3000-5000', '>5000'],
+  };
   allFilterOptions = [];
   private propertiesURL = 'api/properties';  // URL to property web api
   private usersURL = 'api/users';  // URL to users web api
@@ -34,17 +41,110 @@ export class PropertyService {
     private fstorage: StorageService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {
+
+    for (const key in this.filterItems) {
+      this.filterItems[key].forEach(option => this.allFilterOptions.push(option))
+    }
+  }
 
   getProperties(options?: PropertyOptions): Observable<Property[]> {
     if (options && (options.search || options.filterBy?.length > 0)) {
-      let params = new HttpParams();
+      let propertyRef: CollectionReference;
+      this.fsdb.collection('properties', ref => propertyRef = ref);
+      console.dir(propertyRef);
+      // console.dir(options)
       if (options.search) {
-        params = params.append('s', options.search);
+
       }
-      if (options.filterBy && options.filterBy.length !== 0) {
-        options.filterBy.forEach(filter => params = params.append('by', filter));
+      if (options.filterBy?.length > 0) {
+        console.log(options.filterBy);
+        const filterObj = {};
+        for (const key in this.filterItems) {
+          if (this.filterItems.hasOwnProperty(key)) {
+            filterObj[key] = [];
+            options.filterBy.forEach(opt => {
+              if (this.filterItems[key].includes(opt)) {
+                filterObj[key].push(opt);
+              }
+            });
+          }
+        }
+        console.log(filterObj);
+
+
+        let query:any = propertyRef;
+        for (const key in filterObj) {
+          if (this.filterItems.hasOwnProperty(key)) {
+            switch (key) {
+              case 'city':
+                filterObj[key].forEach(filterItm => {
+                  query = query.where("address.city", "==", filterItm);
+                });
+                break;
+              case 'sub city':
+                filterObj[key].forEach(filterItm => {
+                  query = query.where("address.subCity", "==", filterItm);
+                });
+                break;
+              case 'type':
+                filterObj[key].forEach(filterItm => {
+                  query = query.where("houseType", "==", filterItm);
+                });
+                break;
+              case 'number of bedrooms':
+                filterObj[key].forEach((filterItm) => {
+                  if (filterItm === 'One Bedroom') {
+                    query = query.where("bedrooms", "==", 1);
+                  }
+                  if (filterItm === 'Two Bedrooms') {
+                    query = query.where("bedrooms", "==", 2);
+                  }
+                  if (filterItm === 'Three Bedrooms') {
+                    query = query.where("bedrooms", "==", 3);
+                  }
+                  if (filterItm === '>3 Bedrooms') {
+                    query = query.where("fourPlus", "==", true);
+                  }
+                });
+                break;
+              case 'price range':
+                filterObj[key].forEach((filterItm) => {
+                    query = query.where("priceRange", "==", filterItm);
+                  });
+                break;
+
+              default:
+                break;
+            }
+          }
+        }
+        return this.fsdb.collection('properties', _ => query).get().pipe(
+          map(snapshot => snapshot.docChanges()),
+          map(values => {
+            return values.map(value => {
+              const data: any = value.doc.data();
+              return {
+                ...data,
+                id: value.doc.id as string,
+
+              } as Property;
+            });
+          }),
+          catchError(this.handleError<Property[]>(`QUERIES FAILED`)),
+          );
+
       }
+
+      // let params = new HttpParams();
+      // if (options.search) {
+      //   params = params.append('s', options.search);
+      // }
+      // if (options.filterBy && options.filterBy.length !== 0) {
+      //   options.filterBy.forEach(filter => params = params.append('by', filter));
+      // }
+
+
       // const propRef = this.fsdb.collection('properties', ref => {
       //   if(filter)
       //   return ref;
@@ -145,7 +245,7 @@ export class PropertyService {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      console.error(operation, error); // log to console instead
 
       // TODO: LOG
 
@@ -177,6 +277,21 @@ export class PropertyService {
     const done = new Subject();
     sentCreatedProperty.postCreator = this.authService.currentUser.id;
     sentCreatedProperty.propertyImages = [];
+
+    sentCreatedProperty.bedrooms > 3 ? sentCreatedProperty.fourPlus = true : sentCreatedProperty.fourPlus = false;
+    if (sentCreatedProperty.price.amount >= 5000){
+      sentCreatedProperty.priceRange = '>5000';
+    }
+    else if (sentCreatedProperty.price.amount >= 3000){
+      sentCreatedProperty.priceRange = '3000-5000';
+    }
+    else if (sentCreatedProperty.price.amount >= 2000){
+      sentCreatedProperty.priceRange = '2000-3000';
+    }
+    else{
+      sentCreatedProperty.priceRange = '<=2000';
+    }
+
     if (images && images.length !== 0) {
       const createdProperty = Object.assign({}, sentCreatedProperty);// we copy it not to alter the sent object as it affects preview
       this.fstorage.uploadFiles(images, `propertyImages/${createdProperty.id}`).pipe(
@@ -222,6 +337,21 @@ export class PropertyService {
 
   updateProperty(editedProperty, images?) {
     const done = new Subject();
+
+    editedProperty.bedrooms > 3 ? editedProperty.fourPlus = true : editedProperty.fourPlus = false;
+    if (editedProperty.price.amount >= 5000){
+      editedProperty.priceRange = '>5000';
+    }
+    else if (editedProperty.price.amount >= 3000){
+      editedProperty.priceRange = '3000-5000';
+    }
+    else if (editedProperty.price.amount >= 2000){
+      editedProperty.priceRange = '2000-3000';
+    }
+    else{
+      editedProperty.priceRange = '<=2000';
+    }
+
     if (images && images.length !== 0) {
       const editedPropertyCopy = Object.assign({}, editedProperty);
       editedPropertyCopy.propertyImages = [...editedProperty.propertyImages]; // not to alter the sent array as it affects preview
@@ -232,6 +362,9 @@ export class PropertyService {
             console.log('links ', links);
             links.forEach(link => editedPropertyCopy.propertyImages.push(link));
             console.log('editedPropertyWithImages ', editedPropertyCopy);
+            if (editedProperty.bedrooms > 3){
+              editedProperty.fourPlus = true;
+            }
             from(this.fsdb.collection('properties').doc(editedPropertyCopy.id).set(editedPropertyCopy)).subscribe(
               () => {
                 done.next(done);
@@ -241,7 +374,7 @@ export class PropertyService {
         })
       ).subscribe();
     }
-    else{//no new images
+    else {//no new images
       from(this.fsdb.collection('properties').doc(editedProperty.id).set(editedProperty)).subscribe(
         () => {
           done.next(done);

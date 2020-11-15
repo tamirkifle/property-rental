@@ -5,7 +5,7 @@
     <div class="card-body py-2 px-3">
         <div class="row">
             <div class="col-8">
-                <p class="card-title font-weight-bold">{{ property.bedrooms }} Bedroom House In {{property.address.neighborhood ? property.address.neighborhood + ',': ''}} {{property.address.city}}</p>
+                <p class="card-title font-weight-bold">{{ property.bedrooms }} Bedroom {{property.houseType === 'Full House' ? 'House' : property.houseType}} In {{property.address.neighborhood ? property.address.neighborhood + ',': ''}} {{property.address.city}}</p>
                 <p class="card-subtitle mb-1 text-muted">2 Hrs Ago</p>
             </div>
             <div class="col-4 text-right">

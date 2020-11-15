@@ -50,12 +50,13 @@
                 <label for="typeOfHouse" class="col-4 col-md-5 col-form-label text-brand-grey">Type of
                     House</label>
                 <div class="col-7 col-md-7 col-lg-7 ml-auto">
-                    <select class="form-control border-0 ml-auto w-100" id="typeOfHouse">
+                    <select class="form-control border-0 ml-auto w-100" id="typeOfHouse" name="typeOfHouse" [(ngModel)]="currentProperty.houseType" >
                         <option value="" selected disabled hidden>Select</option>
-                        <option value="Full House">Full House</option>
                         <option value="Apartment">Apartment</option>
+                        <option value="Condominium">Condominium</option>
+                        <option value="Full House">Full House</option>
                         <option value="House Quarter">House Quarter</option>
-
+                        
                     </select>
                 </div>
             </div>

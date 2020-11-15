@@ -31,6 +31,7 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
     areaInM2: null,
     bathrooms: null,
     levels: null,
+    houseType: null
   };
   editing = false;
   imagePreviews: string[] = [];
@@ -138,6 +139,7 @@ export class AddEditPropertyComponent implements OnInit, CanComponentDeactivate 
       areaInM2: null,
       bathrooms: null,
       levels: null,
+      houseType: null,
     };
     function customComparison(one, two) {
       if (one === '' && two === null || one === null && two === '') {
