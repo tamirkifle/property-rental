@@ -52,7 +52,7 @@ export class PropertyDetailComponent implements OnInit {
       this.property = data.property;
       this.postCreatorUser = data.user;
       this.relatedItems = this.shuffle(data.relatedItems);
-      this.isAuthorizedToEdit = this.authService.isLoggedIn && (this.authService.currentUser.username === this.postCreatorUser.username);
+      this.isAuthorizedToEdit = this.authService.isLoggedIn && (this.authService.currentUser.username === this.postCreatorUser.username || this.authService.currentUser.isAdmin);
       this.imageObject = [];
       this.imageObject = this.property.propertyImages.map(imageLink => {
         return { image: imageLink, thumbImage: imageLink, title: this.property.propertyTitle };
