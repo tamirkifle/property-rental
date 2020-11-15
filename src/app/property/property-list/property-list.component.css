@@ -23,7 +23,7 @@
     padding-bottom: 1rem;
 }
 
-.filter_card{
+/* .filter_card{
     display: inline-block;
     padding: 5px;
     margin-right: 5px;
@@ -50,15 +50,30 @@
     text-align: center;
     cursor: pointer;
     outline: none;
+} */
+
+.remove-container{
+    position: relative;
 }
-.clear_filters_btn{
+.remove-filter-btn{
+width: 20px; 
+height: 20px; 
+line-height: 0;
+}
+.remove-filter-btn:hover{
+background-color: #17516c;
+color: white!important;
+}
+
+
+/* .clear_filters_btn{
     border: none;
     background-color: white;
     text-decoration: underline;
     margin-left: 1rem;
     cursor: pointer;
     color: black;
-}
+} */
 
 .clear_search_btn{
     border: none;

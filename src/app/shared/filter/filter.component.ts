@@ -48,7 +48,7 @@ export class FilterComponent implements OnInit {
 
   filterBySelected() {
     this.router.navigate([], {
-      queryParams: { by: this.activeOptions },
+      queryParams: {s: null, by: this.activeOptions },
       relativeTo: this.route,
       queryParamsHandling: 'merge'
     });

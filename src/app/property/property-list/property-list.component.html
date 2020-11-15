@@ -2,14 +2,26 @@
     <div class="sticky-md-top bg-white">
         <app-filter></app-filter>
     </div>
-    <h4 class="search_info" *ngIf="searchText">
-        Showing search results for {{searchText}}
-        <a (click)="clearSearch()" class="clear_search_btn">Clear Search</a>
+    <h4 class="pl-3 ml-5 my-2 h5" *ngIf="searchText">
+        Showing search results for <span class="text-brand-primary">"{{searchText}}"</span>
+        <a (click)="clearSearch()" class="clear_search_btn">Clear</a>
     </h4>
     <div class="active_filters ml-5" *ngIf="filterOptions?.length !== 0">
-        <span class="filtered_by">Filtered by: </span>
-        <span *ngFor="let filter of filterOptions" class="filter_card">{{filter}}<button class="close_filter_btn" (click)="removeFilter(filter)">×</button></span>
-        <a (click)="clearFilters()" class="clear_filters_btn">Clear Filters</a>
+        <!-- <span class="filtered_by">Filtered by: </span> -->
+        <div class="d-flex flex-wrap">
+            <!-- Current Filters -->
+            <small *ngFor="let filter of filterOptions"
+                class="mb-2 mx-2 py-2 px-2 rounded-pill bg-card text-brand-primary border border-brand-grey remove-container" style="line-height: 2">{{filter}}
+                <button (click)="removeFilter(filter)" type="button"
+                    class="btn p-0 ml-1 text-brand-primary remove-filter-btn"><i class="fa fa-times-circle"
+                        aria-hidden="true"></i>
+                </button>
+            </small>
+            <button (click)="clearFilters()" 
+            class="mb-2 mx-1 py-2 px-2 btn btn-link text-dark remove-container">
+                Clear
+        </button>
+        </div>
     </div>
     <div class="properties_container" *ngIf="properties?.length !== 0">
         <app-property-item *ngFor="let property of properties" [property]="property"

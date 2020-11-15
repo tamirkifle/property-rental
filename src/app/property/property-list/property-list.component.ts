@@ -69,18 +69,19 @@ export class PropertyListComponent implements OnInit {
   }
 
   clearFilters(){
+    this.searchText = null;
     this.filterOptions = [];
     this.router.navigate([],
       {
         relativeTo: this.route,
-        queryParams: { by: this.filterOptions },
+        queryParams: { s: this.searchText, by: this.filterOptions },
         queryParamsHandling: 'merge',
     });
   }
 
   clearSearch(){
     this.searchText = null;
-    this.filterOptions = null;
+    this.filterOptions = [];
     this.router.navigate([],
       {
         queryParams: { s: this.searchText, by: this.filterOptions },
