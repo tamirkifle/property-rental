@@ -46,7 +46,7 @@ export class AuthService {
         this.currentUser = null;
         this.userChanged.emit();
       }
-      console.log('authState', user);
+      // console.log('authState', user);
     });
   }
 

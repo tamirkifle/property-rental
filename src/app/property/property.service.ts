@@ -90,7 +90,7 @@ export class PropertyService {
             });
           }
         }
-        console.log(filterObj);
+        // console.log(filterObj);
 
 
         for (const key in filterObj) {
@@ -315,15 +315,15 @@ export class PropertyService {
       const createdProperty = Object.assign({}, sentCreatedProperty);// we copy it not to alter the sent object as it affects preview
       this.fstorage.uploadFiles(images, `propertyImages/${createdProperty.id}`).pipe(
         finalize(() => {
-          console.log(this.fstorage.refs);
+          // console.log(this.fstorage.refs);
           combineLatest(this.fstorage.refs.map((ref: AngularFireStorageReference) => ref.getDownloadURL())).subscribe(links => {
-            console.log('links ', links);
+            // console.log('links ', links);
             createdProperty.propertyImages = links;
-            console.log('createdPropertyWithImages ', createdProperty);
+            // console.log('createdPropertyWithImages ', createdProperty);
             from(this.fsdb.collection('properties').add(createdProperty)).subscribe(
               doc => {
                 const id = doc.id;
-                console.log('id', id);
+                // console.log('id', id);
                 sentCreatedProperty.id = id; // so that the canDeactivate guard can pass.pipe(
                 this.authService.currentUser.posts.push(id);
                 this.userService.updateUser(this.authService.currentUser).subscribe(() => {
@@ -338,7 +338,7 @@ export class PropertyService {
       from(this.fsdb.collection('properties').add(sentCreatedProperty)).subscribe(
         doc => {
           const id = doc.id;
-          console.log('id', id);
+          // console.log('id', id);
           sentCreatedProperty.id = id; // so that the canDeactivate guard can pass.pipe(
           this.authService.currentUser.posts.push(id);
           this.userService.updateUser(this.authService.currentUser).subscribe(() => {
@@ -376,11 +376,11 @@ export class PropertyService {
       editedPropertyCopy.propertyImages = [...editedProperty.propertyImages]; // not to alter the sent array as it affects preview
       this.fstorage.uploadFiles(images, `propertyImages/${editedPropertyCopy.id}`).pipe(
         finalize(() => {
-          console.log(this.fstorage.refs);
+          // console.log(this.fstorage.refs);
           combineLatest(this.fstorage.refs.map((ref: AngularFireStorageReference) => ref.getDownloadURL())).subscribe(links => {
-            console.log('links ', links);
+            // console.log('links ', links);
             links.forEach(link => editedPropertyCopy.propertyImages.push(link));
-            console.log('editedPropertyWithImages ', editedPropertyCopy);
+            // console.log('editedPropertyWithImages ', editedPropertyCopy);
             if (editedProperty.bedrooms > 3){
               editedProperty.fourPlus = true;
             }
