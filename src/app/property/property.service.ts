@@ -413,6 +413,22 @@ export class PropertyService {
     return done;
   }
 
+  getPostsForUser(userid){
+    return this.fsdb.collection('properties', ref => ref.where("postCreator", "==", userid)).get().pipe(
+      map(snapshot => snapshot.docChanges()),
+      map(values => {
+        return values.map(value => {
+          const data: any = value.doc.data();
+          return {
+            ...data,
+            id: value.doc.id as string,
+
+          } as Property;
+        });
+      }),
+      catchError(this.handleError<Property[]>(`getProperties`)),
+    );
+  }
   likeProperty(propertyId) {
     if (!this.authService.currentUser.favorites) {
       this.authService.currentUser.favorites = [];

@@ -74,14 +74,7 @@ export class UserPostsResolver implements Resolve<Property[]> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Property[]> {
-    const userPostsIds = this.authService.currentUser.posts;
-    if (userPostsIds && userPostsIds.length !== 0) {
-      // combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(postID))).subscribe(r => console.log(r));
-      return combineLatest(userPostsIds.map(postID => this.propertyService.getProperty(postID)));
-    }
-    else {
-      return of([]);
-    }
+    return this.propertyService.getPostsForUser(this.authService.currentUser.id);
   }
 }
 
