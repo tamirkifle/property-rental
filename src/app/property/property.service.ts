@@ -52,13 +52,32 @@ export class PropertyService {
     if (options && (options.search || options.filterBy?.length > 0)) {
       let propertyRef: CollectionReference;
       this.fsdb.collection('properties', ref => propertyRef = ref);
-      console.dir(propertyRef);
       // console.dir(options)
-      if (options.search) {
-
+      let query:any = propertyRef;
+      if (options.search && !(options.filterBy?.length > 0)) {
+        return this.fsdb.collection('properties').get().pipe(
+          map(snapshot => snapshot.docChanges()),
+          map(values => {
+            return values.map(value => {
+              const data: any = value.doc.data();
+              return {
+                ...data,
+                id: value.doc.id as string,
+    
+              } as Property;
+            });
+          }),
+          map(properties => {
+            return properties.filter(prop => {
+              return `${prop.bedrooms} bedroom ${prop.houseType} in ${prop.address.neighborhood}, ${prop.address.city}`
+              .toLowerCase().includes(options.search) || prop.propertyTitle?.includes(options.search);
+            })
+          }),
+          catchError(this.handleError<Property[]>(`getProperties + search`)),
+        );
       }
       if (options.filterBy?.length > 0) {
-        console.log(options.filterBy);
+        // console.log(options.filterBy);
         const filterObj = {};
         for (const key in this.filterItems) {
           if (this.filterItems.hasOwnProperty(key)) {
@@ -73,7 +92,6 @@ export class PropertyService {
         console.log(filterObj);
 
 
-        let query:any = propertyRef;
         for (const key in filterObj) {
           if (this.filterItems.hasOwnProperty(key)) {
             switch (key) {
