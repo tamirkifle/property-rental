@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { UserService } from './user/user.service';
 
@@ -22,6 +22,12 @@ export class AppComponent {
   ) { }
 
   ngOnInit(): void {
+    this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0);
+        });
     this.authService.redirectUrl = null;
     this.route.queryParamMap.subscribe((params) => {
       this.searchTerm = params.get('s') || '';
