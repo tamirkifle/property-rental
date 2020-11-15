@@ -23,6 +23,7 @@ export class PropertyDetailComponent implements OnInit {
   customImageSize = { width: '100%', height: '500px', space: 0 };
   currentBreakPoint: string;
   relatedItems: Property[];
+  showRelated = true;
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
@@ -35,6 +36,9 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.route.parent.snapshot.url[0].path === 'admin'){
+      this.showRelated = false;
+    }
     this.media$.subscribe(mq => {
       // console.log(mq[0].mqAlias);
       this.currentBreakPoint = mq[0].mqAlias;

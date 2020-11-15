@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/user/user';
 import { UserService } from '../../user/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin-users',
@@ -9,13 +10,13 @@ import { UserService } from '../../user/user.service';
 })
 export class AdminUsersComponent implements OnInit {
   users: User[];
-  constructor(private userService: UserService) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.users = this.route.parent.snapshot.data.users;
   }
 
-  getUsers(){
-    this.userService.getUsers().subscribe(users => this.users = users);
-  }
+  // getUsers(){
+  //   this.userService.getUsers().subscribe(users => this.users = users);
+  // }
 }

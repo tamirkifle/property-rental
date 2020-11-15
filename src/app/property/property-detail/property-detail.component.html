@@ -1,5 +1,5 @@
-<div class="row mx-0">
-  <div class="card rounded-0 col-md-8 col-lg-8 col-xl-9">
+<div class="mx-0" [class.row]="showRelated">
+  <div class="card rounded-0 col-md-8 col-lg-8 col-xl-9" [class.mx-auto]="!showRelated">
     <div class="mx-4 my-3" *ngIf="property">
       <div class="row justify-content-between align-items-center mb-2">
         <svg (click)="goBack()" class="btn-outline-brand-primary rounded pointable" id="ic_arrow_back"
@@ -80,7 +80,7 @@
       </div>
     </div>
   </div>
-  <div class="related col-12 col-md-4 col-lg-4 col-xl-3">
+  <div class="related col-12 col-md-4 col-lg-4 col-xl-3" *ngIf="showRelated">
     <div class="my-2 text-brand-grey font-weight-bold">Similar Items</div>
     <app-related-list [relatedItems]="relatedItems"></app-related-list>
   </div>
