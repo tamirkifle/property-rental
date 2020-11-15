@@ -95,7 +95,7 @@ export class PropertiesResolver implements Resolve<Property[]> {
     route: ActivatedRouteSnapshot
   ): Observable<Property[]> {
     const options: PropertyOptions = {
-      search: route.queryParams.s.toLowerCase(),
+      search: route.queryParams.s,
       filterBy: route.queryParamMap.getAll('by').filter(query => this.propertyService.allFilterOptions.includes(query))};
     return this.propertyService.getProperties(options);
   }

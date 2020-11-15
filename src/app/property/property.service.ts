@@ -70,7 +70,8 @@ export class PropertyService {
           map(properties => {
             return properties.filter(prop => {
               return `${prop.bedrooms} bedroom ${prop.houseType} in ${prop.address.neighborhood}, ${prop.address.city}`
-              .toLowerCase().includes(options.search) || prop.propertyTitle?.includes(options.search);
+              .toLowerCase()
+              .includes(options.search.toLowerCase()) || prop.propertyTitle?.toLowerCase().includes(options.search.toLowerCase());
             })
           }),
           catchError(this.handleError<Property[]>(`getProperties + search`)),
