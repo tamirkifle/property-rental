@@ -462,7 +462,7 @@ export class PropertyService {
     return this.getProperties()
       .pipe(
         map(properties => {
-          return properties.splice(0, 8);
+          return properties.splice(0, 8).filter(p => p.id !== id);
         }),
       );
   }
