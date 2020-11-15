@@ -15,8 +15,9 @@
                         *ngFor="let filterName of filterKeys">
                         <div>
                             <span class="px-3 text-left text-sm-center">
-                                <span class="mr-3">{{filterName | titlecase}}</span>
+                                <span class="mr-3 font-weight-bold">{{filterName | titlecase}}</span>
                             </span>
+                            <hr>
                             <div style="opacity: 95%;" >
                                 <form class="pt-2">
                                     <div *ngFor="let option of filterItems[filterName]" class="form-group mb-0 pl-4 text-left">
