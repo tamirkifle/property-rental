@@ -4,6 +4,9 @@
     </div>
     <div class="login_container">
         <form action="" class="signin_form mt-1" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)" novalidate>
+            <div class="card bg-warning mb-4" *ngIf="warningMessage">
+                <div class="card-text text-white">{{warningMessage}}</div>
+            </div>
             <div class="text-left">
                 <label for="" class="m-0"><small>Email</small></label>
                 <input type="text" placeholder="Your email here...." class="login_input d-block w-100" name="email"

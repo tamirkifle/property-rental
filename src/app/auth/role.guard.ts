@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthService } from './auth.service';
 import { UserService } from '../user/user.service';
 import { map, switchMap } from 'rxjs/operators';
@@ -24,6 +24,7 @@ export class RoleGuard implements CanActivate {
         }
         else{
           this.authService.redirectUrl = state.url.split('?')[0];
+          this.authService.redirected.next(this.authService.redirectUrl);
           this.router.navigate(['/login']);
           return false;
         }

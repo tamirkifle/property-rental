@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of, Subject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
@@ -10,6 +10,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AuthService {
   userChanged = new EventEmitter();
+  redirected = new Subject();
 
   authState$;
   currentUser: User = null;

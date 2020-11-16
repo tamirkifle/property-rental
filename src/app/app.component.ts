@@ -68,6 +68,10 @@ export class AppComponent {
   }
 
   saveRedirect(){
+    const lastURL =  this.router.url.split('?')[0];
+    if (['/create', '/login'].includes(lastURL)){
+      return;
+    }
     this.authService.redirectUrl = this.router.url.split('?')[0];
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  warningMessage: string = null;
   uname: string;
   password: string;
   invalidTry = false;
@@ -15,7 +16,14 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-
+    this.authService.redirected.subscribe(redirectUrl => {
+      if (redirectUrl === '/properties/favorites'){
+        this.warningMessage = 'You need to log in before accessing your favorites';
+      }
+      else if (redirectUrl === '/properties/create'){
+        this.warningMessage = 'You need to log in before you can add a new property';
+      }
+    });
   }
 
   onSubmit(credentials){
@@ -30,5 +38,9 @@ export class LoginComponent implements OnInit {
 
     });
 
+  }
+
+  ngOnDestroy(){
+    this.authService.redirected.unsubscribe();
   }
 }
