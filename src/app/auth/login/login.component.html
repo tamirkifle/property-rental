@@ -9,10 +9,10 @@
             </div>
             <div class="text-left">
                 <label for="" class="m-0"><small>Email</small></label>
-                <input type="text" placeholder="Your email here...." class="login_input d-block w-100" name="email"
+                <input type="email" placeholder="Your email here...." class="login_input d-block w-100" name="email"
                     required ngModel>
                 <span
-                    *ngIf="(loginForm.controls.user?.invalid && loginForm.controls.user.touched) || (loginForm.controls.user?.invalid && invalidTry)"
+                    *ngIf="(loginForm.controls.email?.invalid && loginForm.controls.email.touched) || (loginForm.controls.email?.invalid && invalidTry)"
                     style="float: right;font-size: 16px;line-height:0; color: red;"><em>Required</em></span>
             </div>
             <div class="text-left">
@@ -27,7 +27,7 @@
                 <div class="card-text text-white">{{errorMessage}}</div>
             </div>
             <div class="text-right mb-2">
-                <a href="#" class="text-brand-primary mt-2">Forgot Password?</a>
+                <button type="button" disabled class="btn btn-link text-brand-primary mt-2">Forgot Password?</button>
             </div>
 
             <span (mouseenter)="invalidTry = true" (mouseleave)="invalidTry = false">
@@ -40,13 +40,13 @@
                     <span class="col-auto text-muted">or</span>
                     <hr class="col">
             </div>
-            <button href="#" class="fb rounded-sm btn w-75 mx-auto py-2 mb-3">
+            <button  disabled class="fb rounded-sm btn w-75 mx-auto py-2 mb-3">
                 <i class="fa fa-facebook fa-fw"></i> Login with Facebook
             </button>
-            <button href="#" class="twitter rounded-sm btn w-75 mx-auto py-2 mb-3">
+            <button type="button" disabled class="twitter rounded-sm btn w-75 mx-auto py-2 mb-3">
                 <i class="fa fa-twitter fa-fw"></i> Login with Twitter
             </button>
-            <button href="#" class="google rounded-sm btn w-75 mx-auto py-2 mb-3">
+            <button type="button" disabled class="google rounded-sm btn w-75 mx-auto py-2 mb-3">
                 <i class="fa fa-google fa-fw"></i> Login with Google+
             </button>
             <a routerLink="/create" class="btn text-brand-primary btn-link mt-2">
