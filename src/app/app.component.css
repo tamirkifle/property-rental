@@ -107,7 +107,7 @@ nav a {
     background-image: linear-gradient(
       to bottom,
      rgba(124, 124, 124, 0.55), 
-     rgba(145, 201, 228, 0.55)), url(/assets/header_img.png);
+     rgba(145, 201, 228, 0.55)), url(/assets/header_img.jpg);
     background-size: cover;
     /* background-position: left; */
     /* min-height: 300px; */
