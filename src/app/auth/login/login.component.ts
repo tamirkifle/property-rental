@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit{
   warningMessage: string = null;
   uname: string;
   password: string;
@@ -38,9 +38,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     });
 
-  }
-
-  ngOnDestroy(){
-    this.authService.redirected.unsubscribe();
   }
 }
