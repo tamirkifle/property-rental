@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   warningMessage: string = null;
   uname: string;
   password: string;
@@ -17,26 +17,23 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     this.authService.redirected.subscribe(redirectUrl => {
-      if (redirectUrl === '/properties/favorites'){
+      if (redirectUrl === '/properties/favorites') {
         this.warningMessage = 'You need to log in before accessing your favorites';
       }
-      else if (redirectUrl === '/properties/create'){
+      else if (redirectUrl === '/properties/create') {
         this.warningMessage = 'You need to log in before you can add a new property';
       }
     });
   }
 
-  onSubmit(credentials){
+  onSubmit(credentials) {
     this.errorMessage = null;
     this.authService.login(credentials).subscribe(
-      resp => {
-        this.authService.userChanged.emit();
+      () => {
         this.authService.redirectUrl ? this.router.navigate([this.authService.redirectUrl]) : this.router.navigate(['/properties']);
-    },
-    err => {
-      this.errorMessage = err.message;
-
-    });
-
+      },
+      err => {
+        this.errorMessage = err.message;
+      });
   }
 }

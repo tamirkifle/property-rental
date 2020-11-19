@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-import { UserService } from '../user/user.service';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class AdminGuard implements CanActivate {
     if (this.authService.isLoggedIn && this.authService.isAdmin){
       return true;
     }
-    return this.authService.authState$.pipe(
+    return this.authService.currentUser$.pipe(
       map((result) => {
         if (result){
           return this.authService.isAdmin;

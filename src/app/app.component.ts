@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { AuthService } from './auth/auth.service';
-import { UserService } from './user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -19,16 +18,15 @@ export class AppComponent {
     private router: Router,
     private route: ActivatedRoute,
     public authService: AuthService,
-    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((evt) => {
-            if (!(evt instanceof NavigationEnd)) {
-                return;
-            }
-            window.scrollTo(0, 0);
-        });
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
     this.authService.redirectUrl = null;
     this.route.queryParamMap.subscribe((params) => {
       this.searchTerm = params.get('s') || '';
@@ -36,14 +34,13 @@ export class AppComponent {
 
     this.authService.userChanged.subscribe(() => {
       this.checkedAuth = true;
+      this.isLoggedIn = this.authService.isLoggedIn;
+      this.isAdmin = this.authService.isAdmin;
+
       this.avatar = this.authService.currentUser ? this.authService.currentUser.avatar : 'assets/other_icons/profile.png';
       this.userFirstName = this.authService.currentUser ? this.authService.currentUser.firstname : 'Profile';
     });
 
-    this.authService.authState$.subscribe(() => {
-      this.isLoggedIn = this.authService.isLoggedIn;
-      this.isAdmin = this.authService.isAdmin;
-    })
   }
   onSearch(searchTerm) {
     if (!searchTerm) {
@@ -61,15 +58,15 @@ export class AppComponent {
     });
   }
 
-  logout () {
+  logout() {
     this.authService.logout().subscribe(res => {
       this.router.navigate(['/']);
     });
   }
 
-  saveRedirect(){
-    const lastURL =  this.router.url.split('?')[0];
-    if (['/create', '/login'].includes(lastURL)){
+  saveRedirect() {
+    const lastURL = this.router.url.split('?')[0];
+    if (['/create', '/login'].includes(lastURL)) {
       return;
     }
     this.authService.redirectUrl = this.router.url.split('?')[0];

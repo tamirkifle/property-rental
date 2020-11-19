@@ -15,7 +15,7 @@ export class CanEditGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     this.authService.redirectUrl = state.url.split('?')[0];
     const id = next.paramMap.get('id');
-    return this.authService.authState$.pipe(
+    return this.authService.currentUser$.pipe(
       map((user: User) => {
         if (user && user.posts.includes(id)) {
           return true;

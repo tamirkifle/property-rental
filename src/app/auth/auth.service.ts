@@ -1,101 +1,68 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { from, Observable, of, Subject } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable, Subject } from 'rxjs';
+import { FirebaseService } from '../firebase.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userChanged = new EventEmitter();
+  userChanged = new Subject();
   redirected = new Subject();
 
-  authState$;
   currentUser: User = null;
   redirectUrl: string;
-  _isAdmin = false;
-  private _isLoggedIn = false;
+  isAdmin = false;
+  isLoggedIn = false;
 
-  get isLoggedIn(){
-    return this._isLoggedIn;
-  }
-
-  get isAdmin(){
-    return this.currentUser?.isAdmin;
-  }
-  constructor(private userService: UserService, private fAuth: AngularFireAuth, private fsdb: AngularFireAuth) { 
-    this.authState$ = this.fAuth.authState.pipe(
-      switchMap(user => {
-        if (user){
-          return this.userService.getUser(user.uid);
+  currentUser$: Observable<User | void>;
+  constructor(private userService: UserService, private firebaseService: FirebaseService) {
+    this.currentUser$ = this.firebaseService.currentUser$;
+    this.currentUser$.pipe(
+      tap((user: User) => {
+        console.log(user);
+        if (user) {
+          this.isLoggedIn = true;
+          this.currentUser = user;
+          this.isAdmin = this.currentUser.isAdmin;
         }
-        else{
-          return of(null);
+        else {
+          this.isLoggedIn = false;
+          this.currentUser = null;
+          this.isAdmin = false;
         }
+        this.userChanged.next();
       })
-    );
-    this.authState$.subscribe(user => {
-      if (user){
-        this._isLoggedIn = true;
-        this.currentUser = user;
-        this.userChanged.emit();
-      }
-      else{
-        this._isLoggedIn = false;
-        this.currentUser = null;
-        this.userChanged.emit();
-      }
-      // console.log('authState', user);
-    });
+    ).subscribe();
   }
 
-  login({email, password}): Observable<any> {
-      return from(this.fAuth.signInWithEmailAndPassword(email, password));
-
-
-    // return this.userService.getUser(credentials.user).pipe(
-    //   map(user => {
-    //     if (user){
-    //       this.currentUser = user;
-    //       this.userChanged.emit();
-    //       this._isLoggedIn = true;
-    //       return true;
-    //     }
-    //     return false;
-    //   })
-    // );
+  login({ email, password }): Observable<User | void> {
+    return this.firebaseService.login({ email, password });
   }
 
-  createUser(createdUser: User, password){
-    return from(this.fAuth.createUserWithEmailAndPassword(createdUser.contact.email, password)).pipe(
-      switchMap(user => {
-        if (user){
-          createdUser.id = user.user.uid;
-          return this.userService.updateUser(createdUser);
-        }
-        else{
-          of(null);
-        }
-      }),
-    );
+  createUser(createdUser: User, password): Observable<User | void> {
+    return this.firebaseService.createUser(createdUser, password);
   }
-  adminLogin(credentials){
+
+  adminLogin(credentials): Observable<boolean> {
     return this.userService.getUser(credentials.user).pipe(
       map(user => {
-        if ((user && user.isAdmin) || (credentials.user === 'test' && credentials.password === 'secret')){
+        if ((user && user.isAdmin) || (credentials.user === 'test' && credentials.password === 'secret')) {
           this.currentUser = user;
-          this._isAdmin = true;
-          this._isLoggedIn = true;
+          this.isAdmin = true;
+          this.isLoggedIn = true;
           return true;
         }
         return false;
       })
     );
   }
-  logout(): Observable<any> {
-    return from(this.fAuth.signOut());
 
+  logout(): Observable<any> {
+    return this.firebaseService.logout().pipe(
+      switchMap(() => this.currentUser$)
+    );
   }
 }

@@ -26,8 +26,6 @@ export class PropertyDetailComponent implements OnInit {
   showRelated = true;
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService,
-    private propertyService: PropertyService,
     private router: Router,
     public authService: AuthService,
     media: MediaObserver
@@ -66,7 +64,7 @@ export class PropertyDetailComponent implements OnInit {
         );
       }
     });
-    this.authService.authState$.subscribe(() => {
+    this.authService.currentUser$.subscribe(() => {
       this.isAuthorizedToEdit = this.authService.isLoggedIn && (this.authService.currentUser.username === this.postCreatorUser.username || this.authService.currentUser.isAdmin);
     })
   }

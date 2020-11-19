@@ -1,10 +1,8 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from './user';
 
-import { from, Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable, of } from 'rxjs';
+import { FirebaseService } from '../firebase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +10,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class UserService {
   private usersURL = 'api/users';
 
-  constructor(private http: HttpClient, private fsdb: AngularFirestore) { }
-  
+  constructor(private firebaseService: FirebaseService) { }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
@@ -27,65 +25,16 @@ export class UserService {
     };
   }
 
-  getUsers(): Observable<User[]>{
-    // return this.http.get<User[]>(this.usersURL)
-    // .pipe(
-    //   catchError(this.handleError('getUsers', []))
-    // );
-
-    return this.fsdb.collection('users').get().pipe(
-      map(snapshot => snapshot.docChanges()),
-      map(values => {
-        return values.map(value => {
-          const data: any = value.doc.data();
-          return {
-            id: value.doc.id as string,
-            ...data,
-
-
-          } as User;
-        });
-      }),
-      catchError(this.handleError<User[]>(`getProperties`)),
-    );
+  getUsers(): Observable<User[]> {
+    return this.firebaseService.getUsers();
   }
 
-  getUser(id): Observable<User>{
-    return this.fsdb.collection('users').doc(id).get().pipe(
-      map(snapshot => snapshot.data()),
-      map(data => {
-        return {
-          id,
-          ...data,
-
-        } as User;
-      })
-      
-      );
-
-    // return this.getUsers().pipe(
-    //   map(users => users.find(user => user.username === id))
-    // );
+  getUser(id: string): Observable<User> {
+    return this.firebaseService.getUser(id);
   }
 
-  updateUser(user, avatarFile?){
-    var fd = new FormData();
-    if (avatarFile){
-      fd.append('image', avatarFile);
-    }
-    fd.append('user', user);
-
-    //change to fd
-    return from(this.fsdb.collection('users').doc(user.id).set(user));
+  updateUser(user, avatarFile?): Observable<void> {
+    return this.firebaseService.updateUser(user, avatarFile);
   }
-
-  // addUser(user, password){
-  //   var fd = new FormData();
-  //   fd.append('password', password);
-  //   fd.append('user', user);
-
-  //   //change to fd
-  //   return this.http.post(this.usersURL, user);
-  // }
 
 }
