@@ -38,10 +38,19 @@
       position: relative;
       z-index: 1000;
   } */
-.filter-item{
+
+.filter-item {
     margin-left: -1px;
 }
 
-.form-check-input{
+.form-check-input {
     margin-top: 0.8rem;
+}
+
+.dropdown-no-arrow::after {
+    display: none;
+}
+
+.dropdown>.dropdown-menu {
+    transform: translate3d(5px, 33px, 0px);
 }

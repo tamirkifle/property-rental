@@ -2,12 +2,12 @@
     <div class="user_detail_card">
         <a class="close_btn" aria-hidden="true" (click)="closeDetail()">╳</a>
         <div class="user_avatar col-12">
-            <img src="{{user.avatar}}" alt="User Avatar"  style="width: 150px; height: 150px;">
+            <img src="{{user.avatar ? user.avatar : 'assets/placeholders/avatar.png'}}" alt="User Avatar"  style="width: 150px; height: 150px;">
         </div>
         <div class="user_details">
             <div class="user_name">{{user.firstname}} {{user.lastname}}</div>
             <div class="user_address">Addis Ababa, Ethiopia</div>
-            <div class="user_posts">{{user.posts.length}} Post{{user.posts.length != 1?'s':''}}</div>
+            <div class="user_posts">{{user.posts?.length}} Post{{user.posts?.length != 1?'s':''}}</div>
             <app-rating [rating]="user.rating"></app-rating>
         </div>
         <div class="rate_user">

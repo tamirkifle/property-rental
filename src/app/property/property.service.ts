@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Property, PropertyOptions } from './property';
 // import { MOCKPROPERTIES } from './mock-properties';
-import { Observable, of } from 'rxjs';
-import { catchError, map, take, tap } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { FilterByPipe } from '../shared/filter-by.pipe';
-import { PropertyFilterPipe } from '../shared/property-filter.pipe';
 import { AuthService } from '../auth/auth.service';
-import { Router } from '@angular/router';
 import { getAllPropertiesURL, getPropertyBaseURL, createPropertyURL, updatePropertyURL, deletePropertyURL } from 'src/app/api';
 import { updateUserURL } from '../api';
-
+import { UserService } from '../user/user.service';
+import { FirebaseService } from '../firebase.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,46 +18,37 @@ export class PropertyService {
   // private propertiesURL = 'api/properties';
   // private usersURL = 'api/users';
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  filterItems = {
+    'city': ['Addis Ababa', 'Mekele', 'Arba Minch', 'Gondar', 'Bahir Dar'],
+    'sub city': ['Kirkos', 'Bole', 'Lideta', 'Yeka'],
+    'type': ['Apartment', 'Condominium', 'Full House', 'House Quarter'],
+    'number of bedrooms': ['One Bedroom', 'Two Bedrooms', 'Three Bedrooms', '>3 Bedrooms'],
+    'price range': ['<=2000', '2000-3000', '3000-5000', '>5000'],
   };
 
   constructor(
-    private http: HttpClient,
     private authService: AuthService,
-    private filterBy: FilterByPipe,
-    private search: PropertyFilterPipe
-    ) { }
-
-  getProperties(options?: PropertyOptions): Observable<Property[]> {
-    if (options && (options.search && options.filterBy)){
-        let params = new HttpParams();
-        if (options.search){
-          params = params.append('s', options.search);
-        }
-        if (options.filterBy && options.filterBy.length !== 0){
-          options.filterBy.forEach(filter => params = params.append('by', filter));
-        }
-        return this.http.get<Property[]>(getAllPropertiesURL, { params });
-
+    private userService: UserService,
+    private firebaseService: FirebaseService,
+  ) {
+    for (const key in this.filterItems) {
+      if (this.filterItems.hasOwnProperty(key)) {
+        this.filterItems[key].forEach(option => this.allFilterOptions.push(option));
+      }
     }
-    return this.http.get<Property[]>(getAllPropertiesURL)
-    .pipe(
-      catchError(this.handleError<Property[]>('getProperties', []))
-    );
   }
 
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
+/**
+ * Handle Http operation that failed.
+ * Let the app continue.
+ * @param operation - name of the operation that failed
+ * @param result - optional value to return as the observable result
+ */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      console.error(operation, error); // log to console instead
 
       // TODO: LOG
 
@@ -69,60 +57,60 @@ export class PropertyService {
     };
   }
 
-  getProperty(id: number): Observable<Property> {
-    const url = `${getPropertyBaseURL}/${id}`;
-    return this.http.get<Property>(url).pipe(
-      catchError(this.handleError<Property>(`getProperty id=${id}`))
-    );
+  getProperties(options?: PropertyOptions): Observable<Property[]> {
+    if (options && (options.search || options.filterBy?.length > 0)) {
+      return this.firebaseService.getProperties(options, this.filterItems);
+    }
+    return this.firebaseService.getProperties();
   }
 
-  addProperty(createdProperty){
-    return this.http
-      .post(createPropertyURL, createdProperty).pipe(
-        catchError(this.handleError<Property>(`addProperty`))
-      );;
+
+
+  getProperty(id: string): Observable<Property> {
+    return this.firebaseService.getProperty(id);
   }
 
-  updateProperty(editedProperty){
-    console.log('in update property:', editedProperty);
-    return this.http
-      .put(updatePropertyURL, editedProperty).pipe(
-        catchError(this.handleError(`updateProperty`))
-      );
+  addProperty(sentCreatedProperty: Property, images?): Subject<any> | Observable<any> {
+    return this.firebaseService.addProperty(sentCreatedProperty, this.authService.currentUser, images);
+
   }
 
-  likeProperty(propertyId) {
+  updateProperty(editedProperty, images?, linksToRemove?: string[]): Subject<any> | Observable<any>{
+    return this.firebaseService.updateProperty(editedProperty, images, linksToRemove);
+  }
+
+  getPostsForUser(userid: string): Observable<Property[]> {
+    return this.firebaseService.getPostsForUser(userid);
+  }
+
+  likeProperty(propertyId): Observable<void> {
+
     if (!this.authService.currentUser.favorites) {
       this.authService.currentUser.favorites = [];
     }
+
     this.authService.currentUser.favorites.push(propertyId);
-    return this.http.put(updateUserURL, this.authService.currentUser).pipe(
-      catchError(this.handleError(`likeProperty`))
-    );
+    return this.userService.updateUser(this.authService.currentUser);
   }
 
-  unlikeProperty(propertyId){
+  unlikeProperty(propertyId): Observable<void> {
+
     this.authService.currentUser.favorites = this.authService.currentUser.favorites.filter(id => id !== propertyId);
-    return this.http.put(updateUserURL, this.authService.currentUser).pipe(
-      catchError(this.handleError(`unlikeProperty`))
-    );
+    return this.userService.updateUser(this.authService.currentUser);
+
   }
 
-  deleteProperty(property){
-    const id = typeof property === 'number' ? property : property.id;
-    const url = `${deletePropertyURL}/${id}`;
-    return this.http.delete(url, this.httpOptions).pipe(
-      catchError(this.handleError(`deleteProperty`))
-    );
+  deleteProperty(property: Property): Observable<void> {
+    return this.firebaseService.deleteProperty(property);
   }
 
-  getRelatedProperties(id){
-      // NOT IMPLEMENTED: get all realted properties to property
-      return this.http.get<Property[]>(getAllPropertiesURL)
+  getRelatedProperties(id) {
+    // NOT IMPLEMENTED: get all related properties
+    return this.getProperties()
       .pipe(
-        map(properties => properties.filter(p => p.id !== id)),
-        map(properties => properties.splice(0, 7)),
-        catchError(this.handleError<Property[]>(`getRelatedProperties`, []))
+        map(properties => {
+          return properties.splice(0, 8).filter(p => p.id !== id);
+        }),
       );
   }
 }

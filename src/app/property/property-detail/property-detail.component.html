@@ -1,5 +1,5 @@
-<div class="row mx-0">
-  <div class="card rounded-0 col-md-8 col-lg-8 col-xl-9">
+<div class="mx-0" [class.row]="showRelated">
+  <div class="card rounded-0 col-md-8 col-lg-8 col-xl-9" [class.mx-auto]="!showRelated">
     <div class="mx-4 my-3" *ngIf="property">
       <div class="row justify-content-between align-items-center mb-2">
         <svg (click)="goBack()" class="btn-outline-brand-primary rounded pointable" id="ic_arrow_back"
@@ -29,7 +29,7 @@
       </div>
       <div class="card-body p-0">
         <div class="card-title pb-2 pt-3 row mb-0">
-          <h2 class=" d-inline h6 col-md-3 col-sm-4 col-auto">Price: </h2>
+          <h2 class=" d-inline h6 col-md-3 col-sm-4 col-auto">Monthly Rent: </h2>
           <div class="d-inline col-auto">
             <p class="mb-1">{{property.price.amount | number:'1.0-2'}} Birr</p>
             <p class="text-muted">{{property.price.type}} Price</p>
@@ -65,12 +65,10 @@
             <div class="mb-2 mr-4 text-muted" *ngIf="property.address?.subCity">{{ property.address.subCity}}</div>
           </div>
         </div>
-        <div class="row border-top pb-2 pt-3" *ngIf="property.address">
-          <h2 class="h6 col-md-3 col-sm-4 text-nowrap">Neighborhood</h2>
+        <div class="row border-top pb-2 pt-3" *ngIf="property.houseType">
+          <h2 class="h6 col-md-3 col-sm-4 text-nowrap">House Type</h2>
           <div class="col-sm-auto d-flex flex-column flex-wrap" style="max-height: 120px;">
-            <span class="mb-2 mr-4 align-top">Restaurant</span>
-            <div class="mb-2 mr-4">School</div>
-            <div class="mb-2 mr-4">Supermarket</div>
+            <span class="mb-2 mr-4 align-top">{{property.houseType}}</span>
           </div>
         </div>
         <!-- <div class="post_map"></div> -->
@@ -82,7 +80,7 @@
       </div>
     </div>
   </div>
-  <div class="related col-12 col-md-4 col-lg-4 col-xl-3">
+  <div class="related col-12 col-md-4 col-lg-4 col-xl-3" *ngIf="showRelated">
     <div class="my-2 text-brand-grey font-weight-bold">Similar Items</div>
     <app-related-list [relatedItems]="relatedItems"></app-related-list>
   </div>

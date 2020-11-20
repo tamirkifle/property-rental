@@ -123,8 +123,13 @@
               "devServerTarget": "property-rental:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "property-rental"
 }

@@ -22,6 +22,13 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.currentUser;
+    if (!this.user.address){
+      this.user.address = { city: null, subCity: null, neighborhood: null };
+    }
+    if (!this.user.contact){
+      this.user.contact = { phone: null, email: null };
+    }
+
 
   }
 
@@ -40,7 +47,7 @@ export class EditProfileComponent implements OnInit {
   onSave(){
     this.userService.updateUser(this.user, this.newAvatar).subscribe(res => {
       this.authService.currentUser = this.user;
-      this.authService.userChanged.emit();
+      this.authService.userChanged.next();
       this.router.navigate(['..'], {
         relativeTo: this.route,
       });

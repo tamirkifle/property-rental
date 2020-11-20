@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Property } from 'src/app/property/property';
-import { PropertyService } from 'src/app/property/property.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin-properties',
@@ -9,15 +9,14 @@ import { PropertyService } from 'src/app/property/property.service';
 })
 export class AdminPropertiesComponent implements OnInit {
   properties: Property[];
-  constructor(private propertyService: PropertyService) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getProperties();
-    console.log(this.propertyService.getProperties());
+    this.properties = this.route.parent.snapshot.data.properties;
   }
 
-  getProperties(): void {
-    this.propertyService.getProperties()
-    .subscribe(properties => this.properties = properties);
-  }
+  // getProperties(): void {
+  //   this.propertyService.getProperties()
+  //   .subscribe(properties => this.properties = properties);
+  // }
 }

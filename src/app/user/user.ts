@@ -1,5 +1,5 @@
 export interface User {
-  id?: number;
+  id: string;
   username: string;
   firstname: string;
   lastname: string;
@@ -9,8 +9,8 @@ export interface User {
   address?: {city: string, subCity: string, neighborhood: string};
   company?: string;
   about?: string;
-  posts: number[];
-  favorites?: number[]; //property ids
+  posts: string[];
+  favorites?: string[]; //property ids
   // password: string;
   isAdmin?: boolean;
   rating?:

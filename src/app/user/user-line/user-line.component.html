@@ -1,29 +1,29 @@
-<div class="row">
-    <div class="card bg-transparent border-0 mb-3 pointable col-md-8" *ngIf="user" (click)="showUserDetail()">
+<div class="row" *ngIf="user" >
+    <div class="card bg-transparent border-0 mb-3 pointable col-md-8" (click)="showUserDetail()">
         <div class="row no-gutters">
             <div class="col-auto">
-                <img src="{{user.avatar}}" class="card-img rounded-circle" style="width: 60px; height: 60px;"
+                <img src="{{user.avatar ? user.avatar : 'assets/placeholders/avatar.png'}}" class="card-img rounded-circle" style="width: 60px; height: 60px;"
                     alt="{{user.firstname}} Avatar">
             </div>
             <div class="col-8">
                 <div class="card-body p-0 pl-4">
                     <p class="card-title mb-0 font-weight-bold">{{user.firstname}} {{user.lastname}}</p>
-                    <p class="card-text mb-2 text-brand-grey font-italic font-weight-bold">{{user.posts.length}}
-                        Post{{user.posts.length != 1?'s':''}}</p>
+                    <p class="card-text mb-2 text-brand-grey font-italic font-weight-bold">{{user.posts?.length}}
+                        Post{{user.posts?.length != 1?'s':''}}</p>
                     <app-rating [align]="'left'" [rating]="user.rating"></app-rating>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-4 text-left">
-        <a class="mb-2 text-brand-grey d-block text-nowrap" href="tel:{{user.contact[0]?.type === 'phone' ? user.contact[0].value : user.contact[1].value}}" *ngIf="user.contact[0]?.type === 'phone' || user.contact[1]?.type === 'phone'">
+        <a class="mb-2 text-brand-grey d-block text-nowrap" href="tel:{{user.contact.phone}}" *ngIf="user.contact?.phone">
             <!-- <img src="assets/other_icons/phone.png" class="mr-2" style="width: 20px;" alt="Phone icon"> -->
             <span class="mr-2">☎︎</span>
-            {{user.contact[0]?.type === 'phone' ? user.contact[0].value : user.contact[1].value}}
+            {{user.contact.phone}}
         </a>
-        <a class="mb-2 text-brand-grey d-block text-nowrap" href="mailto:{{user.contact[0]?.type === 'email' ? user.contact[0].value : user.contact[1].value}}" *ngIf="user.contact[0]?.type === 'email' || user.contact[1]?.type === 'email'">
+        <a class="mb-2 text-brand-grey d-block text-nowrap" href="mailto:{{user.contact.email}}" *ngIf="user.contact?.email">
             <span class="mr-2">✉️</span>
-            {{user.contact[0]?.type === 'email' ? user.contact[0].value : user.contact[1].value}}
+            {{user.contact.email}}
         </a>
         
     </div>

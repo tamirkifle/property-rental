@@ -1,5 +1,5 @@
 export interface Property {
-  id: number;
+  id: string;
   propertyTitle: string;
   bedrooms: number;
   address: {city: string, subCity?: string, neighborhood: string, coordinates?: string};
@@ -11,6 +11,9 @@ export interface Property {
   areaInM2?: number;
   levels?: number;
   amenities?: string[];
+  houseType?: 'Apartment' | 'Condominium' | 'House Quarter' | 'Full House';
+  fourPlus?: boolean;// for filtering
+  priceRange?: '<=2000' | '2000-3000' | '3000-5000' | '>5000';
 }
 
 // export interface Property {

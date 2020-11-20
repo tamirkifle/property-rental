@@ -1,60 +1,68 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
-import { map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-
+import { map, switchMap, tap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { FirebaseService } from '../firebase.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userChanged = new EventEmitter();
+  userChanged = new Subject();
+  redirected = new Subject();
 
   currentUser: User = null;
   redirectUrl: string;
-  _isAdmin = false;
-  private _isLoggedIn = false;
+  isAdmin = false;
+  isLoggedIn = false;
 
-  get isLoggedIn(){
-    return this._isLoggedIn;
+  currentUser$: Observable<User | void>;
+  constructor(private userService: UserService, private firebaseService: FirebaseService) {
+    this.currentUser$ = this.firebaseService.currentUser$;
+    this.currentUser$.pipe(
+      tap((user: User) => {
+        console.log(user);
+        if (user) {
+          this.isLoggedIn = true;
+          this.currentUser = user;
+          this.isAdmin = this.currentUser.isAdmin;
+        }
+        else {
+          this.isLoggedIn = false;
+          this.currentUser = null;
+          this.isAdmin = false;
+        }
+        this.userChanged.next();
+      })
+    ).subscribe();
   }
 
-  get isAdmin(){
-    return this.currentUser?.isAdmin;
+  login({ email, password }): Observable<User | void> {
+    return this.firebaseService.login({ email, password });
   }
-  constructor(private userService: UserService) { }
 
-  login(credentials: {user: string, password: string}): Observable<boolean> {
+  createUser(createdUser: User, password): Observable<User | void> {
+    return this.firebaseService.createUser(createdUser, password);
+  }
+
+  adminLogin(credentials): Observable<boolean> {
     return this.userService.getUser(credentials.user).pipe(
       map(user => {
-        if (user){
+        if ((user && user.isAdmin) || (credentials.user === 'test' && credentials.password === 'secret')) {
           this.currentUser = user;
-          this.userChanged.emit();
-          this._isLoggedIn = true;
+          this.isAdmin = true;
+          this.isLoggedIn = true;
           return true;
         }
         return false;
       })
     );
   }
-  adminLogin(credentials){
-    return this.userService.getUser(credentials.user).pipe(
-      map(user => {
-        if ((user && user.isAdmin) || (credentials.user === 'test' && credentials.password === 'secret')){
-          this.currentUser = user;
-          this._isAdmin = true;
-          this._isLoggedIn = true;
-          return true;
-        }
-        return false;
-      })
+
+  logout(): Observable<any> {
+    return this.firebaseService.logout().pipe(
+      switchMap(() => this.currentUser$)
     );
-  }
-  logout(): Observable<true> {
-    this.currentUser = null;
-    this._isLoggedIn = false;
-    this._isAdmin = false;
-    return of(true);
   }
 }

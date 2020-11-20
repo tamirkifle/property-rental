@@ -1,9 +1,8 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from './user';
 
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FirebaseService } from '../firebase.service';
 
 import { getAllUsersURL, updateUserURL, createUserURL } from 'src/app/api';
 
@@ -13,8 +12,8 @@ import { getAllUsersURL, updateUserURL, createUserURL } from 'src/app/api';
 export class UserService {
   // private usersURL = 'api/users';
 
-  constructor(private http: HttpClient) { }
-  
+  constructor(private firebaseService: FirebaseService) { }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
@@ -28,42 +27,16 @@ export class UserService {
     };
   }
 
-  getUsers(): Observable<User[]>{
-    return this.http.get<User[]>(getAllUsersURL)
-    .pipe(
-      catchError(this.handleError<User[]>('getUsers', []))
-    );
+  getUsers(): Observable<User[]> {
+    return this.firebaseService.getUsers();
   }
 
-  getUser(username): Observable<User>{
-    return this.getUsers().pipe(
-      map(users => users.find(user => user.username === username)),
-      catchError(this.handleError<User>('getUser'))
-    );
+  getUser(id: string): Observable<User> {
+    return this.firebaseService.getUser(id);
   }
 
-  updateUser(user, avatarFile?){
-    var fd = new FormData();
-    if (avatarFile){
-      fd.append('image', avatarFile);
-    }
-    fd.append('user', user);
-
-    //change to fd
-    return this.http.put(updateUserURL, user).pipe(
-      catchError(this.handleError('updateUser'))
-    );
-  }
-
-  addUser(user, password){
-    var fd = new FormData();
-    fd.append('password', password);
-    fd.append('user', user);
-
-    //change to fd
-    return this.http.post(createUserURL, user).pipe(
-      catchError(this.handleError<User>('addUser'))
-    );
+  updateUser(user, avatarFile?): Observable<void> {
+    return this.firebaseService.updateUser(user, avatarFile);
   }
 
 }

@@ -12,7 +12,6 @@ export class ImageSliderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.property);
   }
 
   slideImage(dir: 'left' | 'right'): void {

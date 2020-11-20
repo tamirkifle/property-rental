@@ -3,6 +3,7 @@ import { User } from '../../user/user';
 import { Router } from '@angular/router';
 import { UserService } from '../../user/user.service';
 import { AuthService } from '../auth.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-user',
@@ -25,8 +26,9 @@ export class CreateUserComponent implements OnInit {
   // // password: string;
   // isAdmin?: boolean;
   // rating?:
-
+  errorMessage = null;
   createdUser: User = {
+    id: null,
     username: null,
     firstname: null,
     lastname: null,
@@ -59,17 +61,26 @@ export class CreateUserComponent implements OnInit {
     return true;
   }
   onFormSubmit() {
+    this.errorMessage = null;
     if (!this.checkContact()){
       return;
     }
-    this.userService.addUser(this.createdUser, this.userPass).subscribe((createdUser: User) => {
-      this.authService.login({ user: createdUser.username, password: this.userPass }).subscribe((result) => {
-        if (result === true) {
-          this.router.navigate(['/properties']);
-        }
-      });
+    this.authService.createUser(this.createdUser, this.userPass).subscribe(res => {
+      this.authService.redirectUrl ? this.router.navigate([this.authService.redirectUrl]) : this.router.navigate(['/properties']);
+    },
+    err => {
+      this.errorMessage = err.message;
     });
-  }
+     
+    }
+    // this.userService.addUser(this.createdUser, this.userPass).subscribe((createdUser: User) => {
+    //   this.authService.login({ user: createdUser.username, password: this.userPass }).subscribe((result) => {
+    //     if (result === true) {
+    //       this.router.navigate(['/properties']);
+    //     }
+    //   });
+    // });
+  // }
 
   log(x){
     console.log(x);

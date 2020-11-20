@@ -1,40 +1,37 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  CanActivateChild,
-  CanDeactivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  Router,
-} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router){}
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return this.checkLoggedIn(state.url);
-  }
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-  checkLoggedIn(url: string): boolean {
-    if (this.authService.isLoggedIn && this.authService.isAdmin) {
+    if (this.authService.isLoggedIn && this.authService.isAdmin){
       return true;
     }
+    return this.authService.currentUser$.pipe(
+      map((result) => {
+        if (result){
+          return this.authService.isAdmin;
+        }
+        else{
+          this.authService.redirectUrl = state.url.split('?')[0];
+          this.router.navigate(['/login']);
+          return false;
+        }
+        
 
-    // Retain the attempted URL for redirection
-    this.authService.redirectUrl = url;
-    this.router.navigateByUrl('/admin/login');
-    return false;
+        
+      })
+    );
+    
+    
   }
 }

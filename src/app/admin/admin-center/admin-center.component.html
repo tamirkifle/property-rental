@@ -1,4 +1,4 @@
-<header class="property_header">
+<!-- <header class="property_header">
     <h1 class="page_title">Property Rental</h1>
     <div class="search_container"><input type="text" class="search_input" placeholder="Search"><button
         class="search_btn"><img src="assets/other_icons/search.png" alt=""></button></div>
@@ -7,16 +7,18 @@
       </app-top-menu-button>
       <app-top-menu-button [name]="userFirstName" [iconSrc]="avatar"></app-top-menu-button>
     </div>
-  </header>
-  
-  <div class="main">
-    <nav class="main_nav">
-      <a routerLink="home"><i class="fa fa-home" aria-hidden="true"></i>Admin Dashboard</a>
-      <a routerLink="properties"><i class="fa fa-list" aria-hidden="true"></i>Manage Properties</a>
-      <a routerLink="users"><i class="fa fa-user" aria-hidden="true"></i>Manage Users</a>
-      <a (click)="logout()"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a>
-    </nav>
+  </header> -->
+
+<div class="main">
+  <nav class="main_nav">
+    <a routerLink="home"><i class="fa fa-home" aria-hidden="true"></i>Admin Dashboard</a>
+    <a routerLink="properties"><i class="fa fa-list" aria-hidden="true"></i>Manage Properties</a>
+    <a routerLink="users"><i class="fa fa-user" aria-hidden="true"></i>Manage Users</a>
+    <!-- <a (click)="logout()"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a> -->
+  </nav>
+  <div class="w-100">
     <router-outlet></router-outlet>
   </div>
-  
-  <footer class="login_footer"><span>© Property Rental 2020</span></footer>
+</div>
+
+<!-- <footer class="login_footer"><span>© Property Rental 2020</span></footer> -->

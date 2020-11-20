@@ -6,7 +6,7 @@
 }
 .user_line{
     display: block;
-    margin: 0 0 1rem 1rem;
+    /* margin: 0 0 1rem 1rem; */
     display: flex;
     min-width: 400px;
 }

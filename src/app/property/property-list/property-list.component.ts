@@ -19,12 +19,20 @@ export class PropertyListComponent implements OnInit {
   ) {}
   searchText: string = null;
   ngOnInit(): void {
+    // console.log('ngOnInit');
     this.route.queryParamMap.subscribe((params) => {
       this.searchText = params.get('s');
-      this.filterOptions = params.getAll('by').filter(query => this.propertyService.allFilterOptions.includes(query));
+      this.filterOptions = params.getAll('by');
     });
-    this.route.data.subscribe(data => this.properties = data.properties);
+    this.route.data.subscribe(data => {
+      this.properties = data.properties;
+      // console.log(data);
+    });
 
+  }
+
+  ngAfterViewInit(){
+    this.filterOptions = this.filterOptions.filter(query => this.propertyService.allFilterOptions.includes(query));
   }
 
   addCommas(num): string {
@@ -61,18 +69,19 @@ export class PropertyListComponent implements OnInit {
   }
 
   clearFilters(){
+    this.searchText = null;
     this.filterOptions = [];
     this.router.navigate([],
       {
         relativeTo: this.route,
-        queryParams: { by: this.filterOptions },
+        queryParams: { s: this.searchText, by: this.filterOptions },
         queryParamsHandling: 'merge',
     });
   }
 
   clearSearch(){
     this.searchText = null;
-    this.filterOptions = null;
+    this.filterOptions = [];
     this.router.navigate([],
       {
         queryParams: { s: this.searchText, by: this.filterOptions },

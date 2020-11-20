@@ -6,22 +6,22 @@
         <button class="navbar-toggler" data-toggle="collapse" data-target="#main-nav">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="main-nav">
+        <div class="collapse navbar-collapse" id="main-nav" *ngIf="checkedAuth">
           <ul class="navbar-nav ml-auto flex-md-wrap justify-content-center">
             <li class="nav-item text-center d-inline-block my-auto"><a class="btn nav-link shadow-none d-inline-block px-3" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="/properties">Feed</a></li>
             <li class="nav-item text-center d-inline-block my-auto"><a class="btn nav-link shadow-none px-3" routerLinkActive="active" routerLink="/properties/favorites">Favorites</a></li>
-            <li class="nav-item text-center d-inline-block my-auto" *ngIf="authService.isLoggedIn"><a class="btn nav-link shadow-none d-inline-block px-3" routerLinkActive="active" routerLink="/properties/myposts">My
+            <li class="nav-item text-center d-inline-block my-auto" *ngIf="isLoggedIn"><a class="btn nav-link shadow-none d-inline-block px-3" routerLinkActive="active" routerLink="/properties/myposts">My
                 Properties</a></li>
-            <li class="nav-item text-center d-inline-block my-auto" *ngIf="authService.isLoggedIn && authService.isAdmin"><a class="btn nav-link shadow-none d-inline-block px-3" routerLinkActive="active"
+            <li class="nav-item text-center d-inline-block my-auto" *ngIf="isLoggedIn && isAdmin"><a class="btn nav-link shadow-none d-inline-block px-3" routerLinkActive="active"
                 routerLink="/admin">Admin Center</a></li>
             <li class="nav-item text-center d-inline-block my-auto"><a class="btn nav-link shadow-none d-inline-block px-3" routerLinkActive="active" routerLink="/properties/create">New Property</a></li>
-            <li class="nav-item text-center d-inline-block my-auto" *ngIf="!authService.isLoggedIn"><a class="btn nav-link shadow-none d-inline-block px-3"
+            <li class="nav-item text-center d-inline-block my-auto" *ngIf="!isLoggedIn"><a class="btn nav-link shadow-none d-inline-block px-3"
               routerLinkActive="active" routerLink="/login" (click)="saveRedirect()">Login</a></li>
-            <li class="nav-item text-center d-inline-block my-auto" *ngIf="authService.isLoggedIn">
+            <li class="nav-item text-center d-inline-block my-auto" *ngIf="isLoggedIn">
               <a class="btn nav-link shadow-none d-inline-block px-3"
               routerLinkActive="active" routerLink="myprofile">Welcome {{userFirstName}}</a>
             </li>
-            <li class="nav-item text-center d-inline-block my-auto" *ngIf="authService.isLoggedIn"><a class="btn nav-link shadow-none px-3" routerLinkActive="active"
+            <li class="nav-item text-center d-inline-block my-auto" *ngIf="isLoggedIn"><a class="btn nav-link shadow-none px-3" routerLinkActive="active"
                 (click)="logout()">Logout</a></li>
           </ul>
         </div>

@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterByPipe } from '../shared/filter-by.pipe';
 import { PropertyFilterPipe } from '../shared/property-filter.pipe';
 import { RelatedListComponent } from './related-list/related-list.component';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 
 
@@ -29,6 +30,8 @@ import { RelatedListComponent } from './related-list/related-list.component';
     SharedModule,
     PropertyRoutingModule,
     FormsModule,
+    AngularFirestoreModule,
+
   ],
   exports: [
     PropertyItemComponent,

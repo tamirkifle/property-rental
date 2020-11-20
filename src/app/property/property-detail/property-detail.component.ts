@@ -23,20 +23,22 @@ export class PropertyDetailComponent implements OnInit {
   customImageSize = { width: '100%', height: '500px', space: 0 };
   currentBreakPoint: string;
   relatedItems: Property[];
+  showRelated = true;
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService,
-    private propertyService: PropertyService,
     private router: Router,
-    private authService: AuthService,
+    public authService: AuthService,
     media: MediaObserver
   ) {
     this.media$ = media.asObservable();
   }
 
   ngOnInit(): void {
+    if (this.route.parent.snapshot.url[0].path === 'admin'){
+      this.showRelated = false;
+    }
     this.media$.subscribe(mq => {
-      console.log(mq[0].mqAlias);
+      // console.log(mq[0].mqAlias);
       this.currentBreakPoint = mq[0].mqAlias;
       if (this.currentBreakPoint === 'xs') {
         this.customImageSize = { width: '100%', height: '300px', space: 0 };
@@ -52,7 +54,6 @@ export class PropertyDetailComponent implements OnInit {
       this.property = data.property;
       this.postCreatorUser = data.user;
       this.relatedItems = this.shuffle(data.relatedItems);
-      this.isAuthorizedToEdit = this.authService.isLoggedIn && (this.authService.currentUser.username === this.postCreatorUser.username);
       this.imageObject = [];
       this.imageObject = this.property.propertyImages.map(imageLink => {
         return { image: imageLink, thumbImage: imageLink, title: this.property.propertyTitle };
@@ -63,6 +64,9 @@ export class PropertyDetailComponent implements OnInit {
         );
       }
     });
+    this.authService.currentUser$.subscribe(() => {
+      this.isAuthorizedToEdit = this.authService.isLoggedIn && (this.authService.currentUser.username === this.postCreatorUser.username || this.authService.currentUser.isAdmin);
+    })
   }
 
   goBack(): void {

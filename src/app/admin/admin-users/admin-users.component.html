@@ -1,4 +1,7 @@
-<h1 class="user_title">List Of Users</h1>
-<div *ngFor="let user of users" class="user_line">
-    <app-user-line [user]="user"></app-user-line><button>Edit</button><button>Ban</button><button>Remove</button>
+<h1 class="user_title p-3">List Of Users</h1>
+<div *ngFor="let user of users">
+    <div class="user_line p-2">
+        <app-user-line [user]="user"></app-user-line><button class="btn btn-primary align-self-center mr-1">Edit</button><button class="btn btn-danger align-self-center mr-1">Ban</button><button  class="btn btn-danger align-self-center mr-1">Remove</button>
+    </div>
+    <hr class="">
 </div>
