@@ -4,13 +4,11 @@ import { User } from './user';
 import { Observable, of } from 'rxjs';
 import { FirebaseService } from '../firebase.service';
 
-import { getAllUsersURL, updateUserURL, createUserURL } from 'src/app/api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  // private usersURL = 'api/users';
 
   constructor(private firebaseService: FirebaseService) { }
 
@@ -35,7 +33,7 @@ export class UserService {
     return this.firebaseService.getUser(id);
   }
 
-  updateUser(user, avatarFile?): Observable<void> {
+  updateUser(user, avatarFile?): Observable<any> {
     return this.firebaseService.updateUser(user, avatarFile);
   }
 
