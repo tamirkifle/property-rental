@@ -3,7 +3,10 @@
 A property rental web app built using Angular. 
 Backend is hosted temporarily on firebase using firestore. Node backend coming soon.
 
+### Live Demo: [Link](https://property-rental-fca0f.web.app/)
 
-P.S.
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
+### Technologies Used
+- Angular 10
+- Google Firestore
+- Google Firebase Authentication
 
